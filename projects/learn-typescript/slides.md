@@ -12,7 +12,7 @@ info: |
 drawings:
   persist: false
 css: unocss
-download: true
+# download: true
 record: dev
 hideInToc: true
 title: TypeScript 快速上手
