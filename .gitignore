@@ -128,3 +128,13 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+
+
+# slidev 相关
+.DS_Store
+*.local
+index.html
+.remote-assets
+components.d.ts
+slides-export/
