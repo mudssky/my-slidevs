@@ -1,11 +1,24 @@
 <template>
-  <div class="container">测试vue组件</div>
-  <el-button>djklasjlk</el-button>
-  <el-button type="primary">Primary</el-button>
+  <div class="container">
+    <el-row> 已有的slidevs列表 </el-row>
+    <li v-for="item in slidevUrlList" :key="item.url">
+      <a
+        href="{{ item.url }}"
+        target="_blank"
+        class="text-blue-600 text-[25px] cursor-pointer"
+        >{{ item.name }}</a
+      >
+    </li>
+  </div>
 </template>
 
-<script lang="ts" setup></script>
-<script>
+<script lang="ts" setup>
+import slidevUrlList from '../../slidevs.json'
+// console.log({ slidevUrlList })
+// const slidevUrlList = [1, 2]
+</script>
+
+<script lang="ts">
 export default {
   name: 'HomeContent',
 }
@@ -13,6 +26,7 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  background-color: red;
+  width: 800px;
+  margin: 0 auto;
 }
 </style>

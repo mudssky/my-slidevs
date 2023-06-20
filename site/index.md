@@ -2,7 +2,6 @@
 layout: home
 ---
 
-[dasdas](https://github.com/slidevjs/slidev/issues?q=monorepo)
 
 
 <script setup>
