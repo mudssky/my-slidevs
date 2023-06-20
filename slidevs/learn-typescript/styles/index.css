@@ -1,0 +1,11 @@
+/* 全局css */
+.slidev-vclick-target {
+  @apply mb-5;
+}
+
+.col-left {
+  @apply mr-5;
+}
+/* h4 {
+  @apply text-orange-500;
+} */
