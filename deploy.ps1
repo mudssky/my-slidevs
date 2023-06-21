@@ -95,4 +95,8 @@ switch ($mode) {
 		Copy-Slidevs
 		Deploy-Site
  }
+
+ 'onlyDeploy' {
+		Deploy-Site
+ }
 }
