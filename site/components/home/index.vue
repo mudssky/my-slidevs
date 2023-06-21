@@ -3,7 +3,7 @@
     <el-row> 已有的slidevs列表 </el-row>
     <li v-for="item in slidevUrlList" :key="item.url">
       <a
-        href="{{ item.url }}"
+        :href="item.url"
         target="_blank"
         class="text-blue-600 text-[25px] cursor-pointer"
         >{{ item.name }}</a

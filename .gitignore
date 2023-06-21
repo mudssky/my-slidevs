@@ -138,3 +138,4 @@ index.html
 .remote-assets
 components.d.ts
 slides-export/
+.vitepress/cache
