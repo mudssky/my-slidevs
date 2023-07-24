@@ -21,7 +21,7 @@
     // "outFile": "./",                             /* Concatenate and emit output to single file. */
     "outDir": "dist" /* Redirect output structure to the directory. */,
     // 配置源代码所在的目录
-    "rootDir": "./" /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */,
+    "rootDir": "../learn-typescript" /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */,
     // "composite": true,                           /* Enable project compilation */
     // "tsBuildInfoFile": "./",                     /* Specify file to store incremental compilation information */
     // 编译后的文件移除注释
