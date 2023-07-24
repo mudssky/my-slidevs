@@ -1,10 +1,14 @@
 [
   {
-    "name": "learn-typescript",
-    "url": "slidevs/learn-typescript"
+    "url": "slidevs/learn-canvas",
+    "name": "learn-canvas"
   },
   {
-    "name": "slidev3",
-    "url": "slidevs/slidev3"
+    "url": "slidevs/learn-typescript",
+    "name": "learn-typescript"
+  },
+  {
+    "url": "slidevs/slidev3",
+    "name": "slidev3"
   }
 ]
