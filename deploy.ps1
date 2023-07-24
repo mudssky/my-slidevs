@@ -13,10 +13,10 @@ param(
 $deployPath = "$PSScriptRoot\site\.vitepress\dist"
 $slidevPath = "$deployPath\slidevs"
 $slidevSubPrefix = 'slidevs/'
-$projectsPath = "$PSScriptRoot\projects"
+$slidevProjectsPath = "$PSScriptRoot\projects\slidevs"
 $sitePath = "$PSScriptRoot\site"
 function Get-SlidevsUrl() {
-	$urls =	Get-ChildItem $projectsPath  | ForEach-Object { @{
+	$urls =	Get-ChildItem $slidevProjectsPath  | ForEach-Object { @{
 			url  = $slidevSubPrefix + $_.Name
 			name = $_.Name
 		} }
@@ -39,13 +39,13 @@ function Set-DistPath() {
 
 
 function Build-Slidevs() {
-	Get-ChildItem -LiteralPath $projectsPath | ForEach-Object {
+	Get-ChildItem -LiteralPath $slidevProjectsPath | ForEach-Object {
 		pnpm --filter $_.Name build --base ("/my-slidevs/slidevs/" + $_.Name)
 	}
 }
 
 function Copy-Slidevs() {
-	Get-ChildItem -LiteralPath $projectsPath | ForEach-Object {
+	Get-ChildItem -LiteralPath $slidevProjectsPath | ForEach-Object {
 		Copy-Item  -Path  ( '{0}\dist' -f $_.FullName) -Destination ("$slidevPath\{0}" -f $_.Name) -Recurse -ErrorAction Stop | Out-Null
 	}
 }
