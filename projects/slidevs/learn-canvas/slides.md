@@ -116,3 +116,9 @@ hideInToc: true
 ---
 
 <Demo006Patterns/>
+
+---
+hideInToc: true
+---
+
+<Demo007Shadows/>
