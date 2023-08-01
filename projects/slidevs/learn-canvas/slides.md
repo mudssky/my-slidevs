@@ -103,4 +103,10 @@ hideInToc: true
 hideInToc: true
 ---
 
-<Demo004LineStyle width="400"/>
+<Demo004LineStyle />
+
+---
+hideInToc: true
+---
+
+<Demo005Gradients/>

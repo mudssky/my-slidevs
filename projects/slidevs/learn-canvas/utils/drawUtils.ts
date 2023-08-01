@@ -1,3 +1,8 @@
+export interface PositionOption {
+  startX?: number
+  startY?: number
+}
+
 /**
  * 用于绘制前移动坐标轴，并且会在绘制完恢复状态
  * @param ctx
@@ -7,10 +12,7 @@
 export function drawFromPostion(
   ctx: CanvasRenderingContext2D,
   drawFn: (ctx: CanvasRenderingContext2D) => void,
-  options?: {
-    startX?: number
-    startY?: number
-  }
+  options?: PositionOption
 ) {
   const { startX = 0, startY = 0 } = options || {}
   // 保存初始状态
