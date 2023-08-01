@@ -110,3 +110,9 @@ hideInToc: true
 ---
 
 <Demo005Gradients/>
+
+---
+hideInToc: true
+---
+
+<Demo006Patterns/>
