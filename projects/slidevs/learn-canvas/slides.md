@@ -91,4 +91,10 @@ hideInToc: true
 hideInToc: true
 ---
 
-<Demo002DrawShape/>
+<Demo002Shape/>
+
+---
+hideInToc: true
+---
+
+<Demo003StylesAndColor/>
