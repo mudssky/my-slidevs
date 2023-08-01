@@ -5,6 +5,7 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue'
 import { ref } from 'vue'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { drawFromPostion } from '../utils/drawUtils'
 const canvasBoardRef = ref()
 

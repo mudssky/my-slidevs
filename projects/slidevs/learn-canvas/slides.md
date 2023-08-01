@@ -152,3 +152,15 @@ hideInToc: true
 ---
 
 <Demo012Translate/>
+
+---
+hideInToc: true
+---
+
+<Demo013Rotate/>
+
+---
+hideInToc: true
+---
+
+<Demo014Scale/>
