@@ -140,3 +140,15 @@ hideInToc: true
 ---
 
 <Demo010Image/>
+
+---
+hideInToc: true
+---
+
+<Demo011Restore/>
+
+---
+hideInToc: true
+---
+
+<Demo012Translate/>
