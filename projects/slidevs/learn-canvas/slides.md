@@ -97,4 +97,10 @@ hideInToc: true
 hideInToc: true
 ---
 
-<Demo003StylesAndColor/>
+<Demo003Colors width="400"/>
+
+---
+hideInToc: true
+---
+
+<Demo004LineStyle width="400"/>

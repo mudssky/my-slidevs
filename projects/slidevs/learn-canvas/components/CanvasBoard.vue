@@ -1,9 +1,18 @@
 <template>
-  <canvas ref="canvasDom" width="900" height="450"></canvas>
+  <canvas ref="canvasDom" :width="p.width" :height="p.height"></canvas>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+interface Props {
+  width?: number
+  height?: number
+}
+const p = withDefaults(defineProps<Props>(), {
+  width: 900,
+  height: 450,
+})
+
 const canvasDom = ref()
 
 defineExpose({
