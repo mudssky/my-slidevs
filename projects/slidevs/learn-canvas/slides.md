@@ -128,3 +128,9 @@ hideInToc: true
 ---
 
 <Demo008WindingRule/>
+
+---
+hideInToc: true
+---
+
+<Demo009Text/>
