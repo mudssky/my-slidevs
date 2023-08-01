@@ -122,3 +122,9 @@ hideInToc: true
 ---
 
 <Demo007Shadows/>
+
+---
+hideInToc: true
+---
+
+<Demo008WindingRule/>
