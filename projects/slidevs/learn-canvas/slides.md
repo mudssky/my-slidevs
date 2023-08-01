@@ -134,3 +134,9 @@ hideInToc: true
 ---
 
 <Demo009Text/>
+
+---
+hideInToc: true
+---
+
+<Demo010Image/>
