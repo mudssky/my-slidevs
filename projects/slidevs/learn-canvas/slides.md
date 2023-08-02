@@ -164,3 +164,33 @@ hideInToc: true
 ---
 
 <Demo014Scale/>
+
+---
+hideInToc: true
+---
+
+<Demo015Transforms/>
+
+---
+hideInToc: true
+---
+
+<Demo016Clip/>
+
+---
+hideInToc: true
+---
+
+<Demo017Animations1/>
+
+---
+hideInToc: true
+---
+
+<Demo018AnimationsClock/>
+
+---
+hideInToc: true
+---
+
+<Demo019AnimationsNationalPark/>
