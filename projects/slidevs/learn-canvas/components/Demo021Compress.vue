@@ -14,6 +14,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { downloadBlob } from '../utils/compress'
 
 const canvasBoardRef = ref()
 const imgDomRef = ref()
@@ -29,26 +30,30 @@ function handleFileChange(e: any) {
   fr.onload = () => {
     // base64ImageUrl.value = fr.result as string
     imgDom.src = fr.result as string
+    imgDom.onload = function () {
+      const compressCanvas: HTMLCanvasElement = canvasBoardRef.value.canvasDom
+      compressCanvas.width = imgDomRef.value.width
+      compressCanvas.height = imgDomRef.value.height
+      const ctx = compressCanvas.getContext('2d')!
 
-    const compressCanvas: HTMLCanvasElement = canvasBoardRef.value.canvasDom
-    compressCanvas.width = imgDomRef.value.width
-    compressCanvas.height = imgDomRef.value.height
-    const ctx = compressCanvas.getContext('2d')!
+      ctx.drawImage(imgDom, 0, 0, imgDom.width, imgDom.height)
+      // imgDomAfter.value.src = compressCanvas.toDataURL('image/jpeg', 0.1)
+      compressCanvas.toBlob(
+        (blob) => {
+          // 注意一般只支持jpg格式的压缩，chrome额外支持webp格式的压缩
+          // png是不支持压缩的
 
-    ctx.drawImage(imgDom, 0, 0, imgDom.width, imgDom.height)
-    // imgDomAfter.value.src = compressCanvas.toDataURL('image/jpeg', 0.1)
-    compressCanvas.toBlob(
-      (blob) => {
-        // 注意一般只支持jpg格式的压缩，chrome额外支持webp格式的压缩
-        // png是不支持压缩的
+          // 这里可以把blob上传到后端
+          if (blob) {
+            downloadBlob(blob, 'compressed.jpeg')
+          }
 
-        // 这里可以把blob上传到后端
-
-        console.log({ blob })
-      },
-      file.type,
-      0.2
-    )
+          console.log({ blob })
+        },
+        file.type,
+        0.2
+      )
+    }
   }
 }
 </script>
