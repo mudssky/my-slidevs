@@ -13,11 +13,9 @@
 </template>
 
 <script lang="ts" setup>
-import { nextTick } from 'vue'
 import { ref } from 'vue'
 
 const canvasBoardRef = ref()
-const base64ImageUrl = ref('')
 const imgDomRef = ref()
 // const imgDomAfter = ref()
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
