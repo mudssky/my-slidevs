@@ -97,7 +97,7 @@ hideInToc: true
 hideInToc: true
 ---
 
-<Demo003Colors width="400"/>
+<Demo003Colors :width="400"/>
 
 ---
 hideInToc: true
@@ -194,3 +194,9 @@ hideInToc: true
 ---
 
 <Demo019AnimationsNationalPark/>
+
+---
+hideInToc: true
+---
+
+<Demo021Compress />
