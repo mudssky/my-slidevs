@@ -34,3 +34,15 @@ export async function compressImgDom(
     }
   })
 }
+
+export function downloadBlob(res: Blob, filename: string) {
+  const blobUrl = window.URL.createObjectURL(new Blob([res]))
+  const a = document.createElement('a')
+  a.style.display = 'none'
+  a.href = blobUrl
+  a.download = filename
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
+  window.URL.revokeObjectURL(blobUrl) // 释放blob对象
+}
