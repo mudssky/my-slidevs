@@ -41,7 +41,7 @@ hideInToc: true
 ---
 title: 什么是canvas?
 level: 1
-layout: center
+
 ---
 ## 00.什么是canvas？
 

@@ -1,5 +1,7 @@
 <template>
-  <canvas ref="canvasDom" :width="p.width" :height="p.height"></canvas>
+  <canvas ref="canvasDom" :width="p.width" :height="p.height">
+    当前浏览器不支持canvas元素，请升级或更换浏览器！
+  </canvas>
 </template>
 
 <script lang="ts" setup>

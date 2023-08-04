@@ -1,6 +1,8 @@
 <template>
   <div>
-    <canvas id="canvas" width="900" height="450"></canvas>
+    <canvas id="canvas" width="900" height="450">
+      当前浏览器不支持canvas元素，请升级或更换浏览器！
+    </canvas>
   </div>
 </template>
 
