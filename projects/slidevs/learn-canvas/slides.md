@@ -43,7 +43,9 @@ title: 什么是canvas?
 level: 1
 
 ---
-## 00.什么是canvas？
+## 00.什么是canvas？  
+
+canvas元素+相关的api  
 
 Canvas API 提供了一个通过JavaScript 和 HTML的`<canvas>`元素来绘制图形的方式。它可以用于动画、游戏画面、数据可视化、图片编辑以及实时视频处理等方面。
 
@@ -54,9 +56,56 @@ Canvas API 主要聚焦于 2D 图形。而同样使用`<canvas>`元素的 WebGL 
 <https://caniuse.com/canvas>
 
 ---
+title: canvas 元素
+level: 1
+---
+
+## 01.canvas元素  
+
+canvas 的默认大小为`300*150` px,具有width和height属性，用于定义canvas的宽和高。  
+
+canvas标签内可以设置替换内容，不支持canvas的浏览器会显示替换内容(比如IE9之前的浏览器)，支持canvas的浏览器则显示canvas，忽略替换内容
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>认识canvas标签</title>
+</head>
+<body>
+  <canvas width="300" height="150">
+    当前浏览器不支持canvas元素，请升级或更换浏览器！
+  </canvas>
+</body>
+</html>
+
+```
+
+> 可以用css定义大小，绘制时图像会伸缩以适应它的框架尺寸，但是如果css的尺寸和画布大小比例不一致，会出现扭曲变形
+
+---
+title: 渲染上下文
+level: 1
+---
+
+## 02.渲染上下文
+
+```ts
+  const canvasDom = <HTMLCanvasElement>document.getElementById('canvas')
+  if (canvasDom.getContext) {
+    const ctx:CanvasRenderingContext2D = canvasDom.getContext('2d')!
+   }
+
+```
+
+---
 title: Hello canvas
 level: 1
 ---
+
 ## 01.hello canvas
 
 ```ts
@@ -78,8 +127,6 @@ level: 1
   ctx.fillText('hello canvas', 200, 400, 400) 
 
 ```
-
-canvas 的默认大小为`300*150` px,可以使用html的高度和宽度属性自定义Canvas的尺寸
 
 ---
 hideInToc: true
