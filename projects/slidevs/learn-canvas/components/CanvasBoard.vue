@@ -25,6 +25,5 @@ defineExpose({
 <style lang="scss" scoped>
 canvas {
   border: 1px solid #eee;
-  //   border-radius: 8px;
 }
 </style>

@@ -43,7 +43,7 @@ title: 什么是canvas?
 level: 1
 
 ---
-## 00.什么是canvas？  
+## 01.什么是canvas？  
 
 canvas元素+相关的api  
 
@@ -60,7 +60,7 @@ title: canvas 元素
 level: 1
 ---
 
-## 01.canvas元素  
+## 02.canvas元素  
 
 canvas 的默认大小为`300*150` px,具有width和height属性，用于定义canvas的宽和高。  
 
@@ -91,7 +91,7 @@ title: 渲染上下文
 level: 1
 ---
 
-## 02.渲染上下文
+## 03.渲染上下文
 
 ```ts
   const canvasDom = <HTMLCanvasElement>document.getElementById('canvas')
@@ -114,7 +114,7 @@ title: Hello canvas
 level: 1
 ---
 
-## 03.hello canvas
+## 04.hello canvas
 
 - moveTo 移动画笔
 - lineTo 画线
@@ -140,6 +140,46 @@ level: 1
   ctx.fillText('hello canvas', 200, 400, 400) 
 
 ```
+
+---
+title: Vue3 中使用canvas
+level: 1
+---
+## 05.Vue3 中使用canvas
+
+```vue
+<template>
+  <canvas ref="canvasDom" :width="p.width" :height="p.height">
+    当前浏览器不支持canvas元素，请升级或更换浏览器！
+  </canvas>
+</template>
+<script lang="ts" setup>
+import { ref } from 'vue'
+interface Props {
+  width?: number
+  height?: number
+}
+const p = withDefaults(defineProps<Props>(), {
+  width: 900,
+  height: 450,
+})
+const canvasDom = ref()
+defineExpose({
+  canvasDom,
+})
+</script>
+<style lang="scss" scoped>
+canvas {
+  border: 1px solid #eee;
+}
+</style>
+```
+
+---
+title: 绘制形状
+level: 1
+---
+## 06.绘制形状
 
 ---
 hideInToc: true
