@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue'
 import { ref } from 'vue'
-import { drawFromPostion } from '../utils/drawUtils'
+import { drawFromPosition } from '../utils/drawUtils'
 import canvas_createpattern from '../assets/images/canvas_createpattern.png'
 const canvasBoardRef = ref()
 /**
@@ -28,7 +28,7 @@ onMounted(() => {
   const canvasDom: HTMLCanvasElement = canvasBoardRef.value.canvasDom
   const ctx = canvasDom.getContext('2d')!
 
-  drawFromPostion(ctx, drawPatterns, {
+  drawFromPosition(ctx, drawPatterns, {
     startX: 10,
     startY: 10,
   })

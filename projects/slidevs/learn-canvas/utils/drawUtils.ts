@@ -9,7 +9,7 @@ export interface PositionOption {
  * @param drawFn
  * @param options
  */
-export function drawFromPostion(
+export function drawFromPosition(
   ctx: CanvasRenderingContext2D,
   drawFn: (ctx: CanvasRenderingContext2D) => void,
   options?: PositionOption

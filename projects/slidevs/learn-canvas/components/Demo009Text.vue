@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue'
 import { ref } from 'vue'
-import { drawFromPostion } from '../utils/drawUtils'
+import { drawFromPosition } from '../utils/drawUtils'
 
 const canvasBoardRef = ref()
 
@@ -22,11 +22,11 @@ onMounted(() => {
   const canvasDom: HTMLCanvasElement = canvasBoardRef.value.canvasDom
   const ctx = canvasDom.getContext('2d')!
 
-  drawFromPostion(ctx, drawTextDemo, {
+  drawFromPosition(ctx, drawTextDemo, {
     startX: 10,
     startY: 10,
   })
-  drawFromPostion(ctx, drawTextStrokeDemo, {
+  drawFromPosition(ctx, drawTextStrokeDemo, {
     startX: 10,
     startY: 100,
   })

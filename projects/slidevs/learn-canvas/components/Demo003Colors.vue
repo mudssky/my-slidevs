@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue'
 import { ref } from 'vue'
-import { drawFromPostion } from '../utils/drawUtils'
+import { drawFromPosition } from '../utils/drawUtils'
 
 const canvasBoardRef = ref()
 
@@ -84,20 +84,20 @@ onMounted(() => {
   const canvasDom: HTMLCanvasElement = canvasBoardRef.value.canvasDom
   const ctx = canvasDom.getContext('2d')!
 
-  drawFromPostion(ctx, drawFillStyleDemo, {
+  drawFromPosition(ctx, drawFillStyleDemo, {
     startX: 10,
     startY: 10,
   })
-  drawFromPostion(ctx, drawStrokeStyleDemo, {
+  drawFromPosition(ctx, drawStrokeStyleDemo, {
     startX: 10,
     startY: 200,
   })
-  drawFromPostion(ctx, drawGlobalAlphaDemo, {
+  drawFromPosition(ctx, drawGlobalAlphaDemo, {
     startX: 200,
     startY: 10,
   })
 
-  drawFromPostion(ctx, drawRGBADemo, {
+  drawFromPosition(ctx, drawRGBADemo, {
     startX: 200,
     startY: 200,
   })

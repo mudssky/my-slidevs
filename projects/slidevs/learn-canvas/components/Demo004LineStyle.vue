@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue'
 import { ref } from 'vue'
-import { PositionOption, drawFromPostion } from '../utils/drawUtils'
+import { PositionOption, drawFromPosition } from '../utils/drawUtils'
 
 const canvasBoardRef = ref()
 
@@ -101,7 +101,7 @@ function drawLineDashDemo(
     if (offset > 16) {
       offset = 0
     }
-    drawFromPostion(ctx, drawLineDash1, options)
+    drawFromPosition(ctx, drawLineDash1, options)
     setTimeout(march, 20)
   }
   march()
@@ -111,20 +111,20 @@ onMounted(() => {
   const canvasDom: HTMLCanvasElement = canvasBoardRef.value.canvasDom
   const ctx = canvasDom.getContext('2d')!
 
-  drawFromPostion(ctx, drawLineWidthDemo, {
+  drawFromPosition(ctx, drawLineWidthDemo, {
     startX: 10,
     startY: 10,
   })
-  drawFromPostion(ctx, drawLineCapDemo, {
+  drawFromPosition(ctx, drawLineCapDemo, {
     startX: 10,
     startY: 200,
   })
-  drawFromPostion(ctx, drawLineJoinDemo, {
+  drawFromPosition(ctx, drawLineJoinDemo, {
     startX: 200,
     startY: 10,
   })
 
-  drawFromPostion(ctx, drawLineJoinDemo2, {
+  drawFromPosition(ctx, drawLineJoinDemo2, {
     startX: 200,
     startY: 200,
   })

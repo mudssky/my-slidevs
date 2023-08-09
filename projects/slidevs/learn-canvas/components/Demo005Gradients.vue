@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue'
 import { ref } from 'vue'
-import { drawFromPostion } from '../utils/drawUtils'
+import { drawFromPosition } from '../utils/drawUtils'
 
 const canvasBoardRef = ref()
 /**
@@ -79,11 +79,11 @@ onMounted(() => {
   const canvasDom: HTMLCanvasElement = canvasBoardRef.value.canvasDom
   const ctx = canvasDom.getContext('2d')!
 
-  drawFromPostion(ctx, drawLinearGradientDemo, {
+  drawFromPosition(ctx, drawLinearGradientDemo, {
     startX: 10,
     startY: 10,
   })
-  drawFromPostion(ctx, drawRadialGradientDemo, {
+  drawFromPosition(ctx, drawRadialGradientDemo, {
     startX: 10,
     startY: 200,
   })

@@ -15,6 +15,8 @@ onMounted(() => {
   if (canvasDom?.getContext) {
     // 2、从HTMLCanvasElement获取上下文环境对象context
     const ctx = canvasDom.getContext('2d')!
+    console.log({ ctx })
+
     // 3. 绘制图形
     ctx.moveTo(80, 55) //左上角为坐标起点0.0
     ctx.lineTo(900, 150)

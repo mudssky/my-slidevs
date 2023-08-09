@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue'
 import { ref } from 'vue'
-import { drawFromPostion } from '../utils/drawUtils'
+import { drawFromPosition } from '../utils/drawUtils'
 const canvasBoardRef = ref()
 
 function drawRectangular(ctx: CanvasRenderingContext2D) {
@@ -243,32 +243,32 @@ onMounted(() => {
     startX: 0,
     startY: 250,
   })
-  drawFromPostion(ctx, drawTriangle2, {
+  drawFromPosition(ctx, drawTriangle2, {
     startX: 250,
   })
 
-  drawFromPostion(ctx, drawArcs, {
+  drawFromPosition(ctx, drawArcs, {
     startX: 250,
     startY: 200,
   })
-  drawFromPostion(ctx, drawCurve1, {
+  drawFromPosition(ctx, drawCurve1, {
     startX: 450,
   })
 
-  drawFromPostion(ctx, drawCurve2, {
+  drawFromPosition(ctx, drawCurve2, {
     startX: 450,
     startY: 200,
   })
 
-  drawFromPostion(ctx, drawGame, {
+  drawFromPosition(ctx, drawGame, {
     startX: 650,
   })
-  drawFromPostion(ctx, drawPath2DTest, {
+  drawFromPosition(ctx, drawPath2DTest, {
     startX: 650,
     startY: 200,
   })
 
-  drawFromPostion(ctx, drawPath2DTest2, {
+  drawFromPosition(ctx, drawPath2DTest2, {
     startX: 650,
     startY: 300,
   })

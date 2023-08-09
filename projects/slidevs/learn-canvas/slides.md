@@ -101,12 +101,25 @@ level: 1
 
 ```
 
+getContext 参数的2d是contextType ，有以下几种类型
+
+- 2d，建立一个二维渲染上下文 CanvasRenderingContext2D。
+- webgl（或 experimental-webgl）： 创建一个 WebGLRenderingContext 三维渲染上下文对象
+- webgl2 ： 创建一个 WebGL2RenderingContext 三维渲染上下文对象
+- webgpu 创建一个三维渲染上下文对象 GPUCanvasContext
+- bitmaprenderer：创建一个只提供将canvas内容替换为指定ImageBitmap功能的ImageBitmapRenderingContext。
+
 ---
 title: Hello canvas
 level: 1
 ---
 
-## 01.hello canvas
+## 03.hello canvas
+
+- moveTo 移动画笔
+- lineTo 画线
+- fillRect 画矩形
+- fillText 在指定区域填充文字
 
 ```ts
   // 1. 获取canvas dom对象

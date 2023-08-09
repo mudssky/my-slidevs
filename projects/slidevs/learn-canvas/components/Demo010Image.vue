@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue'
 import { ref } from 'vue'
-import { PositionOption, drawFromPostion } from '../utils/drawUtils'
+import { PositionOption, drawFromPosition } from '../utils/drawUtils'
 import canvas_backdrop from '../assets/images/canvas_backdrop.png'
 const canvasBoardRef = ref()
 
@@ -30,7 +30,7 @@ function drawImageScaleDemo(
   img.onload = function () {
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 3; j++) {
-        drawFromPostion(
+        drawFromPosition(
           ctx,
           () => {
             ctx.drawImage(img, j * 50, i * 38, 50, 38)
@@ -47,7 +47,7 @@ onMounted(() => {
   const canvasDom: HTMLCanvasElement = canvasBoardRef.value.canvasDom
   const ctx = canvasDom.getContext('2d')!
 
-  drawFromPostion(ctx, drawImageDemo, {
+  drawFromPosition(ctx, drawImageDemo, {
     startX: 10,
     startY: 10,
   })

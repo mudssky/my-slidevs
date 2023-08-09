@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue'
 import { ref } from 'vue'
-import { drawFromPostion } from '../utils/drawUtils'
+import { drawFromPosition } from '../utils/drawUtils'
 const canvasBoardRef = ref()
 
 function drawRotateDemo(ctx: CanvasRenderingContext2D) {
@@ -40,7 +40,7 @@ onMounted(() => {
   const canvasDom: HTMLCanvasElement = canvasBoardRef.value.canvasDom
   const ctx = canvasDom.getContext('2d')!
   // drawTranslateDemo(ctx)
-  drawFromPostion(ctx, drawRotateDemo, {
+  drawFromPosition(ctx, drawRotateDemo, {
     startX: 100,
     startY: 10,
   })

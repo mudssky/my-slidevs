@@ -6,7 +6,7 @@
 import { onMounted } from 'vue'
 import { ref } from 'vue'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { drawFromPostion } from '../utils/drawUtils'
+import { drawFromPosition } from '../utils/drawUtils'
 const canvasBoardRef = ref()
 
 function drawTranslateDemo(ctx: CanvasRenderingContext2D) {
