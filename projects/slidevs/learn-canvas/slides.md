@@ -193,7 +193,7 @@ image: https://source.unsplash.com/collection/94734566/1920x1080
 
 canvas绘制的原点（0,0）是左上角  
 
-![栅格](assets/images/canvas_default_grid.png)
+![栅格](/images/canvas_default_grid.png)
 
 ---
 title: 绘制直线

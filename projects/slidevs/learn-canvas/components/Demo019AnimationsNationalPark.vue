@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue'
 import { ref } from 'vue'
-import nationalParkPic from '../assets/images/national_park.jpg'
+import nationalParkPic from '/images/national_park.jpg'
 const canvasBoardRef = ref()
 function drawLoopPark(ctx: CanvasRenderingContext2D) {
   var img = new Image()

@@ -5,9 +5,9 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue'
 import { ref } from 'vue'
-import earthPic from '../assets/images/canvas_earth.png'
-import moonPic from '../assets/images/canvas_moon.png'
-import sunPic from '../assets/images/canvas_sun.png'
+import earthPic from '/images/canvas_earth.png'
+import moonPic from '/images/canvas_moon.png'
+import sunPic from '/images/canvas_sun.png'
 const canvasBoardRef = ref()
 
 function drawTransformsDemo(ctx: CanvasRenderingContext2D) {

@@ -6,7 +6,7 @@
 import { onMounted } from 'vue'
 import { ref } from 'vue'
 import { PositionOption, drawFromPosition } from '../utils/drawUtils'
-import canvas_backdrop from '../assets/images/canvas_backdrop.png'
+import canvas_backdrop from '/images/canvas_backdrop.png'
 const canvasBoardRef = ref()
 
 function drawImageDemo(ctx: CanvasRenderingContext2D) {

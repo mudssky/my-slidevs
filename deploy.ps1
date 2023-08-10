@@ -22,7 +22,7 @@ function Get-SlidevsUrl() {
 			name = $_.Name
 		} }
 	$urlJson = ConvertTo-Json $urls
-	Write-Debug "generate url json：  $urlJson"
+	Write-Verbose "generate url json：  $urlJson"
 	Out-File  -InputObject $urlJson  -FilePath  "$sitePath\slidevs.json"
 }
 
@@ -31,10 +31,11 @@ function Get-SlidevsUrl() {
 # 准备发布文件夹
 function Set-DistPath() {
 	if (Test-Path $slidevPath) {
-		Write-Debug "clean $slidevPath"
+		Write-Verbose "clean $slidevPath"
+		
 		Remove-Item -Path $slidevPath -Recurse -Force | Out-Null
 	}
-	Write-Debug "create new  folder: $slidevPath"
+	Write-Verbose "create new  folder: $slidevPath"
 	New-Item -Path $slidevPath -ItemType Directory -Force -ErrorAction Stop | Out-Null
 }
 
@@ -57,6 +58,7 @@ function Copy-Slidevs() {
 
 function Build-Site() {
 	pnpm docs:build
+	Write-Verbose "build success, use `docs:preview` to previw  or `docs:deploy` to deploy manully"
 
 }
 

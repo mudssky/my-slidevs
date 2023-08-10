@@ -6,7 +6,7 @@
 import { onMounted } from 'vue'
 import { ref } from 'vue'
 import { drawFromPosition } from '../utils/drawUtils'
-import canvas_createpattern from '../assets/images/canvas_createpattern.png'
+import canvas_createpattern from '/images/canvas_createpattern.png'
 const canvasBoardRef = ref()
 /**
  * 图案样式demo

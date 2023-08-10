@@ -12,6 +12,7 @@
     "seriph",
     "shiki",
     "slidev",
+    "slidevs",
     "unocss",
     "webgl",
     "webgpu"
@@ -19,9 +20,7 @@
   // flagWords - list of words to be always considered incorrect
   // This is useful for offensive words and common spelling errors.
   // For example "hte" should be "the"
-  "allowCompoundWords": false,
+  "allowCompoundWords": true,
   "flagWords": [],
-  "ignorePaths": [
-    "package.json"
-  ]
+  "ignorePaths": ["package.json"]
 }
