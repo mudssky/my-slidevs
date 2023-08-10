@@ -28,6 +28,8 @@
   // 隔离的代码块需要被空行包围
   "blanks-around-fences": true,
   // MD033/no-inline-html,html还是有用的，所以关掉这个
+  // MD034
+  "no-bare-urls": false,
   "no-inline-html": false,
   // MD81 不能用强调符号作为标题，这是为了语义,但是太烦了，还是关掉
   "no-emphasis-as-heading": false,

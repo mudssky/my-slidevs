@@ -7,10 +7,12 @@
   // words - list of words to be always considered correct
   "words": [
     "bitmaprenderer",
+    "frontmatter",
     "obsidain",
     "seriph",
     "shiki",
     "slidev",
+    "unocss",
     "webgl",
     "webgpu"
   ],

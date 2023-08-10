@@ -5,18 +5,27 @@
 </template>
 
 <script lang="ts" setup>
+import { onMounted } from 'vue'
 import { ref } from 'vue'
 interface Props {
   width?: number
   height?: number
+  drawFn?: (ctx: CanvasRenderingContext2D) => void
 }
 const p = withDefaults(defineProps<Props>(), {
   width: 900,
   height: 450,
+  drawFn: undefined,
 })
 
 const canvasDom = ref()
 
+onMounted(() => {
+  if (p.drawFn) {
+    const ctx = canvasDom.value.getContext('2d')
+    p.drawFn(ctx)
+  }
+})
 defineExpose({
   canvasDom,
 })
