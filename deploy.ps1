@@ -2,8 +2,7 @@
 [CmdletBinding()]
 param(
 	[ValidateSet('all', 'onlySite', 'onlySlidevs', 'onlyDeploy', 'localRelease' )]
-	[string]$Mode = 'all',
-	[switch]$localRelease
+	[string]$Mode = 'all'
 )
 
 
@@ -63,13 +62,7 @@ function Build-Site() {
 }
 
 function Deploy-Site() {
-	if ( -not  $localRelease) {
-		pnpm gh-pages -d $deployPath
-	}
-	else {
-		Write-Host "local release mode, run pnpm docs:preview to preview"
-	}
-
+	pnpm gh-pages -d $deployPath
 }
 
 # if ($Mode -eq 'onlySite' ) {

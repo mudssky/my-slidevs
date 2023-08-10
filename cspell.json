@@ -14,6 +14,7 @@
     "slidev",
     "slidevs",
     "unocss",
+    "unplugin",
     "webgl",
     "webgpu"
   ],
@@ -22,5 +23,7 @@
   // For example "hte" should be "the"
   "allowCompoundWords": true,
   "flagWords": [],
-  "ignorePaths": ["package.json"]
+  "ignorePaths": [
+    "package.json"
+  ]
 }
