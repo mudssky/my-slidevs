@@ -126,6 +126,27 @@ export function drawCurve2(ctx: CanvasRenderingContext2D) {
   ctx.bezierCurveTo(85, 25, 75, 37, 75, 40)
   ctx.fill()
 }
+// 封装的一个用于绘制圆角矩形的函数。
+export function roundedRect(
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+  radius: number
+) {
+  ctx.beginPath()
+  ctx.moveTo(x, y + radius)
+  ctx.lineTo(x, y + height - radius)
+  ctx.quadraticCurveTo(x, y + height, x + radius, y + height)
+  ctx.lineTo(x + width - radius, y + height)
+  ctx.quadraticCurveTo(x + width, y + height, x + width, y + height - radius)
+  ctx.lineTo(x + width, y + radius)
+  ctx.quadraticCurveTo(x + width, y, x + width - radius, y)
+  ctx.lineTo(x + radius, y)
+  ctx.quadraticCurveTo(x, y, x, y + radius)
+  ctx.stroke()
+}
 
 export function drawGame(ctx: CanvasRenderingContext2D) {
   roundedRect(ctx, 12, 12, 150, 150, 15)
@@ -190,29 +211,7 @@ export function drawGame(ctx: CanvasRenderingContext2D) {
   ctx.fill()
 }
 
-// 封装的一个用于绘制圆角矩形的函数。
-export function roundedRect(
-  ctx: CanvasRenderingContext2D,
-  x: number,
-  y: number,
-  width: number,
-  height: number,
-  radius: number
-) {
-  ctx.beginPath()
-  ctx.moveTo(x, y + radius)
-  ctx.lineTo(x, y + height - radius)
-  ctx.quadraticCurveTo(x, y + height, x + radius, y + height)
-  ctx.lineTo(x + width - radius, y + height)
-  ctx.quadraticCurveTo(x + width, y + height, x + width, y + height - radius)
-  ctx.lineTo(x + width, y + radius)
-  ctx.quadraticCurveTo(x + width, y, x + width - radius, y)
-  ctx.lineTo(x + radius, y)
-  ctx.quadraticCurveTo(x, y, x, y + radius)
-  ctx.stroke()
-}
-
-export function drawPath2DTest(ctx: CanvasRenderingContext2D) {
+export function drawPath2DDemo(ctx: CanvasRenderingContext2D) {
   const rectangle = new Path2D()
   rectangle.rect(10, 10, 50, 50)
 
@@ -222,10 +221,13 @@ export function drawPath2DTest(ctx: CanvasRenderingContext2D) {
 
   ctx.stroke(rectangle)
   ctx.fill(circle)
+
+  // rectangle.addPath(circle)
+  // ctx.stroke(rectangle)
 }
 
-export function drawPath2DTest2(ctx: CanvasRenderingContext2D) {
+export function drawPath2DSvg(ctx: CanvasRenderingContext2D) {
   const p = new Path2D('M10 10 h 80 v 80 h -80 Z')
-  // ctx.stroke(p)
-  ctx.fill(p)
+  ctx.stroke(p)
+  // ctx.fill(p)
 }

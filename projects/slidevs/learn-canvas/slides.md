@@ -143,6 +143,7 @@ level: 1
 
 ---
 hideInToc: true
+title: hello canvas demo
 ---
 
 <Demo001HelloCanvas/>
@@ -182,124 +183,12 @@ canvas {
 ```
 
 ---
-title: 绘制形状
-level: 1
-layout: image-right
-image: https://source.unsplash.com/collection/94734566/1920x1080
----
-## 06.绘制形状
-
-### 栅格
-
-canvas绘制的原点（0,0）是左上角  
-
-![栅格](/images/canvas_default_grid.png)
-
----
-title: 绘制直线
-level: 2
+src: ./pages/01shape.md
 ---
 
-和直线绘制相关的3个方法
-
-1. `moveTo(x, y)` 移动画笔的位置，也就是初始位置
-2. `lineTo(x, y)` 连接初始位置和指定位置（并不会画线，需要配置stroke），参数为指定位置x和y的坐标点()
-3. `stroke()`  
-
 ---
-title: 绘制矩形
-level: 2
+src: ./pages/02color-style.md
 ---
-
-### 绘制矩形
-canvas 提供了三个方法绘制矩形：
-
-1. `fillRect(x, y, width, height)`   绘制一个填充的矩形
-2. `strokeRect(x, y, width, height)`  绘制一个矩形的边框
-3. `clearRect(x, y, width, height)`  清除指定矩形区域，让清除部分完全透明
-
-<v-click>
-
-<Demo002Rect1 width="200" height="200"/>
-
-</v-click>
-
----
-title: 绘制路径
-level: 2
----
-### 绘制路径
-
-图形的基本元素是路径。路径是通过不同颜色和宽度的线段或曲线相连形成的不同形状的点的集合。一个路径，甚至一个子路径，都是闭合的。
-
-使用路径绘制的步骤
-
-1. 首先，你需要创建路径起始点。  `beginPath()`
-2. 然后你使用画图命令去画出路径。
-3. 之后你把路径封闭。 `closePath()`
-4. 一旦路径生成，你就能通过描边（`stroke`）或填充路径区域(`fill`)来渲染图形。
-
-`lineTo(x, y)` 绘制一条从当前位置到指定 x 以及 y 位置的直线。
-
-<v-click>
-
-<Demo002PathTriangle  width="200" height="100" />
-
-</v-click>
-<!-- <script setup lang="ts">
-import {drawTriangle} from './example/examples'
-</script>
-<CanvasBoard width="200" height="200" :drawFn="drawTriangle"/> 
--->
-
----
-
-### 圆弧
-
-`moveTo(x, y)` 将笔触移动到指定的坐标 x 以及 y 上，实际上不画任何东西.
-
-`arc(x, y, radius, startAngle, endAngle, anticlockwise)` 画一个以（x,y）为圆心的以 radius 为半径的圆弧（圆），从 startAngle 开始到 endAngle 结束，anticlockwise是可选的Boolean值，如果为 true，逆时针绘制圆弧，反之，顺时针绘制。默认是顺时针
-
-`arcTo(x1, y1, x2, y2, radius)`  根据给定的控制点和半径画一段圆弧，再以直线连接两个控制点。(起点和2个控制点组成圆的两条切线)
-
-<v-click>
-
-<Demo002Smile class="inline-block"/>
-
-</v-click>
-
-<v-click>
-
-<Demo002ArcTo class="inline-block ml-10" />
-
-</v-click>
-
----
-
-### 贝塞尔曲线
-[贝塞尔曲线](https://zh.wikipedia.org/wiki/%E8%B2%9D%E8%8C%B2%E6%9B%B2%E7%B7%9A) 可以用来绘制复杂有规律的图形。
-
-`quadraticCurveTo(cp1x, cp1y, x, y)` 绘制二次贝塞尔曲线，cp1x,cp1y 为一个控制点，x,y 为结束点。
-
-`bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)` 绘制三次贝塞尔曲线，cp1x,cp1y为控制点一，cp2x,cp2y为控制点二，x,y为结束点。
-
-<v-click>
-
-<Demo002QuadraticCurveTo class="inline-block ml-10" />
-
-</v-click>
-
-<v-click>
-
-<Demo002BezierCurveTo class="inline-block ml-5" />
-
-</v-click>
-
----
-hideInToc: true
----
-
-<Demo002Shape class="inline-block"/>
 
 ---
 hideInToc: true
