@@ -13,13 +13,6 @@ canvas绘制的原点（0,0）是左上角
 ![栅格](/images/canvas_default_grid.png)
 
 ---
-title: 绘制直线
-level: 2
----
-
-和直线绘制相关的3个方法
-
----
 title: 绘制矩形
 level: 2
 ---
