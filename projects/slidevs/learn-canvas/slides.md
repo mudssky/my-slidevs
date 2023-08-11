@@ -36,7 +36,7 @@ hideInToc: true
 
 ## 目录
 
-<Toc columns="2" />
+<Toc columns="3" />
 
 ---
 title: 什么是canvas?
