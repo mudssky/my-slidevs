@@ -11,11 +11,13 @@ interface Props {
   width?: number
   height?: number
   drawFn?: (ctx: CanvasRenderingContext2D) => void
+  title?: string
 }
 const p = withDefaults(defineProps<Props>(), {
   width: 900,
   height: 450,
   drawFn: undefined,
+  title: undefined,
 })
 
 const canvasDom = ref()

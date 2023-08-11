@@ -22,20 +22,12 @@ export function drawTriangle(
   ctx.lineTo(startX + 100, startY + 75)
   ctx.lineTo(startX + 100, startY + 25)
   ctx.fill()
+  // ctx.closePath()
+  // ctx.stroke()
 }
 
-export function drawSmile(
-  ctx: CanvasRenderingContext2D,
-  options?: {
-    startX?: number
-    startY?: number
-  }
-) {
-  const { startX = 0, startY = 0 } = options || {}
-  // 保存初始状态
-  ctx.save()
+export function drawSmile(ctx: CanvasRenderingContext2D) {
   // 移动起点
-  ctx.translate(startX, startY)
   ctx.beginPath()
   ctx.arc(75, 75, 50, 0, Math.PI * 2, true) // 绘制圆弧
   ctx.moveTo(110, 75)
@@ -45,8 +37,21 @@ export function drawSmile(
   ctx.moveTo(95, 65)
   ctx.arc(90, 65, 5, 0, Math.PI * 2, true) // 右眼
   ctx.stroke()
-  // 恢复初始状态
-  ctx.restore()
+}
+
+export function drawArcTo(ctx: CanvasRenderingContext2D) {
+  // ctx.beginPath()
+  // ctx.moveTo(50, 50)
+  // ctx.setLineDash([4, 5]) //表示4像素实线和5像素间隔,重复这样的模式
+  // ctx.lineTo(100, 50)
+  // ctx.lineTo(100, 100)
+  // ctx.stroke()
+  // ctx.setLineDash([])
+
+  ctx.beginPath()
+  ctx.moveTo(50, 50)
+  ctx.arcTo(100, 50, 100, 100, 50)
+  ctx.stroke()
 }
 
 export function drawTriangle2(ctx: CanvasRenderingContext2D) {
@@ -68,19 +73,19 @@ export function drawTriangle2(ctx: CanvasRenderingContext2D) {
 }
 
 export function drawArcs(ctx: CanvasRenderingContext2D) {
-  for (let i = 0; i < 4; i++) {
-    for (let j = 0; j < 3; j++) {
+  for (let y = 0; y < 4; y++) {
+    for (let x = 0; x < 3; x++) {
       ctx.beginPath()
-      const x = 25 + j * 50 // x 坐标值
-      const y = 25 + i * 50 // y 坐标值
+      const centerX = 25 + x * 50 // 圆心 x 坐标值
+      const centerY = 25 + y * 50 // 圆心 y 坐标值
       const radius = 20 // 圆弧半径
       const startAngle = 0 // 开始点
-      const endAngle = Math.PI + (Math.PI * j) / 2 // 结束点
-      const anticlockwise = i % 2 == 0 ? false : true // 顺时针或逆时针
+      const endAngle = Math.PI + (Math.PI * x) / 2 // 结束点
+      const anticlockwise = y % 2 == 0 ? false : true // 顺时针或逆时针
 
-      ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise)
+      ctx.arc(centerX, centerY, radius, startAngle, endAngle, anticlockwise)
 
-      if (i > 1) {
+      if (y > 1) {
         ctx.fill()
       } else {
         ctx.stroke()
