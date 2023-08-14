@@ -1,5 +1,6 @@
 {
   "name": "learn-canvas",
+  "type": "module",
   "private": true,
   "scripts": {
     "build": "slidev build",

@@ -185,16 +185,9 @@ canvas {
 ---
 src: ./pages/01shape.md
 ---
-
 ---
 src: ./pages/02color-style.md
 ---
-
----
-hideInToc: true
----
-
-<Demo003Colors :width="400"/>
 
 ---
 hideInToc: true

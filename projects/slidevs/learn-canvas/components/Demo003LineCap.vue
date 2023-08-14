@@ -1,18 +1,18 @@
 <template>
   <div class="inline-block">
-    <div class="text-[12px]">fillStyle 例子</div>
+    <div class="text-[12px]">lineCap 例子</div>
     <CanvasBoard
       ref="canvasBoardRef"
       :width="p.width"
       :height="p.height"
-      :draw-fn="drawFillStyleDemo"
+      :draw-fn="drawLineCapDemo"
     ></CanvasBoard>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { drawFillStyleDemo } from '../example/examples'
+import { drawLineCapDemo } from '../example/examples'
 interface Props {
   width?: number
   height?: number
