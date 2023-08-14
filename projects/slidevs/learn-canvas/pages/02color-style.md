@@ -99,6 +99,8 @@ level: 2
 </v-click>
 
 ---
+hideInToc: true
+---
 
 ### miterLimit
 
@@ -113,5 +115,50 @@ miterLimit 属性就是用来设定外延交点与连接点的最大距离，如
 <v-click>
 
 <Demo003MiterLimit  />
+
+</v-click>
+
+---
+hideInToc: true
+---
+
+### 虚线
+
+用 setLineDash 方法和 lineDashOffset 属性来制定虚线样式。  
+setLineDash 方法接受一个数组，来指定线段与间隙的交替；如果数组元素的数量是奇数，数组的元素会被复制并重复。例如， [5, 15, 25] 会变成 [5, 15, 25, 5, 15, 25]  
+lineDashOffset 属性设置起始偏移量。
+
+<v-click>
+
+<Demo003LineDash />
+
+</v-click>
+
+<v-click>
+
+<Demo003LineDash2 class=" ml-10"  width="300"/>
+
+</v-click>
+
+---
+title: 渐变
+level: 2
+---
+
+## 渐变 Gradients
+我们用下面的方法新建一个 canvasGradient 对象，并且赋给图形的 fillStyle 或 strokeStyle 属性。
+
+1. `createLinearGradient(x1, y1, x2, y2)` 创建线性渐变,接受 4 个参数，表示渐变的起点 (x1,y1) 与终点 (x2,y2)
+2. `createRadialGradient(x1, y1, r1, x2, y2, r2)`创建径向渐变， 接受 6 个参数，前三个定义一个以 (x1,y1) 为原点，半径为 r1 的圆，后三个参数则定义另一个以 (x2,y2) 为原点，半径为 r2 的圆。
+
+创建出 `canvasGradient` 对象后，我们就可以用 `addColorStop` 方法给它上色了。  
+
+`gradient.addColorStop(position, color)` 该方法接受 2 个参数，position 参数必须是一个 0.0 与 1.0 之间的数值，表示渐变中颜色所在的相对位置。例如，0.5 表示颜色会出现在正中间。color 参数必须是一个有效的 CSS 颜色值（如 #FFF，rgba(0,0,0,1)，等等）。
+
+---
+
+<v-click>
+
+<Demo005LinearGradient1 />
 
 </v-click>

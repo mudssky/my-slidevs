@@ -363,8 +363,10 @@ export function drawMiterLimitDemo(
   miterLimit: number = 10
 ) {
   // 清空画布
-  ctx.clearRect(0, 0, 150, 150)
-
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+  ctx.fillStyle = 'purple'
+  ctx.font = '16px Fira Sans'
+  ctx.fillText(`miterLimit:${miterLimit}`, 100, 20, 100)
   // 绘制参考线
   ctx.strokeStyle = '#09f'
   ctx.lineWidth = 2
@@ -384,4 +386,72 @@ export function drawMiterLimitDemo(
   }
   ctx.stroke()
   return false
+}
+
+export function drawLineDashDemo(ctx: CanvasRenderingContext2D) {
+  let offset = 0
+  function _drawLineDash(ctx: CanvasRenderingContext2D) {
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+    ctx.setLineDash([4, 2])
+    ctx.lineDashOffset = -offset
+    ctx.strokeRect(10, 10, 100, 100)
+  }
+  // 蚂蚁线运行
+  function march() {
+    offset++
+    if (offset > 16) {
+      offset = 0
+    }
+    _drawLineDash(ctx)
+    setTimeout(march, 20)
+    // requestAnimationFrame(march)
+  }
+  march()
+  //  _drawLineDash(ctx)
+}
+
+export function drawLineDashDemo2(ctx: CanvasRenderingContext2D) {
+  let y = 15
+  function drawDashedLine(segment: number[]) {
+    ctx.beginPath()
+    ctx.setLineDash(segment)
+    ctx.moveTo(0, y)
+    ctx.lineTo(ctx.canvas.width, y)
+    ctx.stroke()
+    y += 20
+  }
+
+  drawDashedLine([])
+  drawDashedLine([1, 1])
+  drawDashedLine([10, 10])
+  drawDashedLine([20, 5])
+  drawDashedLine([15, 3, 3, 3])
+  drawDashedLine([20, 3, 3, 3, 3, 3, 3, 3])
+  drawDashedLine([12, 3, 3]) // Equals [12, 3, 3, 12, 3, 3]
+}
+
+export function drawLinearGradientDemo(ctx: CanvasRenderingContext2D) {
+  // Create gradients
+  // 纵向渐变
+  const lingrad = ctx.createLinearGradient(0, 0, 0, 150)
+  // 添加色标
+  lingrad.addColorStop(0, '#00ABEB')
+  lingrad.addColorStop(0.5, '#fff')
+  lingrad.addColorStop(0.5, '#26C000')
+  // lingrad.addColorStop(0.75, 'red')
+  lingrad.addColorStop(1, '#fff')
+
+  // 纵向渐变
+  const lingrad2 = ctx.createLinearGradient(0, 50, 0, 95)
+  // 黑色到透明度0的渐变
+  lingrad2.addColorStop(0.5, '#000')
+  lingrad2.addColorStop(1, 'rgba(0,0,0,0)')
+
+  // assign gradients to fill and stroke styles
+  ctx.fillStyle = lingrad
+  ctx.strokeStyle = lingrad2
+
+  // draw shapes
+  ctx.fillRect(10, 10, 130, 130)
+  ctx.strokeRect(50, 50, 50, 50)
 }

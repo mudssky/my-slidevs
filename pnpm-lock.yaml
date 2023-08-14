@@ -73,7 +73,11 @@ importers:
         specifier: 1.0.0-beta.6
         version: 1.0.0-beta.6(@algolia/client-search@4.19.1)(sass@1.64.1)(search-insights@2.7.0)
 
-  projects/slidevs/learn-canvas: {}
+  projects/slidevs/learn-canvas:
+    devDependencies:
+      '@iconify-json/el':
+        specifier: ^1.1.5
+        version: 1.1.5
 
   projects/slidevs/learn-typescript: {}
 
@@ -871,6 +875,12 @@ packages:
 
   /@iconify-json/carbon@1.1.18:
     resolution: {integrity: sha512-RbKET6KS9xUMeYVq1FUH3UUA7AYNcnApkHt2AccCwTWTQQs/O58ji4Of6z6PhRajGlbfvrJzT/Uqh19OKECRvA==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/el@1.1.5:
+    resolution: {integrity: sha512-PwFbcsSLGi4thGBBq8pYdqXZnDgQN9adLkmiderrwk/ht9eKQ+xyKZ56BgHPym62lN9cf4K0EMMrEkDKk2Z7sg==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true

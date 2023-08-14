@@ -9,6 +9,7 @@
     "bezier",
     "bitmaprenderer",
     "daisyui",
+    "Fira",
     "frontmatter",
     "obsidain",
     "rgba",
@@ -18,6 +19,7 @@
     "slidevs",
     "unocss",
     "unplugin",
+    "vclick",
     "webgl",
     "webgpu"
   ],

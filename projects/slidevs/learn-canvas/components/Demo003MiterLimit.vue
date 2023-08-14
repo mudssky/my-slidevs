@@ -1,13 +1,13 @@
 <template>
   <div class="inline-block">
     <div class="text-[12px]">MiterLimit 例子</div>
-    <div class="flex justify-between w-[300px]">
+    <div class="flex justify-between w-[300px] pb-1">
       <input
-        class="input input-bordered input-secondary"
+        class="rounded border border-black"
         type="number"
         v-model="miterLimit"
       />
-      <button class="btn" @click="handleRePaintClick">重绘</button>
+      <button class="btn-primary" @click="handleRePaintClick">重绘</button>
     </div>
 
     <CanvasBoard
