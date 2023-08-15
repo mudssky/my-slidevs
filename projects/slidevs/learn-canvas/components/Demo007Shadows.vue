@@ -1,5 +1,9 @@
 <template>
-  <CanvasBoard ref="canvasBoardRef"></CanvasBoard>
+  <CanvasBoard
+    ref="canvasBoardRef"
+    :width="p.width"
+    :height="p.height"
+  ></CanvasBoard>
 </template>
 
 <script lang="ts" setup>
@@ -8,6 +12,14 @@ import { ref } from 'vue'
 import { drawFromPosition } from '../utils/drawUtils'
 
 const canvasBoardRef = ref()
+interface Props {
+  width?: number
+  height?: number
+}
+const p = withDefaults(defineProps<Props>(), {
+  width: 200,
+  height: 200,
+})
 /**
  * 阴影demo
  * @param ctx

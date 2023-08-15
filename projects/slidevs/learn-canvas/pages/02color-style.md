@@ -3,12 +3,11 @@
 title: 使用样式和颜色
 level: 1
 layout: center
-background: https://sli.dev/bar.png
 ---
 # 07.使用样式和颜色
 
 ---
-title: Colors
+title: 色彩
 level: 2
 ---
 
@@ -162,3 +161,69 @@ level: 2
 <Demo005LinearGradient1 />
 
 </v-click>
+
+<v-click>
+
+<Demo005RadialGradient class=" ml-10" />
+
+</v-click>
+
+---
+title: 图案样式
+level: 2
+---
+
+## 图案样式 Patterns
+
+`createPattern(image, type)`,该方法接受两个参数。Image 可以是一个 Image 对象的引用，或者另一个 canvas 对象。Type 必须是下面的字符串值之一：`repeat`，`repeat-x`，`repeat-y` 和 `no-repeat`。
+
+图案的应用跟渐变类似，创建出一个 pattern 之后，赋给 fillStyle 或 strokeStyle 属性即可
+
+<v-click>
+
+<Demo006Patterns />
+
+</v-click>
+
+---
+title: 阴影
+level: 2
+---
+
+## 阴影 Shadows
+
+`shadowOffsetX = float`  
+`shadowOffsetY = float`  
+shadowOffsetX 和 shadowOffsetY 用来设定阴影在 X 和 Y 轴的延伸距离，它们是不受变换矩阵所影响的。负值表示阴影会往上或左延伸，正值则表示会往下或右延伸，它们默认都为 0。  
+
+`shadowBlur = float` shadowBlur 用于设定阴影的模糊程度，其数值并不跟像素数量挂钩，也不受变换矩阵的影响，默认为 0。  
+`shadowColor = color` shadowColor 是标准的 CSS 颜色值，用于设定阴影颜色效果，默认是全透明的黑色。  
+
+<v-click>
+
+<Demo007Shadows />
+
+</v-click>
+
+---
+title: 填充规则
+level: 2
+---
+## 填充规则
+
+当我们用到 fill（或者 clip和isPointinPath ）你可以选择一个填充规则，该填充规则根据某处在路径的外面或者里面来决定该处是否被填充，这对于自己与自己路径相交或者路径被嵌套的时候是有用的。
+两个可能的值：
+
+- `nonzero` 默认值
+- `evenodd`
+
+<v-click>
+
+<Demo008WindingRule />
+
+</v-click>
+
+---
+
+# 骨架屏
+<TestSkeleton />

@@ -3,14 +3,13 @@
     ref="canvasBoardRef"
     :width="p.width"
     :height="p.height"
-    :draw-fn="drawPatterns"
+    :draw-fn="drawImageScaleDemo"
   ></CanvasBoard>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-
-import canvas_createpattern from '/images/canvas_createpattern.png'
+import canvas_backdrop from '/images/canvas_backdrop.png'
 
 interface Props {
   width?: number
@@ -22,19 +21,20 @@ const p = withDefaults(defineProps<Props>(), {
 })
 const canvasBoardRef = ref()
 /**
- * 图案样式demo
+ * 图片缩放后铺满
  * @param ctx
+ * @param options
  */
-function drawPatterns(ctx: CanvasRenderingContext2D) {
-  // 创建新 image 对象，用作图案
-  var img = new Image()
-  img.src = canvas_createpattern
+function drawImageScaleDemo(ctx: CanvasRenderingContext2D) {
+  const img = new Image()
   img.onload = function () {
-    // 创建图案
-    const pattern = ctx.createPattern(img, 'repeat')
-    ctx.fillStyle = pattern!
-    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+    for (let i = 0; i < 4; i++) {
+      for (let j = 0; j < 3; j++) {
+        ctx.drawImage(img, j * 50, i * 38, 50, 38)
+      }
+    }
   }
+  img.src = canvas_backdrop
 }
 </script>
 

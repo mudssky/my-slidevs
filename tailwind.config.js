@@ -3,12 +3,11 @@ export default {
   content: [
     './index.html',
     './site/**/*.{js,ts,vue}',
-    './project/**/*.{js,ts,vue}',
+    './projects/**/*.{js,ts,vue}',
   ],
   theme: {
     extend: {},
   },
-  plugins: [require('daisyui')],
   // corePlugins: {
   //   preflight: false,
   // },

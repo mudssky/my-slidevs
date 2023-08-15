@@ -9,7 +9,7 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue'
 import { ref } from 'vue'
-import { drawFromPosition } from '../utils/drawUtils'
+import canvas_backdrop from '/images/canvas_backdrop.png'
 const canvasBoardRef = ref()
 interface Props {
   width?: number
@@ -19,27 +19,27 @@ const p = withDefaults(defineProps<Props>(), {
   width: 200,
   height: 200,
 })
-function drawScaleDemo(ctx: CanvasRenderingContext2D) {
-  // draw a simple rectangle, but scale it.
-  ctx.save()
-  ctx.scale(10, 3)
-  ctx.fillRect(1, 10, 10, 10)
-  ctx.restore()
 
-  // mirror horizontally
-  ctx.scale(-1, 1)
-  ctx.font = '48px serif'
-  ctx.fillText('MDN', -135, 120)
+function drawImageDemo(ctx: CanvasRenderingContext2D) {
+  const img = new Image()
+  img.onload = function () {
+    ctx.drawImage(img, 0, 0)
+    ctx.beginPath()
+    ctx.strokeStyle = 'red'
+    ctx.moveTo(40, 96)
+    ctx.lineTo(70, 66)
+    ctx.lineTo(103, 76)
+    ctx.lineTo(170, 15)
+    ctx.stroke()
+  }
+  img.src = canvas_backdrop
 }
 
 onMounted(() => {
   const canvasDom: HTMLCanvasElement = canvasBoardRef.value.canvasDom
   const ctx = canvasDom.getContext('2d')!
-  // drawTranslateDemo(ctx)
-  drawFromPosition(ctx, drawScaleDemo, {
-    startX: 0,
-    startY: 0,
-  })
+
+  drawImageDemo(ctx)
 })
 </script>
 

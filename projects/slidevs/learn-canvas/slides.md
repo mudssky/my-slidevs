@@ -190,46 +190,11 @@ src: ./pages/02color-style.md
 ---
 
 ---
-hideInToc: true
+src: ./pages/03text.md
 ---
-
-<Demo004LineStyle />
-
 ---
-hideInToc: true
+src: ./pages/04image.md
 ---
-
-<Demo005Gradients/>
-
----
-hideInToc: true
----
-
-<Demo006Patterns/>
-
----
-hideInToc: true
----
-
-<Demo007Shadows/>
-
----
-hideInToc: true
----
-
-<Demo008WindingRule/>
-
----
-hideInToc: true
----
-
-<Demo009Text/>
-
----
-hideInToc: true
----
-
-<Demo010Image/>
 
 ---
 hideInToc: true
