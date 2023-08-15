@@ -1,31 +1,32 @@
 <template>
   <div>
-    <img
-      class="inline-block"
-      id="source"
-      :src="rhino"
-      width="300"
-      height="227"
-    />
-    <img
-      class="inline-block"
-      id="frame"
-      :src="canvas_picture_frame"
-      width="132"
-      height="150"
-    />
+    <div>
+      <img
+        class="inline-block"
+        id="source"
+        :src="rhino"
+        width="300"
+        height="227"
+      />
+      <img
+        class="inline-block"
+        id="frame"
+        :src="canvas_picture_frame"
+        width="132"
+        height="150"
+      />
+    </div>
+    <div>裁剪犀牛头部，放到相框里</div>
+    <CanvasBoard
+      ref="canvasBoardRef"
+      :width="p.width"
+      :height="p.height"
+    ></CanvasBoard>
   </div>
-  <div>通过裁剪拼接图片</div>
-  <CanvasBoard
-    ref="canvasBoardRef"
-    :width="p.width"
-    :height="p.height"
-    :draw-fn="drawImageScaleDemo"
-  ></CanvasBoard>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import canvas_picture_frame from '/images/canvas_picture_frame.png'
 import rhino from '/images/rhino.jpg'
 
@@ -44,22 +45,27 @@ const canvasBoardRef = ref()
  * @param options
  */
 function drawImageScaleDemo(ctx: CanvasRenderingContext2D) {
-  // Draw slice
-  ctx.drawImage(
-    document.getElementById('source') as HTMLImageElement,
-    33,
-    71,
-    104,
-    124,
-    21,
-    20,
-    87,
-    104
-  )
+  const rhinoDom = document.getElementById('source') as HTMLImageElement
+  const frameDom = document.getElementById('frame') as HTMLImageElement
+  console.log({
+    rhinoDom,
+    frameDom,
+  })
 
-  // Draw frame
-  ctx.drawImage(document.getElementById('frame') as HTMLImageElement, 0, 0)
+  // Draw slice
+  ctx.drawImage(rhinoDom, 33, 71, 104, 124, 21, 20, 87, 104)
+
+  // 绘制到指定位置
+  ctx.drawImage(frameDom, 0, 0)
 }
+onMounted(() => {
+  const ctx: CanvasRenderingContext2D =
+    canvasBoardRef.value.canvasDom.getContext('2d')
+  // console.log({ ctx })
+  setTimeout(() => {
+    drawImageScaleDemo(ctx)
+  }, 2000)
+})
 </script>
 
 <style lang="scss"></style>

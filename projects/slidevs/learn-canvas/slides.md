@@ -72,11 +72,11 @@ canvas标签内可以设置替换内容，不支持canvas的浏览器会显示�
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content= :width=device-width, initial-scale=1.0">
   <title>认识canvas标签</title>
 </head>
 <body>
-  <canvas width="300" height="150">
+  <canvas :width="300" :height="150">
     当前浏览器不支持canvas元素，请升级或更换浏览器！
   </canvas>
 </body>
@@ -194,6 +194,10 @@ src: ./pages/03text.md
 ---
 ---
 src: ./pages/04image.md
+---
+
+---
+src: ./pages/05transformations.md
 ---
 
 ---

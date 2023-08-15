@@ -3,7 +3,7 @@ title: 使用图片
 level: 1
 layout: center
 ---
-# 07.使用图片
+# 09.使用图片
 
 ---
 title: 获取需要绘制的图片
@@ -86,8 +86,22 @@ drawImage 方法的第三个也是最后一个变种有 8 个新参数，用于�
 hideInToc: true
 ---
 
-<v-clicks>
-
 <Demo010DrawImageSlice class="inline-block mt-10" />
 
-</v-clicks>
+---
+title: 控制图像的缩放行为
+level: 2
+---
+
+## 控制图像的缩放行为
+
+过度缩放图像可能会导致图像模糊或像素化。您可以通过使用绘图环境的imageSmoothingEnabled属性来控制是否在缩放图像时使用平滑算法。默认值为true，即启用平滑缩放。您也可以像这样禁用此功能：
+
+```js
+ctx.mozImageSmoothingEnabled = false;
+ctx.webkitImageSmoothingEnabled = false;
+ctx.msImageSmoothingEnabled = false;
+ctx.imageSmoothingEnabled = false;
+
+
+```

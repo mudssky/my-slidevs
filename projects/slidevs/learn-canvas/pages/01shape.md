@@ -27,7 +27,7 @@ canvas 提供了三个方法绘制矩形：
 
 <v-click>
 
-<Demo002Rect1 width="200" height="200"/>
+<Demo002Rect1 :width="200" :height="200"/>
 
 </v-click>
 
@@ -50,13 +50,13 @@ level: 2
 
 <v-click>
 
-<Demo002PathTriangle  width="200" height="100" />
+<Demo002PathTriangle  :width="200" :height="100" />
 
 </v-click>
 <!-- <script setup lang="ts">
 import {drawTriangle} from './example/examples'
 </script>
-<CanvasBoard width="200" height="200" :drawFn="drawTriangle"/> 
+<CanvasBoard :width="200" :height="200" :drawFn="drawTriangle"/> 
 -->
 
 ---

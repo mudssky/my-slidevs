@@ -135,7 +135,7 @@ lineDashOffset 属性设置起始偏移量。
 
 <v-click>
 
-<Demo003LineDash2 class=" ml-10"  width="300"/>
+<Demo003LineDash2 class=" ml-10"  :width="300"/>
 
 </v-click>
 
@@ -224,6 +224,7 @@ level: 2
 </v-click>
 
 ---
-
+hideInToc: true
+---
 # 骨架屏
 <TestSkeleton />

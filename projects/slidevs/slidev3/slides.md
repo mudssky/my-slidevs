@@ -144,7 +144,7 @@ function updateUser(id: number, update: User) {
 }
 ```
 
-<arrow v-click="3" x1="400" y1="420" x2="230" y2="330" color="#564" width="3" arrowSize="1" />
+<arrow v-click="3" x1="400" y1="420" x2="230" y2="330" color="#564" :width="3" arrowSize="1" />
 
 [^1]: [Learn More](https://sli.dev/guide/syntax.html#line-highlighting)
 
@@ -201,7 +201,6 @@ Also, HTML elements are valid:
   <span>Right content</span>
 </div>
 -->
-
 
 ---
 class: px-20
