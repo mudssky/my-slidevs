@@ -36,7 +36,7 @@ hideInToc: true
 
 ## 目录
 
-<Toc columns="3" />
+<Toc columns="4" />
 
 ---
 title: 什么是canvas?
@@ -199,36 +199,6 @@ src: ./pages/04image.md
 ---
 src: ./pages/05transformations.md
 ---
-
----
-hideInToc: true
----
-
-<Demo011Restore/>
-
----
-hideInToc: true
----
-
-<Demo012Translate/>
-
----
-hideInToc: true
----
-
-<Demo013Rotate/>
-
----
-hideInToc: true
----
-
-<Demo014Scale/>
-
----
-hideInToc: true
----
-
-<Demo015Transforms/>
 
 ---
 hideInToc: true

@@ -1,35 +1,27 @@
 <template>
-  <CanvasBoard ref="canvasBoardRef"></CanvasBoard>
+  <div class="inline-block">
+    <div class="text-[12px]">Demo012Translate</div>
+    <CanvasBoard
+      ref="canvasBoardRef"
+      :width="p.width"
+      :height="p.height"
+      :draw-fn="drawTranslateDemo"
+    ></CanvasBoard>
+  </div>
 </template>
 
 <script lang="ts" setup>
-import { onMounted } from 'vue'
 import { ref } from 'vue'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { drawFromPosition } from '../utils/drawUtils'
-const canvasBoardRef = ref()
-
-function drawTranslateDemo(ctx: CanvasRenderingContext2D) {
-  for (let i = 0; i < 3; i++) {
-    for (let j = 0; j < 3; j++) {
-      ctx.save()
-      ctx.fillStyle = 'rgb(' + 51 * i + ', ' + (255 - 51 * i) + ', 255)'
-      ctx.translate(10 + j * 50, 10 + i * 50)
-      ctx.fillRect(0, 0, 25, 25)
-      ctx.restore()
-    }
-  }
+import { drawTranslateDemo } from '../example/examples'
+interface Props {
+  width?: number
+  height?: number
 }
-
-onMounted(() => {
-  const canvasDom: HTMLCanvasElement = canvasBoardRef.value.canvasDom
-  const ctx = canvasDom.getContext('2d')!
-  drawTranslateDemo(ctx)
-  // drawFromPostion(ctx, drawTranslateDemo, {
-  //   startX: 10,
-  //   startY: 10,
-  // })
+const p = withDefaults(defineProps<Props>(), {
+  width: 300,
+  height: 200,
 })
+const canvasBoardRef = ref()
 </script>
 
 <style lang="scss"></style>

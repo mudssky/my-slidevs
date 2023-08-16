@@ -500,3 +500,98 @@ export function drawStrokeTextDemo(ctx: CanvasRenderingContext2D) {
   ctx.font = '48px serif'
   ctx.strokeText('Hello world', 10, 50)
 }
+
+export function drawSaveRestoreDemo(ctx: CanvasRenderingContext2D) {
+  ctx.fillRect(0, 0, 150, 150) // 使用默认设置绘制一个矩形
+  ctx.save() // 保存默认状态
+
+  ctx.fillStyle = '#09F' // 在原有配置基础上对颜色做改变
+  ctx.fillRect(15, 15, 120, 120) // 使用新的设置绘制一个矩形
+
+  ctx.save() // 保存当前状态
+  ctx.fillStyle = '#FFF' // 再次改变颜色配置
+  ctx.globalAlpha = 0.5
+  ctx.fillRect(30, 30, 90, 90) // 使用新的配置绘制一个矩形
+
+  ctx.restore() // 重新加载之前的颜色状态
+  ctx.fillRect(45, 45, 60, 60) // 使用上一次的配置绘制一个矩形
+
+  ctx.restore() // 加载默认颜色配置
+  ctx.fillRect(60, 60, 30, 30) // 使用加载的配置绘制一个矩形
+}
+
+export function drawTranslateDemo(ctx: CanvasRenderingContext2D) {
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      ctx.save()
+      ctx.fillStyle = 'rgb(' + 51 * i + ', ' + (255 - 51 * i) + ', 255)'
+      ctx.translate(10 + j * 50, 10 + i * 50)
+      ctx.fillRect(0, 0, 25, 25)
+      ctx.restore()
+    }
+  }
+}
+
+export function drawRotateDemo(ctx: CanvasRenderingContext2D) {
+  // left rectangles, rotate from canvas origin
+  ctx.save()
+  // blue rect
+  ctx.fillStyle = '#0095DD'
+  ctx.fillRect(30, 30, 100, 100)
+  ctx.rotate((Math.PI / 180) * 25)
+  // grey rect
+  ctx.fillStyle = '#4D4E53'
+  ctx.fillRect(30, 30, 100, 100)
+  ctx.restore()
+
+  // right rectangles, rotate from rectangle center
+  // draw blue rect
+  ctx.fillStyle = '#0095DD'
+  ctx.fillRect(150, 30, 100, 100)
+
+  ctx.translate(200, 80) // translate to rectangle center
+  // x = x + 0.5 * width
+  // y = y + 0.5 * height
+  ctx.rotate((Math.PI / 180) * 25) // rotate
+  ctx.translate(-200, -80) // translate back
+
+  // draw grey rect
+  ctx.fillStyle = '#4D4E53'
+  ctx.fillRect(150, 30, 100, 100)
+}
+
+export function drawScaleDemo(ctx: CanvasRenderingContext2D) {
+  //绘制一个矩形并缩放
+  ctx.save()
+  ctx.scale(10, 3)
+  ctx.fillRect(1, 10, 10, 10)
+  ctx.restore()
+
+  // 关于x轴对称
+  ctx.scale(-1, 1)
+  ctx.font = '48px serif'
+  ctx.fillText('SCALE', -135, 120)
+}
+
+export function drawTransformsDemo(ctx: CanvasRenderingContext2D) {
+  const sin = Math.sin(Math.PI / 6)
+  // const sin = 0
+  const cos = Math.cos(Math.PI / 6)
+  ctx.translate(100, 100)
+  let c = 0
+  // ctx.scale(cos, cos)
+  for (let i = 0; i <= 12; i++) {
+    c = Math.floor((255 / 12) * i)
+    // ctx.fillStyle = 'rgb(' + c + ',' + c + ',' + c + ')'
+    ctx.fillStyle = `rgb(${c},${c},${c})`
+    ctx.fillRect(0, 0, 100, 10)
+
+    ctx.transform(cos, sin, -sin, cos, 0, 0)
+    // 翻译
+    // ctx.rotate(Math.PI / 6)
+  }
+
+  ctx.setTransform(-1, 0, 0, 1, 100, 100)
+  ctx.fillStyle = 'rgba(255, 128, 255, 0.5)'
+  ctx.fillRect(0, 50, 100, 100)
+}

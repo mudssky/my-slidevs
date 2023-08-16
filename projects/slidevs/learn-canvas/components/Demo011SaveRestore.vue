@@ -1,18 +1,18 @@
 <template>
   <div class="inline-block">
-    <div class="text-[12px]">Demo014Scale</div>
+    <div class="text-[12px]">Demo011SaveRestore</div>
     <CanvasBoard
       ref="canvasBoardRef"
       :width="p.width"
       :height="p.height"
-      :draw-fn="drawScaleDemo"
+      :draw-fn="drawSaveRestoreDemo"
     ></CanvasBoard>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { drawScaleDemo } from '../example/examples'
+import { drawSaveRestoreDemo } from '../example/examples'
 interface Props {
   width?: number
   height?: number
