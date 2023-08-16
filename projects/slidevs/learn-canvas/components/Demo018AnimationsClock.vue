@@ -1,27 +1,43 @@
 <template>
-  <CanvasBoard ref="canvasBoardRef"></CanvasBoard>
+  <div class="inline-block">
+    <div class="text-[12px]">Demo018AnimationsClock</div>
+    <CanvasBoard
+      ref="canvasBoardRef"
+      :width="p.width"
+      :height="p.height"
+      :draw-fn="drawClock"
+    ></CanvasBoard>
+  </div>
 </template>
 
 <script lang="ts" setup>
 import { onMounted } from 'vue'
 import { ref } from 'vue'
-
+interface Props {
+  width?: number
+  height?: number
+}
+const p = withDefaults(defineProps<Props>(), {
+  width: 400,
+  height: 400,
+})
 const canvasBoardRef = ref()
 function drawClock(ctx: CanvasRenderingContext2D) {
   function clock() {
-    var now = new Date()
+    const now = new Date()
 
     ctx.save()
-    ctx.clearRect(0, 0, 150, 150)
-    ctx.translate(75, 75)
-    ctx.scale(0.4, 0.4)
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+    ctx.translate(ctx.canvas.width / 2, ctx.canvas.height / 2)
+    ctx.scale(0.8, 0.8)
+    //逆时针旋转90度，把起点调整到12点
     ctx.rotate(-Math.PI / 2)
     ctx.strokeStyle = 'black'
     ctx.fillStyle = 'white'
     ctx.lineWidth = 8
     ctx.lineCap = 'round'
 
-    // Hour marks
+    // 绘制小时标记
     ctx.save()
     for (var i = 0; i < 12; i++) {
       ctx.beginPath()
@@ -29,10 +45,14 @@ function drawClock(ctx: CanvasRenderingContext2D) {
       ctx.moveTo(100, 0)
       ctx.lineTo(120, 0)
       ctx.stroke()
+
+      ctx.fillStyle = 'black'
+      ctx.font = '20px Fira Sans'
+      ctx.fillText(`${i + 1}`, 150, 0, 50)
     }
     ctx.restore()
 
-    // Minute marks
+    // 绘制分钟标记
     ctx.save()
     ctx.lineWidth = 5
     for (i = 0; i < 60; i++) {
@@ -53,7 +73,7 @@ function drawClock(ctx: CanvasRenderingContext2D) {
 
     ctx.fillStyle = 'black'
 
-    // write Hours
+    // 绘制时针
     ctx.save()
     ctx.rotate(
       hr * (Math.PI / 6) + (Math.PI / 360) * min + (Math.PI / 21600) * sec
@@ -65,7 +85,7 @@ function drawClock(ctx: CanvasRenderingContext2D) {
     ctx.stroke()
     ctx.restore()
 
-    // write Minutes
+    // 绘制分针
     ctx.save()
     ctx.rotate((Math.PI / 30) * min + (Math.PI / 1800) * sec)
     ctx.lineWidth = 10
@@ -75,7 +95,7 @@ function drawClock(ctx: CanvasRenderingContext2D) {
     ctx.stroke()
     ctx.restore()
 
-    // Write seconds
+    // 绘制秒针
     ctx.save()
     ctx.rotate((sec * Math.PI) / 30)
     ctx.strokeStyle = '#D40000'
@@ -113,11 +133,6 @@ function drawClock(ctx: CanvasRenderingContext2D) {
 onMounted(() => {
   const canvasDom: HTMLCanvasElement = canvasBoardRef.value.canvasDom
   const ctx = canvasDom.getContext('2d')!
-  // drawTranslateDemo(ctx)
-  // drawFromPostion(ctx, drawTransformsDemo, {
-  //   startX: 0,
-  //   startY: 0,
-  // })
   drawClock(ctx)
 })
 </script>

@@ -1,18 +1,18 @@
 <template>
   <div class="inline-block">
-    <div class="text-[12px]">Demo016Clip</div>
+    <div class="text-[12px]">Demo016GlobalCompositeOperation</div>
     <CanvasBoard
       ref="canvasBoardRef"
       :width="p.width"
       :height="p.height"
-      :draw-fn="drawClipDemo"
+      :draw-fn="drawGlobalCompositeOperationDemo"
     ></CanvasBoard>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { drawClipDemo } from '../example/examples'
+import { drawGlobalCompositeOperationDemo } from '../example/examples'
 interface Props {
   width?: number
   height?: number

@@ -595,3 +595,70 @@ export function drawTransformsDemo(ctx: CanvasRenderingContext2D) {
   ctx.fillStyle = 'rgba(255, 128, 255, 0.5)'
   ctx.fillRect(0, 50, 100, 100)
 }
+
+export function drawGlobalCompositeOperationDemo(
+  ctx: CanvasRenderingContext2D
+) {
+  ctx.globalCompositeOperation = 'xor'
+
+  ctx.fillStyle = 'blue'
+  ctx.fillRect(10, 10, 100, 100)
+
+  ctx.fillStyle = 'red'
+  ctx.fillRect(50, 50, 100, 100)
+}
+
+export function drawClipDemo(ctx: CanvasRenderingContext2D) {
+  ctx.fillRect(0, 0, 150, 150)
+
+  ctx.translate(75, 75)
+
+  // 绘制圆形裁切路径
+  ctx.beginPath()
+  ctx.arc(0, 0, 60, 0, Math.PI * 2, true)
+  ctx.clip()
+
+  // 绘制线性渐变星空背景
+  const lingrad = ctx.createLinearGradient(0, -75, 0, 75)
+  lingrad.addColorStop(0, '#232256')
+  lingrad.addColorStop(1, '#143778')
+
+  ctx.fillStyle = lingrad
+  ctx.fillRect(-75, -75, 150, 150)
+
+  // 随机位置绘制星星
+  for (let j = 1; j < 50; j++) {
+    ctx.save()
+    ctx.fillStyle = '#fff'
+    ctx.translate(
+      75 - Math.floor(Math.random() * 150),
+      75 - Math.floor(Math.random() * 150)
+    )
+    drawStar(ctx, Math.floor(Math.random() * 4) + 2)
+    ctx.restore()
+  }
+}
+
+/**
+ * 绘制五角星
+ * @param ctx
+ * @param r  五角星的半径
+ */
+export function drawStar(ctx: CanvasRenderingContext2D, r: number) {
+  ctx.save()
+  ctx.beginPath()
+  ctx.moveTo(r, 0)
+  for (let i = 0; i < 9; i++) {
+    // 五角星外壳的按照离圆心的距离可以分成两种点
+    ctx.rotate(Math.PI / 5)
+    if (i % 2 == 0) {
+      ctx.lineTo((r / 0.525731) * 0.200811, 0)
+    } else {
+      ctx.lineTo(r, 0)
+    }
+  }
+  ctx.closePath()
+  ctx.fill()
+  // ctx.stroke()
+  ctx.restore()
+}

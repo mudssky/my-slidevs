@@ -201,10 +201,12 @@ src: ./pages/05transformations.md
 ---
 
 ---
-hideInToc: true
+src: ./pages/06compositeAndCliping.md
 ---
 
-<Demo016Clip/>
+---
+src: ./pages/07animation.md
+---
 
 ---
 hideInToc: true
