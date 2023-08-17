@@ -13,6 +13,7 @@
 import { onMounted } from 'vue'
 import { ref } from 'vue'
 import nationalParkPic from '/images/national_park.jpg'
+import { PanoramaViewDraw } from '../example/examples'
 const canvasBoardRef = ref()
 interface Props {
   width?: number
@@ -23,6 +24,7 @@ const p = withDefaults(defineProps<Props>(), {
   height: 300,
 })
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function drawLoopPark(ctx: CanvasRenderingContext2D) {
   const img = new Image()
 
@@ -33,17 +35,20 @@ function drawLoopPark(ctx: CanvasRenderingContext2D) {
 
   // 每帧持续时间 30毫秒
   const speed = 30
-
-  // 防止js精度问题
-  const scale = 1.05
-
+  // 图片y轴位移
   const y = 0
 
+  // 图片每次移动距离
   var dx = 0.75
+  // 绘制图片放大倍数
+  const scale = 1.0
+  // 绘制图片的宽高
   let imgW: number
   let imgH: number
   // 计算图片1位移
   var x = 0
+
+  // 清理图片的大小
   let clearX: number
   let clearY: number
 
@@ -69,7 +74,7 @@ function drawLoopPark(ctx: CanvasRenderingContext2D) {
       clearY = CanvasYSize
     }
 
-    return setInterval(draw, speed)
+    setInterval(draw, speed)
   }
 
   function draw() {
@@ -97,7 +102,7 @@ function drawLoopPark(ctx: CanvasRenderingContext2D) {
       if (x > CanvasXSize) {
         x = CanvasXSize - imgW
       }
-      // draw aditional image
+      // draw additional image
       if (x > CanvasXSize - imgW) {
         ctx.drawImage(img, x - imgW + 1, y, imgW, imgH)
       }
@@ -112,12 +117,13 @@ function drawLoopPark(ctx: CanvasRenderingContext2D) {
 onMounted(() => {
   const canvasDom: HTMLCanvasElement = canvasBoardRef.value.canvasDom
   const ctx = canvasDom.getContext('2d')!
-  // drawTranslateDemo(ctx)
-  // drawFromPostion(ctx, drawTransformsDemo, {
-  //   startX: 0,
-  //   startY: 0,
-  // })
-  drawLoopPark(ctx)
+  // drawLoopPark(ctx)
+  new PanoramaViewDraw({
+    ctx,
+    imgSrc: nationalParkPic,
+    // moveX: 3,
+    // speed: 10,
+  })
 })
 </script>
 

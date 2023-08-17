@@ -662,3 +662,103 @@ export function drawStar(ctx: CanvasRenderingContext2D, r: number) {
   // ctx.stroke()
   ctx.restore()
 }
+interface LoopParkProps {
+  ctx: CanvasRenderingContext2D
+  imgSrc: string
+  speed?: number
+  moveX?: number
+  scale?: number
+  imgY?: number
+}
+
+/**
+ * 绘制全景图片，支持大于canvas大小的图片
+ */
+export class PanoramaViewDraw {
+  ctx: CanvasRenderingContext2D
+  imgSrc: string
+  speed: number
+  moveX: number
+  scale: number
+  private img: HTMLImageElement = new Image()
+
+  // 缩放后的实际图片大小
+  private imgW!: number
+  private imgH!: number
+
+  // 获取清理的图片区域
+  private clearX!: number
+  private clearY!: number
+
+  private imgY: number
+  // 图片位移的位置
+  private imgX: number = 0
+
+  constructor(props: LoopParkProps) {
+    const {
+      ctx,
+      imgSrc,
+      speed = 30,
+      moveX = 0.75,
+      scale = 1.0,
+      imgY = 0,
+    } = props
+    this.ctx = ctx
+    this.imgSrc = imgSrc
+    this.speed = speed
+    this.moveX = moveX
+    this.scale = scale
+    this.imgY = imgY
+    this.img.src = this.imgSrc
+    this.init()
+  }
+
+  // clearRect 清理的图片区域
+  getClearImageArea() {
+    this.clearX = Math.max(this.imgW, this.ctx.canvas.width)
+    this.clearY = Math.max(this.imgH, this.ctx.canvas.height)
+  }
+  resetImgX() {
+    if (this.imgW > this.ctx.canvas.width) {
+      this.imgX = this.ctx.canvas.width - this.imgW
+    }
+  }
+  init() {
+    this.img.onload = () => {
+      // 获取缩放后的图片大小
+      this.imgW = this.img.width * this.scale
+      this.imgH = this.img.height * this.scale
+      this.getClearImageArea()
+      // 图片宽度大于canvas时起点需要往左移
+      this.resetImgX()
+      console.log({ width: this.imgW })
+
+      setInterval(this.draw.bind(this), this.speed)
+    }
+  }
+  draw() {
+    this.ctx.clearRect(0, 0, this.clearX, this.clearY)
+    // 图片宽度大于canvas的情况
+    if (this.imgW > this.ctx.canvas.width) {
+      // 位移超过canvas宽度时(图片整个移动到canvas外)，重置
+      if (this.imgX > this.ctx.canvas.width) {
+        this.resetImgX()
+      }
+
+      // 绘制额外的图片填补空白
+      // 额外图片的x等于当前图片的x，减去一个图片宽度
+      this.ctx.drawImage(
+        this.img,
+        // 防止缩放时留下空隙
+        this.imgX - this.imgW + 1,
+        this.imgY,
+        this.imgW,
+        this.imgH
+      )
+    } else {
+      throw Error('need image width lager than canvas')
+    }
+    this.ctx.drawImage(this.img, this.imgX, this.imgY, this.imgW, this.imgH)
+    this.imgX += this.moveX
+  }
+}

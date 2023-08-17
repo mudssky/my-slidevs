@@ -212,22 +212,4 @@ src: ./pages/07animation.md
 hideInToc: true
 ---
 
-<Demo017Animations1/>
-
----
-hideInToc: true
----
-
-<Demo018AnimationsClock/>
-
----
-hideInToc: true
----
-
-<Demo019AnimationsNationalPark/>
-
----
-hideInToc: true
----
-
 <Demo021Compress />
