@@ -1,3 +1,5 @@
+import { CanvasDemo, CanvasDemoProps } from './abstract'
+
 /**
  * 绘制矩形的例子，需要150*150以上的画布
  * @param ctx
@@ -760,5 +762,20 @@ export class PanoramaViewDraw {
     }
     this.ctx.drawImage(this.img, this.imgX, this.imgY, this.imgW, this.imgH)
     this.imgX += this.moveX
+  }
+}
+
+interface BallDemoProps extends CanvasDemoProps {
+  x: number
+  y: number
+  radius: number
+  color: string
+}
+export class BallDemo extends CanvasDemo {
+  draw(): void {
+    throw new Error('Method not implemented.')
+  }
+  constructor(props: BallDemoProps) {
+    super(props)
   }
 }

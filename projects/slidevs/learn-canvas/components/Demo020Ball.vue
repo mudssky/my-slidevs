@@ -1,40 +1,64 @@
 <template>
-  <CanvasBoard ref="canvasBoardRef"></CanvasBoard>
+  <div class="inline-block">
+    <div class="text-[12px]">Demo018AnimationsClock</div>
+    <CanvasBoard
+      ref="canvasBoardRef"
+      :width="p.width"
+      :height="p.height"
+    ></CanvasBoard>
+  </div>
 </template>
 
 <script lang="ts" setup>
 import { onMounted } from 'vue'
 import { ref } from 'vue'
 import nationalParkPic from '/images/national_park.jpg'
+import { PanoramaViewDraw } from '../example/examples'
 const canvasBoardRef = ref()
-function drawLoopPark(ctx: CanvasRenderingContext2D) {
-  var img = new Image()
+interface Props {
+  width?: number
+  height?: number
+}
+const p = withDefaults(defineProps<Props>(), {
+  width: 900,
+  height: 300,
+})
 
-  // User Variables - customize these to change the image being scrolled, its
-  // direction, and the speed.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function drawLoopPark(ctx: CanvasRenderingContext2D) {
+  const img = new Image()
 
   img.src = nationalParkPic
-  var CanvasXSize = 800
-  var CanvasYSize = 200
-  var speed = 30 // lower is faster
-  var scale = 1.05
-  var y = -4.5 // vertical offset
+  // 获取canvas大小
+  const CanvasXSize = ctx.canvas.width
+  const CanvasYSize = ctx.canvas.height
 
-  // Main program
+  // 每帧持续时间 30毫秒
+  const speed = 30
+  // 图片y轴位移
+  const y = 0
 
+  // 图片每次移动距离
   var dx = 0.75
+  // 绘制图片放大倍数
+  const scale = 1.0
+  // 绘制图片的宽高
   let imgW: number
   let imgH: number
+  // 计算图片1位移
   var x = 0
+
+  // 清理图片的大小
   let clearX: number
   let clearY: number
 
   img.onload = function () {
+    // 放大图片进行计算
     imgW = img.width * scale
     imgH = img.height * scale
 
     if (imgW > CanvasXSize) {
-      // image larger than canvas
+      // 图片宽度大于canvas
       x = CanvasXSize - imgW
     }
     if (imgW > CanvasXSize) {
@@ -50,12 +74,11 @@ function drawLoopPark(ctx: CanvasRenderingContext2D) {
       clearY = CanvasYSize
     }
 
-    // set refresh rate
-    return setInterval(draw, speed)
+    setInterval(draw, speed)
   }
 
   function draw() {
-    ctx.clearRect(0, 0, clearX, clearY) // clear the canvas
+    ctx.clearRect(0, 0, clearX, clearY)
 
     // if image is <= Canvas Size
     if (imgW <= CanvasXSize) {
@@ -79,7 +102,7 @@ function drawLoopPark(ctx: CanvasRenderingContext2D) {
       if (x > CanvasXSize) {
         x = CanvasXSize - imgW
       }
-      // draw aditional image
+      // draw additional image
       if (x > CanvasXSize - imgW) {
         ctx.drawImage(img, x - imgW + 1, y, imgW, imgH)
       }
@@ -89,19 +112,18 @@ function drawLoopPark(ctx: CanvasRenderingContext2D) {
     // amount to move
     x += dx
   }
-
-  // window.requestAnimationFrame(draw)
 }
 
 onMounted(() => {
   const canvasDom: HTMLCanvasElement = canvasBoardRef.value.canvasDom
   const ctx = canvasDom.getContext('2d')!
-  // drawTranslateDemo(ctx)
-  // drawFromPostion(ctx, drawTransformsDemo, {
-  //   startX: 0,
-  //   startY: 0,
-  // })
-  drawLoopPark(ctx)
+  // drawLoopPark(ctx)
+  new PanoramaViewDraw({
+    ctx,
+    imgSrc: nationalParkPic,
+    // moveX: 3,
+    // speed: 10,
+  })
 })
 </script>
 
