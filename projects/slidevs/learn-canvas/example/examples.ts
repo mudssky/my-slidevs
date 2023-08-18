@@ -1,4 +1,4 @@
-import { CanvasDemo, CanvasDemoProps } from './abstract'
+import { throttle } from './utils'
 
 /**
  * 绘制矩形的例子，需要150*150以上的画布
@@ -765,17 +765,151 @@ export class PanoramaViewDraw {
   }
 }
 
-interface BallDemoProps extends CanvasDemoProps {
-  x: number
-  y: number
-  radius: number
-  color: string
-}
-export class BallDemo extends CanvasDemo {
-  draw(): void {
-    throw new Error('Method not implemented.')
+export class BallDemo {
+  private raf!: number
+  private running!: boolean
+  constructor(
+    public ctx: CanvasRenderingContext2D,
+    private x: number = 100,
+    private y: number = 100,
+    // 小球速率添加
+    private vx: number = 6,
+    private vy: number = 2,
+    private radius: number = 25,
+    private color: string = 'red'
+  ) {
+    this.init()
   }
-  constructor(props: BallDemoProps) {
-    super(props)
+  init() {
+    this.drawBall()
+    // this.ctx.canvas.addEventListener('mouseover', () => {
+    //   this.raf = window.requestAnimationFrame(this.draw.bind(this))
+    // })
+    this.ctx.canvas.addEventListener('mouseout', () => {
+      window.cancelAnimationFrame(this.raf)
+      this.running = false
+    })
+    this.ctx.canvas.addEventListener('mousemove', (e) => {
+      if (!this.running) {
+        this.clear()
+        this.x = e.offsetX
+        this.y = e.offsetY
+        this.drawBall()
+      }
+    })
+    this.ctx.canvas.addEventListener('click', () => {
+      if (!this.running) {
+        this.draw()
+        this.running = true
+      }
+    })
+  }
+  // 碰撞检测
+  collisionDetection() {
+    // 小球要超出画布时，速度矢量反转
+    const ballY = this.y + this.vy
+    const ballX = this.x + this.vx
+    if (ballY > this.ctx.canvas.height || ballY < 0) {
+      this.vy = -this.vy
+    }
+    if (ballX > this.ctx.canvas.width || ballX < 0) {
+      this.vx = -this.vx
+    }
+  }
+  drawBall() {
+    this.ctx.beginPath()
+    this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true)
+    this.ctx.closePath()
+    this.ctx.fillStyle = this.color
+    this.ctx.fill()
+  }
+  clear() {
+    // this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
+    // 使用这个而不是clearReact,这样上次的轨迹不会被完全清除，而是形成长尾效果
+    this.ctx.fillStyle = 'rgba(255,255,255,0.3)'
+    this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
+  }
+  draw() {
+    this.clear()
+    this.drawBall()
+    this.collisionDetection()
+    this.x += this.vx
+    this.y += this.vy
+
+    // this.vy *= 0.99
+    // this.vx*=0.2
+
+    this.raf = window.requestAnimationFrame(this.draw.bind(this))
+  }
+}
+export interface RGBA {
+  r: number
+  g: number
+  b: number
+  a: number
+}
+export const DEFAULT_RGBA: RGBA = {
+  r: 0,
+  g: 0,
+  b: 0,
+  a: 0,
+}
+export function getRGBAStr(c: RGBA) {
+  // if (c.a === 0) {
+  //   return `rgba(${c.r},${c.g},${c.b},${0})`
+  // }
+  return `rgba(${c.r},${c.g},${c.b},${c.a.toFixed(2)})`
+}
+export class ColorPicker {
+  private img: HTMLImageElement = new Image()
+  private hoverRGBA!: RGBA
+  private selectedRGBA!: RGBA
+  constructor(
+    public ctx: CanvasRenderingContext2D,
+    private imgSrc: string,
+    private hoverCallBack?: (rgba: RGBA) => void,
+    private selectedCallBack?: (rgba: RGBA) => void
+  ) {
+    this.img.src = imgSrc
+    this.init()
+  }
+
+  init() {
+    this.img.onload = () => {
+      this.ctx.drawImage(this.img, 0, 0)
+      this.ctx.canvas.addEventListener(
+        'mousemove',
+        throttle((e: MouseEvent) => {
+          this.hoverRGBA = this.pick(e)
+          this.hoverCallBack?.(this.hoverRGBA)
+        })
+      )
+      this.ctx.canvas.addEventListener(
+        'click',
+        throttle((e: MouseEvent) => {
+          this.selectedRGBA = this.pick(e)
+
+          this.selectedCallBack?.(this.selectedRGBA)
+        })
+      )
+    }
+  }
+
+  pick(e: MouseEvent): RGBA {
+    // const rect = this.ctx.canvas.getBoundingClientRect()
+    // const x = Math.round(e.clientX - rect.left - this.ctx.canvas.clientLeft)
+    const x = Math.round(e.offsetX)
+    // const y = Math.round(e.clientY - rect.top - this.ctx.canvas.clientTop)
+    const y = Math.round(e.offsetY)
+    console.log({ x, y })
+
+    const pixel = this.ctx.getImageData(x, y, 1, 1)
+    const data = pixel.data
+    return {
+      r: data[0],
+      g: data[1],
+      b: data[2],
+      a: data[3] / 255,
+    }
   }
 }
