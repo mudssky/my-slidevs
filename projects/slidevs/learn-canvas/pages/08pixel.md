@@ -63,3 +63,9 @@ const myImageData = ctx.getImageData(left, top, width, height);
 ```
 
 <Demo022ColorPicker />
+
+---
+
+## 写入像素数据
+
+`putImageData()`可以实现像素数据的写入
