@@ -47,10 +47,6 @@ const canvasBoardRef = ref()
 function drawImageScaleDemo(ctx: CanvasRenderingContext2D) {
   const rhinoDom = document.getElementById('source') as HTMLImageElement
   const frameDom = document.getElementById('frame') as HTMLImageElement
-  console.log({
-    rhinoDom,
-    frameDom,
-  })
 
   // Draw slice
   ctx.drawImage(rhinoDom, 33, 71, 104, 124, 21, 20, 87, 104)
@@ -61,7 +57,6 @@ function drawImageScaleDemo(ctx: CanvasRenderingContext2D) {
 onMounted(() => {
   const ctx: CanvasRenderingContext2D =
     canvasBoardRef.value.canvasDom.getContext('2d')
-  // console.log({ ctx })
   setTimeout(() => {
     drawImageScaleDemo(ctx)
   }, 2000)

@@ -733,7 +733,7 @@ export class PanoramaViewDraw {
       this.getClearImageArea()
       // 图片宽度大于canvas时起点需要往左移
       this.resetImgX()
-      console.log({ width: this.imgW })
+      // console.log({ width: this.imgW })
 
       setInterval(this.draw.bind(this), this.speed)
     }
@@ -901,7 +901,7 @@ export class ColorPicker {
     const x = Math.round(e.offsetX)
     // const y = Math.round(e.clientY - rect.top - this.ctx.canvas.clientTop)
     const y = Math.round(e.offsetY)
-    console.log({ x, y })
+    // console.log({ x, y })
 
     const pixel = this.ctx.getImageData(x, y, 1, 1)
     const data = pixel.data
@@ -911,5 +911,127 @@ export class ColorPicker {
       b: data[2],
       a: data[3] / 255,
     }
+  }
+}
+
+export enum ColorCovertTypeEnum {
+  original = 'original',
+  invert = 'invert',
+  grayscale = 'grayscale',
+}
+
+export const colorCovertTypeList = Object.values(ColorCovertTypeEnum)
+
+export class ImageCovert {
+  private img: HTMLImageElement = new Image()
+  constructor(public ctx: CanvasRenderingContext2D, public imgSrc: string) {
+    this.img.src = imgSrc
+    this.init()
+  }
+  init() {
+    this.img.onload = () => {
+      this.original()
+    }
+  }
+  original() {
+    this.ctx.drawImage(this.img, 0, 0)
+  }
+  // 灰度
+  grayscale() {
+    this.ctx.drawImage(this.img, 0, 0)
+    const imageData = this.ctx.getImageData(
+      0,
+      0,
+      this.ctx.canvas.width,
+      this.ctx.canvas.height
+    )
+    const data = imageData.data
+    for (let i = 0; i < data.length; i += 4) {
+      // 每个像素点 rgb三个值的平均值
+      const avg = (data[i] + data[i + 1] + data[i + 2]) / 3
+      data[i] = avg // red
+      data[i + 1] = avg // green
+      data[i + 2] = avg // blue
+    }
+    this.ctx.putImageData(imageData, 0, 0)
+  }
+  // 反向
+  invert() {
+    this.ctx.drawImage(this.img, 0, 0)
+    const imageData = this.ctx.getImageData(
+      0,
+      0,
+      this.ctx.canvas.width,
+      this.ctx.canvas.height
+    )
+    const data = imageData.data
+    for (let i = 0; i < data.length; i += 4) {
+      data[i] = 255 - data[i] // red
+      data[i + 1] = 255 - data[i + 1] // green
+      data[i + 2] = 255 - data[i + 2] // blue
+    }
+    this.ctx.putImageData(imageData, 0, 0)
+  }
+  convert(type: ColorCovertTypeEnum) {
+    switch (type) {
+      case ColorCovertTypeEnum.invert:
+        this.invert()
+        break
+      case ColorCovertTypeEnum.grayscale:
+        this.grayscale()
+        break
+      default:
+        this.original()
+        break
+    }
+  }
+}
+
+export class ImageSmoothingEnableDemo {
+  // ctx
+  private ctx1: CanvasRenderingContext2D
+  private ctx2: CanvasRenderingContext2D
+  private img = new Image()
+  constructor(
+    public canvas1: string,
+    public canvas2: string,
+
+    public imgSrc: string
+  ) {
+    this.ctx1 = this.getContext(canvas1)!
+    this.ctx2 = this.getContext(canvas2)!
+    this.img.src = imgSrc
+    this.init()
+  }
+  init() {
+    this.img.onload = () => {
+      this.ctx1.drawImage(this.img, 0, 0)
+    }
+    this.ctx1.canvas.addEventListener('mousemove', this.zoom.bind(this))
+  }
+  getContext(selector: string) {
+    const canvasDom = <HTMLCanvasElement>document.querySelector(selector)!
+    return canvasDom.getContext('2d')
+  }
+  toggleImageSmoothing(enable?: boolean) {
+    this.ctx2.imageSmoothingEnabled = enable ?? !this.ctx2.imageSmoothingEnabled
+  }
+  zoom(e: MouseEvent) {
+    const x = e.offsetX
+    const y = e.offsetY
+    this.ctx2.clearRect(0, 0, this.ctx2.canvas.width, this.ctx2.canvas.height)
+    this.ctx2.drawImage(
+      this.ctx1.canvas,
+      Math.abs(x - 5),
+      Math.abs(y - 5),
+      10,
+      10,
+      // 100,
+      // 100,
+      0,
+      0,
+      200,
+      200
+    )
   }
 }

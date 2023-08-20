@@ -1,5 +1,5 @@
 <template>
-  <canvas ref="canvasDom" :width="p.width" :height="p.height">
+  <canvas ref="canvasDom" :width="p.width" :height="p.height" :id="p.id">
     当前浏览器不支持canvas元素，请升级或更换浏览器！
   </canvas>
 </template>
@@ -8,6 +8,7 @@
 import { onMounted } from 'vue'
 import { ref } from 'vue'
 interface Props {
+  id?: string
   width?: number
   height?: number
   drawFn?: (ctx: CanvasRenderingContext2D) => void
@@ -18,6 +19,7 @@ const p = withDefaults(defineProps<Props>(), {
   height: 450,
   drawFn: undefined,
   title: undefined,
+  id: undefined,
 })
 
 const canvasDom = ref()

@@ -69,3 +69,26 @@ const myImageData = ctx.getImageData(left, top, width, height);
 ## 写入像素数据
 
 `putImageData()`可以实现像素数据的写入
+
+```js
+ctx.putImageData(myImageData, dx, dy);
+
+```
+
+下面这个例子里面，我们遍历所有像素以改变他们的数值，然后我们将被修改的像素数组通过putImageData() 放回到画布中去。
+
+<Demo023PutImage/>
+
+---
+## 缩放和反锯齿
+
+<Link to="37">缩放和切片的方法</Link>在之前drawImage的章节提到过
+
+反锯齿默认是开启的，是这个属性imageSmoothingEnabled
+
+关闭以后我们就能看到清楚的像素
+
+<Demo023imageSmoothingEnabled/>
+
+---
+## 保存图片
