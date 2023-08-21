@@ -1,9 +1,12 @@
 <template>
-  <CanvasBoard
-    ref="canvasBoardRef"
-    :width="p.width"
-    :height="p.height"
-  ></CanvasBoard>
+  <div>
+    <div>Demo008WindingRule</div>
+    <CanvasBoard
+      ref="canvasBoardRef"
+      :width="p.width"
+      :height="p.height"
+    ></CanvasBoard>
+  </div>
 </template>
 
 <script lang="ts" setup>

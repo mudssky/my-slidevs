@@ -149,3 +149,5 @@ html2canvas(document.body).then(function(canvas) {
 ```
 
 之后我们使用`canvas.toBlob`之类保存图片的api下载到本地
+
+还有另一个保存图片的库 https://github.com/bubkoo/html-to-image

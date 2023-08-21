@@ -222,9 +222,3 @@ level: 2
 <Demo008WindingRule />
 
 </v-click>
-
----
-hideInToc: true
----
-# 骨架屏
-<TestSkeleton />

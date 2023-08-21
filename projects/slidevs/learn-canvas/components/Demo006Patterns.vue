@@ -1,10 +1,13 @@
 <template>
-  <CanvasBoard
-    ref="canvasBoardRef"
-    :width="p.width"
-    :height="p.height"
-    :draw-fn="drawPatterns"
-  ></CanvasBoard>
+  <div>
+    <div>Demo006Patterns</div>
+    <CanvasBoard
+      ref="canvasBoardRef"
+      :width="p.width"
+      :height="p.height"
+      :draw-fn="drawPatterns"
+    ></CanvasBoard>
+  </div>
 </template>
 
 <script lang="ts" setup>

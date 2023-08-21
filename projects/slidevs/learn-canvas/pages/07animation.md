@@ -26,9 +26,9 @@ hideInToc: true
 
 ## 更新动画
 
-为了实现动画，我们需要一些可以定时执行重绘的方法。
+为了实现动画，我们需要一些可以定时执行重绘的方法。  
 `setInterval(function, delay)` 当设定好间隔时间后，function 会定期执行。
-`setTimeout(function, delay)` 在设定好的时间之后执行函数
+`setTimeout(function, delay)` 在设定好的时间之后执行函数  
 `requestAnimationFrame(callback)` 告诉浏览器你希望执行一个动画，并在重绘之前，请求浏览器执行一个特定的函数来更新动画。
 
 <v-clicks>

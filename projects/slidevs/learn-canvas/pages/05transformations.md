@@ -13,7 +13,8 @@ level: 2
 ## 状态的保存和恢复
 
 `save()` 保存画布 (canvas) 的所有状态  
-`restore()` save 和 restore 方法是用来保存和恢复 canvas 状态的，都没有参数。Canvas 的状态就是当前画面应用的所有样式和变形的一个快照。
+`restore()` 恢复上一个保存的状态  
+save 和 restore 方法是用来保存和恢复 canvas 状态的，都没有参数。Canvas 的状态就是当前画面应用的所有样式和变形的一个快照。
 
 Canvas 状态存储在栈中，每当save()方法被调用后，当前的状态就被推送到栈中保存。一个绘画状态包括：
 

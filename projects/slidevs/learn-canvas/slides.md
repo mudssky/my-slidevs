@@ -101,7 +101,7 @@ level: 1
 
 ```
 
-getContext 参数的2d是contextType ，有以下几种类型
+getContext 参数的`'2d'`是contextType ，有以下几种类型
 
 - 2d，建立一个二维渲染上下文 CanvasRenderingContext2D。
 - webgl（或 experimental-webgl）： 创建一个 WebGLRenderingContext 三维渲染上下文对象
