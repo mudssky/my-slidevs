@@ -1035,3 +1035,54 @@ export class ImageSmoothingEnableDemo {
     )
   }
 }
+
+export class ScratchLotteryDemo {
+  private ctx: CanvasRenderingContext2D
+  private isDrawing: boolean = false
+  constructor(public selector: string) {
+    this.ctx = this.getContext(selector)!
+    this.init()
+  }
+
+  getContext(selector: string) {
+    const canvasDom = <HTMLCanvasElement>document.querySelector(selector)!
+    return canvasDom.getContext('2d')
+  }
+
+  init() {
+    this.ctx.fillStyle = 'darkgray'
+    this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
+    this.ctx.fillStyle = '#fff'
+    const text = '刮刮卡'
+    const tx = this.ctx.measureText(text)
+    this.ctx.fillText(
+      text,
+      this.ctx.canvas.width / 2 - tx.width / 2,
+      this.ctx.canvas.height / 2
+    )
+    this.ctx.canvas.addEventListener('mousedown', this.startDrawing.bind(this))
+    this.ctx.canvas.addEventListener('mouseup', this.endDrawing.bind(this))
+    this.ctx.canvas.addEventListener('mousemove', this.drawing.bind(this))
+  }
+  startDrawing() {
+    this.isDrawing = true
+  }
+  endDrawing() {
+    this.isDrawing = false
+  }
+  drawing(e: MouseEvent) {
+    if (!this.isDrawing) return
+    // this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
+    // 与canvas border的距离，基本上就是鼠标的坐标了
+    const x = e.offsetX
+    const y = e.offsetY
+    // console.log({ x, y })
+    // this.ctx.fillRect(x, y, 5, 5)
+
+    // 现有内容保持在新图形不重叠的地方。也即是清除重叠的地方
+    this.ctx.globalCompositeOperation = 'destination-out'
+    this.ctx.beginPath()
+    this.ctx.arc(x, y, 10, 0, 2 * Math.PI)
+    this.ctx.fill()
+  }
+}

@@ -211,8 +211,7 @@ src: ./pages/07animation.md
 ---
 src: ./pages/08pixel.md
 ---
----
-hideInToc: true
----
 
-<Demo021Compress />
+---
+src: ./pages/09examples.md
+---

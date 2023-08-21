@@ -92,3 +92,60 @@ ctx.putImageData(myImageData, dx, dy);
 
 ---
 ## 保存图片
+
+`HTMLCanvasElement.toDataURL()`
+
+- 如果画布的高度或宽度是 0，那么会返回字符串“`data:,”`。
+- 如果传入的类型非“`image/png`”，但是返回的值以“`data:image/png`”开头，那么该传入的类型是不支持的。
+- Chrome 支持“`image/webp`”类型。
+
+```js
+canvas.toDataURL(type, encoderOptions);
+```
+
+`type` 可选
+
+图片格式，默认为 `image/png`
+
+`encoderOptions` 可选
+
+在指定图片格式为 `image/jpeg` 或 `image/webp` 的情况下，可以从 0 到 1 的区间内选择图片的质量。如果超出取值范围，将会使用默认值 `0.92`。其他参数会被忽略。返回值是包含dataURI的domstring
+> 也就是说只有jpeg和 webp（chrome）支持质量选择
+
+---
+
+`HTMLCanvasElement.toBlob()`
+
+**`HTMLCanvasElement.toBlob()`** 方法创造 [`Blob`](https://developer.mozilla.org/zh-CN/docs/Web/API/Blob) 对象，用以展示 canvas 上的图片；这个图片文件可以被缓存或保存到本地（由用户代理自行决定）。
+
+可以在调用时指定所需的文件格式和图像质量，若未指定文件格式（或不支持指定的文件格式），则默认导出 `image/png` 类型。浏览器需要支持 `image/png`，大多数浏览器还支持额外的图片格式，包括 `image/jpeg` 和 `image/webp`。
+对于支持以指定分辨率编码的图片格式，如不特别指明，图片的默认分辨率为 96dpi。
+
+```js
+toBlob(callback)
+toBlob(callback, type)
+toBlob(callback, type, quality)
+
+```
+
+---
+## 压缩图片的例子
+
+<Demo021Compress/>
+
+---
+
+## 网页截图
+
+html2canvas 这个库是把dom元素在canvas上绘制
+<https://github.com/niklasvh/html2canvas>
+
+```js
+
+html2canvas(document.body).then(function(canvas) {
+    document.body.appendChild(canvas);
+});
+
+```
+
+之后我们使用`canvas.toBlob`之类保存图片的api下载到本地
