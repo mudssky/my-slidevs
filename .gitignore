@@ -139,3 +139,6 @@ index.html
 components.d.ts
 slides-export/
 .vitepress/cache
+
+
+*.pdf

@@ -14,19 +14,19 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@slidev/cli": "^0.42.5",
+    "@slidev/cli": "^0.42.7",
     "@slidev/theme-default": "^0.21.2",
     "@slidev/theme-seriph": "^0.21.3",
-    "@typescript-eslint/eslint-plugin": "^6.1.0",
-    "@typescript-eslint/parser": "^6.1.0",
-    "autoprefixer": "^10.4.14",
-    "eslint": "^8.45.0",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-vue": "^9.15.1",
+    "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "@typescript-eslint/parser": "^6.4.0",
+    "autoprefixer": "^10.4.15",
+    "eslint": "^8.47.0",
+    "eslint-config-prettier": "^8.10.0",
+    "eslint-plugin-vue": "^9.17.0",
     "gh-pages": "^5.0.0",
-    "playwright-chromium": "^1.36.1",
-    "postcss": "^8.4.27",
-    "sass": "^1.64.1",
+    "playwright-chromium": "^1.37.1",
+    "postcss": "^8.4.28",
+    "sass": "^1.66.1",
     "tailwindcss": "^3.3.3",
     "typescript": "^5.1.6",
     "unplugin-auto-import": "^0.16.6",
@@ -34,7 +34,7 @@
     "vitepress": "1.0.0-beta.6"
   },
   "dependencies": {
-    "element-plus": "^2.3.8",
+    "element-plus": "^2.3.9",
     "lodash": "^4.17.21",
     "vue": "^3.3.4"
   }
