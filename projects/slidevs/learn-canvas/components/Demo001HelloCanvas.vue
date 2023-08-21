@@ -1,5 +1,6 @@
 <template>
   <div>
+  <el-button>测试按钮</el-button>
     <canvas id="canvas" width="900" height="450">
       当前浏览器不支持canvas元素，请升级或更换浏览器！
     </canvas>
@@ -8,6 +9,7 @@
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
+import { ElButton } from 'element-plus'
 
 onMounted(() => {
   // 1. 获取canvas dom对象
