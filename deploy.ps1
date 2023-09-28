@@ -97,6 +97,7 @@ switch ($mode) {
 		Build-Slidevs
 		# 5.拷贝到站点文件夹
 		Copy-Slidevs
+		Write-Host 'Run pnpm docs:preview to preview'
  }
  "onlySlidevs" {
 		# 3.准备slievs文件夹
