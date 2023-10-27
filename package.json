@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs:dev": "vitepress dev site",
     "docs:build": "vitepress build site",
+    "build": "pnpm docs:build",
     "docs:preview": "vitepress preview site",
     "docs:deploy": "gh-pages -d site/.vitepress/dist"
   },
@@ -28,6 +30,7 @@
     "postcss": "^8.4.31",
     "sass": "^1.69.5",
     "tailwindcss": "^3.3.5",
+    "turbo": "^1.10.16",
     "typescript": "^5.2.2",
     "unplugin-auto-import": "^0.16.7",
     "unplugin-vue-components": "^0.25.2",

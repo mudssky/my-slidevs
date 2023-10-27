@@ -1,0 +1,9 @@
+{
+  "name": "site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev site",
+    "build": "vitepress build site"
+  }
+}

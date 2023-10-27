@@ -1,7 +1,7 @@
 
 [CmdletBinding()]
 param(
-	[ValidateSet('all', 'onlySite', 'onlySlidevs', 'onlyDeploy', 'localRelease' )]
+	[ValidateSet('all', 'onlySite', 'onlySlidevs', 'onlyDeploy', 'localRelease' , 'turbo')]
 	[string]$Mode = 'all'
 )
 
@@ -19,10 +19,10 @@ function Get-SlidevsUrl() {
 	$urls =	Get-ChildItem $slidevProjectsPath  | ForEach-Object { @{
 			url  = $slidevSubPrefix + $_.Name
 			name = $_.Name
-		} }
+		} } | Sort-Object -Property name
 	$urlJson = ConvertTo-Json $urls
 	Write-Verbose "generate url json：  $urlJson"
-	Out-File  -InputObject $urlJson  -FilePath  "$sitePath\slidevs.json"
+	Out-File  -InputObject $urlJson  -Encoding UTF8  -FilePath  "$sitePath\slidevs.json"
 }
 
 
@@ -63,6 +63,26 @@ function Build-Site() {
 
 function Deploy-Site() {
 	pnpm gh-pages -d $deployPath
+}
+
+function Add-BaseUrl() {
+	param(
+		[string]$htmlContent,
+		[string] $baseUrl
+	)
+	$replacement = '${attr}="' + $baseUrl + '${url}"' 
+	return  $htmlConetnt -replace '(?<attr>href|src)="(?<url>(?!http).*)"', $replacement
+}
+
+function Update-Html() {
+	Get-ChildItem -LiteralPath $slidevPath  | ForEach-Object {
+		$base = ($baseUrl + $slidevSubPrefix + $_.Name)
+		Write-Verbose  ('{0}\\{1}' -f $slidevPath, $_.Name)
+		Get-ChildItem -Recurse -LiteralPath ('{0}\\{1}' -f $slidevPath, $_.Name) -Filter *.html | ForEach-Object {
+			$newContent = Add-BaseUrl -htmlContent (Get-Content $_.FullName) -baseUrl $base
+			$newContent | Out-File -FilePath $_.FullName 
+		}
+	}
 }
 
 # if ($Mode -eq 'onlySite' ) {
@@ -108,8 +128,15 @@ switch ($mode) {
 		Copy-Slidevs
 		Deploy-Site
  }
-
  'onlyDeploy' {
 		Deploy-Site
+ }
+ 'turbo' {
+		Get-SlidevsUrl
+		pnpm turbo build
+		Set-DistPath
+		Copy-Slidevs
+		Update-Html
+		Write-Host 'Run pnpm docs:preview to preview'
  }
 }
