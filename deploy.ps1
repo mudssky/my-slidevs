@@ -134,12 +134,7 @@ switch ($mode) {
 	'turbo:deploy' {
 		Get-SlidevsUrl
 		# Set-BuildBase
-		pnpm turbo build:base --force 
-		# if (-not (Test-Path $deployPath)) {
-		# 	New-Item -ItemType Directory -Force -Path $deployPath
-		# }
-		# Remove-Item $deployPath -Recurse -Force
-		# Copy-Item -Path "$sitePath/.vitepress/dist" -Destination $deployPath
+		pnpm turbo build:base
 		Copy-Slidevs
 		Write-Host 'Run pnpm docs:preview to preview'
  }
