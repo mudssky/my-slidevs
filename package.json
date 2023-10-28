@@ -10,7 +10,8 @@
     "docs:build": "vitepress build site",
     "build": "pnpm docs:build",
     "docs:preview": "vitepress preview site",
-    "docs:deploy": "gh-pages -d site/.vitepress/dist"
+    "docs:deploy": "gh-pages -d site/.vitepress/dist",
+    "build:base": "vitepress build site"
   },
   "keywords": [],
   "author": "",

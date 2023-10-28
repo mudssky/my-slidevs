@@ -5,6 +5,7 @@
     "build": "slidev build",
     "dev": "slidev --open",
     "start": "pnpm dev",
-    "export": "slidev export"
+    "export": "slidev export",
+    "build:base": "slidev build --base /my-slidevs/slidevs/slidev3"
   }
 }

@@ -4,6 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "vitepress dev site",
-    "build": "vitepress build site"
+    "build": "vitepress build",
+    "build:base": "vitepress build",
+    "preview": "vitepress preview"
   }
 }

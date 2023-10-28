@@ -1,13 +1,10 @@
 
 [CmdletBinding()]
 param(
-	[ValidateSet('all', 'onlySite', 'onlySlidevs', 'onlyDeploy', 'localRelease' , 'turbo')]
+	[ValidateSet('all', 'onlySite', 'onlySlidevs', 'onlyDeploy', 'localRelease' , 'turbo:local', 'turbo:deploy')]
 	[string]$Mode = 'all'
 )
 
-
-
-# class 
 
 $deployPath = "$PSScriptRoot\site\.vitepress\dist"
 $slidevPath = "$deployPath\slidevs"
@@ -39,13 +36,29 @@ function Set-DistPath() {
 }
 
 
-function Build-Slidevs() {
+function Set-Scripts {
+	[CmdletBinding()]
+	param (
+		[string]$key , # 脚本名
+		[string]$value,
+		[string]$path # package.json路径
+	)
+	
+	$jsonMap = Get-Content $path | ConvertFrom-Json -AsHashtable
+	if ($jsonMap.scripts.ContainsKey($key)) {
+		$jsonMap.scripts.$key = $value
+	}
+	else {
+		$jsonMap.scripts.Add($key, $value)
+	}
+	ConvertTo-Json $jsonMap -Depth 100 | Out-File $path
+
+}
+function Set-BuildBase() {
 	Get-ChildItem -LiteralPath $slidevProjectsPath | ForEach-Object {
 		$base = ($baseUrl + $slidevSubPrefix + $_.Name)
-		Write-Verbose ('build base: {0},name: {1}' -f $base, $_.Name)
-		pnpm --filter  $_.Name build --base $base
+		Set-Scripts -path "$($_.FullName)\package.json" -key 'build:base' -value "slidev build --base $base"
 	}
-	# pnpm --filter .\projects\slidevs\* build
 }
 
 function Copy-Slidevs() {
@@ -54,7 +67,13 @@ function Copy-Slidevs() {
 		Copy-Item  -Path  ( '{0}\dist' -f $_.FullName) -Destination ("$slidevPath\{0}" -f $_.Name) -Recurse -ErrorAction Stop | Out-Null
 	}
 }
-
+function Build-Slidevs() {
+	Get-ChildItem -LiteralPath $slidevProjectsPath | ForEach-Object {
+		$base = ($baseUrl + $slidevSubPrefix + $_.Name)
+		Write-Verbose ('build base: {0},name: {1}' -f $base, $_.Name)
+		pnpm --filter  $_.Name build --base $base
+	}
+}
 function Build-Site() {
 	pnpm docs:build
 	Write-Verbose "build success, use `docs:preview` to previw  or `docs:deploy` to deploy manully"
@@ -65,33 +84,7 @@ function Deploy-Site() {
 	pnpm gh-pages -d $deployPath
 }
 
-function Add-BaseUrl() {
-	param(
-		[string]$htmlContent,
-		[string] $baseUrl
-	)
-	$replacement = '${attr}="' + $baseUrl + '${url}"' 
-	return  $htmlConetnt -replace '(?<attr>href|src)="(?<url>(?!http).*)"', $replacement
-}
 
-function Update-Html() {
-	Get-ChildItem -LiteralPath $slidevPath  | ForEach-Object {
-		$base = ($baseUrl + $slidevSubPrefix + $_.Name)
-		Write-Verbose  ('{0}\\{1}' -f $slidevPath, $_.Name)
-		Get-ChildItem -Recurse -LiteralPath ('{0}\\{1}' -f $slidevPath, $_.Name) -Filter *.html | ForEach-Object {
-			$newContent = Add-BaseUrl -htmlContent (Get-Content $_.FullName) -baseUrl $base
-			$newContent | Out-File -FilePath $_.FullName 
-		}
-	}
-}
-
-# if ($Mode -eq 'onlySite' ) {
-# 	Get-SlidevsUrl
-# 	Reset-DistPath
-# 	Build-Site
-# 	Copy-Site
-
-# }
 switch ($mode) {
  "all" {
 		# 1.准备slidevs json
@@ -131,12 +124,23 @@ switch ($mode) {
  'onlyDeploy' {
 		Deploy-Site
  }
- 'turbo' {
+ 'turbo:local' {
 		Get-SlidevsUrl
-		pnpm turbo build
-		Set-DistPath
+		Set-BuildBase
+		pnpm turbo build:base --force 
 		Copy-Slidevs
-		Update-Html
+		Write-Host 'Run pnpm docs:preview to preview'
+ }
+	'turbo:deploy' {
+		Get-SlidevsUrl
+		# Set-BuildBase
+		pnpm turbo build:base --force 
+		# if (-not (Test-Path $deployPath)) {
+		# 	New-Item -ItemType Directory -Force -Path $deployPath
+		# }
+		# Remove-Item $deployPath -Recurse -Force
+		# Copy-Item -Path "$sitePath/.vitepress/dist" -Destination $deployPath
+		Copy-Slidevs
 		Write-Host 'Run pnpm docs:preview to preview'
  }
 }

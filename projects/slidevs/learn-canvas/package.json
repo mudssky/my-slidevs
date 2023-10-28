@@ -6,7 +6,8 @@
     "build": "slidev build",
     "dev": "slidev",
     "start": "pnpm dev",
-    "export": "slidev export"
+    "export": "slidev export",
+    "build:base": "slidev build --base /my-slidevs/slidevs/learn-canvas"
   },
   "devDependencies": {
     "@iconify-json/el": "^1.1.5"

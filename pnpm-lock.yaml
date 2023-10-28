@@ -86,6 +86,8 @@ importers:
 
   projects/slidevs/slidev3: {}
 
+  site: {}
+
 packages:
 
   /@aashutoshrathi/word-wrap@1.2.6:
