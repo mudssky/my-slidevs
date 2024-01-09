@@ -17,29 +17,29 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@slidev/cli": "^0.43.9",
+    "@slidev/cli": "^0.46.1",
     "@slidev/theme-default": "^0.21.2",
     "@slidev/theme-seriph": "^0.21.3",
-    "@typescript-eslint/eslint-plugin": "^6.9.0",
-    "@typescript-eslint/parser": "^6.9.0",
+    "@typescript-eslint/eslint-plugin": "^6.18.1",
+    "@typescript-eslint/parser": "^6.18.1",
     "autoprefixer": "^10.4.16",
-    "eslint": "^8.52.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-vue": "^9.18.0",
-    "gh-pages": "^6.0.0",
-    "playwright-chromium": "^1.39.0",
-    "postcss": "^8.4.31",
-    "sass": "^1.69.5",
-    "tailwindcss": "^3.3.5",
-    "turbo": "^1.10.16",
-    "typescript": "^5.2.2",
-    "unplugin-auto-import": "^0.16.7",
-    "unplugin-vue-components": "^0.25.2",
-    "vitepress": "1.0.0-rc.24"
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-vue": "^9.19.2",
+    "gh-pages": "^6.1.1",
+    "playwright-chromium": "^1.40.1",
+    "postcss": "^8.4.33",
+    "sass": "^1.69.7",
+    "tailwindcss": "^3.4.1",
+    "turbo": "^1.11.3",
+    "typescript": "^5.3.3",
+    "unplugin-auto-import": "^0.17.3",
+    "unplugin-vue-components": "^0.26.0",
+    "vitepress": "1.0.0-rc.36"
   },
   "dependencies": {
-    "element-plus": "^2.4.1",
+    "element-plus": "^2.4.4",
     "lodash": "^4.17.21",
-    "vue": "^3.3.7"
+    "vue": "^3.4.6"
   }
 }

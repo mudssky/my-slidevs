@@ -1,11 +1,11 @@
 {
   "name": "slidev3",
-  "private": true,
   "scripts": {
     "build": "slidev build",
-    "dev": "slidev --open",
     "start": "pnpm dev",
     "export": "slidev export",
-    "build:base": "slidev build --base /my-slidevs/slidevs/slidev3"
-  }
+    "build:base": "slidev build --base /my-slidevs/slidevs/slidev3",
+    "dev": "slidev --open"
+  },
+  "private": true
 }
