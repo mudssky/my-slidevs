@@ -12,8 +12,13 @@ $baseUrl = '/my-slidevs/'
 $slidevSubPrefix = 'slidevs/'
 $slidevProjectsPath = "$PSScriptRoot\projects\slidevs"
 $sitePath = "$PSScriptRoot\site"
+
+# 排除模板项目
+
+$projectList = Get-ChildItem -LiteralPath $slidevProjectsPath -Exclude *template*, slidev3
+
 function Get-SlidevsUrl() {
-	$urls =	Get-ChildItem $slidevProjectsPath  | ForEach-Object { @{
+	$urls =	$projectList | ForEach-Object { @{
 			url  = $slidevSubPrefix + $_.Name
 			name = $_.Name
 		} } | Sort-Object -Property name
@@ -55,20 +60,20 @@ function Set-Scripts {
 
 }
 function Set-BuildBase() {
-	Get-ChildItem -LiteralPath $slidevProjectsPath | ForEach-Object {
+	$projectList | ForEach-Object {
 		$base = ($baseUrl + $slidevSubPrefix + $_.Name)
 		Set-Scripts -path "$($_.FullName)\package.json" -key 'build:base' -value "slidev build --base $base"
 	}
 }
 
 function Copy-Slidevs() {
-	Get-ChildItem -LiteralPath $slidevProjectsPath | ForEach-Object {
+	$projectList | ForEach-Object {
 		
 		Copy-Item  -Path  ( '{0}\dist' -f $_.FullName) -Destination ("$slidevPath\{0}" -f $_.Name) -Recurse -ErrorAction Stop | Out-Null
 	}
 }
 function Build-Slidevs() {
-	Get-ChildItem -LiteralPath $slidevProjectsPath | ForEach-Object {
+	$projectList | ForEach-Object {
 		$base = ($baseUrl + $slidevSubPrefix + $_.Name)
 		Write-Verbose ('build base: {0},name: {1}' -f $base, $_.Name)
 		pnpm --filter  $_.Name build --base $base
