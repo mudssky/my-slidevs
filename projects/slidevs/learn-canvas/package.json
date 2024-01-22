@@ -1,15 +1,18 @@
 {
   "name": "learn-canvas",
+  "private": true,
+  "type": "module",
   "scripts": {
     "build": "slidev build",
-    "start": "pnpm dev",
-    "export": "slidev export",
     "build:base": "slidev build --base /my-slidevs/slidevs/learn-canvas",
-    "dev": "slidev"
+    "dev": "slidev",
+    "export": "slidev export",
+    "start": "pnpm dev"
+  },
+  "dependencies": {
+    "@mudssky/slidev-style": "workspace:*"
   },
   "devDependencies": {
     "@iconify-json/el": "^1.1.5"
-  },
-  "type": "module",
-  "private": true
+  }
 }

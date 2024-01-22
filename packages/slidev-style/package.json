@@ -1,0 +1,26 @@
+{
+  "name": "@mudssky/slidev-style",
+  "version": "1.0.0",
+  "description": "index.js",
+  "license": "ISC",
+  "author": "",
+  "exports": {
+    ".": {
+      "import": "./index.css",
+      "require": "./index.css"
+    },
+    "./*.css": {
+      "import": "./*.css",
+      "require": "./*.css"
+    }
+  },
+  "main": "index.css",
+  "files": [
+    "./*.css",
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

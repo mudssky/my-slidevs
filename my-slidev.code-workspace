@@ -1,0 +1,15 @@
+{
+  "folders": [
+    {
+      "path": ".",
+      "name": "root",
+    },
+    {
+      "path": "packages/slidev-style",
+      "name": "slidev-style",
+    },
+  ],
+  "settings": {
+    "powershell.cwd": "root",
+  },
+}

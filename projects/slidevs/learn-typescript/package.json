@@ -1,11 +1,14 @@
 {
   "name": "learn-typescript",
+  "private": true,
   "scripts": {
     "build": "slidev build",
-    "start": "pnpm dev",
-    "export": "slidev export",
     "build:base": "slidev build --base /my-slidevs/slidevs/learn-typescript",
-    "dev": "slidev"
+    "dev": "slidev",
+    "export": "slidev export",
+    "start": "pnpm dev"
   },
-  "private": true
+  "dependencies": {
+    "@mudssky/slidev-style": "workspace:*"
+  }
 }

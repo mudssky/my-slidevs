@@ -1,0 +1,10 @@
+.btn-primary {
+  @apply inline-block cursor-pointer rounded bg-blue-500 px-4 py-1  font-bold  text-white;
+}
+.btn-primary:hover {
+  @apply hover:bg-blue-700;
+}
+
+.btn-primary:active {
+  @apply transition scale-95 ease-in-out;
+}

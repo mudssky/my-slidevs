@@ -1,5 +1,3 @@
-module.exports = {
-  semi: false,
-  singleQuote: true,
-  jsxSingleQuote: true,
-}
+const prettierConfigCustom = require('@mudssky/prettier-config-custom')
+
+module.exports = prettierConfigCustom
