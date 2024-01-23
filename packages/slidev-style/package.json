@@ -6,21 +6,27 @@
   "author": "",
   "exports": {
     ".": {
-      "import": "./index.css",
-      "require": "./index.css"
+      "import": "./index.ts",
+      "require": "./index.ts"
     },
     "./*.css": {
       "import": "./*.css",
       "require": "./*.css"
+    },
+    "./scss/*.scss": {
+      "import": "./scss/*.scss",
+      "require": "./scss/*.scss"
     }
   },
-  "main": "index.css",
+  "main": "index.ts",
+  "module": "index.ts",
   "files": [
     "./*.css",
     "dist",
     "src"
   ],
   "scripts": {
+    "build": "pnpm sass ./scss/index.scss ./index.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }

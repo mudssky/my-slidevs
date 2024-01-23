@@ -1,0 +1,8 @@
+/* 全局css, 在多个slidev项目中共享 */
+.slidev-vclick-target {
+  @apply mb-[5px];
+}
+
+.col-left {
+  @apply pr-[5px];
+}

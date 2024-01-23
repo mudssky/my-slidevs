@@ -94,6 +94,39 @@ importers:
         specifier: ^1.1.5
         version: 1.1.5
 
+  projects/slidevs/learn-css:
+    dependencies:
+      '@mudssky/slidev-style':
+        specifier: workspace:*
+        version: link:../../../packages/slidev-style
+      '@slidev/cli':
+        specifier: ^0.46.2
+        version: 0.46.2(@types/markdown-it@13.0.7)(playwright-chromium@1.40.1)(postcss@8.4.33)(sass@1.69.7)(typescript@5.3.3)
+      '@slidev/theme-default':
+        specifier: latest
+        version: 0.21.2
+      '@slidev/theme-seriph':
+        specifier: latest
+        version: 0.21.3
+
+  projects/slidevs/learn-rxjs:
+    dependencies:
+      '@mudssky/slidev-style':
+        specifier: workspace:*
+        version: link:../../../packages/slidev-style
+      '@slidev/cli':
+        specifier: ^0.46.2
+        version: 0.46.2(@types/markdown-it@13.0.7)(playwright-chromium@1.40.1)(postcss@8.4.33)(sass@1.69.7)(typescript@5.3.3)
+      '@slidev/theme-default':
+        specifier: latest
+        version: 0.21.2
+      '@slidev/theme-seriph':
+        specifier: latest
+        version: 0.21.3
+      rxjs:
+        specifier: ^7.8.1
+        version: 7.8.1
+
   projects/slidevs/learn-typescript:
     dependencies:
       '@mudssky/slidev-style':
@@ -1283,7 +1316,7 @@ packages:
       resolve: 1.22.8
       resolve-from: 5.0.0
       resolve-global: 2.0.0
-      shiki: /shikiji-compat@0.9.18
+      shiki: /shikiji-compat@0.9.19
       shikiji: 0.9.18
       shikiji-twoslash: 0.9.18(typescript@5.3.3)
       sirv: 2.0.4
@@ -5596,6 +5629,12 @@ packages:
   /rw@1.3.3:
     resolution: {integrity: sha512-PdhdWy89SiZogBLaw42zdeqtRJ//zFd2PgQavcICDUgJT5oW10QCRKbJ6bg4r0/UY2M6BWd5tkxuGFRvCkgfHQ==}
 
+  /rxjs@7.8.1:
+    resolution: {integrity: sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==}
+    dependencies:
+      tslib: 2.6.2
+    dev: false
+
   /sade@1.8.1:
     resolution: {integrity: sha512-xal3CZX1Xlo/k4ApwCFrHVACi9fBqJ7V+mwhBsuf/1IOKbBy098Fex+Wa/5QMubw09pSZ/u8EY8PWgevJsXp1A==}
     engines: {node: '>=6'}
@@ -5649,19 +5688,11 @@ packages:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
 
-  /shikiji-compat@0.9.18:
-    resolution: {integrity: sha512-DYDY0VOsrOFSQsHR6dwR9vsSLFEtzMsPaPd3cqDDeM1nhRaWh1LoiZNDvELKKNpQtwXzR4Sb2HuPIDMhgs9dYw==}
-    dependencies:
-      shikiji: 0.9.18
-      shikiji-transformers: 0.9.18
-    dev: true
-
   /shikiji-compat@0.9.19:
     resolution: {integrity: sha512-W0qrnED9VnVOSgEsv+gAZasjpPM1eESBI84iPGSvVx/qwcqL9/n+p8QUPW1Rc3Y8o8pXjJLNZDeOS9lPzdYA0w==}
     dependencies:
       shikiji: 0.9.19
       shikiji-transformers: 0.9.19
-    dev: false
 
   /shikiji-core@0.9.18:
     resolution: {integrity: sha512-PKTXptbrp/WEDjNHV8OFG9KkfhmR0pSd161kzlDDlgQ0HXAnqJYNDSjqsy1CYZMx5bSvLMy42yJj9oFTqmkNTQ==}
@@ -5669,7 +5700,6 @@ packages:
 
   /shikiji-core@0.9.19:
     resolution: {integrity: sha512-AFJu/vcNT21t0e6YrfadZ+9q86gvPum6iywRyt1OtIPjPFe25RQnYJyxHQPMLKCCWA992TPxmEmbNcOZCAJclw==}
-    dev: false
 
   /shikiji-transformers@0.9.18:
     resolution: {integrity: sha512-lvKVfgx1ETDqUNxqiUn+whlnjQiunsAg76DOpzjjxkHE/bLcwa+jrghcMxQhui86SLR1tzCdM4Imh+RxW0LI2Q==}
@@ -5681,7 +5711,6 @@ packages:
     resolution: {integrity: sha512-lGLI7Z8frQrIBbhZ74/eiJtxMoCQRbpaHEB+gcfvdIy+ZFaAtXncJGnc52932/UET+Y4GyKtwwC/vjWUCp+c/Q==}
     dependencies:
       shikiji: 0.9.19
-    dev: false
 
   /shikiji-twoslash@0.9.18(typescript@5.3.3):
     resolution: {integrity: sha512-+Np6QAdV244p6CVofefszrRWdcmbUNvTXaGV4V+wjKRyfp8jVTUtxjuVjtG7e3vyA8Nu989K99CCjhcTQOuEaw==}
@@ -5713,7 +5742,6 @@ packages:
     resolution: {integrity: sha512-Kw2NHWktdcdypCj1GkKpXH4o6Vxz8B8TykPlPuLHOGSV8VkhoCLcFOH4k19K4LXAQYRQmxg+0X/eM+m2sLhAkg==}
     dependencies:
       shikiji-core: 0.9.19
-    dev: false
 
   /signal-exit@3.0.7:
     resolution: {integrity: sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==}
@@ -6011,7 +6039,6 @@ packages:
 
   /tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
-    dev: true
 
   /turbo-darwin-64@1.11.3:
     resolution: {integrity: sha512-IsOOg2bVbIt3o/X8Ew9fbQp5t1hTHN3fGNQYrPQwMR2W1kIAC6RfbVD4A9OeibPGyEPUpwOH79hZ9ydFH5kifw==}

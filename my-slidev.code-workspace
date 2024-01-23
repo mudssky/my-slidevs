@@ -8,6 +8,10 @@
       "path": "packages/slidev-style",
       "name": "slidev-style",
     },
+    // {
+    //   "path": "projects/slidevs/learn-rxjs",
+    //   "name": "learn-rxjs",
+    // },
   ],
   "settings": {
     "powershell.cwd": "root",
