@@ -22,7 +22,6 @@ mdc: true
 # RxJS
 
 ---
-
 hideInToc: true
 ---
 
@@ -36,4 +35,12 @@ src: ./pages/01introduction.md
 
 ---
 src: ./pages/03Observables.md
+---
+
+---
+src: ./pages/04Observer.md
+---
+
+---
+src: ./pages/05Operators.md
 ---

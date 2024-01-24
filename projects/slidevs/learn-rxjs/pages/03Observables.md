@@ -1,8 +1,8 @@
 ---
-title: Observable
+title: Observables 观测值
 level: 1
 ---
-Observable 是多个值的惰性Push集合
+Observables 是多个值的惰性Push集合
 
 |type | single|multiple|
 |---|---|---|
@@ -51,7 +51,7 @@ RxJS 引入了 Observables，这是一种新的 JavaScript Push系统。 Observa
 ---
 title:   As Function
 level: 2
----
+---  
 ### Observables as Function
 
 ```js
@@ -93,4 +93,110 @@ function foo() {
   return 42;
   return 100; // dead code. will never happen
 }
+```
+
+同步输出
+
+```shell
+ .\examples\003observableDiffFn.ts
+```
+
+支持异步
+
+```shell
+ .\examples\004observableDiffFnAsync.ts
+```
+
+<v-click>
+
+结论
+
+- func.call() 表示“同步给我一个值”
+- observable.subscribe() 表示“同步或异步地给我任意数量的值”
+
+</v-click>
+
+---
+title: Observable解析
+level: 2
+---
+
+### 创建 Observables
+
+以下示例创建一个 Observable，每秒向订阅者发出字符串 'hi' 。
+
+```js
+import { Observable } from 'rxjs';
+
+const observable = new Observable(function subscribe(subscriber) {
+  const id = setInterval(() => {
+    subscriber.next('hi');
+  }, 1000);
+});
+```
+
+> 可以使用new Observable创建，最常见的是用创建函数来创建。 比如 of，from,interval方法
+
+### 订阅 Observables
+
+```js
+observable.subscribe((x) => console.log(x));
+```
+
+当使用观察者调用 observable.subscribe 时，将为该给定订阅者运行 `new Observable(function subscribe(subscriber) {...})` 中的函数 subscribe 。
+每次调用observable.subscribe都是独立的
+
+---
+
+### 执行 Observables
+
+`new Observable(function subscribe(subscriber) {...})`内的代码表示Observable执行的内容，是一种针对每个订阅的观察者进行的惰性计算。随着时间的推移，执行会同步或异步地生成多个值。
+可以有三种值，
+
+- next 发送一个值，数字，字符串，对象等
+- error，发送javaScript错误或异常
+- complete 完成，不发送值，调用以后将不再产生值
+
+```js
+import { Observable } from 'rxjs';
+
+const observable = new Observable(function subscribe(subscriber) {
+  try {
+    subscriber.next(1);
+    subscriber.next(2);
+    subscriber.next(3);
+    subscriber.complete();
+  } catch (err) {
+    subscriber.error(err); // delivers an error if it caught one
+  }
+});
+
+```
+
+---
+### 取消执行 Observables
+
+因为可观察执行可能是无限的，并且观察者希望在有限时间内中止执行是很常见的，所以我们需要一个 API 来取消执行。由于每次执行都只属于一个观察者，一旦观察者接收完值，它必须有一种方法来停止执行，以避免浪费计算能力或内存资源。
+
+```js
+import { from } from 'rxjs';
+const observable = from([10, 20, 30]);
+const subscription = observable.subscribe((x) => console.log(x));
+subscription.unsubscribe();// Later:
+```
+
+创建Observable对象时可以定义取消的方法
+
+```js
+import { Observable } from 'rxjs';
+const observable = new Observable(function subscribe(subscriber) {
+  // Keep track of the interval resource
+  const intervalId = setInterval(() => {
+    subscriber.next('hi');
+  }, 1000);
+// Provide a way of canceling and disposing the interval resource
+  return function unsubscribe() {
+    clearInterval(intervalId);
+  };
+});
 ```
