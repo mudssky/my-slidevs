@@ -23,3 +23,65 @@ level: 1
 ```shell
  .\examples\014concat.ts
 ```
+
+### merge 先到先得快速通过
+
+```shell
+ .\examples\015merge.ts
+```
+
+concurrent参数可以限流，只合并前concurrent个数据流
+
+merge的应用场景
+fromEvent绑定多个事件的情况，比如移动设备上touch事件比click事件先触发，
+我们只用merge合并click事件和touch事件，接受最早到达那个，统一处理。
+
+### zip 拉链式组合
+
+zip的英文含义就是拉链，拉链的工作方式两端是一一对应的
+这个方法就类似于python的zip
+
+```shell
+ .\examples\016zip.ts
+```
+
+数据积压问题
+
+如果几个上游吐出数据的速度不一样，快速的数据流就会逐渐积压，造成内存占用。
+
+---
+
+### combineLatest 合并最新数据
+
+```shell
+ .\examples\017combineLatest.ts
+```
+
+**多重依赖问题**
+
+<!-- ```mermaid
+sequenceDiagram
+  Alice->John: Hello John, how are you?
+  Note over Alice,John: A typical interaction
+``` -->
+
+```mermaid
+graph TD
+original$ --> source1$
+original$ --> source2$
+source1$ --> result$
+source2$ --> result$
+```
+
+会在同一时间出现两个数据，因为数据源是同一个，被认为是"同时产生",可以用withLatestFrom处理这个情况
+
+```shell
+ .\examples\018combineLatest2.ts
+```
+
+### withLatestFrom
+
+类似于combineLatest,但是只能由一个observable pipe调用（实例操作符）
+调用的那个observable的数据是主导地位，作为参数的Observable对象只能贡献数据，不能控制产生数据的时机。
+
+也就是调用observable触发的时候才获取数据
