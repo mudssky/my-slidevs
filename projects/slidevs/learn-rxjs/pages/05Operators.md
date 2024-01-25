@@ -1,15 +1,15 @@
 ---
-title: Operators 运算符
+title: Operators 操作符
 level: 1
 ---
 
 ## Operators 操作符
 
-运算符是函数，分为两种
+操作符是函数，分为两种
 
-Pipeable Operators，管道运算符，是一种可以使用语法`observableInstance.pipe(operator)`或者`observableInstance.pipe(operatorFactory())`的操作符。当 Pipeable Operators 被调用时，它们不会改变现有的 Observable 实例，本质上这些都是纯函数。operatorFactory运算符工厂是可以使用参数设置上下文来返回operator的函数，工厂的参数也是运算符
+Pipeable Operators，管道操作符，是一种可以使用语法`observableInstance.pipe(operator)`或者`observableInstance.pipe(operatorFactory())`的操作符。当 Pipeable Operators 被调用时，它们不会改变现有的 Observable 实例，本质上这些都是纯函数。operatorFactory操作符工厂是可以使用参数设置上下文来返回operator的函数，工厂的参数也是操作符
 
-Creation Operators ，创建运算符，可以作为独立函数调用来创建新的Observable，比如of(1, 2, 3) 创建一个将依次发出 1、2 和 3 的可观察对象。
+Creation Operators ，创建操作符，可以作为独立函数调用来创建新的Observable，比如of(1, 2, 3) 创建一个将依次发出 1、2 和 3 的可观察对象。
 
 ```ts  twoslash
 import { of, map } from 'rxjs';
@@ -33,24 +33,24 @@ level: 2
 ---
 
 ### Piping 管道
-Pipeable operators 是函数，可以像普通函数一样使用。比如`op()(obs)`,但是这样使用数量增多以后可读性不高`op4()(op3()(op2()(op1()(obs))))`,所以使用pipe方法来组合这些运算符
+Pipeable operators 是函数，可以像普通函数一样使用。比如`op()(obs)`,但是这样使用数量增多以后可读性不高`op4()(op3()(op2()(op1()(obs))))`,所以使用pipe方法来组合这些操作符
 
 ```js
 obs.pipe(op1(), op2(), op3(), op4());
 ```
 
 ---
-title: Creation Operators 创建运算符
+title: Creation Operators 创建操作符
 level: 2
 ---
-### Creation Operators 创建运算符
-创建运算符的典型示例是 interval 函数。它接受一个数字作为输入参数，并生成一个 Observable 作为输出：
+### Creation Operators 创建操作符
+创建操作符的典型示例是 interval 函数。它接受一个数字作为输入参数，并生成一个 Observable 作为输出：
 
 ```shell
  .\examples\007interval.ts
 ```
 
-有以下创建运算符
+有以下创建操作符
 
 - [`ajax`](https://rxjs.dev/api/ajax/ajax)
 - [`bindCallback`](https://rxjs.dev/api/index/function/bindCallback)
@@ -85,7 +85,7 @@ level: 2
 
 Observables 最常发出普通值，如字符串和数字，也有很多场合要处理发出Observables的场景。
 
-concatAll() 运算符订阅来自“外部”Observable 的每个“内部”Observable，并复制所有发出的值，直到该 Observable 完成，然后继续处理下一个。所有值都以这种方式连接起来。
+concatAll() 操作符订阅来自“外部”Observable 的每个“内部”Observable，并复制所有发出的值，直到该 Observable 完成，然后继续处理下一个。所有值都以这种方式连接起来。
 
 ```ts twoslash
 import { concatAll, from, map, of } from 'rxjs'
@@ -97,7 +97,7 @@ from([1, 2, 3])
   .subscribe((x) => console.log(x))
 ```
 
-其他类似的展平运算符有:
+其他类似的展平操作符有:
 
 - mergeAll() — 在每个内部 Observable 到达时订阅它，然后在每个值到达时发出它
 - switchAll() — 当第一个内部 Observable 到达时订阅它，并在它到达时发出每个值，但当下一个内部 Observable 到达时，取消订阅前一个，并订阅新的。
@@ -125,14 +125,15 @@ level: 2
 -->
 
 ---
-layout: two-cols-ul
+layout: three-cols-ul
 level: 2
 
 ---
 
 ### Categories of operators 操作符分类
 
-#### Creation Operators 创建型操作符
+#### Creation Operators
+创建类
 
 - [`ajax`](https://rxjs.dev/api/ajax/ajax)
 - [`bindCallback`](https://rxjs.dev/api/index/function/bindCallback)
@@ -155,6 +156,7 @@ hideInToc: true
 ---
 
 #### Join Creation Operators
+连接创建类
 
 - [`combineLatest`](https://rxjs.dev/api/index/function/combineLatest)
 - [`concat`](https://rxjs.dev/api/index/function/concat)
@@ -165,11 +167,12 @@ hideInToc: true
 - [`zip`](https://rxjs.dev/api/index/function/zip)
 
 ---
-layout: two-cols-ul
+layout: three-cols-ul
 
 ---
 
 #### Transformation Operators
+转化类
 
 - [`buffer`](https://rxjs.dev/api/operators/buffer)
 - [`bufferCount`](https://rxjs.dev/api/operators/bufferCount)
@@ -203,6 +206,7 @@ layout: two-cols-ul
 ---
 
 #### Filtering Operators
+过滤类
 
 - [`audit`](https://rxjs.dev/api/operators/audit)
 - [`auditTime`](https://rxjs.dev/api/operators/auditTime)
@@ -233,6 +237,7 @@ layout: two-cols-ul
 ---
 
 #### Join Operators
+连接类
 
 - [`combineLatestAll`](https://rxjs.dev/api/operators/combineLatestAll)
 - [`concatAll`](https://rxjs.dev/api/operators/concatAll)
@@ -243,6 +248,7 @@ layout: two-cols-ul
 - [`withLatestFrom`](https://rxjs.dev/api/operators/withLatestFrom)
 
 #### Multicasting Operators
+多播类
 
 - [`multicast`](https://rxjs.dev/api/operators/multicast)
 - [`publish`](https://rxjs.dev/api/operators/publish)
@@ -252,17 +258,19 @@ layout: two-cols-ul
 - [`share`](https://rxjs.dev/api/operators/share)
 
 #### Error Handling Operators
+错误处理类
 
 - [`catchError`](https://rxjs.dev/api/operators/catchError)
 - [`retry`](https://rxjs.dev/api/operators/retry)
 - [`retryWhen`](https://rxjs.dev/api/operators/retryWhen)
 
 ---
-layout: two-cols-ul
+layout: three-cols-ul
 
 ---
 
 #### Utility Operators
+辅助工具类
 
 - [`tap`](https://rxjs.dev/api/operators/tap)
 - [`delay`](https://rxjs.dev/api/operators/delay)
@@ -278,6 +286,7 @@ layout: two-cols-ul
 - [`toArray`](https://rxjs.dev/api/operators/toArray)
 
 #### Conditional and Boolean Operators
+条件分支类
 
 - [`defaultIfEmpty`](https://rxjs.dev/api/operators/defaultIfEmpty)
 - [`every`](https://rxjs.dev/api/operators/every)
@@ -286,6 +295,7 @@ layout: two-cols-ul
 - [`isEmpty`](https://rxjs.dev/api/operators/isEmpty)
 
 #### Mathematical and Aggregate Operators
+数学和合计类
 
 - [`count`](https://rxjs.dev/api/operators/count)
 - [`max`](https://rxjs.dev/api/operators/max)
@@ -295,10 +305,44 @@ layout: two-cols-ul
 ---
 title: 自定义操作符
 level: 2
+layout: image-right
+image: https://source.unsplash.com/collection/94734566/1920x1080
 
 ---
 
 ### 创建自定义操作符
 
 #### 使用pipe创建新的操作符
-如果有可复用的序列
+如果有可复用的序列,可以用pipe函数来提取到新的操作符中。
+
+比如，可以创建一个丢弃奇数并将偶数加倍的函数
+
+```ts twoslash
+import { pipe, filter, map } from 'rxjs';
+
+function discardOddDoubleEven() {
+  return pipe(
+    filter((v:number) => !(v % 2)),
+    map((v) => v + v)
+  );
+}
+```
+
+---
+hideInToc: true
+
+---
+
+#### 从头创建新的操作符
+
+它更复杂，但如果您必须编写一个不能由现有操作符组合而成的操作符（很少发生），您可以使用 Observable 构造函数从头开始编写一个操作符
+
+1. 订阅输入 Observable 时实现所有三个 Observer 函数 next() 、 error() 和 complete() 。
+2. 实现一个“终结”函数，在 Observable 完成时进行清理
+3. 从传递给 Observable 构造函数的函数返回该终结函数。
+
+```shell
+ .\examples\010delay.ts
+```
+
+> 操作符本质上是返回一个Observable对象的函数

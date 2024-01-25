@@ -44,3 +44,7 @@ src: ./pages/04Observer.md
 ---
 src: ./pages/05Operators.md
 ---
+
+---
+src: ./pages/06Subscription.md
+---

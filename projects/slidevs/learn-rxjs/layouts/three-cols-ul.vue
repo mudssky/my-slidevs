@@ -8,7 +8,7 @@
   ul {
     @apply flex flex-wrap;
     li {
-      @apply w-1/3;
+      @apply min-w-3/12 px-1;
     }
   }
 }
