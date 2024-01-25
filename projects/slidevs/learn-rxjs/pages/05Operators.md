@@ -60,7 +60,7 @@ level: 2
 - [`from`](https://rxjs.dev/api/index/function/from)
 - [`fromEvent`](https://rxjs.dev/api/index/function/fromEvent)
 - [`fromEventPattern`](https://rxjs.dev/api/index/function/fromEventPattern)
-- [`generate`](https://rxjs.dev/api/index/function/generate)
+- [`generate`](https://rxjs.dev/api/index/function/generate) //已弃用
 - [`interval`](https://rxjs.dev/api/index/function/interval)
 - [`of`](https://rxjs.dev/api/index/function/of)
 - [`range`](https://rxjs.dev/api/index/function/range)
@@ -345,4 +345,4 @@ hideInToc: true
  .\examples\010delay.ts
 ```
 
-> 操作符本质上是返回一个Observable对象的函数
+> 操作符本质上是返回一个全新Observable对象的函数

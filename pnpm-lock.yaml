@@ -23,13 +23,16 @@ importers:
         version: 1.0.4(prettier@3.2.4)(typescript@5.3.3)
       '@slidev/cli':
         specifier: ^0.46.1
-        version: 0.46.1(@types/markdown-it@13.0.7)(playwright-chromium@1.40.1)(postcss@8.4.33)(sass@1.69.7)(typescript@5.3.3)
+        version: 0.46.1(@types/markdown-it@13.0.7)(@types/node@20.11.6)(playwright-chromium@1.40.1)(postcss@8.4.33)(sass@1.69.7)(typescript@5.3.3)
       '@slidev/theme-default':
         specifier: ^0.21.2
         version: 0.21.2
       '@slidev/theme-seriph':
         specifier: ^0.21.3
         version: 0.21.3
+      '@types/node':
+        specifier: ^20.11.6
+        version: 20.11.6
       '@typescript-eslint/eslint-plugin':
         specifier: ^6.18.1
         version: 6.18.1(@typescript-eslint/parser@6.18.1)(eslint@8.56.0)(typescript@5.3.3)
@@ -80,7 +83,7 @@ importers:
         version: 0.26.0(vue@3.4.6)
       vitepress:
         specifier: 1.0.0-rc.36
-        version: 1.0.0-rc.36(@algolia/client-search@4.22.0)(postcss@8.4.33)(sass@1.69.7)(search-insights@2.13.0)(typescript@5.3.3)
+        version: 1.0.0-rc.36(@algolia/client-search@4.22.0)(@types/node@20.11.6)(postcss@8.4.33)(sass@1.69.7)(search-insights@2.13.0)(typescript@5.3.3)
 
   packages/slidev-style: {}
 
@@ -101,7 +104,7 @@ importers:
         version: link:../../../packages/slidev-style
       '@slidev/cli':
         specifier: ^0.46.2
-        version: 0.46.2(@types/markdown-it@13.0.7)(playwright-chromium@1.40.1)(postcss@8.4.33)(sass@1.69.7)(typescript@5.3.3)
+        version: 0.46.2(@types/markdown-it@13.0.7)(@types/node@20.11.6)(playwright-chromium@1.40.1)(postcss@8.4.33)(sass@1.69.7)(typescript@5.3.3)
       '@slidev/theme-default':
         specifier: latest
         version: 0.21.2
@@ -116,7 +119,7 @@ importers:
         version: link:../../../packages/slidev-style
       '@slidev/cli':
         specifier: ^0.46.2
-        version: 0.46.2(@types/markdown-it@13.0.7)(playwright-chromium@1.40.1)(postcss@8.4.33)(sass@1.69.7)(typescript@5.3.3)
+        version: 0.46.2(@types/markdown-it@13.0.7)(@types/node@20.11.6)(playwright-chromium@1.40.1)(postcss@8.4.33)(sass@1.69.7)(typescript@5.3.3)
       '@slidev/theme-default':
         specifier: latest
         version: 0.21.2
@@ -140,7 +143,7 @@ importers:
         version: link:../../../packages/slidev-style
       '@slidev/cli':
         specifier: ^0.46.2
-        version: 0.46.2(@types/markdown-it@13.0.7)(playwright-chromium@1.40.1)(postcss@8.4.33)(sass@1.69.7)(typescript@5.3.3)
+        version: 0.46.2(@types/markdown-it@13.0.7)(@types/node@20.11.6)(playwright-chromium@1.40.1)(postcss@8.4.33)(sass@1.69.7)(typescript@5.3.3)
       '@slidev/theme-default':
         specifier: latest
         version: 0.21.2
@@ -1257,7 +1260,7 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@slidev/cli@0.46.1(@types/markdown-it@13.0.7)(playwright-chromium@1.40.1)(postcss@8.4.33)(sass@1.69.7)(typescript@5.3.3):
+  /@slidev/cli@0.46.1(@types/markdown-it@13.0.7)(@types/node@20.11.6)(playwright-chromium@1.40.1)(postcss@8.4.33)(sass@1.69.7)(typescript@5.3.3):
     resolution: {integrity: sha512-YqDn/7d+N24VqkHebpzslyXCeHHk3MJLcgHZC2074QBxH6mlLgk4Q9mSk4wXOjOZFLegEaOQj+x3NcbXHzQOnQ==}
     engines: {node: '>=18.0.0'}
     hasBin: true
@@ -1325,7 +1328,7 @@ packages:
       unplugin-vue-components: 0.26.0(vue@3.4.6)
       unplugin-vue-markdown: 0.25.2(vite@5.0.11)
       uqr: 0.1.2
-      vite: 5.0.11(sass@1.69.7)
+      vite: 5.0.11(@types/node@20.11.6)(sass@1.69.7)
       vite-plugin-inspect: 0.8.1(vite@5.0.11)
       vite-plugin-remote-assets: 0.4.1(vite@5.0.11)
       vite-plugin-static-copy: 1.0.0(vite@5.0.11)
@@ -1359,7 +1362,7 @@ packages:
       - vue-template-es2015-compiler
     dev: true
 
-  /@slidev/cli@0.46.2(@types/markdown-it@13.0.7)(playwright-chromium@1.40.1)(postcss@8.4.33)(sass@1.69.7)(typescript@5.3.3):
+  /@slidev/cli@0.46.2(@types/markdown-it@13.0.7)(@types/node@20.11.6)(playwright-chromium@1.40.1)(postcss@8.4.33)(sass@1.69.7)(typescript@5.3.3):
     resolution: {integrity: sha512-RQUq3gY+cbvKLO04bcvAUIsDSfcXKd+ZpwJV9CFaPvqwYxrQZ0uBCiJH03z4chV5g6cDiRGlEKWyGHXNVjTqcg==}
     engines: {node: '>=18.0.0'}
     hasBin: true
@@ -1427,7 +1430,7 @@ packages:
       unplugin-vue-components: 0.26.0(vue@3.4.15)
       unplugin-vue-markdown: 0.25.2(vite@5.0.11)
       uqr: 0.1.2
-      vite: 5.0.11(sass@1.69.7)
+      vite: 5.0.11(@types/node@20.11.6)(sass@1.69.7)
       vite-plugin-inspect: 0.8.1(vite@5.0.11)
       vite-plugin-remote-assets: 0.4.1(vite@5.0.11)
       vite-plugin-static-copy: 1.0.0(vite@5.0.11)
@@ -1664,6 +1667,11 @@ packages:
 
   /@types/ms@0.7.34:
     resolution: {integrity: sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g==}
+
+  /@types/node@20.11.6:
+    resolution: {integrity: sha512-+EOokTnksGVgip2PbYbr3xnR7kZigh4LbybAfBAw5BpnQ+FqBYUsvCEjYd70IXKlbohQ64mzEYmMtlWUY8q//Q==}
+    dependencies:
+      undici-types: 5.26.5
 
   /@types/semver@7.5.6:
     resolution: {integrity: sha512-dn1l8LaMea/IjDoHNd9J52uBbInB796CDffS6VdIxvqYCPSG0V0DzHp76GpaWnlhg88uYyPbXCDIowa86ybd5A==}
@@ -1910,7 +1918,7 @@ packages:
       '@unocss/core': 0.58.3
       '@unocss/reset': 0.58.3
       '@unocss/vite': 0.58.3(vite@5.0.11)
-      vite: 5.0.11(sass@1.69.7)
+      vite: 5.0.11(@types/node@20.11.6)(sass@1.69.7)
     transitivePeerDependencies:
       - rollup
 
@@ -2088,7 +2096,7 @@ packages:
       chokidar: 3.5.3
       fast-glob: 3.3.2
       magic-string: 0.30.5
-      vite: 5.0.11(sass@1.69.7)
+      vite: 5.0.11(@types/node@20.11.6)(sass@1.69.7)
     transitivePeerDependencies:
       - rollup
 
@@ -2102,7 +2110,7 @@ packages:
       '@babel/core': 7.23.7
       '@babel/plugin-transform-typescript': 7.23.6(@babel/core@7.23.7)
       '@vue/babel-plugin-jsx': 1.1.5(@babel/core@7.23.7)
-      vite: 5.0.11(sass@1.69.7)
+      vite: 5.0.11(@types/node@20.11.6)(sass@1.69.7)
       vue: 3.4.15(typescript@5.3.3)
     transitivePeerDependencies:
       - supports-color
@@ -2118,7 +2126,7 @@ packages:
       '@babel/core': 7.23.7
       '@babel/plugin-transform-typescript': 7.23.6(@babel/core@7.23.7)
       '@vue/babel-plugin-jsx': 1.1.5(@babel/core@7.23.7)
-      vite: 5.0.11(sass@1.69.7)
+      vite: 5.0.11(@types/node@20.11.6)(sass@1.69.7)
       vue: 3.4.6(typescript@5.3.3)
     transitivePeerDependencies:
       - supports-color
@@ -2131,7 +2139,7 @@ packages:
       vite: ^4.0.0 || ^5.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 5.0.11(sass@1.69.7)
+      vite: 5.0.11(@types/node@20.11.6)(sass@1.69.7)
       vue: 3.4.6(typescript@5.3.3)
     dev: true
 
@@ -2142,7 +2150,7 @@ packages:
       vite: ^5.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 5.0.11(sass@1.69.7)
+      vite: 5.0.11(@types/node@20.11.6)(sass@1.69.7)
       vue: 3.4.6(typescript@5.3.3)
     dev: true
 
@@ -2153,7 +2161,7 @@ packages:
       vite: ^5.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 5.0.11(sass@1.69.7)
+      vite: 5.0.11(@types/node@20.11.6)(sass@1.69.7)
       vue: 3.4.15(typescript@5.3.3)
     dev: false
 
@@ -6144,6 +6152,9 @@ packages:
       unplugin: 1.6.0
     optional: true
 
+  /undici-types@5.26.5:
+    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
+
   /unhead@1.8.10:
     resolution: {integrity: sha512-dth8FvZkLriO5ZWWOBIYBNSfGiwJtKcqpPWpSOk/Z0e2jdlgwoZEWZHFyte0EKvmbZxKcsWNMqIuv7dEmS5yZQ==}
     dependencies:
@@ -6228,7 +6239,7 @@ packages:
       '@unocss/transformer-directives': 0.58.3
       '@unocss/transformer-variant-group': 0.58.3
       '@unocss/vite': 0.58.3(vite@5.0.11)
-      vite: 5.0.11(sass@1.69.7)
+      vite: 5.0.11(@types/node@20.11.6)(sass@1.69.7)
     transitivePeerDependencies:
       - postcss
       - rollup
@@ -6362,7 +6373,7 @@ packages:
       '@types/markdown-it': 13.0.7
       markdown-it: 13.0.2
       unplugin: 1.6.0
-      vite: 5.0.11(sass@1.69.7)
+      vite: 5.0.11(@types/node@20.11.6)(sass@1.69.7)
     transitivePeerDependencies:
       - rollup
 
@@ -6452,7 +6463,7 @@ packages:
       open: 9.1.0
       picocolors: 1.0.0
       sirv: 2.0.4
-      vite: 5.0.11(sass@1.69.7)
+      vite: 5.0.11(@types/node@20.11.6)(sass@1.69.7)
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -6468,7 +6479,7 @@ packages:
       debug: 4.3.4
       fs-extra: 11.2.0
       magic-string: 0.30.5
-      vite: 5.0.11(sass@1.69.7)
+      vite: 5.0.11(@types/node@20.11.6)(sass@1.69.7)
     transitivePeerDependencies:
       - supports-color
 
@@ -6482,7 +6493,7 @@ packages:
       fast-glob: 3.3.2
       fs-extra: 11.2.0
       picocolors: 1.0.0
-      vite: 5.0.11(sass@1.69.7)
+      vite: 5.0.11(@types/node@20.11.6)(sass@1.69.7)
 
   /vite-plugin-vue-server-ref@0.4.0(vite@5.0.11)(vue@3.4.15):
     resolution: {integrity: sha512-JTKBPsLMH5apzV5Yog2bUI7GdnVed3cW0ghMQ36+lmuUibHv6M1X2AlqSFg+nRIhaGGxMMIJV/xEJbhGHY/Y8Q==}
@@ -6492,7 +6503,7 @@ packages:
     dependencies:
       debug: 4.3.4
       ufo: 1.3.2
-      vite: 5.0.11(sass@1.69.7)
+      vite: 5.0.11(@types/node@20.11.6)(sass@1.69.7)
       vue: 3.4.15(typescript@5.3.3)
     transitivePeerDependencies:
       - supports-color
@@ -6506,7 +6517,7 @@ packages:
     dependencies:
       debug: 4.3.4
       ufo: 1.3.2
-      vite: 5.0.11(sass@1.69.7)
+      vite: 5.0.11(@types/node@20.11.6)(sass@1.69.7)
       vue: 3.4.6(typescript@5.3.3)
     transitivePeerDependencies:
       - supports-color
@@ -6520,12 +6531,12 @@ packages:
       '@windicss/plugin-utils': 1.9.3
       debug: 4.3.4
       kolorist: 1.8.0
-      vite: 5.0.11(sass@1.69.7)
+      vite: 5.0.11(@types/node@20.11.6)(sass@1.69.7)
       windicss: 3.5.6
     transitivePeerDependencies:
       - supports-color
 
-  /vite@5.0.11(sass@1.69.7):
+  /vite@5.0.11(@types/node@20.11.6)(sass@1.69.7):
     resolution: {integrity: sha512-XBMnDjZcNAw/G1gEiskiM1v6yzM4GE5aMGvhWTlHAYYhxb7S3/V1s3m2LDHa8Vh6yIWYYB0iJwsEaS523c4oYA==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -6553,6 +6564,7 @@ packages:
       terser:
         optional: true
     dependencies:
+      '@types/node': 20.11.6
       esbuild: 0.19.11
       postcss: 8.4.33
       rollup: 4.9.4
@@ -6568,9 +6580,9 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 5.0.11(sass@1.69.7)
+      vite: 5.0.11(@types/node@20.11.6)(sass@1.69.7)
 
-  /vitepress@1.0.0-rc.36(@algolia/client-search@4.22.0)(postcss@8.4.33)(sass@1.69.7)(search-insights@2.13.0)(typescript@5.3.3):
+  /vitepress@1.0.0-rc.36(@algolia/client-search@4.22.0)(@types/node@20.11.6)(postcss@8.4.33)(sass@1.69.7)(search-insights@2.13.0)(typescript@5.3.3):
     resolution: {integrity: sha512-2z4dpM9PplN/yvTifhavOIAazlCR6OJ5PvLoRbc+7LdcFeIlCsuDGENLX4HjMW18jQZF5/j7++PNqdBfeazxUA==}
     hasBin: true
     peerDependencies:
@@ -6596,7 +6608,7 @@ packages:
       shikiji: 0.9.18
       shikiji-core: 0.9.18
       shikiji-transformers: 0.9.18
-      vite: 5.0.11(sass@1.69.7)
+      vite: 5.0.11(@types/node@20.11.6)(sass@1.69.7)
       vue: 3.4.6(typescript@5.3.3)
     transitivePeerDependencies:
       - '@algolia/client-search'

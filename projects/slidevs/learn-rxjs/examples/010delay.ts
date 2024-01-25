@@ -13,7 +13,7 @@ function delay<T>(delayInMillis: number) {
           // 每次有新值时，我们都会创建一个新的定时器
           // Start a timer to delay the next value
           // from being pushed.
-          const timerID = setTimeout(() => {
+          const timerID: any = setTimeout(() => {
             subscriber.next(value)
             //   推送一个值之后，我们清除计时器id
             // after we push the value, we need to clean up the timer timerID
@@ -55,5 +55,38 @@ function delay<T>(delayInMillis: number) {
     })
 }
 
+// observable 上游
+// subscriber 下游
+export function custom_map<T>(fn: (value: T) => T) {
+  return (observable: Observable<T>) =>
+    new Observable<T>((subscriber) => {
+      const subscription = observable.subscribe({
+        next(value) {
+          try {
+            subscriber.next(fn(value))
+          } catch (err) {
+            // fn的行为无法预测，需要添加错误处理预防错误
+            // 传递错误给下游
+            subscriber.error(err)
+          }
+        },
+        error(err) {
+          subscriber.error(err)
+        },
+        complete() {
+          subscriber.complete()
+        },
+      })
+      return () => {
+        // 退订时的逻辑,取消上游的执行
+        // 也要释放资源
+        subscription.unsubscribe()
+      }
+    })
+}
 // Try it out!
 of(1, 2, 3).pipe(delay(5000)).subscribe(console.log)
+
+of(4, 5, 6)
+  .pipe(custom_map((x) => x * 2))
+  .subscribe(console.log)

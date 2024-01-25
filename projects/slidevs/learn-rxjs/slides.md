@@ -48,3 +48,13 @@ src: ./pages/05Operators.md
 ---
 src: ./pages/06Subscription.md
 ---
+
+<!-- ---
+src: ./pages/010Create.md
+layout: slim-table
+tdClass: dsadsa
+--- -->
+
+---
+src: ./pages/011Join.md
+---
