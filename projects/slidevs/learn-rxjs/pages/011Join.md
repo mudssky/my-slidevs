@@ -59,12 +59,6 @@ zip的英文含义就是拉链，拉链的工作方式两端是一一对应的
 
 **多重依赖问题**
 
-<!-- ```mermaid
-sequenceDiagram
-  Alice->John: Hello John, how are you?
-  Note over Alice,John: A typical interaction
-``` -->
-
 ```mermaid
 graph TD
 original$ --> source1$
@@ -79,9 +73,29 @@ source2$ --> result$
  .\examples\018combineLatest2.ts
 ```
 
+---
+
 ### withLatestFrom
 
 类似于combineLatest,但是只能由一个observable pipe调用（实例操作符）
 调用的那个observable的数据是主导地位，作为参数的Observable对象只能贡献数据，不能控制产生数据的时机。
 
 也就是调用observable触发的时候才获取数据
+这样也就解决了combineLatest多重依赖的问题，因为只有主导的observable对象触发的时候才会获取数据，所以不会出现触发两次的情况。
+
+### race 赢者通吃
+也就类似于promise.race
+
+多个Observable对象，谁先产生数据，就由谁来决定结果。其余的会被退订。
+
+### startWith
+
+在数据流前面添加一个指定数据
+
+startWith的功能也可以用concat实现
+
+---
+
+### forkJoin
+
+合并所有参数的最后一个数据
