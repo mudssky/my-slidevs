@@ -50,6 +50,10 @@ src: ./pages/06Subscription.md
 ---
 
 ---
+src: ./pages/07Subject.md
+---
+
+---
 src: ./pages/010Create.md
 layout: slim-table
 tdClass: dsadsa
