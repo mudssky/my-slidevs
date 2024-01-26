@@ -58,6 +58,10 @@ src: ./pages/08Scheduler.md
 ---
 
 ---
+src: ./pages/09practice.md
+---
+
+---
 src: ./pages/010Create.md
 layout: slim-table
 tdClass: dsadsa
