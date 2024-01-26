@@ -99,3 +99,59 @@ startWith的功能也可以用concat实现
 ### forkJoin
 
 合并所有参数的最后一个数据
+
+---
+
+## 高阶Observable
+
+一般Observable是返回函数的，高阶Observable返回的仍然是Observable
+
+```shell
+ .\examples\023highOrder.ts
+```
+
+高阶Observable本质是用管理数据的方式来管理多个Observable对象
+下面介绍一些操作高阶Observable的操作符
+
+### concatAll
+
+类似于concat，先订阅第一个Observable，再订阅第二个，以此类推。第一个没有完结就不会订阅下一个。
+
+如果第一个Observable不断产生数据，就会产生积压。
+
+```shell
+ .\examples\024concatAll.ts
+```
+
+### mergeAll
+
+这个是只要上游产生Observable就订阅
+
+```shell
+ .\examples\025mergeAll.ts
+```
+
+---
+
+### zipAll
+
+这个是一一对应
+会等上游的Observable先完结再开始执行匹配，因为如果上游不完结，无法确定上游的数量，无法确定后续是否产生。
+其实就是等上游完结，然后依次行订阅所有Observable，使用zip策略
+
+```shell
+ .\examples\025zipAll.ts
+```
+
+### combineLatestAll
+
+和zipAll一样也是必须等上游完结，
+等上游完结后，订阅所有收集到Observable，使用combineLatest策略
+
+### switchAll
+ 总是切换到最新的
+ 每当上游Ob产生一个内部Ob对象，switch就会立刻订阅最新的，如果已经订阅了之前的内部Ob对象，就会退订那个过时的Ob对象
+
+### exhaustAll
+不耗尽当前内部Ob的数据之前不会切换到下一个内部Ob  
+exhaustAll选择前一个Ob的数据，后一个就会被丢弃
