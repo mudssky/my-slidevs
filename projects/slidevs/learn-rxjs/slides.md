@@ -49,12 +49,23 @@ src: ./pages/05Operators.md
 src: ./pages/06Subscription.md
 ---
 
-<!-- ---
+---
 src: ./pages/010Create.md
 layout: slim-table
 tdClass: dsadsa
---- -->
+hide: true
+---
 
 ---
 src: ./pages/011Join.md
+hide: true
+---
+
+---
+src: ./pages/012helper.md
+hide: true
+---
+
+---
+src: ./pages/013filter.md
 ---
