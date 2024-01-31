@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .dialog::backdrop {
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        background: rgba(0, 0, 0, 0.1);
+        /* background: linear-gradient(45deg, black, transparent); */
+      }
+      .dialog {
+        /* width: 100%; */
+        width: 700px;
+        /* background-color: red; */
+      }
+      .content {
+        display: inline-block;
+        width: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <dialog open>
+      <p>Greetings, one and all!</p>
+      <form method="dialog">
+        <button>OK</button>
+      </form>
+    </dialog>
+  </body>
+</html>
