@@ -1,1 +1,1 @@
-import '@mudssky/slidev-style/index.css'
+export {}

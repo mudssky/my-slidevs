@@ -121,12 +121,9 @@ importers:
 
   projects/slidevs/learn-css:
     dependencies:
-      '@mudssky/slidev-style':
-        specifier: workspace:*
-        version: link:../../../packages/slidev-style
       '@mudssky/slidev-theme-default':
-        specifier: ^0.0.3
-        version: 0.0.3
+        specifier: ^0.0.4
+        version: 0.0.4
       '@slidev/theme-default':
         specifier: ^0.21.2
         version: 0.21.2
@@ -1463,15 +1460,15 @@ packages:
       - typescript
     dev: true
 
-  /@mudssky/slidev-style@0.0.3:
-    resolution: {integrity: sha512-6PMn0Ie0gTSXROk4RDbfvJhL8tEr9S2I8wuABD15n2Cr4nTg4tvHd4Hy/Gh28Knui4Yqa4xCNJ2BZ9OrsUlnvg==}
+  /@mudssky/slidev-style@0.0.4:
+    resolution: {integrity: sha512-Zf5wUHkmLRWXC7QQ56O6EsmkZF3XiXrNq0a7evPLQGzJs09CemtIea3TWXNUwzAY/wUL9eBwj/x59lA8PhxItA==}
     dev: false
 
-  /@mudssky/slidev-theme-default@0.0.3:
-    resolution: {integrity: sha512-Dp5JhJTrs1Bn4tnb6Z6DCezpBb+1p0jlkfQyAldl6M0TzS2glvgD3WKNyvCRqx0dQAZ1O375dUvRhyieJ0EjXg==}
+  /@mudssky/slidev-theme-default@0.0.4:
+    resolution: {integrity: sha512-EckzEByJOw+WleFajqKJr8QRgfu8Z1zUP0Ky5ErdT5RI5QzQqF1Zc0r1SBxKzTiTg2SvgDxrW9LVibZYI9+ZMA==}
     engines: {node: '>=18.0.0', slidev: '>=0.4'}
     dependencies:
-      '@mudssky/slidev-style': 0.0.3
+      '@mudssky/slidev-style': 0.0.4
       '@slidev/types': 0.46.3
       codemirror-theme-vars: 0.1.2
       prism-theme-vars: 0.2.4

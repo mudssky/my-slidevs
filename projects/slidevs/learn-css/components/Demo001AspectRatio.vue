@@ -10,8 +10,6 @@
 
 <style lang="scss" scoped>
 .box-container {
-  padding: 20px;
-
   > div {
     display: inline-block;
     margin-right: 20px;

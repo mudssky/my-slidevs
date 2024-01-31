@@ -29,6 +29,13 @@ layout: slim-table
 参数有两种形式，一个是auto，另一个是宽高的比值形式
 
 <Demo001AspectRatio/>
+<style>
+   .slidev-layout p {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.5rem;
+}
+</style>
 
 ---
 title: Container
