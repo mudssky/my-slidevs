@@ -1,6 +1,6 @@
 <template>
   <button class="btn-primary" @click="openCanIUseDialog">
-    {{ p.buttonText ?? '查看CanIUse' }}
+    {{ p.buttonText }}
   </button>
   <dialog
     ref="dialogDomRef"
@@ -25,7 +25,9 @@ interface Props {
   src: string
   buttonText: string
 }
-const p = defineProps<Props>()
+const p = withDefaults(defineProps<Props>(), {
+  buttonText: '查看canIUse',
+})
 
 const dialogDomRef = ref()
 

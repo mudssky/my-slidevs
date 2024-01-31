@@ -9,7 +9,7 @@
 
 <script lang="ts" setup></script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .box-container {
   padding: 20px;
   //   columns: 2;
