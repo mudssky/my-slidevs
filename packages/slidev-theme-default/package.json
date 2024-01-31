@@ -1,6 +1,7 @@
 {
   "name": "@mudssky/slidev-theme-default",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "description": "my slidev theme",
   "keywords": [
     "slidev-theme",
     "slidev"
