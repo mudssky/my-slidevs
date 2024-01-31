@@ -10,8 +10,7 @@
   },
   "dependencies": {
     "@mudssky/slidev-style": "workspace:*",
-    "@mudssky/slidev-theme-default": "workspace:*",
-    "@slidev/cli": "^0.46.2",
+    "@mudssky/slidev-theme-default": "^0.0.1",
     "@slidev/theme-default": "latest",
     "@slidev/theme-seriph": "latest"
   }

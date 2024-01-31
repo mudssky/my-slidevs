@@ -1,6 +1,6 @@
 {
   "name": "@mudssky/slidev-style",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "index.js",
   "license": "ISC",
   "author": "",
@@ -22,11 +22,14 @@
   "module": "index.ts",
   "files": [
     "./*.css",
-    "dist",
-    "src"
+    "scss/",
+    "*.ts"
   ],
   "scripts": {
     "build": "pnpm sass ./scss/index.scss ./index.css",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

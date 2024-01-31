@@ -12,7 +12,6 @@ image: https://source.unsplash.com/collection/94734566/1920x1080
 title: Aspect Ratio
 level: 2
 layout: slim-table
-size: small
 ---
 ### Aspect Ratio 高宽比
 

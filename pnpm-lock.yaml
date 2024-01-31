@@ -122,11 +122,8 @@ importers:
         specifier: workspace:*
         version: link:../../../packages/slidev-style
       '@mudssky/slidev-theme-default':
-        specifier: workspace:*
-        version: link:../../../packages/slidev-theme-default
-      '@slidev/cli':
-        specifier: ^0.46.2
-        version: 0.46.2(@types/markdown-it@13.0.7)(@types/node@20.11.13)(playwright-chromium@1.41.1)(postcss@8.4.33)(sass@1.70.0)(typescript@5.3.3)
+        specifier: ^0.0.1
+        version: 0.0.1
       '@slidev/theme-default':
         specifier: latest
         version: 0.21.2
@@ -1462,6 +1459,16 @@ packages:
       - '@volar/vue-typescript'
       - typescript
     dev: true
+
+  /@mudssky/slidev-theme-default@0.0.1:
+    resolution: {integrity: sha512-acWXoz9UbMMe1KiNWwi9Zu1EqfG/jPQTKI9JpwFjBbJwNYwIUkswA7fiqQsS6Keo684invEHMi45y8hDrtwiEg==}
+    engines: {node: '>=18.0.0', slidev: '>=0.4'}
+    dependencies:
+      '@slidev/types': 0.46.3
+      codemirror-theme-vars: 0.1.2
+      prism-theme-vars: 0.2.4
+      theme-vitesse: 0.7.5
+    dev: false
 
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
