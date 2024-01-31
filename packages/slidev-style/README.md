@@ -11,6 +11,6 @@ pnpm add @muddsky/slidev-style
 ## 使用
 
 ```ts
-import '@mudssky/slidev-style/index'//导入ts
-import '@mudssky/slidev-style/index.css'//导入css
+import '@mudssky/slidev-style' //import ts
+import '@mudssky/slidev-style/index.css' // import css
 ```

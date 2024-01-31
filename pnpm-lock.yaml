@@ -125,13 +125,13 @@ importers:
         specifier: workspace:*
         version: link:../../../packages/slidev-style
       '@mudssky/slidev-theme-default':
-        specifier: ^0.0.1
-        version: 0.0.1
+        specifier: ^0.0.3
+        version: 0.0.3
       '@slidev/theme-default':
-        specifier: latest
+        specifier: ^0.21.2
         version: 0.21.2
       '@slidev/theme-seriph':
-        specifier: latest
+        specifier: ^0.21.3
         version: 0.21.3
 
   projects/slidevs/learn-rxjs:
@@ -1463,10 +1463,15 @@ packages:
       - typescript
     dev: true
 
-  /@mudssky/slidev-theme-default@0.0.1:
-    resolution: {integrity: sha512-acWXoz9UbMMe1KiNWwi9Zu1EqfG/jPQTKI9JpwFjBbJwNYwIUkswA7fiqQsS6Keo684invEHMi45y8hDrtwiEg==}
+  /@mudssky/slidev-style@0.0.3:
+    resolution: {integrity: sha512-6PMn0Ie0gTSXROk4RDbfvJhL8tEr9S2I8wuABD15n2Cr4nTg4tvHd4Hy/Gh28Knui4Yqa4xCNJ2BZ9OrsUlnvg==}
+    dev: false
+
+  /@mudssky/slidev-theme-default@0.0.3:
+    resolution: {integrity: sha512-Dp5JhJTrs1Bn4tnb6Z6DCezpBb+1p0jlkfQyAldl6M0TzS2glvgD3WKNyvCRqx0dQAZ1O375dUvRhyieJ0EjXg==}
     engines: {node: '>=18.0.0', slidev: '>=0.4'}
     dependencies:
+      '@mudssky/slidev-style': 0.0.3
       '@slidev/types': 0.46.3
       codemirror-theme-vars: 0.1.2
       prism-theme-vars: 0.2.4
