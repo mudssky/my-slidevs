@@ -1,9 +1,13 @@
 {
   "name": "@mudssky/slidev-style",
-  "version": "0.0.1",
-  "description": "index.js",
+  "version": "0.0.2",
+  "description": "custom style for slidev",
+  "keywords": [
+    "css",
+    "slidev"
+  ],
   "license": "ISC",
-  "author": "",
+  "author": "mudssky",
   "exports": {
     ".": {
       "import": "./index.ts",
