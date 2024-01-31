@@ -89,6 +89,9 @@ importers:
 
   packages/slidev-theme-default:
     dependencies:
+      '@mudssky/slidev-style':
+        specifier: workspace:^
+        version: link:../slidev-style
       '@slidev/types':
         specifier: ^0.46.3
         version: 0.46.3
