@@ -15,6 +15,8 @@ transition: slide-left
 title: Welcome to Slidev
 hideInToc: true
 mdc: true
+addons:
+  - '@mudssky/slidev-addon-default'
 ---
 
 

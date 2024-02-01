@@ -13,6 +13,7 @@
     "start": "pnpm dev"
   },
   "dependencies": {
+    "@mudssky/slidev-addon-default": "latest",
     "@mudssky/slidev-style": "workspace:*",
     "@slidev/cli": "^0.46.2",
     "@slidev/theme-default": "latest",

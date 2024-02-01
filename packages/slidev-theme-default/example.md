@@ -1,7 +1,5 @@
 ---
 theme: ./
-addon:
-  - '@mudssky/slidev-addon-default'
 ---
 
 # Slidev Theme Starter

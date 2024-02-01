@@ -103,8 +103,8 @@ importers:
   packages/slidev-theme-default:
     dependencies:
       '@mudssky/slidev-addon-default':
-        specifier: workspace:^
-        version: link:../slidev-addon-default
+        specifier: latest
+        version: 0.0.1
       '@mudssky/slidev-style':
         specifier: workspace:^
         version: link:../slidev-style
@@ -139,7 +139,7 @@ importers:
     dependencies:
       '@mudssky/slidev-theme-default':
         specifier: ^0.0.4
-        version: link:../../../packages/slidev-theme-default
+        version: 0.0.4
       '@slidev/theme-default':
         specifier: ^0.21.2
         version: 0.21.2
@@ -149,6 +149,9 @@ importers:
 
   projects/slidevs/learn-rxjs:
     dependencies:
+      '@mudssky/slidev-addon-default':
+        specifier: latest
+        version: 0.0.1
       '@mudssky/slidev-style':
         specifier: workspace:*
         version: link:../../../packages/slidev-style
@@ -1475,6 +1478,29 @@ packages:
       - '@volar/vue-typescript'
       - typescript
     dev: true
+
+  /@mudssky/slidev-addon-default@0.0.1:
+    resolution: {integrity: sha512-HnB2A0424VnlhPZ+q+IpsOW+Yflv6k9/PhbPBfj7pCznkirqIfI2BiqR0pG9Z6EMlUT9LfXqZtHT2vSgbKeAkg==}
+    engines: {node: '>=18.0.0', slidev: '>=0.4'}
+    dependencies:
+      '@mudssky/slidev-style': 0.0.4
+      '@slidev/types': 0.46.3
+    dev: false
+
+  /@mudssky/slidev-style@0.0.4:
+    resolution: {integrity: sha512-Zf5wUHkmLRWXC7QQ56O6EsmkZF3XiXrNq0a7evPLQGzJs09CemtIea3TWXNUwzAY/wUL9eBwj/x59lA8PhxItA==}
+    dev: false
+
+  /@mudssky/slidev-theme-default@0.0.4:
+    resolution: {integrity: sha512-EckzEByJOw+WleFajqKJr8QRgfu8Z1zUP0Ky5ErdT5RI5QzQqF1Zc0r1SBxKzTiTg2SvgDxrW9LVibZYI9+ZMA==}
+    engines: {node: '>=18.0.0', slidev: '>=0.4'}
+    dependencies:
+      '@mudssky/slidev-style': 0.0.4
+      '@slidev/types': 0.46.3
+      codemirror-theme-vars: 0.1.2
+      prism-theme-vars: 0.2.4
+      theme-vitesse: 0.7.5
+    dev: false
 
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
