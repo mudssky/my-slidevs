@@ -8,6 +8,12 @@ importers:
 
   .:
     dependencies:
+      '@mudssky/slidev-addon-default':
+        specifier: workspace:^
+        version: link:packages/slidev-addon-default
+      '@mudssky/slidev-theme-default':
+        specifier: workspace:^
+        version: link:packages/slidev-theme-default
       element-plus:
         specifier: ^2.5.3
         version: 2.5.3(vue@3.4.15)
@@ -135,35 +141,13 @@ importers:
         specifier: ^1.1.5
         version: 1.1.5
 
-  projects/slidevs/learn-css:
-    dependencies:
-      '@mudssky/slidev-theme-default':
-        specifier: latest
-        version: 0.0.5
-      '@slidev/theme-default':
-        specifier: ^0.21.2
-        version: 0.21.2
-      '@slidev/theme-seriph':
-        specifier: ^0.21.3
-        version: 0.21.3
+  projects/slidevs/learn-css: {}
 
   projects/slidevs/learn-rxjs:
     dependencies:
-      '@mudssky/slidev-addon-default':
-        specifier: latest
-        version: 0.0.1
       '@mudssky/slidev-style':
         specifier: workspace:*
         version: link:../../../packages/slidev-style
-      '@slidev/cli':
-        specifier: ^0.46.2
-        version: 0.46.2(@types/markdown-it@13.0.7)(@types/node@20.11.13)(playwright-chromium@1.41.1)(postcss@8.4.33)(sass@1.70.0)(typescript@5.3.3)
-      '@slidev/theme-default':
-        specifier: latest
-        version: 0.21.2
-      '@slidev/theme-seriph':
-        specifier: latest
-        version: 0.21.3
       rxjs:
         specifier: ^7.8.1
         version: 7.8.1
@@ -1489,18 +1473,6 @@ packages:
 
   /@mudssky/slidev-style@0.0.4:
     resolution: {integrity: sha512-Zf5wUHkmLRWXC7QQ56O6EsmkZF3XiXrNq0a7evPLQGzJs09CemtIea3TWXNUwzAY/wUL9eBwj/x59lA8PhxItA==}
-    dev: false
-
-  /@mudssky/slidev-theme-default@0.0.5:
-    resolution: {integrity: sha512-7mGEl60BhSTCaPXqDepenmTHTgeWZHTTAWzY+fv5B1mY/91OEncmvH2XGKEmZ/22+PmqwmjyfAmdhy/l0eSi+g==}
-    engines: {node: '>=18.0.0', slidev: '>=0.4'}
-    dependencies:
-      '@mudssky/slidev-addon-default': 0.0.1
-      '@mudssky/slidev-style': 0.0.4
-      '@slidev/types': 0.46.3
-      codemirror-theme-vars: 0.1.2
-      prism-theme-vars: 0.2.4
-      theme-vitesse: 0.7.5
     dev: false
 
   /@nodelib/fs.scandir@2.1.5:

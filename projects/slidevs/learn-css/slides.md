@@ -1,5 +1,5 @@
 ---
-theme: '@mudssky/slidev-theme-default'
+theme: default
 background: https://source.unsplash.com/collection/94734566/1920x1080
 class: text-center
 highlighter: shikiji
@@ -15,6 +15,8 @@ transition: slide-left
 title: Welcome to Slidev
 hideInToc: true
 mdc: true
+addons:
+  - '@mudssky/slidev-addon-default'
 ---
 
 

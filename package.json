@@ -18,6 +18,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@mudssky/slidev-addon-default": "workspace:^",
+    "@mudssky/slidev-theme-default": "workspace:^",
     "element-plus": "^2.5.3",
     "lodash": "^4.17.21",
     "vue": "^3.4.15"
