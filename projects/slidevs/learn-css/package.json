@@ -9,7 +9,7 @@
     "start": "pnpm dev"
   },
   "dependencies": {
-    "@mudssky/slidev-theme-default": "^0.0.4",
+    "@mudssky/slidev-theme-default": "latest",
     "@slidev/theme-default": "^0.21.2",
     "@slidev/theme-seriph": "^0.21.3"
   }

@@ -138,8 +138,8 @@ importers:
   projects/slidevs/learn-css:
     dependencies:
       '@mudssky/slidev-theme-default':
-        specifier: ^0.0.4
-        version: 0.0.4
+        specifier: latest
+        version: 0.0.5
       '@slidev/theme-default':
         specifier: ^0.21.2
         version: 0.21.2
@@ -1491,10 +1491,11 @@ packages:
     resolution: {integrity: sha512-Zf5wUHkmLRWXC7QQ56O6EsmkZF3XiXrNq0a7evPLQGzJs09CemtIea3TWXNUwzAY/wUL9eBwj/x59lA8PhxItA==}
     dev: false
 
-  /@mudssky/slidev-theme-default@0.0.4:
-    resolution: {integrity: sha512-EckzEByJOw+WleFajqKJr8QRgfu8Z1zUP0Ky5ErdT5RI5QzQqF1Zc0r1SBxKzTiTg2SvgDxrW9LVibZYI9+ZMA==}
+  /@mudssky/slidev-theme-default@0.0.5:
+    resolution: {integrity: sha512-7mGEl60BhSTCaPXqDepenmTHTgeWZHTTAWzY+fv5B1mY/91OEncmvH2XGKEmZ/22+PmqwmjyfAmdhy/l0eSi+g==}
     engines: {node: '>=18.0.0', slidev: '>=0.4'}
     dependencies:
+      '@mudssky/slidev-addon-default': 0.0.1
       '@mudssky/slidev-style': 0.0.4
       '@slidev/types': 0.46.3
       codemirror-theme-vars: 0.1.2

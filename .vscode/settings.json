@@ -26,5 +26,10 @@
   ],
   "python.analysis.extraPaths": [
     "c:/Users/mudssky/.vscode/extensions/rt-thread.rt-thread-micropython-1.0.11/microExamples/code-completion"
+  ],
+  "css.customData": [".vscode/tailwind.json"],
+  //clsx针对tailwind配置
+  "tailwindCSS.experimental.classRegex": [
+    ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
   ]
 }
