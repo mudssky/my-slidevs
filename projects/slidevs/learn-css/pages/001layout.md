@@ -168,9 +168,168 @@ level: 2
 ---
 title: Box Sizing
 level: 2
+layout: slim-table
 ---
+### Box Sizing
 
 | Class       | Properties               |
 | ----------- | ------------------------ |
 | box-border  | box-sizing: border-box;  |
 | box-content | box-sizing: content-box; |
+
+设置盒模型
+border-box 元素指定宽或高时包含元素的border和padding
+tailwind初始化里面使用的就是border-box。
+
+content-box 则是宽和高只包含元素的内容，不包含border和padding
+
+<Demo008BoxSizing />
+
+---
+title: Display
+level: 2
+layout: slim-table
+tableSize: small
+---
+### Display
+
+display可以设置的属性太多了
+
+| Class        | Properties               |
+| ------------------ | ---------------------------- |
+| block              | display: block;              |
+| inline-block       | display: inline-block;       |
+| inline             | display: inline;             |
+| flex               | display: flex;               |
+| inline-flex        | display: inline-flex;        |
+| table              | display: table;              |
+| inline-table       | display: inline-table;       |
+| table-caption      | display: table-caption;      |
+| table-cell         | display: table-cell;         |
+| table-column       | display: table-column;       |
+| table-column-group | display: table-column-group; |
+| table-footer-group | display: table-footer-group; |
+| table-header-group | display: table-header-group; |
+| table-row-group    | display: table-row-group;    |
+| table-row          | display: table-row;          |
+| flow-root          | display: flow-root;          |
+| grid               | display: grid;               |
+| inline-grid        | display: inline-grid;        |
+| contents           | display: contents;           |
+| list-item          | display: list-item;          |
+| hidden             | display: none;               |
+
+<style>
+.slidev-layout{
+    overflow: auto;
+}
+</style>
+
+---
+layout: two-cols
+---
+
+`inline` 、 `inline-block` 和 `block`
+行内元素，行内块元素，块元素，是比较的常用的
+这个例子就能明显看出区别，inline文字会正常换行
+inline-block则是整体包裹住文字
+block元素会独占一行
+
+::right::
+<Demo009Display1/>
+
+---
+
+`flow-root` ,创建BFC（块级格式化上下文），可以解决margin塌陷问题
+
+<div class="p-4">
+  <div class="flow-root bg-red-300">
+    <div class="my-4 ">Well, let me tell you something, ...</div>
+  </div>
+  <div class="flow-root  bg-blue-300">
+    <div class="my-4 ">Sure, go ahead, laugh if you want...</div>
+  </div>
+</div>
+
+---
+
+flex 就不用在这里多说了
+`inline-flex` 创建一个随文本流动的内联flex容器
+
+似乎是和inline-box类似，会根据内容决定容器大小。。。
+因为没有碰到使用场景，所以demo略了
+
+grid也略
+
+inline-grid， 和inline-flex类似，不会占据一整行，根据内容决定容器大小
+
+<span class="inline-grid grid-cols-3 gap-4">
+  <span>01</span>
+  <span>02</span>
+  <span>03</span>
+  <span>04</span>
+  <span>05</span>
+  <span>06</span>
+</span>
+<span class="inline-grid grid-cols-3 gap-4">
+  <span>01</span>
+  <span>02</span>
+  <span>03</span>
+  <span>04</span>
+  <span>05</span>
+  <span>06</span>
+</span>
+
+`contents`, 这个可以创建一个虚拟容器，他本身会隐藏，不会被渲染。但是子级内容不会受到影响(就类似于display:none.但是子级不隐藏)
+
+<div class="flex box-container">
+  <div class="flex-1">01</div>
+  <div class="contents bg-red-200">
+    <div class="flex-1">02</div>
+    <div class="flex-1">03</div>
+  </div>
+  <div class="flex-1">04</div>
+</div>
+
+<style>
+    .inline-grid span{
+        @apply bg-blue-300;
+    }
+    .box-container div{
+        @apply bg-purple-400;
+    }
+</style>
+
+---
+
+`Table`, table布局以前还有一点应用场景，
+这个布局比较繁琐，因此我也不想用
+
+<div class="table w-full ...">
+  <div class="table-header-group ...">
+    <div class="table-row">
+      <div class="table-cell text-left ...">Song</div>
+      <div class="table-cell text-left ...">Artist</div>
+      <div class="table-cell text-left ...">Year</div>
+    </div>
+  </div>
+  <div class="table-row-group">
+    <div class="table-row">
+      <div class="table-cell ...">The Sliding Mr. Bones (Next Stop, Pottersville)</div>
+      <div class="table-cell ...">Malcolm Lockyer</div>
+      <div class="table-cell ...">1961</div>
+    </div>
+    <div class="table-row">
+      <div class="table-cell ...">Witchy Woman</div>
+      <div class="table-cell ...">The Eagles</div>
+      <div class="table-cell ...">1972</div>
+    </div>
+    <div class="table-row">
+      <div class="table-cell ...">Shining Star</div>
+      <div class="table-cell ...">Earth, Wind, and Fire</div>
+      <div class="table-cell ...">1975</div>
+    </div>
+  </div>
+</div>
+
+`display:none` 很实用了。
