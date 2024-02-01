@@ -8,12 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@mudssky/slidev-addon-default':
-        specifier: workspace:^
-        version: link:packages/slidev-addon-default
-      '@mudssky/slidev-theme-default':
-        specifier: workspace:^
-        version: link:packages/slidev-theme-default
       element-plus:
         specifier: ^2.5.3
         version: 2.5.3(vue@3.4.15)
@@ -27,6 +21,12 @@ importers:
       '@mudssky/prettier-config-custom':
         specifier: ^1.0.4
         version: 1.0.4(prettier@3.2.4)(typescript@5.3.3)
+      '@mudssky/slidev-addon-default':
+        specifier: workspace:^
+        version: link:packages/slidev-addon-default
+      '@mudssky/slidev-theme-default':
+        specifier: workspace:^
+        version: link:packages/slidev-theme-default
       '@slidev/cli':
         specifier: ^0.46.3
         version: 0.46.3(@types/markdown-it@13.0.7)(@types/node@20.11.13)(playwright-chromium@1.41.1)(postcss@8.4.33)(sass@1.70.0)(typescript@5.3.3)
@@ -110,7 +110,7 @@ importers:
     dependencies:
       '@mudssky/slidev-addon-default':
         specifier: latest
-        version: 0.0.1
+        version: link:../slidev-addon-default
       '@mudssky/slidev-style':
         specifier: workspace:^
         version: link:../slidev-style
@@ -1462,18 +1462,6 @@ packages:
       - '@volar/vue-typescript'
       - typescript
     dev: true
-
-  /@mudssky/slidev-addon-default@0.0.1:
-    resolution: {integrity: sha512-HnB2A0424VnlhPZ+q+IpsOW+Yflv6k9/PhbPBfj7pCznkirqIfI2BiqR0pG9Z6EMlUT9LfXqZtHT2vSgbKeAkg==}
-    engines: {node: '>=18.0.0', slidev: '>=0.4'}
-    dependencies:
-      '@mudssky/slidev-style': 0.0.4
-      '@slidev/types': 0.46.3
-    dev: false
-
-  /@mudssky/slidev-style@0.0.4:
-    resolution: {integrity: sha512-Zf5wUHkmLRWXC7QQ56O6EsmkZF3XiXrNq0a7evPLQGzJs09CemtIea3TWXNUwzAY/wUL9eBwj/x59lA8PhxItA==}
-    dev: false
 
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
