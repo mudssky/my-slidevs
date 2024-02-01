@@ -85,10 +85,26 @@ importers:
         specifier: 1.0.0-rc.40
         version: 1.0.0-rc.40(@algolia/client-search@4.22.1)(@types/node@20.11.13)(postcss@8.4.33)(sass@1.70.0)(search-insights@2.13.0)(typescript@5.3.3)
 
+  packages/slidev-addon-default:
+    dependencies:
+      '@mudssky/slidev-style':
+        specifier: workspace:^
+        version: link:../slidev-style
+      '@slidev/types':
+        specifier: ^0.46.3
+        version: 0.46.3
+    devDependencies:
+      '@slidev/cli':
+        specifier: ^0.46.3
+        version: 0.46.3(@types/markdown-it@13.0.7)(@types/node@20.11.13)(playwright-chromium@1.41.1)(postcss@8.4.33)(sass@1.70.0)(typescript@5.3.3)
+
   packages/slidev-style: {}
 
   packages/slidev-theme-default:
     dependencies:
+      '@mudssky/slidev-addon-default':
+        specifier: workspace:^
+        version: link:../slidev-addon-default
       '@mudssky/slidev-style':
         specifier: workspace:^
         version: link:../slidev-style
@@ -123,7 +139,7 @@ importers:
     dependencies:
       '@mudssky/slidev-theme-default':
         specifier: ^0.0.4
-        version: 0.0.4
+        version: link:../../../packages/slidev-theme-default
       '@slidev/theme-default':
         specifier: ^0.21.2
         version: 0.21.2
@@ -1459,21 +1475,6 @@ packages:
       - '@volar/vue-typescript'
       - typescript
     dev: true
-
-  /@mudssky/slidev-style@0.0.4:
-    resolution: {integrity: sha512-Zf5wUHkmLRWXC7QQ56O6EsmkZF3XiXrNq0a7evPLQGzJs09CemtIea3TWXNUwzAY/wUL9eBwj/x59lA8PhxItA==}
-    dev: false
-
-  /@mudssky/slidev-theme-default@0.0.4:
-    resolution: {integrity: sha512-EckzEByJOw+WleFajqKJr8QRgfu8Z1zUP0Ky5ErdT5RI5QzQqF1Zc0r1SBxKzTiTg2SvgDxrW9LVibZYI9+ZMA==}
-    engines: {node: '>=18.0.0', slidev: '>=0.4'}
-    dependencies:
-      '@mudssky/slidev-style': 0.0.4
-      '@slidev/types': 0.46.3
-      codemirror-theme-vars: 0.1.2
-      prism-theme-vars: 0.2.4
-      theme-vitesse: 0.7.5
-    dev: false
 
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}

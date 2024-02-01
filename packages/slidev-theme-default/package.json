@@ -40,6 +40,9 @@
         "mono": "Fira Code"
       },
       "hightlighter": "prism"
-    }
+    },
+    "addon": [
+      "@mudssky/slidev-addon-default"
+    ]
   }
 }

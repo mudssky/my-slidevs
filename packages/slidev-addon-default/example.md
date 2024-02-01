@@ -1,7 +1,5 @@
 ---
 theme: ./
-addon:
-  - '@mudssky/slidev-addon-default'
 ---
 
 # Slidev Theme Starter
@@ -15,19 +13,6 @@ Presentation slides for developers
 </div>
 
 ---
-
----
-title: Aspect Ratio
-level: 2
-layout: slim-table
----
-### Aspect Ratio 高宽比
-
-| Class         | Properties            |
-| ------------- | --------------------- |
-| aspect-auto   | aspect-ratio: auto;   |
-| aspect-square | aspect-ratio: 1 / 1;  |
-| aspect-video  | aspect-ratio: 16 / 9; |
 
 # What is Slidev?
 
