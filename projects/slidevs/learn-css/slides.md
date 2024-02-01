@@ -50,5 +50,9 @@ hide: true
 
 ---
 src: ./pages/001layout.md
+hide: true
+---
 
+---
+src: ./pages/002FlexAndGrid.md
 ---

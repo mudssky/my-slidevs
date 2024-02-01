@@ -1,6 +1,6 @@
 
 ---
-title: 布局
+title: Layout 布局
 level: 1
 layout: image-right
 image: https://source.unsplash.com/collection/94734566/1920x1080
@@ -333,3 +333,303 @@ inline-grid， 和inline-flex类似，不会占据一整行，根据内容决定
 </div>
 
 `display:none` 很实用了。
+
+---
+title: Floats
+level: 2
+---
+
+### Floats
+
+浮动布局现在也不常用了，这个也比较麻烦，还要考虑清除浮动的问题。
+
+可以实现文字环绕图片的效果
+
+| Class       | Properties           |
+| ----------- | -------------------- |
+| float-start | float: inline-start; |
+| float-end   | float: inline-end;   |
+| float-right | float: right;        |
+| float-left  | float: left;         |
+| float-none  | float: none;         |
+
+---
+title: Clear
+level: 2
+---
+
+### Clear
+
+和浮动配套的属性，也没什么必要研究了。
+
+| Class       | Properties           |
+| ----------- | -------------------- |
+| clear-start | clear: inline-start; |
+| clear-end   | clear: inline-end;   |
+| clear-left  | clear: left;         |
+| clear-right | clear: right;        |
+| clear-both  | clear: both;         |
+| clear-none  | clear: none;         |
+
+---
+title: Isolation
+level: 2
+---
+
+### Isolation
+
+创建新的堆叠上下文，适用于解决z-index遮挡的问题。它可以创建新的堆叠上下文，而无需z-index将元素放在彼此的前面。
+默认是 `isolation: auto`，通常我们需要的时候会设置为`isolation: isolate;`
+<Demo010Isolation/>
+
+---
+title: Object Fit
+level: 2
+---
+### Object Fit
+
+主要是调整图片适应容器的方式。
+
+| Class             | Properties              |
+| ----------------- | ----------------------- |
+| object-contain    | object-fit: contain;    |
+| object-cover      | object-fit: cover;      |
+| object-fill       | object-fit: fill;       |
+| object-none       | object-fit: none;       |
+| object-scale-down | object-fit: scale-down; |
+
+---
+
+object-cover 调整元素内容的大小以覆盖其容器。
+
+<div class="bg-indigo-300">
+  <img class="object-cover h-48 w-96"  alt="mountain" src="/assets/dust-mountain.avif" />
+</div>
+
+object-contain 调整元素内容的大小以使其包含在其容器内。
+
+<div class="bg-purple-300">
+  <img class="object-contain h-48 w-96"  alt="mountain" src="/assets/dust-mountain.avif" />
+</div>
+
+---
+
+object-fill  拉伸元素的内容以适合其容器。
+
+<div class="bg-sky-300">
+  <img class="object-fill h-48 w-96"  alt="mountain" src="/assets/dust-mountain.avif" />
+</div>
+
+object-scale-down 缩小以适合其容器。
+
+<div class="bg-cyan-300">
+  <img class="object-scale-down h-48 w-96"  alt="mountain" src="/assets/dust-mountain.avif" />
+</div>
+
+---
+
+object-none 以原始大小显示元素的内容，忽略容器大小
+
+<div class="bg-yellow-300">
+  <img class="object-none h-48 w-96"  alt="mountain" src="/assets/dust-mountain.avif" />
+</div>
+
+---
+title: Object Position
+level: 2
+layout: slim-table
+---
+### Object Position
+和Object Fit 配套的属性
+
+| Class               | Properties                     |
+| ------------------- | ------------------------------ |
+| object-bottom       | object-position: bottom;       |
+| object-center       | object-position: center;       |
+| object-left         | object-position: left;         |
+| object-left-bottom  | object-position: left bottom;  |
+| object-left-top     | object-position: left top;     |
+| object-right        | object-position: right;        |
+| object-right-bottom | object-position: right bottom; |
+| object-right-top    | object-position: right top;    |
+| object-top          | object-position: top;          |
+
+---
+
+<div class="grid grid-cols-3 gap-8">
+<img class="object-none object-left-top bg-yellow-300 w-[120px] aspect-square"  alt="mountain" src="/assets/dust-mountain.avif"/>
+<img class="object-none object-top bg-yellow-300 w-[120px] aspect-square"  alt="mountain" src="/assets/dust-mountain.avif"/>
+<img class="object-none object-right-top bg-yellow-300 w-[120px] aspect-square"  alt="mountain" src="/assets/dust-mountain.avif"/>
+<img class="object-none object-left bg-yellow-300 w-[120px] aspect-square" alt="mountain" src="/assets/dust-mountain.avif"/>
+<img class="object-none object-center bg-yellow-300 w-[120px] aspect-square " alt="mountain" src="/assets/dust-mountain.avif"/>
+<img class="object-none object-right bg-yellow-300 w-[120px] aspect-square " alt="mountain" src="/assets/dust-mountain.avif"/>
+<img class="object-none object-left-bottom bg-yellow-300 w-[120px] aspect-square " alt="mountain" src="/assets/dust-mountain.avif"/>
+<img class="object-none object-bottom bg-yellow-300 w-[120px] aspect-square " alt="mountain" src="/assets/dust-mountain.avif"/>
+<img class="object-none object-right-bottom bg-yellow-300 w-[120px] aspect-square " alt="mountain" src="/assets/dust-mountain.avif"/>
+</div>
+
+---
+title: Overflow
+level: 2
+layout: slim-table
+tableSize: small
+---
+
+### Overflow 溢出
+用于控制元素如何处理对于容器来说太大的内容的实用程序
+
+| Class              | Properties           |
+| ------------------ | -------------------- |
+| overflow-auto      | overflow: auto;      |
+| overflow-hidden    | overflow: hidden;    |
+| overflow-clip      | overflow: clip;      |
+| overflow-visible   | overflow: visible;   |
+| overflow-scroll    | overflow: scroll;    |
+| overflow-x-auto    | overflow-x: auto;    |
+| overflow-y-auto    | overflow-y: auto;    |
+| overflow-x-hidden  | overflow-x: hidden;  |
+| overflow-y-hidden  | overflow-y: hidden;  |
+| overflow-x-clip    | overflow-x: clip;    |
+| overflow-y-clip    | overflow-y: clip;    |
+| overflow-x-visible | overflow-x: visible; |
+| overflow-y-visible | overflow-y: visible; |
+| overflow-x-scroll  | overflow-x: scroll;  |
+| overflow-y-scroll  | overflow-y: scroll;  |
+
+<style>
+.slidev-layout{
+    overflow: auto;
+    /* table{
+        @apply h-full overflow-auto;
+    } */
+}
+</style>
+
+---
+title: Overscroll Behavior
+level: 2
+layout: slim-table
+---
+
+### Overscroll Behavior
+用于控制浏览器到达滚动区域边界时的行为方式  
+兼容性比较差，不建议使用
+<CanIUse src="https://caniuse.com/css-overscroll-behavior" />
+
+| Class                | Properties                      |
+| -------------------- | ------------------------------- |
+| overscroll-auto      | overscroll-behavior: auto;      |
+| overscroll-contain   | overscroll-behavior: contain;   |
+| overscroll-none      | overscroll-behavior: none;      |
+| overscroll-y-auto    | overscroll-behavior-y: auto;    |
+| overscroll-y-contain | overscroll-behavior-y: contain; |
+| overscroll-y-none    | overscroll-behavior-y: none;    |
+| overscroll-x-auto    | overscroll-behavior-x: auto;    |
+| overscroll-x-contain | overscroll-behavior-x: contain; |
+| overscroll-x-none    | overscroll-behavior-x: none;    |
+
+---
+title: Position
+level: 2
+layout: slim-table
+---
+
+### Position
+定位还是很常用的
+
+里面就只有sticky我没怎么用过，这个是粘性定位，vscode也有这个设置，可以一直把上一个函数名固定在顶部
+
+| Class    | Properties          |
+| -------- | ------------------- |
+| static   | position: static;   |
+| fixed    | position: fixed;    |
+| absolute | position: absolute; |
+| relative | position: relative; |
+| sticky   | position: sticky;   |
+
+---
+title: Top,Right,Bottom,Left
+level: 2
+layout: slim-table
+---
+### Top,Right,Bottom,Left
+inset 属性倒是没用过，其实就是把Top,Right,Bottom,Left可以写到一行里。
+
+```css
+/* 长度值 */
+inset: 10px; /* 应用于所有边 */
+inset: 4px 8px; /* 上下 | 左右 */
+inset: 5px 15px 10px; /* 上 | 左右 | 下 */
+inset: 2.4em 3em 3em 3em; /* 上 | 右 | 下 | 左 */
+
+/* 包含块的宽度（左或右）或高度（上或下）的百分比 */
+inset: 10% 5% 5% 5%;
+
+/* 关键词值 */
+inset: auto;
+
+/* 全局值 */
+inset: inherit;
+inset: initial;
+inset: revert;
+inset: revert-layer;
+inset: unset;
+
+```
+
+<style>
+.slidev-layout{
+    overflow: auto;
+}
+</style>
+
+---
+title: Visibility
+level: 2
+layout: slim-table
+---
+### Visibility
+
+collapse似乎是应用于表格比较合适，其他情况和display:none差不多
+
+| Class     | Properties            |
+| --------- | --------------------- |
+| visible   | visibility: visible;  |
+| invisible | visibility: hidden;   |
+| collapse  | visibility: collapse; |
+
+<table class="mt-5">
+  <thead>
+    <tr>
+      <th>Invoice #</th>
+      <th>Client</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>#100</td>
+      <td>Pendant Publishing</td>
+      <td>$2,000.00</td>
+    </tr>
+    <tr class="collapse">
+      <td>#101</td>
+      <td>Kruger Industrial Smoothing</td>
+      <td>$545.00</td>
+    </tr>
+    <tr>
+      <td>#102</td>
+      <td>J. Peterman</td>
+      <td>$10,000.25</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+title: Z-Index
+level: 2
+layout: slim-table
+---
+### Z-Index
+
+这个就不需要多言了。
