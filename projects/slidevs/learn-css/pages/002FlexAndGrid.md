@@ -347,7 +347,340 @@ level: 2
 ---
 title: Grid Auto Flow
 level: 2
+layout: slim-table
+tableSize: small
 ---
 
 ### Grid Auto Flow
 用于控制网格中元素如何自动放置
+
+| Class               | Properties                    |
+| ------------------- | ----------------------------- |
+| grid-flow-row       | grid-auto-flow: row;          |
+| grid-flow-col       | grid-auto-flow: column;       |
+| grid-flow-dense     | grid-auto-flow: dense;        |
+| grid-flow-row-dense | grid-auto-flow: row dense;    |
+| grid-flow-col-dense | grid-auto-flow: column dense; |
+
+`grid-auto-flow: row dense;` 告诉自动排序算法，果后面出现较小的项目，则尝试在网格中较早的位置填孔
+
+<div class="grid  grid-cols-3 grid-rows-3 [&_div]:(bg-purple-500 rounded p-3 text-center) gap-4">
+  <div class="col-span-2">01</div>
+  <div class="col-span-2">02</div>
+  <div>03</div>
+  <div>04</div>
+  <div>05</div>
+</div>
+
+---
+title: Grid Auto Columns
+level: 2
+layout: slim-table
+---
+### Grid Auto Columns
+
+用于控制隐式创建的网格列的大小
+
+| Class          | Properties                         |
+| -------------- | ---------------------------------- |
+| auto-cols-auto | grid-auto-columns: auto;           |
+| auto-cols-min  | grid-auto-columns: min-content;    |
+| auto-cols-max  | grid-auto-columns: max-content;    |
+| auto-cols-fr   | grid-auto-columns: minmax(0, 1fr); |
+
+<div class="grid grid-flow-col auto-cols-max [&_div]:(bg-blue-500 rounded p-3 text-center) gap-4 mt-2">
+  <div>01</div>
+  <div>02</div>
+  <div>03</div>
+</div>
+
+<div class="grid grid-flow-col auto-cols-fr [&_div]:(bg-blue-500 rounded p-3 text-center) gap-4 mt-2">
+  <div>01</div>
+  <div>02</div>
+  <div>03</div>
+</div>
+
+---
+title: Grid Auto Rows
+level: 2
+layout: slim-table
+---
+### Grid Auto Rows
+用于控制隐式创建的网格行的大小
+
+| Class          | Properties                      |
+| -------------- | ------------------------------- |
+| auto-rows-auto | grid-auto-rows: auto;           |
+| auto-rows-min  | grid-auto-rows: min-content;    |
+| auto-rows-max  | grid-auto-rows: max-content;    |
+| auto-rows-fr   | grid-auto-rows: minmax(0, 1fr); |
+
+<div class="grid grid-flow-row auto-rows-max [&_div]:(bg-blue-500 rounded p-3 text-center) gap-4 mt-2">
+  <div>01</div>
+  <div>02</div>
+  <div>03</div>
+</div>
+
+---
+title: Gap
+level: 2
+---
+### Gap
+
+设置行和列的间距 `row-gap` `column-gap`
+
+<div class="grid gap-4 grid-cols-2 [&_div]:(bg-purple-500 rounded p-3 text-center) mt-2">
+  <div>01</div>
+  <div>02</div>
+  <div>03</div>
+  <div>04</div>
+</div>
+
+---
+title: Justify Content
+level: 2
+layout: slim-table
+---
+### Justify Content
+
+| Class           | Properties                      |
+| --------------- | ------------------------------- |
+| justify-normal  | justify-content: normal;        |
+| justify-start   | justify-content: flex-start;    |
+| justify-end     | justify-content: flex-end;      |
+| justify-center  | justify-content: center;        |
+| justify-between | justify-content: space-between; |
+| justify-around  | justify-content: space-around;  |
+| justify-evenly  | justify-content: space-evenly;  |
+| justify-stretch | justify-content: stretch;       |
+
+---
+title: Justify Items
+level: 2
+layout: slim-table
+tableSize: small
+---
+这些是针对grid布局的参数
+
+| Class                 | Properties              |
+| --------------------- | ----------------------- |
+| justify-items-start   | justify-items: start;   |
+| justify-items-end     | justify-items: end;     |
+| justify-items-center  | justify-items: center;  |
+| justify-items-stretch | justify-items: stretch; |
+
+justify-items-start  
+<div class="grid justify-items-start grid-cols-3 [&_div]:(bg-blue-500 rounded p-2 text-center) mt-2 gap-4">
+  <div>01</div>
+  <div>02</div>
+  <div>03</div>
+  <div>04</div>
+  <div>05</div>
+  <div>06</div>
+</div>
+justify-items-end  
+<div class="grid justify-items-end grid-cols-3   [&_div]:(bg-cyan-500 rounded p-2 text-center) mt-2 gap-4">
+  <div>01</div>
+  <div>02</div>
+  <div>03</div>
+  <div>04</div>
+  <div>05</div>
+  <div>06</div>
+</div>
+
+---
+
+justify-items-center  
+
+<div class="grid justify-items-center grid-cols-3   [&_div]:(bg-fuchsia-500 rounded p-3 text-center) mt-2 gap-4">
+  <div>01</div>
+  <div>02</div>
+  <div>03</div>
+  <div>04</div>
+  <div>05</div>
+  <div>06</div>
+</div>
+
+justify-items-stretch  
+
+<div class="grid justify-items-stretch grid-cols-3   [&_div]:(bg-blue-500 rounded p-3 text-center) mt-2 gap-4">
+  <div>01</div>
+  <div>02</div>
+  <div>03</div>
+  <div>04</div>
+  <div>05</div>
+  <div>06</div>
+</div>
+
+---
+title: Justify Self
+level: 2
+layout: slim-table
+---
+用于控制单个网格项如何沿其内联轴对齐  
+这个和 justify-items系列参数的区别是，它是作用于具体的元素的，而不是所有子元素
+
+| Class                | Properties             |
+| -------------------- | ---------------------- |
+| justify-self-auto    | justify-self: auto;    |
+| justify-self-start   | justify-self: start;   |
+| justify-self-end     | justify-self: end;     |
+| justify-self-center  | justify-self: center;  |
+| justify-self-stretch | justify-self: stretch; |
+
+---
+title: Align Content
+level: 2
+layout: slim-table
+---
+
+### Align Content
+
+用于控制行网格容器中的定位方式的实用程序。 这个是垂直方向，控制子元素
+
+| Class            | Properties                    |
+| ---------------- | ----------------------------- |
+| content-normal   | align-content: normal;        |
+| content-center   | align-content: center;        |
+| content-start    | align-content: flex-start;    |
+| content-end      | align-content: flex-end;      |
+| content-between  | align-content: space-between; |
+| content-around   | align-content: space-around;  |
+| content-evenly   | align-content: space-evenly;  |
+| content-baseline | align-content: baseline;      |
+| content-stretch  | align-content: stretch;       |
+
+---
+title: Align Items
+level: 2
+layout: slim-table
+---
+### Align Items
+
+用于控制 Flex 如何沿容器的横轴定位，这个是控制子元素
+
+| Class          | Properties               |
+| -------------- | ------------------------ |
+| items-start    | align-items: flex-start; |
+| items-end      | align-items: flex-end;   |
+| items-center   | align-items: center;     |
+| items-baseline | align-items: baseline;   |
+| items-stretch  | align-items: stretch;    |
+
+---
+title: Align Self
+level: 2
+layout: slim-table
+---
+
+## Align Self
+控制grid中具体元素
+
+| Class         | Properties              |
+| ------------- | ----------------------- |
+| self-auto     | align-self: auto;       |
+| self-start    | align-self: flex-start; |
+| self-end      | align-self: flex-end;   |
+| self-center   | align-self: center;     |
+| self-stretch  | align-self: stretch;    |
+| self-baseline | align-self: baseline;   |
+
+---
+title: Place Content
+level: 2
+layout: slim-table
+tableSize: small
+---
+
+### Place Content
+控制整个内容
+
+| Class                  | Properties                    |
+| ---------------------- | ----------------------------- |
+| place-content-center   | place-content: center;        |
+| place-content-start    | place-content: start;         |
+| place-content-end      | place-content: end;           |
+| place-content-between  | place-content: space-between; |
+| place-content-around   | place-content: space-around;  |
+| place-content-evenly   | place-content: space-evenly;  |
+| place-content-baseline | place-content: baseline;      |
+| place-content-stretch  | place-content: stretch;       |
+
+使用 place-content-center 将项目打包到块轴的中心：  
+
+<div class="grid grid-cols-2 gap-3 place-content-center h-48 [&_div]:(bg-blue-500 rounded p-3 text-center)">
+  <div>01</div>
+  <div>02</div>
+  <div>03</div>
+  <div>04</div>
+</div>
+
+---
+
+place-content-between  
+
+<div class="grid grid-cols-2 gap-3 place-content-between h-48 [&_div]:(bg-purple-500 rounded p-3 text-center)">
+  <div>01</div>
+  <div>02</div>
+  <div>03</div>
+  <div>04</div>
+</div>
+
+---
+title: Place Items
+level: 2
+layout: slim-table
+tableSize: small
+---
+
+### Place Items
+控制每个项目
+
+| Class                | Properties             |
+| -------------------- | ---------------------- |
+| place-items-start    | place-items: start;    |
+| place-items-end      | place-items: end;      |
+| place-items-center   | place-items: center;   |
+| place-items-baseline | place-items: baseline; |
+| place-items-stretch  | place-items: stretch;  |
+
+place-items-start  
+
+<div class="grid grid-cols-3 gap-4 place-items-start  [&_div]:(bg-purple-500 rounded p-3 text-center)">
+  <div>01</div>
+  <div>02</div>
+  <div>03</div>
+  <div>04</div>
+  <div>05</div>
+  <div>06</div>
+</div>
+
+---
+
+place-items-end  
+
+<div class="grid grid-cols-3 gap-4 place-items-end  [&_div]:(bg-purple-500 rounded p-3 text-center)">
+  <div>01</div>
+  <div>02</div>
+  <div>03</div>
+  <div>04</div>
+  <div>05</div>
+  <div>06</div>
+</div>
+
+---
+title: Place Self
+level: 2
+layout: slim-table
+tableSize: small
+---
+### Place Self
+grid布局中 针对特定项目
+
+| Class              | Properties           |
+| ------------------ | -------------------- |
+| place-self-auto    | place-self: auto;    |
+| place-self-start   | place-self: start;   |
+| place-self-end     | place-self: end;     |
+| place-self-center  | place-self: center;  |
+| place-self-stretch | place-self: stretch; |
