@@ -144,3 +144,51 @@ layout: slim-table
 <CanIUseCssProperty cssProperty="list-style-image" />
 
 这个属性的兼容性还可以
+
+这个最常用的就是设置为none，会去掉ul或者ol列表前面的标记，但是也可以设置成图片url
+
+---
+title: List Style Position
+level: 2
+layout: slim-table
+---
+
+### List Style Position
+
+是控制列表标记的位置的。
+
+| Class        | Properties                    |
+| ------------ | ----------------------------- |
+| list-inside  | list-style-position: inside;  |
+| list-outside | list-style-position: outside; |
+
+list-inside  
+
+<ul class="!list-inside">
+  <li>5 cups chopped Porcini mushrooms</li>
+  <li>5 cups chopped Porcini mushrooms</li>
+  <li>5 cups chopped Porcini mushrooms</li>
+</ul>
+
+list-outside 似乎是默认值
+
+<ul class="!list-outside ">
+  <li>5 cups chopped Porcini mushrooms</li>
+  <li>5 cups chopped Porcini mushrooms</li>
+  <li>5 cups chopped Porcini mushrooms</li>
+</ul>
+
+---
+title: List Style Type
+level: 2
+layout: slim-table
+---
+
+### List Style Type
+控制列表的类型，也就是markdown里面两种列表样式
+
+| Class        | Properties                |
+| ------------ | ------------------------- |
+| list-none    | list-style-type: none;    |
+| list-disc    | list-style-type: disc;    |
+| list-decimal | list-style-type: decimal; |
