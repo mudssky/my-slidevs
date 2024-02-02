@@ -55,4 +55,13 @@ hide: true
 
 ---
 src: ./pages/002FlexAndGrid.md
+hide: true
+---
+
+---
+src: ./pages/003Spacing.md
+---
+
+---
+src: ./pages/004Sizing.md
 ---
