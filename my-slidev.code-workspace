@@ -8,6 +8,18 @@
       "path": "packages/slidev-style",
       "name": "slidev-style",
     },
+    {
+      "path": "packages/slidev-theme-default",
+      "name": "slidev-theme-default",
+    },
+    {
+      "path": "packages/slidev-addon-default",
+      "name": "slidev-addon-default",
+    },
+    {
+      "path": "projects/slidevs/learn-css",
+      "name": "learn-css",
+    },
     // {
     //   "path": "projects/slidevs/learn-rxjs",
     //   "name": "learn-rxjs",
