@@ -65,3 +65,7 @@ src: ./pages/003Spacing.md
 ---
 src: ./pages/004Sizing.md
 ---
+
+---
+src: ./pages/005Typography.md
+---
