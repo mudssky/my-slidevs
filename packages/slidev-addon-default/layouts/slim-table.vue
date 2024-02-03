@@ -1,6 +1,6 @@
 <template>
-  <div class="slidev-layout default">
-    <div :class="layoutClass">
+  <div class="slidev-layout default overflow-y-auto">
+    <div :class="clsx(layoutClass)">
       <slot />
     </div>
   </div>
@@ -8,7 +8,7 @@
 <script setup lang="ts">
 import { useAttrs, ref } from 'vue'
 import { onMounted, getCurrentInstance } from 'vue'
-
+import clsx from 'clsx'
 const layoutClass = ref('')
 // interface Attr {
 //   tableSize: string
@@ -21,12 +21,15 @@ onMounted(() => {
   // console.log('attrs', getCurrentInstance()!.attrs)
   const tableSize =
     (getCurrentInstance()!.attrs.tableSize as TableSize) ?? 'middle'
+
+  const tableContainerClass =
+    (getCurrentInstance()!.attrs.tableContainerClass as string) ?? ''
   switch (tableSize) {
     case 'middle':
-      layoutClass.value = 'slim-table-middle'
+      layoutClass.value = clsx('slim-table-middle', tableContainerClass)
       break
     case 'small':
-      layoutClass.value = 'slim-table-small'
+      layoutClass.value = clsx('slim-table-small', tableContainerClass)
       break
   }
 })

@@ -90,9 +90,24 @@ tableSize: small
 | mix-blend-luminosity   | mix-blend-mode: luminosity;   |
 | mix-blend-plus-lighter | mix-blend-mode: plus-lighter; |
 
+<style>
+.slidev-layout{
+    overflow: auto;
+}
+</style>
+
 ---
+
+可以试一试不同混合模式的效果  
 
 <div class="flex justify-center -space-x-14 [&_div]:(w-[100px] aspect-square rounded-50)">
   <div class="mix-blend-multiply bg-blue-400 ..."></div>
   <div class="mix-blend-multiply bg-pink-400 ..."></div>
 </div>
+
+---
+title: Mix Blend Mode
+level: 2
+layout: slim-table
+tableSize: small
+---
