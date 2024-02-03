@@ -69,3 +69,7 @@ src: ./pages/004Sizing.md
 ---
 src: ./pages/005Typography.md
 ---
+
+---
+src: ./pages/006Backgrounds.md
+---
