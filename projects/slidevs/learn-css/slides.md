@@ -79,3 +79,7 @@ hide: true
 ---
 src: ./pages/007Borders.md
 ---
+
+---
+src: ./pages/008Effects.md
+---
