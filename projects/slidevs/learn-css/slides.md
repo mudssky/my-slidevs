@@ -68,8 +68,14 @@ src: ./pages/004Sizing.md
 
 ---
 src: ./pages/005Typography.md
+hide: true
 ---
 
 ---
 src: ./pages/006Backgrounds.md
+hide: true
+---
+
+---
+src: ./pages/007Borders.md
 ---
