@@ -6,14 +6,11 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useAttrs, ref } from 'vue'
+import { ref } from 'vue'
 import { onMounted, getCurrentInstance } from 'vue'
 import clsx from 'clsx'
 const layoutClass = ref('')
-// interface Attr {
-//   tableSize: string
-// }
-// const { tableSize } = useAttrs()
+
 type TableSize = 'small' | 'middle' | 'large'
 onMounted(() => {
   // console.log('slim table mounted')
@@ -43,7 +40,6 @@ onMounted(() => {
     }
   }
 }
-
 .slim-table-small {
   table {
     td,

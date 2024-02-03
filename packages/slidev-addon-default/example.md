@@ -16,6 +16,9 @@ layout: slim-table
 ## slim-table
 
 slim-table 使用示例
+可以通过tableSize 字段设置表格大小 small，默认是middle
+tableContainerClass slot外层包裹的div
+默认对当前幻灯片做了溢出处理  
 
 | Class                  | Properties                    |
 | ---------------------- | ----------------------------- |
