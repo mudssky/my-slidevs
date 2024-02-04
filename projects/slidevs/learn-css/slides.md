@@ -103,3 +103,11 @@ src: ./pages/012Transforms.md
 ---
 src: ./pages/013Interactivity.md
 ---
+
+---
+src: ./pages/014Svg.md
+---
+
+---
+src: ./pages/015Accessibility.md
+---
