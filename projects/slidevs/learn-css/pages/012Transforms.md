@@ -41,5 +41,4 @@ layout: slim-table
 <p>origin-bottom</p>
  <img class="origin-bottom -rotate-12 object-cover h-48 w-96"  alt="mountain" src="/assets/dust-mountain.avif" />
 </div>
-
 </div>

@@ -34,6 +34,7 @@ onMounted(() => {
 <style lang="scss">
 .slim-table-middle {
   table {
+    @apply my-5;
     td,
     th {
       @apply p-[2px];
