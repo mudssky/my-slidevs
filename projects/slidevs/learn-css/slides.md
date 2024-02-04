@@ -87,3 +87,7 @@ src: ./pages/008Effects.md
 ---
 src: ./pages/009Filters.md
 ---
+
+---
+src: ./pages/010Tables.md
+---
