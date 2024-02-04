@@ -42,9 +42,10 @@ onMounted(() => {
 }
 .slim-table-small {
   table {
+    @apply my-2;
     td,
     th {
-      @apply p-0;
+      @apply p-0 text-sm;
     }
   }
 }
