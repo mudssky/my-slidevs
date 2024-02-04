@@ -134,3 +134,191 @@ layout: slim-table
 </div>
 
 </div>
+---
+title: Hue Rotate
+level: 2
+layout: slim-table
+---
+### Hue Rotate
+
+<div class="flex [&_div]:(w-[180px]) space-x-5">
+<div class="">
+ <p>hue-rotate-15</p>
+ <img class="hue-rotate-90 object-cover h-48 w-96"  alt="mountain" src="/assets/dust-mountain.avif" />
+</div>
+<div class="">
+ <p>hue-rotate-90</p>
+ <img class="hue-rotate-90 object-cover h-48 w-96"  alt="mountain" src="/assets/dust-mountain.avif" />
+</div>
+<div class=" ...">
+<p>hue-rotate-180</p>
+ <img class="hue-rotate-180 object-cover h-48 w-96"  alt="mountain" src="/assets/dust-mountain.avif" />
+</div>
+<div class="">
+<p>hue-rotate-60</p>
+  <img class="hue-rotate-60 object-cover h-48 w-96"  alt="mountain" src="/assets/dust-mountain.avif" />
+</div>
+</div>
+
+---
+title: Invert
+level: 2
+layout: slim-table
+---
+### Invert
+
+<div class="flex [&_div]:(w-[180px]) space-x-5">
+<div class="">
+ <p>invert-0</p>
+ <img class="invert-0 object-cover h-48 w-96"  alt="mountain" src="/assets/dust-mountain.avif" />
+</div>
+<div class="">
+ <p>invert</p>
+ <img class="invert object-cover h-48 w-96"  alt="mountain" src="/assets/dust-mountain.avif" />
+</div>
+</div>
+
+---
+title: Saturate
+level: 2
+layout: slim-table
+---
+
+### Saturate
+
+<div class="flex [&_div]:(w-[180px]) space-x-5">
+<div class="">
+ <p>saturate-50</p>
+ <img class="saturate-50 object-cover h-48 w-96"  alt="mountain" src="/assets/dust-mountain.avif" />
+</div>
+<div class="">
+ <p>saturate-100</p>
+ <img class="saturate-100 object-cover h-48 w-96"  alt="mountain" src="/assets/dust-mountain.avif" />
+</div>
+<div class=" ...">
+<p>saturate-150</p>
+ <img class="saturate-150 object-cover h-48 w-96"  alt="mountain" src="/assets/dust-mountain.avif" />
+</div>
+<div class="">
+<p>saturate-200</p>
+  <img class="saturate-200 object-cover h-48 w-96"  alt="mountain" src="/assets/dust-mountain.avif" />
+</div>
+</div>
+
+---
+title: Sepia  
+level: 2
+layout: slim-table
+---
+### Sepia
+
+<div class="flex [&_div]:(w-[180px]) space-x-5">
+<div class="">
+ <p>sepia-0</p>
+ <img class="sepia-0 object-cover h-48 w-96"  alt="mountain" src="/assets/dust-mountain.avif" />
+</div>
+<div class="">
+ <p>sepia</p>
+ <img class="sepia object-cover h-48 w-96"  alt="mountain" src="/assets/dust-mountain.avif" />
+</div>
+</div>
+
+---
+title: Backdrop Blur
+level: 2
+layout: slim-table
+---
+### Backdrop Blur
+
+### Backdrop Blur 背景模糊  
+
+可以用来做毛玻璃效果
+
+<div class="flex [&_div]:(w-[180px] aspect-square) space-x-5">
+<div class="bg-[url(/assets/dust-mountain.avif)] bg-cover flex justify-center items-center">
+ <div class="!w-2/3 aspect-square backdrop-blur-sm border-1 border-blue text-center ">
+   backdrop-blur-sm
+ </div>
+</div>
+<div class="bg-[url(/assets/dust-mountain.avif)] bg-cover flex justify-center items-center">
+ <div class="!w-2/3 aspect-square backdrop-blur-md border-1 border-blue text-center ">
+   backdrop-blur-md
+ </div>
+</div>
+<div class="bg-[url(/assets/dust-mountain.avif)] bg-cover flex justify-center items-center">
+ <div class="!w-2/3 aspect-square backdrop-blur-xl border-1 border-blue text-center ">
+   backdrop-blur-xl
+ </div>
+</div>
+</div>
+
+---
+title: Backdrop Brightness
+level: 2
+layout: slim-table
+---
+### Backdrop Brightness
+和背景滤镜配套的
+
+---
+title: Backdrop Contrast
+level: 2
+layout: slim-table
+---
+### Backdrop Contrast
+
+和背景滤镜配套的
+
+---
+title: Backdrop Grayscale
+level: 2
+layout: slim-table
+---
+
+### Backdrop Grayscale
+和背景滤镜配套的
+
+---
+title: Backdrop Hue Rotate
+level: 2
+layout: slim-table
+---
+
+### Backdrop Hue Rotate
+和背景滤镜配套的
+
+---
+title: Backdrop Invert
+level: 2
+layout: slim-table
+---
+
+### Backdrop Invert
+和背景滤镜配套的
+
+---
+title: Backdrop Opacity
+level: 2
+layout: slim-table
+---
+
+### Backdrop Opacity
+和背景滤镜配套的
+
+---
+title: Backdrop Saturate
+level: 2
+layout: slim-table
+---
+
+### Backdrop Saturate
+和背景滤镜配套的
+
+---
+title: Backdrop Sepia
+level: 2
+layout: slim-table
+---
+
+### Backdrop Sepia
+和背景滤镜配套的
