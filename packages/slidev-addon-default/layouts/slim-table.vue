@@ -32,6 +32,16 @@ onMounted(() => {
 })
 </script>
 <style lang="scss">
+.slidev-layout {
+  table {
+    td {
+      // white-space: pre-line;
+      // overflow: hidden;
+      // word-break: break-all;
+    }
+  }
+}
+
 .slim-table-middle {
   table {
     @apply my-5;
