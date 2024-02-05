@@ -116,7 +116,7 @@ importers:
     dependencies:
       '@mudssky/slidev-addon-default':
         specifier: latest
-        version: link:../slidev-addon-default
+        version: 0.0.2
       '@mudssky/slidev-style':
         specifier: workspace:^
         version: link:../slidev-style
@@ -147,8 +147,6 @@ importers:
         specifier: ^1.1.5
         version: 1.1.5
 
-  projects/slidevs/learn-css: {}
-
   projects/slidevs/learn-rxjs:
     dependencies:
       '@mudssky/slidev-style':
@@ -157,6 +155,8 @@ importers:
       rxjs:
         specifier: ^7.8.1
         version: 7.8.1
+
+  projects/slidevs/learn-tailwind: {}
 
   projects/slidevs/learn-typescript:
     dependencies:
@@ -1346,6 +1346,19 @@ packages:
       - '@volar/vue-typescript'
       - typescript
     dev: true
+
+  /@mudssky/slidev-addon-default@0.0.2:
+    resolution: {integrity: sha512-WSfGpsD+nJ7E4hlVyBbt/ebMiEn3nmycLT6ZI6k7SOm+NnYM4nWeHiIQdeLyBfV8/QjWys9APSU2ySlKiYaxGQ==}
+    engines: {node: '>=18.0.0', slidev: '>=0.4'}
+    dependencies:
+      '@mudssky/slidev-style': 0.0.6
+      '@slidev/types': 0.46.3
+      clsx: 2.1.0
+    dev: false
+
+  /@mudssky/slidev-style@0.0.6:
+    resolution: {integrity: sha512-eG/AVKqdjwAVyznJPCeq1o3GOiCQf7foDkf9+mPV2zrGHhUMdZ7sf9k01SO/oYOF40XBIEvo9qNPSmQoalYkWg==}
+    dev: false
 
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}

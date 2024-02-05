@@ -1,0 +1,16 @@
+{
+  "name": "learn-tailwind",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "slidev build",
+    "build:base": "slidev build --base /my-slidevs/slidevs/learn-tailwind",
+    "dev": "slidev --open",
+    "export": "slidev export",
+    "slidev:export": "npx slidev export --format pdf --output slides-export/pdf",
+    "slidev:exportAll": "pnpm slidev:exportAllFormat && pnpm slidev:exportAllFormatWithClicks",
+    "slidev:exportAllFormat": "npx slidev export --format png --output slides-export/png && npx slidev export --format pdf --output slides-export/pdf ",
+    "slidev:exportAllFormatWithClicks": "npx slidev export --format png --output slides-export/png-clicks --with-clicks && npx slidev export --format pdf --output slides-export/pdf-clicks --with-clicks",
+    "start": "pnpm dev"
+  }
+}

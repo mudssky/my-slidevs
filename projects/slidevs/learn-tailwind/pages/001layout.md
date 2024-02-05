@@ -1,4 +1,3 @@
-
 ---
 title: Layout 布局
 level: 1
@@ -509,6 +508,7 @@ tableSize: small
 title: Overscroll Behavior
 level: 2
 layout: slim-table
+tableSize: small
 ---
 
 ### Overscroll Behavior

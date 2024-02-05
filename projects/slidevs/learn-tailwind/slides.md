@@ -21,7 +21,7 @@ addons:
 
 
 
-# CSS 指南
+# Tailwind 指南
 
 ---
 
@@ -43,6 +43,12 @@ css杂七杂八的东西太多了，比如选择器，大部分情况就用一�
 
 <Toc columns="4" />
 
+<style>
+  .slidev-layout{
+    overflow:auto;
+  }
+</style>
+
 ---
 src: ./pages/selector.md
 hide: true
@@ -50,12 +56,10 @@ hide: true
 
 ---
 src: ./pages/001layout.md
-hide: true
 ---
 
 ---
 src: ./pages/002FlexAndGrid.md
-hide: true
 ---
 
 ---
@@ -68,12 +72,10 @@ src: ./pages/004Sizing.md
 
 ---
 src: ./pages/005Typography.md
-hide: true
 ---
 
 ---
 src: ./pages/006Backgrounds.md
-hide: true
 ---
 
 ---
