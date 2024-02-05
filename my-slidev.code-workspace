@@ -24,6 +24,10 @@
       "path": "projects/slidevs/learn-rxjs",
       "name": "learn-rxjs",
     },
+    {
+      "path": "projects/slidevs/css-tricks",
+      "name": "css-tricks",
+    },
   ],
   "settings": {
     "powershell.cwd": "root",

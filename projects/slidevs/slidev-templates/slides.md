@@ -14,6 +14,8 @@ drawings:
 transition: slide-left
 title: Welcome to Slidev
 mdc: true
+addons:
+  - '@mudssky/slidev-addon-default'
 ---
 
 # Welcome to Slidev
