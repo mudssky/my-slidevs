@@ -2,6 +2,8 @@
 title: Observables 观测值
 level: 1
 ---
+## Observables
+
 Observables 是多个值的惰性Push集合
 
 |type | single|multiple|
@@ -98,13 +100,13 @@ function foo() {
 同步输出
 
 ```shell
- .\examples\003observableDiffFn.ts
+ npx tsx .\examples\003observableDiffFn.ts
 ```
 
 支持异步
 
 ```shell
- .\examples\004observableDiffFnAsync.ts
+npx tsx  .\examples\004observableDiffFnAsync.ts
 ```
 
 <v-click>
@@ -135,7 +137,7 @@ const observable = new Observable(function subscribe(subscriber) {
 });
 ```
 
-> 可以使用new Observable创建，最常见的是用创建函数来创建。 比如 of，from,interval方法
+> 可以使用new Observable创建，最常见的是用创建函数来创建。 比如 of,from,interval方法
 
 ### 订阅 Observables
 
@@ -174,6 +176,7 @@ const observable = new Observable(function subscribe(subscriber) {
 ```
 
 ---
+
 ### 取消执行 Observables
 
 因为可观察执行可能是无限的，并且观察者希望在有限时间内中止执行是很常见的，所以我们需要一个 API 来取消执行。由于每次执行都只属于一个观察者，一旦观察者接收完值，它必须有一种方法来停止执行，以避免浪费计算能力或内存资源。

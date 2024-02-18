@@ -7,7 +7,7 @@ const foo = new Observable((subscriber) => {
   subscriber.next(200)
   setTimeout(() => {
     subscriber.next(300) // happens asynchronously
-  }, 1000)
+  }, 3000)
 })
 
 console.log('before')

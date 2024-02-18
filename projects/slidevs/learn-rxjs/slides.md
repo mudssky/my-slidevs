@@ -66,7 +66,6 @@ src: ./pages/09practice.md
 ---
 src: ./pages/010Create.md
 layout: slim-table
-tdClass: dsadsa
 hide: true
 ---
 

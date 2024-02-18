@@ -9,5 +9,9 @@ level: 1
 可以添加订阅到另一个订阅，然后一起取消
 
 ```shell
- .\examples\012unscbscribes.ts
+npx tsx .\examples\011unsubscribe.ts
+```
+
+```shell
+npx tsx .\examples\012unsubscribes.ts
 ```

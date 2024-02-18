@@ -20,11 +20,11 @@ of(1, 2, 3)
 ```
 
 ```shell
- .\examples\005of.ts
+npx tsx .\examples\005of.ts
 ```
 
 ```shell
- .\examples\006first.ts
+npx tsx .\examples\006first.ts
 ```
 
 ---
@@ -39,6 +39,14 @@ Pipeable operators 是函数，可以像普通函数一样使用。比如`op()(o
 obs.pipe(op1(), op2(), op3(), op4());
 ```
 
+```js
+last()(take(2)(of(1, 2, 3))).subscribe((v) => console.log(`value2: ${v}`))
+```
+
+```shell
+npx tsx .\examples\006first.ts
+```
+
 ---
 title: Creation Operators 创建操作符
 level: 2
@@ -49,33 +57,6 @@ level: 2
 ```shell
  .\examples\007interval.ts
 ```
-
-有以下创建操作符
-
-- [`ajax`](https://rxjs.dev/api/ajax/ajax)
-- [`bindCallback`](https://rxjs.dev/api/index/function/bindCallback)
-- [`bindNodeCallback`](https://rxjs.dev/api/index/function/bindNodeCallback)
-- [`defer`](https://rxjs.dev/api/index/function/defer)
-- [`empty`](https://rxjs.dev/api/index/function/empty)
-- [`from`](https://rxjs.dev/api/index/function/from)
-- [`fromEvent`](https://rxjs.dev/api/index/function/fromEvent)
-- [`fromEventPattern`](https://rxjs.dev/api/index/function/fromEventPattern)
-- [`generate`](https://rxjs.dev/api/index/function/generate) //已弃用
-- [`interval`](https://rxjs.dev/api/index/function/interval)
-- [`of`](https://rxjs.dev/api/index/function/of)
-- [`range`](https://rxjs.dev/api/index/function/range)
-- [`throwError`](https://rxjs.dev/api/index/function/throwError)
-- [`timer`](https://rxjs.dev/api/index/function/timer)
-- [`iif`](https://rxjs.dev/api/index/function/iif)
-
-<style>
-ul {
-  @apply flex flex-wrap;
-  li {
-   @apply  w-1/3;
-  }
-}
-</style>
 
 ---
 title: 高阶可观测值
@@ -89,12 +70,14 @@ concatAll() 操作符订阅来自“外部”Observable 的每个“内部”Obs
 
 ```ts twoslash
 import { concatAll, from, map, of } from 'rxjs'
-from([1, 2, 3])
-  .pipe(
+from([1, 2, 3]).pipe(
     map((n) => of(n * 2)),
     concatAll(),
-  )
-  .subscribe((x) => console.log(x))
+  ).subscribe((x) => console.log(x))
+```
+
+```shell
+npx tsx .\examples\008highOrderOb.ts
 ```
 
 其他类似的展平操作符有:
@@ -116,7 +99,7 @@ level: 2
 <!--
 1. 时间流从左向右的流动表示输入Observable的执行过程
 2. 这些值是Observable发出来的
-3. 这些数显代表complete通知，他表示Observable已经完成了
+3. 这些竖线代表complete通知，他表示Observable已经完成了
 4. 这个Observable是操作符调用的输出。
 5. X表示输出Observable发出的错误，它表示异常或终止。此后再也不会有值或竖线出现了。
 6. 这个盒子代表操作符，它接收输入Observale（上面的），产出输出Observable（下面的）
@@ -140,16 +123,25 @@ level: 2
 - [`bindNodeCallback`](https://rxjs.dev/api/index/function/bindNodeCallback)
 - [`defer`](https://rxjs.dev/api/index/function/defer)
 - [`empty`](https://rxjs.dev/api/index/function/empty)
-- [`from`](https://rxjs.dev/api/index/function/from)
-- [`fromEvent`](https://rxjs.dev/api/index/function/fromEvent)
+- [`from`](https://rxjs.dev/api/index/function/from)  从数组、类数组对象、Promise、可迭代对象或类 Observable 对象创建 Observable
+- [`fromEvent`](https://rxjs.dev/api/index/function/fromEvent) 从dom事件创建
 - [`fromEventPattern`](https://rxjs.dev/api/index/function/fromEventPattern)
-- [`generate`](https://rxjs.dev/api/index/function/generate)
+- [`generate`](https://rxjs.dev/api/index/function/generate) //已弃用
 - [`interval`](https://rxjs.dev/api/index/function/interval)
 - [`of`](https://rxjs.dev/api/index/function/of)
 - [`range`](https://rxjs.dev/api/index/function/range)
 - [`throwError`](https://rxjs.dev/api/index/function/throwError)
 - [`timer`](https://rxjs.dev/api/index/function/timer)
 - [`iif`](https://rxjs.dev/api/index/function/iif)
+
+<style>
+ul {
+  @apply flex flex-wrap;
+  li {
+   @apply  w-1/3;
+  }
+}
+</style>
 
 ---
 hideInToc: true
@@ -192,7 +184,6 @@ layout: three-cols-ul
 - [`mergeScan`](https://rxjs.dev/api/operators/mergeScan)
 - [`pairwise`](https://rxjs.dev/api/operators/pairwise)
 - [`partition`](https://rxjs.dev/api/operators/partition)
-- [`pluck`](https://rxjs.dev/api/operators/pluck)
 - [`scan`](https://rxjs.dev/api/operators/scan)
 - [`switchScan`](https://rxjs.dev/api/operators/switchScan)
 - [`switchMap`](https://rxjs.dev/api/operators/switchMap)
@@ -326,6 +317,10 @@ function discardOddDoubleEven() {
     map((v) => v + v)
   );
 }
+```
+
+```shell
+npx tsx .\examples\009discardOddDoubleEven.ts
 ```
 
 ---

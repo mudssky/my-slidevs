@@ -1,4 +1,3 @@
-
 ---
 title: Subject  订阅
 level: 1
@@ -12,21 +11,23 @@ Subject是一种特殊类型的Observable，它允许将值多播到许多观察
 
 每个Subject都是Observer，它是一个具有 next(v) 、 error(e) 和 complete() 方法的对象。
 
+也就是说，具有Observer（可使用next发送值）和Observable（可调用subscribe取值）的双重性质
+
 ```ts twoslash
 import { Subject } from 'rxjs';
-
 const subject = new Subject<number>();
-
 subject.subscribe({
   next: (v) => console.log(`observerA: ${v}`),
 });
 subject.subscribe({
   next: (v) => console.log(`observerB: ${v}`),
 });
-
 subject.next(1);
 subject.next(2);
+```
 
+```shell
+npx tsx .\examples\033subject.ts
 ```
 
 ---

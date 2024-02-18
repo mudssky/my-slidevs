@@ -7,12 +7,12 @@ level: 1
 RxJS 是一个使用可观察序列编写异步和基于事件的程序的库。它提供了一种核心类型，即 Observable,satellite类型（Observer, Schedulers, Subjects）,还有受array方法启发的操作符(map,filter,reduce,every等以允许将异步事件作为集合处理。)  
 RxJs中有以下基本概念  
 
-- Observable：代表未来值或事件的可调用集合。
-- Observer：是一个回调集合，它知道如何监听 Observable 传递的值。
+- Observable：代表未来值或事件的可调用集合(观测值)。
+- Observer：是一个回调集合，它知道如何监听 Observable 传递的值（观察者）。
 - Subscription：订阅代表 Observable 的执行，主要用于取消执行。
-- Operators： 操作符 是纯函数，支持使用函数式编程风格处理集合，例如 map 、 filter 、 concat 、 reduce
+- Operators： 操作符是纯函数，支持使用函数式编程风格处理集合，例如 map 、 filter 、 concat 、 reduce
 - Subject： 相当于EventEmitter，是向多个Observers多播一个值或事件的唯一方式。
-- Schedulers：  是控制并发的集中调度程序，允许我们在计算发生时进行协调，例如 setTimeout 或 requestAnimationFrame 或其他。
+- Schedulers： 是控制并发的集中调度程序，允许我们在计算过程发生时进行协调，例如 setTimeout 或 requestAnimationFrame 或其他。
 
 ---
 title: Purity 第一个例子
@@ -132,7 +132,7 @@ fromEvent<MouseEvent>(btn.value, 'click')
       scan((count, clientX) => count + clientX, 0),
     )
     .subscribe((count) => toast(`${count}`, 2000))
-// 其他产生值的操作符有 pluck、pairwise、sample 等
+// 其他产生值的操作符有pairwise、sample 等
 ```
 
 <Demo004Values/>
