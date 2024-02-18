@@ -20,6 +20,8 @@ module.exports = {
   'no-multiple-space-atx': true,
   // MD022   标题需要被空行包围
   'blanks-around-headings': false,
+  // MD024/no-duplicate-heading: Multiple headings with the same content
+  'no-duplicate-heading': false,
   // MD025 - Multiple top-level headings in the same document,顶级标题只能有一个，也会检查frontmatter中的内容
   // 因为slidev中这个每页幻灯片那个不属于forntmatter，但是也会被检查，所以这个取消
   'single-h1': false,

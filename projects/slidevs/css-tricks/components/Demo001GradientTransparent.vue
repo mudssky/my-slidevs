@@ -11,7 +11,7 @@
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .g-container {
   position: relative;
   width: 300px;
