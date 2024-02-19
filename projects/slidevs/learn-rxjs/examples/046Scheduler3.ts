@@ -4,7 +4,7 @@ const start = new Date().getTime()
 
 const source$ = range(1, 100000)
 // const source$ = range(1, 100000).pipe(observeOn(asapScheduler, 0))
-// const source$ = range(1, 100000).pipe(observeOn(asyncScheduler ))
+// const source$ = range(1, 100000).pipe(observeOn(asyncScheduler))
 // const source$ = range(1, 100000).pipe(observeOn(queueScheduler))
 console.log('before subscribe')
 

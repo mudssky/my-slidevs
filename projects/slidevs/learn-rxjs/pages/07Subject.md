@@ -106,7 +106,7 @@ level: 2
 10. 与多播的Observable已取消订阅
 
 ```shell
- .\examples\036multicast2.ts
+npx tsx .\examples\036multicast2.ts
 ```
 
 ---
@@ -117,7 +117,7 @@ level: 2
 现在推荐适用share来代替这个适用场景
 
 ```shell
- .\examples\037multicast3.ts
+npx tsx .\examples\037multicast3.ts
 ```
 
 ---
@@ -130,7 +130,7 @@ level: 2
 它具有“当前值”的概念。它存储发送给消费者的最新值，每当新的观察者订阅时，它将立即从 BehaviorSubject 接收“当前值”。
 
 ```shell
- .\examples\038behaviorSubject.ts
+npx tsx .\examples\038behaviorSubject.ts
 ```
 
 ---
@@ -146,13 +146,13 @@ ReplaySubject 与 BehaviorSubject 类似，它可以将旧值发送给新订阅�
 创建 ReplaySubject 时，您可以指定要重播的值的数量：
 
 ```shell
- .\examples\039replaySubject.ts
+npx tsx .\examples\039replaySubject.ts
 ```
 
-除了缓冲区大小之外，您还可以指定以毫秒为单位的窗口时间，以确定记录值的年龄。在下面的示例中，我们使用 100 的大缓冲区大小，但窗口时间参数仅为 500 毫秒。
+除了缓冲区大小之外，您还可以指定以毫秒为单位的窗口时间，以确定记录值的年龄。在下面的示例中，我们使用 100 的大缓冲区大小(缓存的最大数量，溢出后旧数据会被丢弃)，但窗口时间参数仅为 500 毫秒（缓存多长时间的数据，这里是只缓存500ms内的数据）。
 
 ```shell
- .\examples\040replaySubject2.ts
+npx tsx .\examples\040replaySubject2.ts
 ```
 
 ---
@@ -162,12 +162,12 @@ level: 2
 
 ### AsyncSubject
 
-AsyncSubject 是一种变体，其中仅将 Observable 执行的最后一个值发送给其观察者，并且仅在执行完成时发送。
+AsyncSubject 是一种变体，其中仅将 Observable 执行的最后一个值发送给其观察者，并且仅在执行完成(complete)时发送。
 
 这个和Promise比较像。
 
 ```shell
- .\examples\041asyncSubject.ts
+npx tsx .\examples\041asyncSubject.ts
 ```
 
 ---

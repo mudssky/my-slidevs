@@ -43,7 +43,7 @@ console.log('just after subscribe')
 ```
 
 ```shell
- .\examples\044Scheduler.ts
+npx tsx .\examples\044Scheduler1.ts
 ```
 
 asyncScheduler实际上使用了 setTimeout 或 setInterval 进行操作
@@ -58,7 +58,7 @@ async 是RxJS提供的内置Scheduler之一。
 | null                    | 通过不传递任何调度程序，通知将同步且递归地传递。将此用于恒定时间运算或尾递归运算。 |
 | queueScheduler          | 在当前事件框架中的队列上进行调度。使用它进行迭代操作。       |
 | asapScheduler           | 在微任务队列上进行调度，该队列与用于 Promise 的队列相同。基本上是在当前工作之后，但在下一份工作之前。使用它进行异步转换。 |
-| asyncScheduler          | 安排与 `setInterval` 的工作。将其用于基于时间的操作。        |
+| asyncScheduler          | 与 `setInterval` 一起工作。将其用于基于时间的操作。        |
 | animationFrameScheduler | 安排在下一次浏览器内容重绘之前发生的任务。可用于创建流畅的浏览器动画。 |
 
 ---
@@ -96,3 +96,7 @@ async 是RxJS提供的内置Scheduler之一。
 与时间相关的运算符，例如 bufferTime 、 debounceTime 、 delay 、 auditTime 、 sampleTime 、 throttleTime 、 timeout 、 timeoutWith 、 windowTime 都将 Scheduler 作为最后一个参数，否则默认在 asyncScheduler 。
 
 使用 Scheduler 作为参数的其他实例运算符： cache 、 combineLatest 、 concat 、 expand 、 merge 、 publishReplay 、 startWith 。
+
+```shell
+npx tsx .\examples\049Scheduler5.ts
+```
