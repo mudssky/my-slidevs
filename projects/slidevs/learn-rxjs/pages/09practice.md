@@ -3,8 +3,14 @@ title: 实战案例
 level: 1
 ---
 
+## 实战案例
 
-## 01.并发控制
+---
+title: 并发控制
+level: 2
+---
+
+### 01.并发控制
 
 面试题中经常见到的，实现一个批量请求函数，有一个maxNum参数用于控制最大并发数。
 
@@ -26,8 +32,11 @@ function multiRequest(list: string[], maxNum: number = 2) {
 总的来说Promise不好处理的一些异步场景，可以考虑使用rxjs
 
 ---
+title: 事件处理
+level: 2
+---
 
-## 02.事件处理
+### 02.事件处理
 
 下面是搜索框用户输入的例子
 
