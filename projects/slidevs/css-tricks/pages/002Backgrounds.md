@@ -435,3 +435,385 @@ layout: two-cols
 }
 
 </style>
+
+---
+title: 渐变色动画
+level: 2
+---
+
+### 渐变色动画
+
+css动画，目前还不支持渐变。
+在传统的 CSS 中，我们通常想实现背景色渐变动画，有几种方式：
+
+* 通过 background-position 的移动模拟渐变动画；
+* 通过 background-size 的缩放过程来模拟渐变动画；
+* 通过外层的大渐变图形的移动（transform）来模拟渐变动画。
+
+#### 通过 background-position 模拟渐变动画
+
+<div class="gradient-box"/>
+
+<style>
+.gradient-box {
+    width: 200px;
+    aspect-ratio:1/1;
+    /* height: 100px; */
+    background: linear-gradient(90deg,  #ffc700 0%, #e91e1e 50%, #6f27b0 100%);
+    background-size: 200% 100%;
+    background-position: 0 0;
+    animation: bgposition 2s infinite linear alternate;
+}
+
+@keyframes bgposition {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+</style>
+
+---
+
+#### 通过 background-size 模拟渐变动画
+
+通过改变 background-size 的第一个值，我将背景图的大小由 3 倍背景区大小向 1 倍背景区大小过渡，在背景图变换的过程中，就有了一种动画的效果
+
+<div class="gradient-box2"/>
+
+<style>
+.gradient-box2 {
+    width: 200px;
+    aspect-ratio:1/1;
+    background: linear-gradient(90deg,  #ffc700 0%, #e91e1e 33%, #6f27b0 66%, #00ff88 100%);
+    background-position: 100% 0;
+    animation: bgSize 5s infinite ease-in-out alternate;
+}
+
+@keyframes bgSize  {
+    0% {
+        background-size: 300% 100%;
+    }
+    100% {
+        background-size: 100% 100%;
+    }
+}
+
+</style>
+
+---
+
+#### 通过 transform 模拟渐变动画
+
+上述两种方式，由于使用了 background-position 和 background-size，并且在渐变中改变这两个属性，导致页面不断地进行大量的重绘（repaint），对页面性能消耗非常严重，所以我们还可以试试 transfrom 的方法。
+
+下面这种方式，使用伪元素配合 transform 进行渐变动画，通过元素的伪元素 before 或者 after ，在元素内部画出一个大背景，再通过 transform 对伪元素进行变换：
+也就是矩形内的背景在位移。
+
+<div class="gradient-box3"/>
+
+<style>
+/* 好在现代css已经支持嵌套了，这样感觉sass的必要性又减少了，只是还没有mixin和function */
+.gradient-box3 {
+    position: relative;
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+    margin: 100px auto;
+    border: 2px solid #000;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: -100%;
+        left: -100%;
+        bottom: -100%;
+        right: -100%;
+        background: linear-gradient(45deg,  #ffc700 0%, #e91e1e 50%, #6f27b0 100%);
+        background-size: 100% 100%;
+        animation: bgposition2 5s infinite linear alternate;
+        z-index: -1;
+    }
+}
+
+@keyframes bgposition2 {
+    0% {
+        transform: translate(30%, 30%);
+    }
+    25% {
+        transform: translate(30%, -30%);
+    }
+    50% {
+        transform: translate(-30%, -30%);
+    }
+    75% {
+        transform: translate(-30%, 30%);
+    }
+    100% {
+        transform: translate(30%, 30%);
+    }
+}
+
+</style>
+
+---
+
+#### 通过滤镜 hue-rotate 实现渐变动画
+
+hue-rotate：为色相旋转滤镜，默认的值为 0deg，当旋转 360deg 后，相当于回到了本身的颜色值。
+
+<div class="gradient-box4"/>
+
+<style>
+.gradient-box4 {
+    width: 200px;
+    aspect-ratio:1/1;
+    background: linear-gradient(45deg, #5fddcc, #ff004d);
+    animation: hueRotate 10s infinite alternate;
+}
+
+@keyframes hueRotate {
+    0 {
+        filter: hue-rotate(0);
+    }
+    100% {
+        filter: hue-rotate(360deg);
+    }
+}
+</style>
+
+---
+
+#### 使用 CSS @property 实现背景色渐变动画
+
+CSS @property 其实就是灵活度更高的 CSS 自定义属性，我们也可以称其为 CSS Houdini 自定义属性。其中：
+
+* @property --property-name 中的 --property-name 就是自定义属性的名称，定义后可在 CSS 中通过 var(--property-name) 进行引用。
+* syntax：该自定义属性的语法规则，也可以理解为表示定义的自定义属性的类型。
+* inherits：是否允许继承。
+* initial-value：初始值。
+
+Demo 中，我们利用了 CSS Houdini 自定义属性，将原本定义在 background 的过渡效果嫁接到了 color 之上，而 CSS 是支持一个颜色变换到另外一个颜色的，这样，我们巧妙地实现了渐变背景色的过渡动画。
+
+<Demo005PropertyGradient />
+
+---
+title: background-clip 与渐变文字
+level: 2
+---
+
+### background-clip 与渐变文字
+
+首先看看它的用法，简单而言，background-clip 的作用就是设置元素的背景（背景图片或颜色）的填充规则。
+与 box-sizing 的取值非常类似，通常而言，它有 4 个取值：
+
+```css
+{
+    background-clip: border-box;  // 背景延伸到边框外沿（但是在边框之下）
+    background-clip: padding-box; // 边框下面没有背景，即背景延伸到内边距外沿。
+    background-clip: content-box; // 背景裁剪到内容区 (content-box) 外沿。
+    backgrounc-clip: text; 
+}
+
+```
+
+下面的实例就能把看出前三个的区别
+
+<div class="flex justify-between">
+<div class="clip-border clip-box"></div>
+<div class="clip-padding clip-box"></div>
+<div class="clip-content clip-box"></div>
+</div>
+
+<style>
+.clip-box {
+    width: 100px;
+    height: 100px;
+    padding: 20px;
+    background: #000;
+    background-repeat: no-repeat;
+    border: 10px dashed red;
+}
+.clip-border {
+    background-clip: border-box;
+}
+.clip-padding {
+    background-clip: padding-box;
+}
+.clip-content {
+    background-clip: content-box;
+}
+</style>
+
+---
+
+使用border-box可以实现类似红黄相间的边框的效果
+
+这里还利用了 background 可以多重这个特性，不过由于不支持写成 background: #fff, #e91e63，所以将第一重白色写成了 linear-gradient(#fff, #fff)，它其实等价于 #fff。
+
+<div class="clip-box2"></div>
+
+<style>
+.clip-box2{
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(#fff, #fff), #e91e63;
+    background-clip: padding-box, border-box;
+    border: 2px dashed #ffeb3b;
+}
+
+</style>
+
+---
+
+#### background-clip: text
+
+文字颜色设置为透明，这样就能透出后面的背景了。
+
+<div class="clip-box3">Clip</div>
+
+<style>
+.clip-box3{
+  font-size: 180px;
+  font-weight: bold;
+  /* color: deeppink; */
+  color: transparent;
+  background: url(/assets/dust-mountain.webp) no-repeat center center;
+  background-size: cover;
+  background-clip: text;
+}
+
+</style>
+
+---
+
+#### 利用 background-clip: text 实现渐变文字
+
+<div class="clip-box4"> background-clip: text</div>
+
+<style>
+.clip-box4{
+   font-size: 54px;
+    color: transparent;
+    background: linear-gradient(45deg, #ffeb3b, #009688, yellowgreen, pink, #03a9f4, #9c27b0, #8bc34a);
+    background-clip: text;
+}
+
+</style>
+
+---
+
+也可以配合动态背景
+
+<div class="clip-box5"> background-clip: text</div>
+
+也可以实现文字高亮效果
+
+<div class="clip-box6" data-text="Lorem ipsum dolor">Lorem ipsum dolor</div>
+
+<style>
+.clip-box5{
+    font-size: 54px;
+    color: transparent;
+    background: linear-gradient(45deg, #ffeb3b, #009688, yellowgreen, pink, #03a9f4, #9c27b0, #8bc34a);
+    background-clip: text;
+    animation: huerotate 3s infinite;
+}
+@keyframes huerotate {
+    100% {
+        filter: hue-rotate(360deg);
+    }
+}
+.clip-box6 {
+    position: relative;
+    color: transparent;
+    background-color: #E8A95B;
+    background-clip: text;
+}
+.clip-box6::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(120deg, transparent 0%, transparent 6rem, white 11rem, transparent 11.15rem, transparent 15rem, rgba(255, 255, 255, 0.3) 20rem, transparent 25rem, transparent 27rem, rgba(255, 255, 255, 0.6) 32rem, white 33rem, rgba(255, 255, 255, 0.3) 33.15rem, transparent 38rem, transparent 40rem, rgba(255, 255, 255, 0.3) 45rem, transparent 50rem, transparent 100%);
+    background-clip: text;
+    background-size: 150% 100%;
+    background-repeat: no-repeat;
+    animation: shine 5s infinite linear;
+}
+@keyframes shine {
+        0% {
+                background-position: 50% 0;
+        }
+        100% {
+                background-position: -190% 0;
+        }
+}
+</style>
+
+---
+title: 'background 与 display: inline'
+level: 2
+---
+
+### background 与 display: inline
+
+内联元素和块级元素background属性展现不一致
+
+<div class="clip-box7">
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis dicta incidunt ut illo, ratione aut reprehenderit facilis mollitia saepe ducimus libero hic reiciendis deserunt optio veniam ullam. Beatae, non quae.
+    </p>
+</div>
+
+<div  class="clip-box8">
+    <a>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis dicta incidunt ut illo, ratione aut reprehenderit facilis mollitia saepe ducimus libero hic reiciendis deserunt optio veniam ullam. Beatae, non quae.</a>
+</div>
+
+<style>
+.clip-box7,.clip-box8{
+    width:400px;
+    p,a{
+         background: linear-gradient(90deg, blue, green);
+    }
+}
+
+</style>
+
+---
+
+加上动画以后,就比较直观了。
+
+<Demo006InlineGradient/>
+
+---
+
+#### 多行文本的渐隐消失
+
+基于这个特性，我们可以很轻松地实现多行文本的渐隐消失。
+
+<Demo007InlineGradient2/>
+
+---
+
+#### 文字 hover 动效
+
+<Demo008InlineGradient3/>
+
+---
+title: background-attachment
+level: 2
+---
+
+### 冷门属性 background-attachment
+
+background-attachment fix 可以实现视差滚动效果
+
+但是这个效果只能在全屏类的页面使用，因为fix是相对于视口固定的
+
+因此在slidev中不好展示。
+<!-- <Demo009Parallax/> -->
