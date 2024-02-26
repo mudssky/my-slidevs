@@ -43,3 +43,7 @@ src: ./pages/002Backgrounds.md
 ---
 src: ./pages/003Mask.md
 ---
+
+---
+src: ./pages/004ClipPath.md
+---
