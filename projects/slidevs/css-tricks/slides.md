@@ -39,3 +39,7 @@ src: ./pages/001Borders.md
 ---
 src: ./pages/002Backgrounds.md
 ---
+
+---
+src: ./pages/003Mask.md
+---
