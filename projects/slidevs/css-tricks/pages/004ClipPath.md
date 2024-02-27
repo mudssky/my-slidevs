@@ -136,3 +136,158 @@ clip-path 不仅仅能控制元素内的裁剪，对超出元素范围的内容�
 想象这样一种场景，在某个需求的实现过程中，有一类特殊情况，要求容器内的内容，在竖直方向上超出容器区域后会被裁剪，而如果在水平方向上超出容器区域，则不会被裁剪。
 
 <Demo015ClipOverflow/>
+
+---
+
+### 基于 clip-path 的形变动画
+
+clip-path 的一大优点在于它可以与 CSS 中的过渡 transtion 与动画 animation 进行联动，实现动画效果。
+
+因此，我们可以借助 CSS transtion 与 CSS animation 来进行一些形变动画效果。
+
+下面实现了一个多边形从三边形向四边形再到五边形的变换效果：
+
+<div class="polygon-animate"></div>
+
+<style>
+.polygon-animate {
+    width: 200px;
+    height: 200px;
+    background-color: crimson;
+    animation: polygon-ani 3s linear infinite;
+}
+@keyframes polygon-ani {
+    0%,
+    5% {
+        clip-path: polygon(
+            50% 0%,
+            0% 100%,
+            100% 100%,
+            100% 100%,
+            100% 100%
+        );
+    }
+    30%,
+    35% {
+        clip-path: polygon(
+            50% 0%,
+            100% 50%,
+            50% 100%,
+            0% 50%,
+            0% 50%
+        );
+    }
+    60%,
+    65% {
+        clip-path: polygon(
+            50% 0%,
+            100% 38%,
+            82% 100%,
+            18% 100%,
+            0% 38%
+        );
+    }
+    95%,
+    100% {
+        clip-path: polygon(
+            50% 0%,
+            0% 100%,
+            100% 100%,
+            100% 100%,
+            100% 100%
+        );
+    }
+}
+
+</style>
+
+---
+
+### clip-path 动画的局限
+核心点在于：进行动画或者过渡的两个 clip-path 状态， polygon() 内的顶点的数量必须保持一致。
+
+### 基于 clip-path 的图形变换动画
+除此之外，我们还可以尝试，将一个完整的图形，分割成多个小图形
+
+下面是一个容器从正方形拉长到举行的变化效果  
+
+<div class="triangle2rect"></div>
+
+<style>
+@keyframes aniContainer {
+    0%, 10% {
+        width: 100px;
+        height: 100px;
+    }
+    90%, 100% {
+        width: 250px;
+        height: 60px;
+    }
+}
+.triangle2rect {
+ display:inline-block;
+ background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+    width: 100px;
+    height: 100px;
+    animation: aniContainer 2s infinite alternate;
+}
+</style>
+
+---
+
+下面是clip-path实现的三角形动画变换
+
+<div class="triangle2rect"></div>
+
+<style>
+.triangle2rect {
+    width: 100px;
+    height: 100px;
+    animation: a 2s infinite alternate;
+}
+@keyframes a {
+    0%, 10% {
+        background: deeppink;
+        clip-path: polygon(0% 0%, 0% 100%, 50% 50%);
+    }
+    90%, 100% {
+        background: #000;
+        clip-path: polygon(0% 100%, 25% 100%, 12.5% 0%);
+    }
+}
+
+</style>
+
+---
+
+### 基于 clip-path 的边框动画
+
+<Demo016ClipBorder />
+
+---
+
+### 基于 clip-path 的故障动画
+
+<Demo017ClipText/>
+
+---
+
+### 基于 clip-path 的动态区域裁剪动画
+
+<div class="g-container"></div>
+
+<style>
+.g-container {
+    position: relative;
+    width: 400px;
+    height: 300px;
+    overflow: hidden;
+    transition: clip-path .3s linear;
+    clip-path: circle(20px at 44px 44px);
+    background: gold;
+
+    &:hover {
+        clip-path: circle(460px at 44px 44px);
+    }
+}
+</style>
