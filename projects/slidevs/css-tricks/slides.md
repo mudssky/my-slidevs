@@ -51,3 +51,7 @@ src: ./pages/004ClipPath.md
 ---
 src: ./pages/005Shadow.md
 ---
+
+---
+src: ./pages/006Filter.md
+---
