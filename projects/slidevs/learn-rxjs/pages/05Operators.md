@@ -9,11 +9,10 @@ level: 1
 
 Pipeable Operators，管道操作符，是一种可以使用语法`observableInstance.pipe(operator)`或者`observableInstance.pipe(operatorFactory())`的操作符。当 Pipeable Operators 被调用时，它们不会改变现有的 Observable 实例，本质上这些都是纯函数。operatorFactory操作符工厂是可以使用参数设置上下文来返回operator的函数，工厂的参数也是操作符
 
-Creation Operators ，创建操作符，可以作为独立函数调用来创建新的Observable，比如of(1, 2, 3) 创建一个将依次发出 1、2 和 3 的可观察对象。
+Creation Operators ，创建操作符，可以作为独立函数调用来创建新的Observable，比如`of(1, 2, 3)` 创建一个将依次发出 1、2 和 3 的可观察对象。
 
-```ts  twoslash
+```ts 
 import { of, map } from 'rxjs';
-
 of(1, 2, 3)
   .pipe(map((x) => x * x))
   .subscribe((v) => console.log(`value: ${v}`));
@@ -66,9 +65,9 @@ level: 2
 
 Observables 最常发出普通值，如字符串和数字，也有很多场合要处理发出Observables的场景。
 
-concatAll() 操作符订阅来自“外部”Observable 的每个“内部”Observable，并复制所有发出的值，直到该 Observable 完成，然后继续处理下一个。所有值都以这种方式连接起来。
+`concatAll()` 操作符订阅来自“外部”Observable 的每个“内部”Observable，并复制所有发出的值，直到该 Observable 完成，然后继续处理下一个。所有值都以这种方式连接起来。
 
-```ts twoslash
+```ts 
 import { concatAll, from, map, of } from 'rxjs'
 from([1, 2, 3]).pipe(
     map((n) => of(n * 2)),
@@ -308,7 +307,7 @@ image: https://source.unsplash.com/collection/94734566/1920x1080
 
 比如，可以创建一个丢弃奇数并将偶数加倍的函数
 
-```ts twoslash
+```ts 
 import { pipe, filter, map } from 'rxjs';
 
 function discardOddDoubleEven() {

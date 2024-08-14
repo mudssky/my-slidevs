@@ -4,6 +4,8 @@ export default {
     './index.html',
     './site/**/*.{js,ts,vue}',
     './projects/**/*.{js,ts,vue}',
+    // 排除node_modules目录,避免性能问题
+    '!./**/node_modules/**/*',
   ],
   theme: {
     extend: {},

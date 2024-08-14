@@ -10,6 +10,10 @@
     "slidev:exportAll": "pnpm slidev:exportAllFormat && pnpm slidev:exportAllFormatWithClicks",
     "slidev:exportAllFormat": "npx slidev export --format png --output slides-export/png && npx slidev export --format pdf --output slides-export/pdf ",
     "slidev:exportAllFormatWithClicks": "npx slidev export --format png --output slides-export/png-clicks --with-clicks && npx slidev export --format pdf --output slides-export/pdf-clicks --with-clicks",
-    "start": "pnpm dev"
+    "start": "pnpm dev",
+    "build:base": "slidev build --base /my-slidevs/slidevs/css-tricks"
+  },
+  "dependencies": {
+    "@mudssky/slidev-style": "workspace:*"
   }
 }

@@ -2,7 +2,7 @@
 theme: seriph
 background: https://source.unsplash.com/collection/94734566/1920x1080
 class: text-center
-highlighter: shikiji
+highlighter: shiki
 lineNumbers: false
 info: |
   ## Slidev Starter Template
@@ -30,7 +30,13 @@ Css感觉还是通过积累一些炫酷的案例来学习比较好， 最重要�
 
 ---
 
-<Toc/>
+<Toc columns="2"/>
+
+<style>
+  .slidev-layout{
+    overflow:auto;
+  }
+</style>
 
 ---
 src: ./pages/001Borders.md

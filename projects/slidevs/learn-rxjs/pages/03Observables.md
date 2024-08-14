@@ -11,6 +11,7 @@ Observables 是多个值的惰性Push集合
 | Pull| Function|Iterator|
 | Push| Promise| Observable|
 
+
 ```shell
 code ./examples/001observable.ts
 ```
@@ -54,6 +55,7 @@ RxJS 引入了 Observables，这是一种新的 JavaScript Push系统。 Observa
 title:   As Function
 level: 2
 ---  
+
 ### Observables as Function
 
 ```js
@@ -100,7 +102,7 @@ function foo() {
 同步输出
 
 ```shell
- npx tsx .\examples\003observableDiffFn.ts
+npx tsx .\examples\003observableDiffFn.ts
 ```
 
 支持异步
@@ -109,14 +111,16 @@ function foo() {
 npx tsx  .\examples\004observableDiffFnAsync.ts
 ```
 
+
 <v-click>
 
 结论
 
-- func.call() 表示“同步给我一个值”
-- observable.subscribe() 表示“同步或异步地给我任意数量的值”
+- `func.call()` 表示“同步给我一个值”
+- `observable.subscribe()` 表示“同步或异步地给我任意数量的值”
 
 </v-click>
+
 
 ---
 title: Observable解析

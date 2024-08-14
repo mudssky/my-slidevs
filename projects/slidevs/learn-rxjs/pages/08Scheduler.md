@@ -19,7 +19,7 @@ Scheduler控制订阅何时开始以及通知何时传送。它由三个部分�
 下面我们使用asyncScheduler
 可以观察到，和平时的同步行为不同，就像在setTimeOut里执行一样的效果
 
-```ts twoslash
+```ts 
 import { Observable, asyncScheduler, observeOn } from 'rxjs'
 const observable = new Observable((observer) => {
   observer.next(1)

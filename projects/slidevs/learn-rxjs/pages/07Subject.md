@@ -13,7 +13,7 @@ Subject是一种特殊类型的Observable，它允许将值多播到许多观察
 
 也就是说，具有Observer（可使用next发送值）和Observable（可调用subscribe取值）的双重性质
 
-```ts twoslash
+```ts 
 import { Subject } from 'rxjs';
 const subject = new Subject<number>();
 subject.subscribe({
@@ -34,7 +34,7 @@ npx tsx .\examples\033subject.ts
 
 因为Subject 是Observer，所以可以提供Subject作为任何 Observable 的 subscribe 的参数
 
-```ts twoslash
+```ts 
 import { Subject, from } from 'rxjs';
 
 const subject = new Subject<number>();
@@ -65,7 +65,7 @@ level: 2
 
 connect底层执行subscribe，决定共享Observable开始的时间
 
-```ts twoslash
+```ts 
 import { Subject, connectable, from } from 'rxjs'
 
 const source = from([1, 2, 3])
