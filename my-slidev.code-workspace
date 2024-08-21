@@ -25,6 +25,10 @@
       "name": "learn-rxjs",
     },
     {
+      "path": "projects/slidevs/learn-electron",
+      "name": "learn-electron",
+    },
+    {
       "path": "projects/slidevs/css-tricks",
       "name": "css-tricks",
     },
