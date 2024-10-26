@@ -304,3 +304,57 @@ ping、pong的操作，对应的是WebSocket的两个控制帧，`opcode`分别�
 ```javascript
 ws.ping('', false, true);
 ```
+
+---
+title: 安装使用
+---
+
+客户端安装
+
+```shell
+pnpm add socket.io-client
+```
+
+nodejs服务端安装
+
+```
+pnpm add socket.io
+```
+
+如果是nestjs框架，需要
+
+```
+pnpm add @nestjs/platform-socket.io
+```
+
+### 前端socket.io代理配置
+比如vite的proxy中可以进行如下配置，可以将socket.io通信转发到指定的服务
+
+```ts
+  '/socket.io': {
+      target: env.VITE_WS_TARGET,
+      ws: true,
+    },
+```
+
+配置之后我们就不需要在代码中指定服务的地址,后端也不再需要开启CORS
+
+```ts
+  // const socket = io('http://localhost:30355/nest-websocket')
+  const socket = io('/nest-websocket')
+```
+
+### 后端socket.io配置
+
+可以配置命名空间或者配置socket.io服务在不同的端口启动
+
+nestjs中通过装饰器来指定，下面是指定常用的几个参数
+
+```ts
+ @WebSocketGateway(33155, {
+   namespace: 'nest-websocket',
+   cors: {
+     origin: '*',
+   },
+ })
+```
