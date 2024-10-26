@@ -1,0 +1,18 @@
+{
+  "name": "learn-socketio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "slidev build",
+    "dev": "slidev --open",
+    "export": "slidev export",
+    "slidev:export": "npx slidev export --format pdf --output slides-export/pdf",
+    "slidev:exportAll": "pnpm slidev:exportAllFormat && pnpm slidev:exportAllFormatWithClicks",
+    "slidev:exportAllFormat": "npx slidev export --format png --output slides-export/png && npx slidev export --format pdf --output slides-export/pdf ",
+    "slidev:exportAllFormatWithClicks": "npx slidev export --format png --output slides-export/png-clicks --with-clicks && npx slidev export --format pdf --output slides-export/pdf-clicks --with-clicks",
+    "start": "pnpm dev"
+  },
+  "dependencies": {
+    "@mudssky/slidev-style": "workspace:*"
+  }
+}
