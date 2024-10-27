@@ -168,6 +168,12 @@ importers:
         specifier: ^7.8.1
         version: 7.8.1
 
+  projects/slidevs/learn-socketio:
+    dependencies:
+      '@mudssky/slidev-style':
+        specifier: workspace:*
+        version: link:../../../packages/slidev-style
+
   projects/slidevs/learn-tailwind: {}
 
   projects/slidevs/learn-typescript:
