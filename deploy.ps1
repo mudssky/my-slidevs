@@ -13,9 +13,23 @@ $slidevSubPrefix = 'slidevs/'
 $slidevProjectsPath = "$PSScriptRoot\projects\slidevs"
 $sitePath = "$PSScriptRoot\site"
 
-# 排除模板项目
+# 排除模板项目和一些不想上线的项目
 
-$projectList = Get-ChildItem -LiteralPath $slidevProjectsPath -Exclude *template*, slidev3
+$exluceProjectList = 'slidev-templates', 'slidev3', 'learn-socketio', 'learn-electron'
+
+function Get-TurboFilterParams() {
+	param(
+		[Parameter(Mandatory = $true)]
+		[string[]]
+		$ExcludeList
+	)
+	$filterParams = $ExcludeList | ForEach-Object {
+		'--filter=!' + $_
+	} | Join-String -Separator ' '
+	return $filterParams 
+}
+
+$projectList = Get-ChildItem -LiteralPath $slidevProjectsPath -Exclude $exluceProjectList
 
 function Get-SlidevsUrl() {
 	$urls =	$projectList | ForEach-Object { @{
@@ -69,7 +83,7 @@ function Set-BuildBase() {
 function Copy-Slidevs() {
 	$projectList | ForEach-Object {
 		
-		Copy-Item  -Path  ( '{0}\dist' -f $_.FullName) -Destination ("$slidevPath\{0}" -f $_.Name) -Recurse -ErrorAction Stop | Out-Null
+		Copy-Item  -Path  ( '{0}\dist' -f $_.FullName) -Destination ("$slidevPath\{0}" -f $_.Name) -Recurse -ErrorAction Continue | Out-Null
 	}
 }
 function Build-Slidevs() {
@@ -117,6 +131,9 @@ switch ($mode) {
 		Copy-Slidevs
 		Write-Host 'Run pnpm docs:preview to preview'
  }
+ "onlySite" {
+		Build-Site
+ }
  "onlySlidevs" {
 		# 3.准备slievs文件夹
 		Set-DistPath
@@ -132,15 +149,24 @@ switch ($mode) {
  'turbo:local' {
 		Get-SlidevsUrl
 		Set-BuildBase
-		pnpm turbo build:base --force 
+		$filterParams = Get-TurboFilterParams -ExcludeList $exluceProjectList 
+		# Write-Host "pnpm turbo $filterParams build:base  --force"
+		$executeExpression = "pnpm turbo   $filterParams  build:base --force"
+		Write-Debug $executeExpression
+		Invoke-Expression $executeExpression
+
 		Copy-Slidevs
 		Write-Host 'Run pnpm docs:preview to preview'
  }
 	'turbo:deploy' {
 		Get-SlidevsUrl
 		# Set-BuildBase
-		pnpm turbo build:base
+		$filterParams = Get-TurboFilterParams -ExcludeList $exluceProjectList 
+		$executeExpression = "pnpm turbo   $filterParams  build:base "
+		Write-Debug $executeExpression
+		Invoke-Expression $executeExpression
 		Copy-Slidevs
 		Write-Host 'Run pnpm docs:preview to preview'
+		Deploy-Site
  }
 }

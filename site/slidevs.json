@@ -1,30 +1,22 @@
 [
   {
-    "url": "slidevs/css-tricks",
-    "name": "css-tricks"
+    "name": "css-tricks",
+    "url": "slidevs/css-tricks"
   },
   {
-    "url": "slidevs/learn-canvas",
-    "name": "learn-canvas"
+    "name": "learn-canvas",
+    "url": "slidevs/learn-canvas"
   },
   {
-    "url": "slidevs/learn-electron",
-    "name": "learn-electron"
+    "name": "learn-rxjs",
+    "url": "slidevs/learn-rxjs"
   },
   {
-    "url": "slidevs/learn-rxjs",
-    "name": "learn-rxjs"
+    "name": "learn-tailwind",
+    "url": "slidevs/learn-tailwind"
   },
   {
-    "url": "slidevs/learn-socketio",
-    "name": "learn-socketio"
-  },
-  {
-    "url": "slidevs/learn-tailwind",
-    "name": "learn-tailwind"
-  },
-  {
-    "url": "slidevs/learn-typescript",
-    "name": "learn-typescript"
+    "name": "learn-typescript",
+    "url": "slidevs/learn-typescript"
   }
 ]
