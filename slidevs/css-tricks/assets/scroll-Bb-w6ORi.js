@@ -1,0 +1,1 @@
+import{o,b as s,e as t,f as a}from"./modules/vue-Ba7U_aMa.js";import{u as r}from"./slidev/context-_iZsAegV.js";const l={class:"slidev-layout scroll overflow-y-auto"},c={class:"my-auto"},u={__name:"scroll",setup(_){return r(),(e,n)=>(o(),s("div",l,[t("div",c,[a(e.$slots,"default")])]))}};export{u as _};
