@@ -27,7 +27,7 @@ addons:
 
 
 
-# Socket.io的使用
+# Socket.IO的使用
 
 支持多平台的双向和低延迟通信
 
