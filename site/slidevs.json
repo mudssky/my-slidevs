@@ -8,8 +8,16 @@
     "name": "learn-canvas"
   },
   {
+    "url": "slidevs/learn-electron",
+    "name": "learn-electron"
+  },
+  {
     "url": "slidevs/learn-rxjs",
     "name": "learn-rxjs"
+  },
+  {
+    "url": "slidevs/learn-socketio",
+    "name": "learn-socketio"
   },
   {
     "url": "slidevs/learn-tailwind",
