@@ -18,6 +18,21 @@ $sitePath = "$PSScriptRoot\site"
 $exluceProjectList = 'slidev-templates', 'slidev3', 'learn-socketio', 'learn-electron'
 
 function Get-TurboFilterParams() {
+	<#
+	.SYNOPSIS
+		将powershell package列表，转为 turbo filter 过滤的参数，过滤掉不想执行的项目
+	.DESCRIPTION
+		A longer description of the function, its purpose, common use cases, etc.
+	.NOTES
+		Information or caveats about the function e.g. 'This function is not supported in Linux'
+	.LINK
+		Specify a URI to a help page, this will show when Get-Help -Online is used.
+	.EXAMPLE
+		Test-MyTestFunction -Verbose
+		Explanation of the function or its result. You can include multiple examples with additional .EXAMPLE lines
+	#>
+	
+	
 	param(
 		[Parameter(Mandatory = $true)]
 		[string[]]
