@@ -32,6 +32,10 @@
       "path": "projects/slidevs/css-tricks",
       "name": "css-tricks",
     },
+    {
+      "path": "projects/slidevs/ai-sdk",
+      "name": "ai-sdk",
+    },
   ],
   "settings": {
     "powershell.cwd": "root",
