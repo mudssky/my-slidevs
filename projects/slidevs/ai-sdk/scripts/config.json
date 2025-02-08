@@ -1,3 +1,4 @@
 {
-  "deepseek_api_key": "sk-5f8091581a58486fa0592eb7d0eee280"
+  "deepseek_api_key": "sk-5f8091581a58486fa0592eb7d0eee280",
+  "deepseek_base_url": "https://api.deepseek.com"
 }
