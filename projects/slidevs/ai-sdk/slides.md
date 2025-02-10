@@ -464,3 +464,38 @@ ollama run example
 ```
 
 也可以导入Safetensors格式的模型，参考这个文档 https://github.com/ollama/ollama/blob/main/docs/import.md
+
+---
+title: ollama RESTful API
+level: 2
+---
+
+## ollama RESTful API
+
+```powershell
+$res = Invoke-WebRequest -Uri http://localhost:11434/api/chat `
+∙ -Method Post `
+∙ -ContentType "application/json" `
+∙ -Body (@{
+∙     model = "deepseek-r1:1.5b"
+∙     messages = @(
+∙         @{
+∙             role = "user"
+∙             content = "why is the sky blue?"
+∙         }
+∙     )
+∙ } | ConvertTo-Json -Compress)
+
+ [System.Text.Encoding]::UTF8.GetString($res.Content)
+
+```
+
+返回值是类似下面的
+
+```
+{"model":"deepseek-r1:1.5b","created_at":"2025-02-10T09:21:18.7953919Z","message":{"role":"assistant","content":"\u003cthink\u003e"},"done":false}
+{"model":"deepseek-r1:1.5b","created_at":"2025-02-10T09:21:18.8232843Z","message":{"role":"assistant","content":"\n\n"},"done":false}
+{"model":"deepseek-r1:1.5b","created_at":"2025-02-10T09:21:18.8517681Z","message":{"role":"assistant","content":"\u003c/think\u003e"},"done":false}
+{"model":"deepseek-r1:1.5b","created_at":"2025-02-10T09:21:18.8795073Z","message":{"role":"assistant","content":"\n\n"},"done":false}
+{"model":"deepseek-r1:1.5b","created_at":"2025-02-10T09:21:18.9068617Z","message":{"role":"assistant","content":"The"},"done":false}
+```
