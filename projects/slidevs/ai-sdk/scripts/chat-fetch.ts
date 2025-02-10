@@ -50,12 +50,11 @@ async function example2() {
     process.stdout.write(data.choices[0].message.content)
   }
 }
-
+const ai = createChat({
+  baseURL: Config.deepseek_base_url,
+  apiKey: Config.deepseek_api_key,
+})
 async function example3() {
-  const ai = createChat({
-    baseURL: Config.deepseek_base_url,
-    apiKey: Config.deepseek_api_key,
-  })
   const completion = await ai.createCompletions({
     model: 'deepseek-chat',
     message: [
@@ -67,6 +66,17 @@ async function example3() {
   })
   console.log(completion.choices[0].message.content)
 }
-// example1()
+
+example1()
 // example2()
-example3()
+// example3()
+// console.log(await ai.listModels())
+// console.log(await ai.getbalance())
+
+// {
+//   object: 'list',
+//   data: [
+//     { id: 'deepseek-chat', object: 'model', owned_by: 'deepseek' },
+//     { id: 'deepseek-reasoner', object: 'model', owned_by: 'deepseek' }
+//   ]
+// }

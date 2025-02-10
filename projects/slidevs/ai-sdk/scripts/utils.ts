@@ -23,6 +23,37 @@ export class MyOpenAI {
     const res: any = await req.json()
     return res
   }
+  async listModels() {
+    const req = await fetch(`${this.options.baseURL}/models`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${this.options.apiKey}`,
+      },
+    })
+    const res: any = await req.json()
+
+    return res
+  }
+
+  /**
+   * 查询账户余额
+   * @returns
+   */
+  async getbalance() {
+    const req = await fetch(`${this.options.baseURL}/user/balance`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${this.options.apiKey}`,
+      },
+    })
+    const res: any = await req.json()
+
+    return res
+  }
 }
 
 export function createChat(options: OpenAIOption) {
