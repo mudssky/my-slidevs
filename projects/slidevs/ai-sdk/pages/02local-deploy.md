@@ -31,7 +31,7 @@ level: 2
 执行命令运行模型
 
 ```shell
-ollama run deepseek-r1:671b
+ollama run deepseek-r1:1.5b
 ```
 
 之后我们可以在命令行和模型交互
@@ -46,7 +46,7 @@ level: 2
 查看模型信息
 
 ```shell
-ollama show llama3.2
+ollama show deepseek-r1:1.5b
 ```
 
 查看当前已有模型
@@ -64,7 +64,7 @@ ollama ps
 停止模型
 
 ```shell
-ollama stop llama3.2
+ollama stop deepseek-r1:1.5b
 ```
 
 ---
@@ -117,8 +117,8 @@ $res = Invoke-WebRequest -Uri http://localhost:11434/api/chat `
 ∙     )
 ∙ } | ConvertTo-Json -Compress)
 
- [System.Text.Encoding]::UTF8.GetString($res.Content)
-
+$resText = [System.Text.Encoding]::UTF8.GetString($res.Content)
+$resText
 ```
 
 返回值是类似下面的
