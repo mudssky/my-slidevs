@@ -48,8 +48,30 @@ layout: scroll
 > 和模型微调的区别是，不用改变模型本身，相当于给模型外挂了一个可以查找的知识库
 
 ---
+title: 基于AnythingLLM RAG知识库的部署
+level: 2
+---
+
+## 基于AnythingLLM RAG知识库的部署
+
+目前开源知识库有很多，比如MaxKB，Dify，FastGPT,RagFLow,AnythingLLM等等。
+
+其中AnythingLLM安装和部署比较简单，它是all-in-one的理念，而且强调零设置，不需要额外的配置。
+
+另外AnythingLLM docker版本支持多用户模式，分为管理员，经理和默认3个角色。。。
+还有它支持API接口调用，所以我认为已经能满足常见的使用场景了。
+
+直接在官网安装 https://anythingllm.com/ 桌面版即可
+
+我们本地采用ollama部署，所以第一步选择模型提供商时选择ollama
+
+有工作区的概念，工作区里可以添加多个对话，工作区可以上传文件，上传文件并且更新完成后，聊天时就可以查询知识库了。
+并且对话的时候会给出检索到知识的来源。。。
+
+---
 title: RAGFlow部署
 level: 2
+hide: true
 ---
 
 Ragflow是一种基于深厚文档理解的开源RAG引擎。
