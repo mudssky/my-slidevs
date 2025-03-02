@@ -59,7 +59,12 @@ level: 2
 其中AnythingLLM安装和部署比较简单，它是all-in-one的理念，而且强调零设置，不需要额外的配置。
 
 另外AnythingLLM docker版本支持多用户模式，分为管理员，经理和默认3个角色。。。
-还有它支持API接口调用，所以我认为已经能满足常见的使用场景了。
+
+- admin 完全访问整个系统
+- Manager 可以查看所有工作区并管理除 LLM、嵌入器和矢量数据库的设置之外的所有属性
+- Default 只能将聊天发送到明确添加到的工作区。看不到或编辑任何工作区或系统设置。  
+
+还有它支持**API接口调用**，所以我认为已经能满足常见的使用场景了。
 
 直接在官网安装 https://anythingllm.com/ 桌面版即可
 
@@ -67,6 +72,51 @@ level: 2
 
 有工作区的概念，工作区里可以添加多个对话，工作区可以上传文件，上传文件并且更新完成后，聊天时就可以查询知识库了。
 并且对话的时候会给出检索到知识的来源。。。
+
+---
+title: AnythingLLM服务端多人使用部署
+level: 2
+---
+之前使用的是桌面客户端，适合单人使用。
+也可以self-host，自己部署服务端，适合多人使用。  
+
+官方提供了docker部署的方式
+
+```shell
+ docker pull mintplexlabs/anythingllm
+```
+
+如果是windows环境，执行下面的命令运行镜像
+
+```powershell
+$env:STORAGE_LOCATION="$HOME\Documents\anythingllm"; `
+If(!(Test-Path $env:STORAGE_LOCATION)) {New-Item $env:STORAGE_LOCATION -ItemType Directory}; `
+If(!(Test-Path "$env:STORAGE_LOCATION\.env")) {New-Item "$env:STORAGE_LOCATION\.env" -ItemType File}; `
+docker run -d -p 3001:3001 `
+--cap-add SYS_ADMIN `
+-v "$env:STORAGE_LOCATION`:/app/server/storage" `
+-v "$env:STORAGE_LOCATION\.env:/app/server/.env" `
+-e STORAGE_DIR="/app/server/storage" `
+mintplexlabs/anythingllm;
+```
+
+---
+
+如果是linux/mac环境
+
+```shell
+export STORAGE_LOCATION=$HOME/anythingllm && \
+mkdir -p $STORAGE_LOCATION && \
+touch "$STORAGE_LOCATION/.env" && \
+docker run -d -p 3001:3001 \
+--cap-add SYS_ADMIN \
+-v ${STORAGE_LOCATION}:/app/server/storage \
+-v ${STORAGE_LOCATION}/.env:/app/server/.env \
+-e STORAGE_DIR="/app/server/storage" \
+mintplexlabs/anythingllm
+```
+
+管理员可以手动添加其他用户，或者通过api接口来批量新增用户。。。
 
 ---
 title: RAGFlow部署
