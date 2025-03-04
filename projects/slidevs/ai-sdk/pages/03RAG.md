@@ -1,7 +1,10 @@
 ---
 title: 搭建本地知识库
 level: 1
+layout: center
 ---
+
+# 搭建本地知识库
 
 ---
 title: 企业中AI的两种使用方式

@@ -47,3 +47,7 @@ src: ./pages/02local-deploy.md
 ---
 src: ./pages/03RAG.md
 ---
+
+---
+src: ./pages/04ai-agent.md
+---
