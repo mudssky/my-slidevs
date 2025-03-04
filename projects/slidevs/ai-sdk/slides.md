@@ -51,3 +51,7 @@ src: ./pages/03RAG.md
 ---
 src: ./pages/04ai-agent.md
 ---
+
+---
+src: ./pages/05ai-platform.md
+---
