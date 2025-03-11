@@ -1,4 +1,6 @@
 {
-  "deepseek_api_key": "sk-5f8091581a58486fa0592eb7d0eee280",
-  "deepseek_base_url": "https://api.deepseek.com"
+  "deepseek_api_key": "sk-8396bfc7df2b4f66b4c48cb5aef20f3d",
+  "deepseek_base_url": "https://api.deepseek.com",
+  "qwen_api_key": "sk-eaaab42e6522462db55dccfa3f4924d4",
+  "qwen_base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1"
 }
