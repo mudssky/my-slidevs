@@ -26,3 +26,11 @@ anythingLLM使用@agent,提供了网络爬取，网页浏览，保存文件之�
 但是目前使用deepseek api 似乎不能调用工具。
 
 https://docs.anythingllm.com/agent/usage
+
+---
+
+## vercel ai sdk 使用
+
+---
+
+## langchainjs 使用
