@@ -158,10 +158,12 @@ file_template = \
 对于 Web 搜索，`{search_results}、{cur_date} 和 {question}` 是参数。
 
 ---
+hideInToc: true
+---
 
 对于中文查询，我们使用提示符：
 
-```
+````
 search_answer_zh_template = \
 '''# 以下内容是基于用户发送的消息的搜索结果:
 {search_results}
@@ -180,8 +182,10 @@ search_answer_zh_template = \
 # 用户消息为：
 {question}'''
 
-```
+````
 
+---
+hideInToc: true
 ---
 
 英文查询
