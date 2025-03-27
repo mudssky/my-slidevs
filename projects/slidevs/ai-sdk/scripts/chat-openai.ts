@@ -35,6 +35,7 @@ async function example2() {
   })
 
   for await (const chunk of resStream) {
+    if (chunk.choices[0]?.finish_reason === 'stop') break
     process.stdout.write(chunk.choices[0]?.delta?.content || '')
   }
 }
