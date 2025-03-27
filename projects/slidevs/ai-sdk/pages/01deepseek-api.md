@@ -92,6 +92,35 @@ backgroundSize: contain
 DeepSeek-V3 0324 大幅提高了在推理类任务上的表现水平，在数学、代码类相关评测集上取得了超过 GPT-4.5 的得分成绩。
 
 ---
+title: DeepSeek-V3-0324更新内容
+level: 2
+layout: scroll
+---
+
+**`deepseek-chat` 模型升级为 DeepSeek-V3-0324：**
+
+- 推理能力增强
+  - 基准测试提升显著
+    - MMLU-Pro: 75.9 → 81.2 (+5.3)
+    - GPQA: 59.1 → 68.4 (+9.3)
+    - AIME: 39.6 → 59.4 (+19.8)
+    - LiveCodeBench: 39.2 → 49.2 (+10.0)
+- Web前端开发能力优化
+  - 代码生成准确率提升
+  - 生成的网页与游戏前端更加美观
+- 中文写作能力升级
+  - 风格与内容优化
+    - 实现与R1写作风格对齐
+    - 中长篇写作内容质量提升
+- 功能增强
+  - 多轮交互式改写能力提升
+  - 翻译质量与书信写作优化
+- 中文搜索能力优化
+  - 报告分析类请求优化，输出内容详实
+- Function Calling 能力改进
+  - Function Calling 准确率提升，修复 V3 之前的问题
+
+---
 title: 温度设置
 level: 2
 ---
@@ -104,7 +133,7 @@ api调用时，会按照以下公式转换
 ![温度公式](/assets/ai/temperature_fn.png)
 
 #### 温度的作用
-低温度：输出更确定性和一致性
+低温度：输出更确定性和一致性  
 高温度：输出更随机和创造性
 
 ---
@@ -204,7 +233,7 @@ DeepSeek的服务器承受高流量压力时，可能需要等待一段时间才
 - 非流式请求：持续返回空行
 - 流式请求：持续返回 SSE keep-alive 注释（: keep-alive）
 
-使用openaisdk时，非流式请求没有影响。
+使用openai sdk时，非流式请求没有影响。
 流式请求时，可能会超时，然后没有收到任何信息。
 
 我们也可以自己发送http请求，解析响应。
@@ -244,7 +273,7 @@ level: 2
 
 ## 直接调用API
 
-用openai的SDK调用会比较方便(方便兼容chatgpt)，也可以自己发请求来调用
+用openai的SDK调用会比较方便(很多模型厂商会兼容)，也可以自己发请求来调用
 
 常用的对话补全api `https://api.deepseek.com/chat/completions`
 
@@ -310,12 +339,15 @@ async function example2() {
 
 ---
 
+## FIM补全
+
 `https://api.deepseek.com/beta/completions`
 
 FIM（Fill-In-the-Middle）补全 API。
 
 也是补全api，用户可以提供前缀和后缀（可选），FIM 常用于内容续写、代码补全等场景。
-但是它是beta路径的，我认为一般不需要使用这个
+
+fim_completion.ipynb
 
 查看模型列表
 
@@ -336,6 +368,8 @@ title: 多轮对话
 level: 2
 ---
 
+## 多轮对话
+
 DeepSeek /chat/completions API 是一个“无状态” API，即服务端不记录用户请求的上下文，用户在每次请求时，需将之前所有对话历史拼接好后，传递给对话 API。
 
 也就是按照下面的例子，用户的role是user，deepseek的回复role是assistant，需要把对话历史都传入接口
@@ -349,24 +383,13 @@ DeepSeek /chat/completions API 是一个“无状态” API，即服务端不记
 ```
 
 ---
-
-对话前缀续写 和 FIM 补全 都是beta的功能，所以这里先跳过
-
-```js
-// 前缀续写
-messages = [
-    {"role": "user", "content": "Please write quick sort code"},
-    {"role": "assistant", "content": "```python\n", "prefix": True}
-]
-```
-
-[Continue](https://github.com/deepseek-ai/awesome-deepseek-integration/blob/main/docs/continue/README_cn.md) 是vscode的一个代码补全插件，可以配置使用deepseek的api来补全代码。它使用的就是FIM补全api。
-
----
 title: JSON输出
 level: 2
 layout: scroll
 ---
+
+## JSON输出
+
 在很多场景下，用户需要让模型严格按照 JSON 格式来输出，以实现输出的结构化，便于后续逻辑进行解析。
 
 <<< @/scripts/jsonOutput.ts
@@ -374,6 +397,7 @@ layout: scroll
 ---
 title: Function Calling
 level: 2
+hide: true
 ---
 
 目前文档里，提到这部分还不完善，暂时跳过  
@@ -384,7 +408,10 @@ https://api-docs.deepseek.com/zh-cn/guides/function_calling
 ---
 title: 上下文硬盘缓存
 level: 2
+layout: scroll
 ---
+
+## 上下文硬盘缓存
 
 DeepSeek API 上下文硬盘缓存技术对所有用户默认开启，用户无需修改代码即可享用。  
 用户的每一个请求都会触发硬盘缓存的构建。若后续请求与之前的请求在前缀上存在重复，则重复部分只需要从缓存中拉取，计入“缓存命中”。
@@ -411,3 +438,8 @@ messages: [
 ```
 
 此时前面重复的部分会被计入缓存命中
+
+在 DeepSeek API 的返回中，我们在 `usage` 字段中增加了两个字段，来反映请求的缓存命中情况：
+
+1. `prompt_cache_hit_tokens`：本次请求的输入中，缓存命中的 tokens 数（0.1 元 / 百万 tokens）
+2. `prompt_cache_miss_tokens`：本次请求的输入中，缓存未命中的 tokens 数（1 元 / 百万 tokens）
