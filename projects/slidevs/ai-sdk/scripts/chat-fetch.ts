@@ -67,8 +67,8 @@ async function example3() {
   console.log(completion.choices[0].message.content)
 }
 
-example1()
-// example2()
+// example1()
+example2()
 // example3()
 // console.log(await ai.listModels())
 // console.log(await ai.getbalance())

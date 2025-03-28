@@ -1,11 +1,10 @@
 ---
 level: 1
 title: 实战案例
+layout: center
 ---
 
-
-nextjs ai sdk
-https://github.com/vercel/ai
+# 实战案例
 
 ---
 

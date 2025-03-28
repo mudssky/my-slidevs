@@ -168,3 +168,5 @@ Begin!
 Question: 我有 17 美元，现在相当于多少人民币？
 Thought:
 ```
+
+langchain agent开发过程中，可以使用langsmith来调试 https://smith.langchain.com/

@@ -61,6 +61,7 @@ level: 2
 ---
 
 ## 模型选择
+
 deepseek-chat 目前是deepseek-v3  
 deepseek-reasoner 目前是deepseek-r1  
 r1是推理模型，会输出思维链，能看到模型的思考过程，思维链是计入token输出的。
@@ -73,16 +74,6 @@ r1是推理模型，会输出思维链，能看到模型的思考过程，思维
 | deepseek-reasoner | 64K        | 32K               | 8K              | 1元                                 | 4元                                | 16元(6)                      |
 
 > 上面是二月初写的，2025年3月27日的时间点，已经推出v3 0324版本，代码能力强于当前的r1，媲美claude3.7，gpt-4.5 并且加量不加价。
-
-<!-- ---
-layout: image-left
-image: /assets/ai/ds_v3_benchmark_hist_zh.jpeg
-backgroundSize: contain
----
-
-DeepSeek-V3 多项评测成绩超越了 Qwen2.5-72B 和 Llama-3.1-405B 等其他开源模型，并在性能上和世界顶尖的闭源模型 GPT-4o 以及 Claude-3.5-Sonnet 不分伯仲。 -->
-
-<!-- ![v3跑分](/assets/ai/ds_v3_benchmark_hist_zh.jpeg) -->
 
 ---
 layout: image-left
