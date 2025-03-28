@@ -126,9 +126,9 @@ Thought: 基于结果，下一步应该...
 
 ---
 
-### 工作流程图示
+## 工作流程图示
 
-```mermaid {scale: 0.8}
+```mermaid {scale: 0.7}
 %%{init: {'themeVariables': {'fontFamily': 'Arial'}}}%%
 graph TD
     Start[开始] --> Thought1["Thought: 分析问题"]
