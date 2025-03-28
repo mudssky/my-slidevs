@@ -86,7 +86,7 @@ DeepSeek-V3 0324 大幅提高了在推理类任务上的表现水平，在数学
 ---
 title: DeepSeek-V3-0324更新内容
 level: 2
-layout: scroll
+layout: two-cols
 ---
 
 **`deepseek-chat` 模型升级为 DeepSeek-V3-0324：**
@@ -104,6 +104,9 @@ layout: scroll
   - 风格与内容优化
     - 实现与R1写作风格对齐
     - 中长篇写作内容质量提升
+
+::right::
+
 - 功能增强
   - 多轮交互式改写能力提升
   - 翻译质量与书信写作优化
@@ -333,6 +336,13 @@ async function example2() {
 }
 ```
 
+<style>
+  .slidev-code {
+    font-size: 0.5em !important;
+    line-height: 0.5em!important;
+  }
+</style>
+
 ---
 
 ## FIM补全
@@ -382,6 +392,7 @@ DeepSeek /chat/completions API 是一个“无状态” API，即服务端不记
 title: JSON输出
 level: 2
 layout: scroll
+style: 'zoom: 60%'
 ---
 
 ## JSON输出
@@ -434,6 +445,8 @@ messages: [
 ```
 
 此时前面重复的部分会被计入缓存命中
+
+---
 
 在 DeepSeek API 的返回中，我们在 `usage` 字段中增加了两个字段，来反映请求的缓存命中情况：
 

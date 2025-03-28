@@ -54,7 +54,7 @@ layout: scroll
 layout: scroll
 ---
 
-```mermaid {scale: 1}
+```mermaid {scale: 0.5}
 graph TD
     subgraph 用户端
     A[用户提问] --> B[Embedding处理]
