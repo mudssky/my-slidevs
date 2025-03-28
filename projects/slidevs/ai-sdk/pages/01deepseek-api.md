@@ -5,7 +5,7 @@ title: API调用
 
 ## API调用
 
-deepseek api兼容了open的sdk，按照下面的方式调用api
+deepseek api兼容了openai的sdk，按照下面的方式调用api
 
 ```js
 // Please install OpenAI SDK first: `npm install openai`
