@@ -22,5 +22,16 @@ addons:
 ## 学习threejs
 
 ---
+layout: none
+---
 
 <Demo001start />
+
+---
+layout: none
+---
+<Demo002GUI />
+
+---
+
+测试
