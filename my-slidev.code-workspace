@@ -36,6 +36,10 @@
       "path": "projects/slidevs/ai-sdk",
       "name": "ai-sdk",
     },
+    {
+      "path": "projects/slidevs/learn-threejs",
+      "name": "learn-threejs",
+    },
   ],
   "settings": {
     "powershell.cwd": "root",

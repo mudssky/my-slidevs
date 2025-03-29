@@ -27,6 +27,7 @@
     "@mudssky/slidev-addon-default": "workspace:^",
     "@mudssky/slidev-theme-default": "workspace:^",
     "@slidev/cli": "^51.0.2",
+    "@slidev/client": "^51.4.0",
     "@slidev/theme-default": "^0.25.0",
     "@slidev/theme-seriph": "^0.25.0",
     "@types/node": "^22.10.7",
