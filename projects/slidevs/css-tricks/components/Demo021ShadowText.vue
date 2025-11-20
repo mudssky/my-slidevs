@@ -8,10 +8,11 @@
 <script lang="ts" setup></script>
 
 <style lang="scss">
+@use "sass:color";
 @function makelongrightshadow($color) {
   $val: 0px 0px $color;
   @for $i from 1 through 50 {
-    $color: fade-out(desaturate($color, 1%), 0.02);
+    $color: color.adjust(color.adjust($color, $saturation: -1%), $alpha: -0.02);
     $val:
       #{$val},
       #{$i}px #{$i}px #{$color};
@@ -22,7 +23,7 @@
 @function makelongleftshadow($color) {
   $val: 0px 0px $color;
   @for $i from 1 through 50 {
-    $color: fade-out(desaturate($color, 1%), 0.02);
+    $color: color.adjust(color.adjust($color, $saturation: -1%), $alpha: -0.02);
     $val:
       #{$val},
       -#{$i}px #{$i}px #{$color};

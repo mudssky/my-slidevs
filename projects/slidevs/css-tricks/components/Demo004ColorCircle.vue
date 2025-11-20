@@ -3,15 +3,15 @@
 </template>
 
 <style lang="scss" scoped>
+@use "sass:list";
+@use "sass:math";
+
 $colors: ();
 $totalStops: 20;
 
 @for $i from 0 through $totalStops {
-  $colors: append(
-    $colors,
-    hsl(calc($i * 360deg / $totalStops), 100%, 50%),
-    comma
-  );
+  $hue: math.div($i * 360deg, $totalStops);
+  $colors: list.append($colors, hsl($hue, 100%, 50%), $separator: comma);
 }
 
 .colors {
