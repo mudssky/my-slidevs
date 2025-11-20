@@ -1,5 +1,9 @@
 [
   {
+    "name": "ai-sdk",
+    "url": "slidevs/ai-sdk"
+  },
+  {
     "name": "css-tricks",
     "url": "slidevs/css-tricks"
   },
@@ -14,6 +18,10 @@
   {
     "name": "learn-tailwind",
     "url": "slidevs/learn-tailwind"
+  },
+  {
+    "name": "learn-threejs",
+    "url": "slidevs/learn-threejs"
   },
   {
     "name": "learn-typescript",
