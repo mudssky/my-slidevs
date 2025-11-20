@@ -21,11 +21,11 @@ const imgDomRef = ref()
 // const imgDomAfter = ref()
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function handleFileChange(e: any) {
-  let file = e.target.files[0]
+  const file = e.target.files[0]
   console.log({ img: file })
   const imgDom: HTMLImageElement = imgDomRef.value
   // 用img标签预览文件
-  let fr = new FileReader()
+  const fr = new FileReader()
   fr.readAsDataURL(file)
   fr.onload = () => {
     // base64ImageUrl.value = fr.result as string

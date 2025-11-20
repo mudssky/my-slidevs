@@ -42,7 +42,7 @@ function drawAnimationSolarSystemDemo(ctx: CanvasRenderingContext2D) {
 
     // Earth
     // 图片大小24*24
-    var time = new Date()
+    const time = new Date()
     // 旋转角度，按照一分钟公转一周计算。
     ctx.rotate(
       ((2 * Math.PI) / 60) * time.getSeconds() +

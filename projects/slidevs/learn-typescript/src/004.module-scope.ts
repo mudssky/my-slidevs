@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-inferrable-types */
+ 
 // 作用域问题
 // 使用上一个文件定义的变量会报错，因为默认使用的是全局作用域
 // const a = 123

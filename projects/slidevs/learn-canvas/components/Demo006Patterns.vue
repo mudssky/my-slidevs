@@ -30,7 +30,7 @@ const canvasBoardRef = ref()
  */
 function drawPatterns(ctx: CanvasRenderingContext2D) {
   // 创建新 image 对象，用作图案
-  var img = new Image()
+  const img = new Image()
   img.src = canvas_createpattern
   img.onload = function () {
     // 创建图案

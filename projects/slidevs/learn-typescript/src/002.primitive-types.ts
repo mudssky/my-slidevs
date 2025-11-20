@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-inferrable-types */
+ 
 /**
  * 原始数据类型
  */

@@ -19,7 +19,7 @@ function drawLineWidthDemo(ctx: CanvasRenderingContext2D) {
   }
 }
 function drawLineCapDemo(ctx: CanvasRenderingContext2D) {
-  var lineCap: CanvasLineCap[] = ['butt', 'round', 'square']
+  const lineCap: CanvasLineCap[] = ['butt', 'round', 'square']
 
   // 创建路径
   ctx.strokeStyle = '#09f'
@@ -43,7 +43,7 @@ function drawLineCapDemo(ctx: CanvasRenderingContext2D) {
 }
 
 function drawLineJoinDemo(ctx: CanvasRenderingContext2D) {
-  var lineJoin: CanvasLineJoin[] = ['round', 'bevel', 'miter']
+  const lineJoin: CanvasLineJoin[] = ['round', 'bevel', 'miter']
   ctx.lineWidth = 10
   for (let i = 0; i < lineJoin.length; i++) {
     ctx.lineJoin = lineJoin[i]
@@ -78,7 +78,7 @@ function drawLineJoinDemo2(ctx: CanvasRenderingContext2D) {
   ctx.beginPath()
   ctx.moveTo(0, 100)
   for (let i = 0; i < 24; i++) {
-    let dy = i % 2 == 0 ? 25 : -25
+    const dy = i % 2 == 0 ? 25 : -25
     ctx.lineTo(Math.pow(i, 1.5) * 2, 75 + dy)
   }
   ctx.stroke()

@@ -54,7 +54,7 @@ function multiRequestPromise(urls = [], maxNum: number = 2) {
 
   return new Promise((resolve, reject) => {
     function next() {
-      let current = count++ // 处理边界条件
+      const current = count++ // 处理边界条件
       if (current >= length) {
         // 请求全部完成就将promise置为成功状态, 然后将result作为promise值返回
         !result.includes(false) && resolve(result)

@@ -39,14 +39,14 @@ function drawLoopPark(ctx: CanvasRenderingContext2D) {
   const y = 0
 
   // 图片每次移动距离
-  var dx = 0.75
+  const dx = 0.75
   // 绘制图片放大倍数
   const scale = 1.0
   // 绘制图片的宽高
   let imgW: number
   let imgH: number
   // 计算图片1位移
-  var x = 0
+  let x = 0
 
   // 清理图片的大小
   let clearX: number

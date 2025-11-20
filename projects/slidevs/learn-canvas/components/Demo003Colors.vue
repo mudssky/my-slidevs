@@ -73,7 +73,7 @@ function drawRGBADemo(ctx: CanvasRenderingContext2D) {
   ctx.fillRect(0, 112.5, 150, 37.5)
 
   // 画半透明矩形
-  for (var i = 0; i < 10; i++) {
+  for (let i = 0; i < 10; i++) {
     ctx.fillStyle = 'rgba(255,255,255,' + (i + 1) / 10 + ')'
     for (let j = 0; j < 4; j++) {
       ctx.fillRect(5 + i * 14, 5 + j * 37.5, 14, 27.5)

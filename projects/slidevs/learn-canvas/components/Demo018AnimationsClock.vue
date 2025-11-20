@@ -66,9 +66,9 @@ function drawClock(ctx: CanvasRenderingContext2D) {
     }
     ctx.restore()
 
-    var sec = now.getSeconds()
-    var min = now.getMinutes()
-    var hr = now.getHours()
+    const sec = now.getSeconds()
+    const min = now.getMinutes()
+    let hr = now.getHours()
     hr = hr >= 12 ? hr - 12 : hr
 
     ctx.fillStyle = 'black'

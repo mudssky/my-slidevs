@@ -6,7 +6,16 @@ import globals from 'globals'
 import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
-  { ignores: ['**/*.d.ts', '**/coverage/**', '**/dist/**', '**/.vitepress/cache/**', 'node_modules/**', 'projects/slidevs/**'] },
+  {
+    ignores: [
+      '**/*.d.ts',
+      '**/coverage/**',
+      '**/dist/**',
+      '**/.vitepress/cache/**',
+      'node_modules/**',
+      // 'projects/slidevs/**',
+    ],
+  },
   {
     extends: [
       js.configs.recommended,

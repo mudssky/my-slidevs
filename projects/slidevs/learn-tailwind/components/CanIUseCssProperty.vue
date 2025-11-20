@@ -1,5 +1,5 @@
 <template>
-  <CanIUse :src="url" :buttonText="'can I use ' + p.cssProperty" />
+  <CanIUse :src="url" :button-text="'can I use ' + p.cssProperty" />
 </template>
 
 <script lang="ts" setup>
