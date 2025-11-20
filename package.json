@@ -18,9 +18,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "element-plus": "^2.8.6",
+    "element-plus": "^2.11.8",
     "lodash": "^4.17.21",
-    "vue": "^3.5.12"
+    "vue": "^3.5.24"
   },
   "devDependencies": {
     "@mudssky/prettier-config-custom": "^1.1.0",
@@ -30,25 +30,25 @@
     "@slidev/client": "^51.4.0",
     "@slidev/theme-default": "^0.25.0",
     "@slidev/theme-seriph": "^0.25.0",
-    "@types/node": "^22.10.7",
+    "@types/node": "^24.10.1",
     "@typescript-eslint/eslint-plugin": "^6.20.0",
     "@typescript-eslint/parser": "^6.20.0",
-    "autoprefixer": "^10.4.20",
+    "autoprefixer": "^10.4.22",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-vue": "^9.21.0",
+    "eslint-plugin-vue": "^10.5.1",
     "gh-pages": "^6.3.0",
-    "playwright-chromium": "^1.49.1",
-    "postcss": "^8.5.1",
-    "prettier": "^3.4.2",
-    "sass": "^1.83.4",
+    "playwright-chromium": "^1.56.1",
+    "postcss": "^8.5.6",
+    "prettier": "^3.6.2",
+    "sass": "^1.94.2",
     "tailwindcss": "^3.4.17",
     "turbo": "^2.3.3",
-    "typescript": "^5.7.3",
-    "unocss": "^0.62.4",
-    "unplugin-auto-import": "^0.18.3",
-    "unplugin-vue-components": "^0.27.4",
-    "vitepress": "1.3.2"
+    "typescript": "^5.9.3",
+    "unocss": "^66.5.7",
+    "unplugin-auto-import": "^20.2.0",
+    "unplugin-vue-components": "^30.0.0",
+    "vitepress": "1.6.4"
   },
   "packageManager": "pnpm@8.15.9+sha512.499434c9d8fdd1a2794ebf4552b3b25c0a633abcee5bb15e7b5de90f32f47b513aca98cd5cfd001c31f0db454bc3804edccd578501e4ca293a6816166bbd9f81"
 }
