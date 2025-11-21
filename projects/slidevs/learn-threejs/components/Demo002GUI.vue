@@ -79,7 +79,7 @@ onMounted(() => {
     otherFolder.add(obj, 'bbb')
     otherFolder.add(obj, 'ccc').min(-10).max(10).step(0.5)
     otherFolder.add(obj, 'ddd', ['111', '222', '333'])
-    otherFolder.add(obj, 'fff', { Aaa: 0, Bbb: 0.1, Ccc: 5 })
+    // otherFolder.add(obj, 'fff', { Aaa: 0, Bbb: 0.1, Ccc: 5 })
     otherFolder.add(obj, 'logic')
     otherFolder.onChange((value) => {
       console.log(value)
@@ -122,6 +122,7 @@ onMounted(() => {
     // 将渲染器的canvas元素添加到DOM中
     domRef.value.appendChild(renderer.domElement)
     // 添加轨道控制器（允许用鼠标旋转/缩放场景）
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const controls = new OrbitControls(camera, renderer.domElement)
   }
 })
