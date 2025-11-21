@@ -17,6 +17,10 @@
       "name": "slidev-addon-default",
     },
     {
+      "path": "packages/tsconfig",
+      "name": "tsconfig",
+    },
+    {
       "path": "projects/slidevs/learn-tailwind",
       "name": "learn-tailwind",
     },
