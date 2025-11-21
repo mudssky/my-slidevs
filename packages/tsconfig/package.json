@@ -1,0 +1,17 @@
+{
+  "name": "@my-slidev/tsconfig",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "build": "pwsh -File ./build.ps1",
+    "format": "prettier --write .",
+    "postbuild": "pnpm format"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "strip-json-comments-cli": "^3.0.0"
+  }
+}
