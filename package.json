@@ -30,6 +30,7 @@
     "@mudssky/prettier-config-custom": "^1.1.0",
     "@mudssky/slidev-addon-default": "workspace:^",
     "@mudssky/slidev-theme-default": "workspace:^",
+    "@my-slidev/tsconfig": "workspace:^",
     "@slidev/cli": "^52.9.1",
     "@slidev/client": "^52.9.1",
     "@slidev/theme-default": "^0.25.0",
