@@ -22,6 +22,12 @@ addons:
 ## 学习threejs
 
 ---
+
+## 目录
+
+<Toc columns="4" />
+
+---
 src: ./pages/01-install.md
 ---
 
