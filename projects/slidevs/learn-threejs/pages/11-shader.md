@@ -14,4 +14,8 @@ title: Shader 入门
 
 ### 示例
 
+---
+layout: none
+---
+
 <ShaderMaterialIntro />

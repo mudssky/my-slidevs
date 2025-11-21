@@ -14,4 +14,8 @@ title: 相机与交互控制
 
 ### 示例
 
+---
+layout: none
+---
+
 <ControlsOrbitLimits />

@@ -14,4 +14,8 @@ title: 高级渲染与性能优化
 
 ### 示例
 
+---
+layout: none
+---
+
 <InstancedLOD />

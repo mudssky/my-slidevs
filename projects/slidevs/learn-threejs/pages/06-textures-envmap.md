@@ -14,4 +14,8 @@ title: 纹理与环境贴图
 
 ### 示例
 
+---
+layout: none
+---
+
 <EnvMapReflectRefract />

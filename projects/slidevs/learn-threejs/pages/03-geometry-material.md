@@ -14,4 +14,8 @@ title: 几何体与材质
 
 ### 示例
 
+---
+layout: none
+---
+
 <GeometryShowcase />

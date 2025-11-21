@@ -16,7 +16,7 @@ title: 基础闭环与场景渲染
 ### 示例
 
 ---
-
-## layout: none
+layout: none
+---
 
 <Demo001start />

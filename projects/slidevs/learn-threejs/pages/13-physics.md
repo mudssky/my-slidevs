@@ -14,4 +14,8 @@ title: 物理引擎集成（可选）
 
 ### 示例
 
+---
+layout: none
+---
+
 <PhysicsStepDemo />

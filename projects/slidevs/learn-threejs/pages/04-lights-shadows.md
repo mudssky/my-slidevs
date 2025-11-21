@@ -14,4 +14,8 @@ title: 光源与阴影
 
 ### 示例
 
+---
+layout: none
+---
+
 <LightsAndShadows />
