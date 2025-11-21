@@ -7,7 +7,8 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import * as THREE from 'three'
 import { useSlideContext } from '@slidev/client'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { useGuiVisibility } from '../hooks/useGuiVisibility'
+import { useGuiAutoVisibility } from '../hooks'
+
 const domRef = ref()
 const slideContext = useSlideContext()
 let stop = false
@@ -53,8 +54,8 @@ onMounted(() => {
   const actionA = mixer.clipAction(clipA)
   const actionB = mixer.clipAction(clipB)
   actionA.play()
-  const { create } = useGuiVisibility(domRef)
-  const gui = create()
+  const { createGui } = useGuiAutoVisibility(domRef)
+  const gui = createGui()
   gui.add({ blend: () => actionA.crossFadeTo(actionB, 0.5, false) }, 'blend')
   const clock = new THREE.Clock()
   function animate() {

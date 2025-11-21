@@ -2,18 +2,18 @@ import { onUnmounted } from 'vue'
 import type { Ref } from 'vue'
 import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min'
 
-export type GuiVisibilityOptions = {
+export type GuiAutoVisibilityOptions = {
   threshold?: number
 }
 
-export function useGuiVisibility(
+export function useGuiAutoVisibility(
   domRef: Ref<HTMLElement | null | undefined>,
-  options: GuiVisibilityOptions = {},
+  options: GuiAutoVisibilityOptions = {},
 ) {
   let observer: IntersectionObserver | null = null
   let gui: GUI | null = null
 
-  const create = () => {
+  const createGui = () => {
     gui = new GUI()
     const el = domRef.value as HTMLElement | null
     observer = new IntersectionObserver(
@@ -36,5 +36,5 @@ export function useGuiVisibility(
     }
   })
 
-  return { create }
+  return { createGui }
 }

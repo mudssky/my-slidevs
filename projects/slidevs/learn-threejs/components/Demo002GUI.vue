@@ -7,7 +7,8 @@ import { ref, onMounted } from 'vue'
 import * as THREE from 'three'
 import { useSlideContext } from '@slidev/client'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { useGuiVisibility } from '../hooks/useGuiVisibility'
+import { useGuiAutoVisibility } from '../hooks'
+
 const domRef = ref()
 const slideContext = useSlideContext()
 
@@ -22,8 +23,8 @@ onMounted(() => {
     slideContext.$slidev.configs.canvasWidth /
       slideContext.$slidev.configs.aspectRatio || window.innerHeight
 
-  const { create } = useGuiVisibility(domRef)
-  const gui = create()
+  const { createGui } = useGuiAutoVisibility(domRef)
+  const gui = createGui()
   // 2. 创建立方体
   {
     // 创建立方体几何体（宽高深各100单位）

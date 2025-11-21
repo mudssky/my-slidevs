@@ -7,7 +7,8 @@ import { ref, onMounted } from 'vue'
 import * as THREE from 'three'
 import { useSlideContext } from '@slidev/client'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { useGuiVisibility } from '../hooks/useGuiVisibility'
+import { useGuiAutoVisibility } from '../hooks'
+
 const domRef = ref()
 const slideContext = useSlideContext()
 
@@ -42,8 +43,8 @@ onMounted(() => {
     camera2.updateProjectionMatrix()
     cameraHelper.update()
   }
-  const { create } = useGuiVisibility(domRef)
-  const gui = create()
+  const { createGui } = useGuiAutoVisibility(domRef)
+  const gui = createGui()
   gui.add(camera2, 'fov', [30, 60, 10]).onChange(onChange)
   gui
     .add(camera2, 'aspect', {

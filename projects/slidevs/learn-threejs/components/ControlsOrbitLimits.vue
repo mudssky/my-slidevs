@@ -7,7 +7,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import * as THREE from 'three'
 import { useSlideContext } from '@slidev/client'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { useGuiVisibility } from '../hooks/useGuiVisibility'
+import { useGuiAutoVisibility } from '../hooks/useGuiVisibility'
 const domRef = ref()
 const slideContext = useSlideContext()
 let stop = false
@@ -31,8 +31,8 @@ onMounted(() => {
   controls.maxPolarAngle = Math.PI * 0.95
   controls.minDistance = 100
   controls.maxDistance = 500
-  const { create } = useGuiVisibility(domRef)
-  const gui = create()
+  const { createGui } = useGuiAutoVisibility(domRef)
+  const gui = createGui()
   gui.add(controls, 'maxPolarAngle', 0.1, Math.PI)
   gui.add(controls, 'minDistance', 10, 400)
   gui.add(controls, 'maxDistance', 50, 800)
