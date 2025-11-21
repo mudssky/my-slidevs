@@ -15,9 +15,9 @@
   },
   "dependencies": {
     "@mudssky/slidev-style": "workspace:*",
-    "three": "^0.175.0"
+    "three": "^0.181.2"
   },
   "devDependencies": {
-    "@types/three": "^0.175.0"
+    "@types/three": "^0.181.0"
   }
 }
