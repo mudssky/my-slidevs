@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@mudssky/slidev-style": "workspace:*",
+    "@my-slidev/tsconfig": "workspace:^",
     "three": "^0.181.2"
   },
   "devDependencies": {

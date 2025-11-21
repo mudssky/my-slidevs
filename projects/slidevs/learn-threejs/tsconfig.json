@@ -1,0 +1,9 @@
+{
+  "extends": "@my-slidev/tsconfig/base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
+  }
+}

@@ -208,6 +208,9 @@ importers:
       '@mudssky/slidev-style':
         specifier: workspace:*
         version: link:../../../packages/slidev-style
+      '@my-slidev/tsconfig':
+        specifier: workspace:^
+        version: link:../../../packages/tsconfig
       three:
         specifier: ^0.181.2
         version: 0.181.2
