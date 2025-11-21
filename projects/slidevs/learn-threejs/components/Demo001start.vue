@@ -85,6 +85,7 @@ onMounted(() => {
     // 将渲染器的canvas元素添加到DOM中
     domRef.value.appendChild(renderer.domElement)
     // 添加轨道控制器（允许用鼠标旋转/缩放场景）
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const controls = new OrbitControls(camera, renderer.domElement)
   }
 })
