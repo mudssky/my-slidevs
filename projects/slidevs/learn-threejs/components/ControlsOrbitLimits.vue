@@ -7,7 +7,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import * as THREE from 'three'
 import { useSlideContext } from '@slidev/client'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { useGuiAutoVisibility } from '../hooks/useGuiVisibility'
+import { useGuiAutoVisibility } from '@/hooks'
 const domRef = ref()
 const slideContext = useSlideContext()
 let stop = false
