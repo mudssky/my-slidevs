@@ -4,8 +4,27 @@ title: 安装与最小闭环
 
 ### 安装
 
-- 在工作区根或演示目录执行 `pnpm install` 安装依赖。
-- 运行开发：`pnpm dev`；构建导出：`pnpm slidev:export`。
+```shell
+pnpm add three
+pnpm add @types/three -D
+```
+
+如果在html中使用threejs
+
+```html
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://esm.sh/three@0.174.0/build/three.module.js"
+  }
+}
+</script>
+<script type="module">
+// 这里写threejs的代码
+</script>
+```
+
+---
 
 ### 最小闭环
 
