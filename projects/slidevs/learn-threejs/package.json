@@ -11,7 +11,8 @@
     "slidev:exportAllFormat": "npx slidev export --format png --output slides-export/png && npx slidev export --format pdf --output slides-export/pdf ",
     "slidev:exportAllFormatWithClicks": "npx slidev export --format png --output slides-export/png-clicks --with-clicks && npx slidev export --format pdf --output slides-export/pdf-clicks --with-clicks",
     "start": "pnpm dev",
-    "build:base": "slidev build --base /my-slidevs/slidevs/learn-threejs"
+    "build:base": "slidev build --base /my-slidevs/slidevs/learn-threejs",
+    "format": "prettier '**/*.{js,ts,vue}' --write"
   },
   "dependencies": {
     "@mudssky/slidev-style": "workspace:*",
