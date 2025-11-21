@@ -22,6 +22,70 @@ addons:
 ## 学习threejs
 
 ---
+src: ./pages/01-install.md
+---
+
+---
+src: ./pages/02-basics.md
+---
+
+---
+src: ./pages/03-geometry-material.md
+---
+
+---
+src: ./pages/04-lights-shadows.md
+---
+
+---
+src: ./pages/05-camera-controls.md
+---
+
+---
+src: ./pages/06-textures-envmap.md
+---
+
+---
+src: ./pages/07-loaders-gltf.md
+---
+
+---
+src: ./pages/08-animation.md
+---
+
+---
+src: ./pages/09-raycaster.md
+---
+
+---
+src: ./pages/10-postprocessing.md
+---
+
+---
+src: ./pages/11-shader.md
+---
+
+---
+src: ./pages/12-advanced-performance.md
+---
+
+---
+src: ./pages/13-physics.md
+---
+
+---
+src: ./pages/14-debug-best-practices.md
+---
+
+---
+src: ./pages/15-case-study.md
+---
+
+---
+src: ./pages/16-resources.md
+---
+
+---
 title: thre
 ---
 ---
