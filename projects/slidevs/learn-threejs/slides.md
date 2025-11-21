@@ -30,8 +30,11 @@ layout: none
 ---
 layout: none
 ---
+
 <Demo002GUI />
 
 ---
+layout: none
+---
 
-测试
+<Demo003PerspectiveCamera />
