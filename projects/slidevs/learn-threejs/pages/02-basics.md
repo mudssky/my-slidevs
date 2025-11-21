@@ -235,3 +235,48 @@ layout: none
 ---
 
 <Demo002GUI />
+
+---
+level: 2
+---
+
+## 透视相机和视锥体
+
+CameraHelper 可以可视化相机的视锥体，帮助调试投影与阴影相机。
+
+### 核心参数
+
+- `fov`：视野角，越大透视感越强、越“广角”。
+- `aspect`：宽高比，应与画布一致，否则画面会被拉伸。
+- `near` / `far`：近/远裁剪面，只有落在两者之间的物体才会被渲染。
+
+### 视锥体是什么
+
+- 透视相机会形成一个“金字塔形”的可见空间，这个体积就是视锥体。
+- 物体位于视锥体之外会“看不见”，位于 `near` 之前或 `far` 之后也会被裁剪。
+
+```ts
+import * as THREE from 'three'
+const camera = new THREE.PerspectiveCamera(60, 16 / 9, 1, 1000)
+const helperCamera = new THREE.PerspectiveCamera(40, 16 / 9, 50, 300)
+const helper = new THREE.CameraHelper(helperCamera)
+scene.add(helper)
+helperCamera.updateProjectionMatrix()
+helper.update()
+```
+
+---
+hideInToc: true
+---
+
+### 常见问题与经验法则
+
+- 画面被拉伸：`aspect` 与画布不一致，更新宽高比并调用 `updateProjectionMatrix()`。
+- 物体莫名消失：检查是否被 `near`/`far` 裁剪或被相机背对。
+- 深度闪烁（Z-Fighting）：`near` 与 `far` 跨度过大，尽量缩小范围以提升深度精度。
+
+---
+layout: none
+---
+
+<Demo003PerspectiveCamera />
