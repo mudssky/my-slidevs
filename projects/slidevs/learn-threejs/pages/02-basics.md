@@ -21,6 +21,8 @@ level: 2
 - `Light`：为受光材质提供照明（基础材质不受光）
 
 ---
+level: 2
+---
 
 ### 关系与流程
 
@@ -122,6 +124,9 @@ layout: none
 <Demo001start />
 
 ---
+title: 自适应与像素比
+level: 2
+---
 
 ### 自适应与像素比
 容器尺寸变化时，需要更新相机的宽高比（aspect）与渲染器的尺寸（setSize）。实现自适应。  
@@ -138,8 +143,95 @@ function resize() {
 window.addEventListener('resize', resize)
 ```
 
-### 坐标与默认约定
+---
+level: 2
+---
 
-- 采用右手坐标系：X 向右、Y 向上、Z 指向屏幕外
-- 相机默认朝向负 Z；常将相机置于正 Z 观察原点
-- 若相机与物体重合或物体过大，可能不可见，应移动相机或物体
+## 调试工具
+
+### 1. 内置辅助对象（Helpers）
+
+- `AxesHelper`：显示坐标轴，避免方向迷失。
+- `GridHelper`：地面参照，判断位置与比例。
+- `CameraHelper`：可视化相机视锥体，调试投影与阴影相机。
+
+```ts
+const axes = new THREE.AxesHelper(200)
+const grid = new THREE.GridHelper(600, 20)
+scene.add(axes)
+scene.add(grid)
+```
+
+### 2. GUI 控制面板（lil-gui）
+
+- 运行时调整变量（材质颜色、相机参数、灯光强度等）。
+- 推荐使用 `lil-gui`；
+
+```ts
+import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min'
+const gui = new GUI()
+gui.add(mesh.position, 'x').min(-100).max(100).step(10)
+gui.addColor(material, 'color')
+```
+
+---
+hideInToc: true
+---
+
+### 3. 浏览器扩展（DevTools）
+
+- Three.js Developer Tools：在 DevTools 中查看 Scene Graph，直接检查 Mesh/Material。
+- Spector.js：捕捉渲染帧，分析 Draw Calls、着色器与纹理，定位性能瓶颈。
+
+### 4. 性能监控
+
+- `Stats.js`：FPS/MS/内存，可直观观察性能波动。
+- `renderer.info`：几何体/纹理数量与 `calls`（Draw Calls）统计。
+
+```ts
+import Stats from 'three/examples/jsm/libs/stats.module.js'
+const stats = new Stats()
+document.body.appendChild(stats.dom)
+function animate() {
+  stats.begin()
+  renderer.render(scene, camera)
+  stats.end()
+  requestAnimationFrame(animate)
+}
+animate()
+console.log(renderer.info)
+```
+
+---
+hideInToc: true
+---
+
+### 5. Shader 调试
+
+- 颜色输出法：将数据映射到片元颜色，直观排查数值是否正确。
+- 线框模式：`ShaderMaterial` 设置 `wireframe: true`，观察顶点位移与几何结构。
+
+```glsl
+// 片元着色器中输出 UV 以调试
+gl_FragColor = vec4(vUv, 0.0, 1.0);
+```
+
+### 6. React 生态（R3F）补充
+
+- Leva（`useControls`）：更现代的 GUI 控制。
+- `@react-three/drei`：`<Stats />`、`<OrbitControls />` 等辅助组件。
+- `r3f-perf`：更丰富的性能面板与统计。
+
+### 总结建议
+
+- 起步：加入 `AxesHelper` 与 `OrbitControls`，确保可见与可交互。
+- 材质/光照开发：用 `lil-gui` 实时调参提高迭代效率。
+- “看不见”问题：用 DevTools 检查是否在 Scene、是否透明、是否缩放为 0。
+- 卡顿优化：挂 `Stats.js`、查看 `renderer.info`，必要时用 Spector.js 深度分析。
+
+---
+hideInToc: true
+layout: none
+---
+
+<Demo002GUI />
