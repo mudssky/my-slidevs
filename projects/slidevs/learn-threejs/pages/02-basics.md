@@ -124,6 +124,8 @@ layout: none
 ---
 
 ### 自适应与像素比
+容器尺寸变化时，需要更新相机的宽高比（aspect）与渲染器的尺寸（setSize）。实现自适应。  
+slidev中会用css进行画布缩放，所以不用加这行代码
 
 ```ts
 function resize() {
