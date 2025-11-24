@@ -20,7 +20,7 @@
 
 ## 属性
 
-- `content: string` Mermaid 图描述文本（必填）
+- `content?: string` Mermaid 图描述文本（可选；为空时使用 slot）
 - `config?: object` Mermaid 初始化配置（将合并到 `mermaid.initialize`）
 - `theme?: string` Mermaid 主题（如 `default`、`dark`、`neutral`、`forest`），默认 `default`
 - `securityLevel?: 'sandbox'|'strict'|'loose'|'antiscript'` 默认 `strict`
@@ -30,12 +30,14 @@
 - `initialZoom?: number` 初始缩放，默认 `1`
 - `autoFit?: boolean` 渲染后自动适配容器，默认 `true`
 - `downloadName?: string` 下载导出的基础文件名，默认 `mermaid-graph`
+- `renderMode?: 'svg'|'transform'` 缩放模式，默认 `svg`（清晰度更佳）；`transform` 为旧兼容模式
+- `exportScale?: number` PNG 导出倍率，默认 `2`（提高导出清晰度）
 
 ## 交互与下载
 
-- 工具栏按钮：`-`、`+`、`Reset`、`Fit`、`SVG`、`PNG`
-- 鼠标滚轮缩放，按住拖拽平移
-- 点击 `SVG` 下载原始 SVG；点击 `PNG` 将当前图转为 PNG 下载
+- 工具栏按钮：`-`、`+`、`Reset`、`Fit`、`Fullscreen`、`SVG`、`PNG`
+- 鼠标滚轮缩放，按住拖拽平移；双击进入/退出全屏；`ESC` 退出全屏
+- 点击 `SVG` 下载原始 SVG；点击 `PNG` 将当前图转为 PNG 下载（受 `exportScale` 影响）
 
 ## Slot 传入内容
 当你更偏好在 Markdown 中直接书写图内容时，使用默认 slot：
@@ -55,7 +57,7 @@ sequenceDiagram
 ## 兼容与安全
 
 - 默认 `securityLevel: 'strict'`，降低潜在 XSS 风险；如你能保证内容安全可改为 `loose` 或 `antiscript`
-- 大图渲染采用 CSS `transform`，交互流畅；当 `viewBox` 存在时以其为导出尺寸，否则回退到元素边界尺寸
+- 为提高清晰度，默认使用 `renderMode='svg'`（基于 `viewBox` 的原生缩放与平移，放大后不发糊）；可切回 `transform` 以保留旧行为
 
 ## 示例内容
 
