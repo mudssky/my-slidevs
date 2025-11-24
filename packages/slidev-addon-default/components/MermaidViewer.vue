@@ -9,7 +9,7 @@
       @mousemove="onPointerMove"
       @mouseup="onPointerUp"
       @mouseleave="onPointerUp"
-      @dblclick="toggleFullscreen"
+      @dblclick.self="toggleFullscreen"
       @contextmenu.prevent
     >
       <MermaidViewerToolbar
@@ -52,6 +52,7 @@
         class="content"
         :style="contentStyle"
         :key="isFullscreen ? 'full' : 'inline'"
+        @wheel.prevent="onWheel"
       >
         <pre ref="elRef"><slot v-if="!content" /></pre>
       </div>
@@ -154,7 +155,10 @@ const {
 })
 
 const { downloadSVG, downloadPNG } = useDownloads({
-  hostRef: elRef,
+  containerInlineRef,
+  containerFullRef,
+  isFullscreen,
+  svgRef,
   downloadName: p.downloadName,
   exportScale: p.exportScale,
 })

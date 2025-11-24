@@ -56,7 +56,19 @@ export function useMermaidRender(options: {
     if (svg instanceof SVGSVGElement) {
       svgRef.value = svg
       const base = svg.viewBox.baseVal
-      vb.value = { x: base.x, y: base.y, w: base.width, h: base.height }
+      let vx = base.x
+      let vy = base.y
+      let vw = base.width
+      let vh = base.height
+      if (!vw || !vh) {
+        const bbox = svg.getBBox()
+        vx = 0
+        vy = 0
+        vw = Math.max(1, Math.ceil(bbox.width))
+        vh = Math.max(1, Math.ceil(bbox.height))
+        svg.setAttribute('viewBox', `${vx} ${vy} ${vw} ${vh}`)
+      }
+      vb.value = { x: vx, y: vy, w: vw, h: vh }
       vbOrig.value = { ...vb.value }
       svg.style.width = '100%'
       svg.style.height = '100%'

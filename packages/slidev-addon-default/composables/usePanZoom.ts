@@ -30,11 +30,11 @@ export function usePanZoom(options: {
   function applyViewBox() {
     const s = options.svgRef.value
     if (!s) return
-    const b = s.viewBox.baseVal
-    b.x = Math.round(options.vb.value.x)
-    b.y = Math.round(options.vb.value.y)
-    b.width = Math.max(1, options.vb.value.w)
-    b.height = Math.max(1, options.vb.value.h)
+    const x = Math.round(options.vb.value.x)
+    const y = Math.round(options.vb.value.y)
+    const w = Math.max(1, options.vb.value.w)
+    const h = Math.max(1, options.vb.value.h)
+    s.setAttribute('viewBox', `${x} ${y} ${w} ${h}`)
   }
 
   function fit() {
@@ -45,7 +45,10 @@ export function usePanZoom(options: {
       options.svgRef.value ??
       (container?.querySelector('svg') as SVGElement | null)
     if (!container || !svg) return
-    if (options.renderMode === 'svg' && options.svgRef.value) {
+    if (options.renderMode === 'svg') {
+      if (!options.svgRef.value && svg instanceof SVGSVGElement) {
+        options.svgRef.value = svg
+      }
       const b = options.vbOrig.value
       options.vb.value = { ...b }
       applyViewBox()
@@ -84,6 +87,13 @@ export function usePanZoom(options: {
 
   function zoomIn() {
     if (options.renderMode === 'svg') {
+      const container = options.isFullscreen.value
+        ? options.containerFullRef.value
+        : options.containerInlineRef.value
+      if (!options.svgRef.value && container) {
+        const found = container.querySelector('svg') as SVGSVGElement | null
+        if (found) options.svgRef.value = found
+      }
       const prev = scale.value
       const next = Math.min(
         options.maxZoom,
@@ -101,6 +111,13 @@ export function usePanZoom(options: {
 
   function zoomOut() {
     if (options.renderMode === 'svg') {
+      const container = options.isFullscreen.value
+        ? options.containerFullRef.value
+        : options.containerInlineRef.value
+      if (!options.svgRef.value && container) {
+        const found = container.querySelector('svg') as SVGSVGElement | null
+        if (found) options.svgRef.value = found
+      }
       const prev = scale.value
       const next = Math.min(
         options.maxZoom,
@@ -117,40 +134,45 @@ export function usePanZoom(options: {
   }
 
   function onWheel(e: WheelEvent) {
-    if (options.renderMode === 'svg' && options.svgRef.value) {
-      const prev = scale.value
-      const next = Math.min(
-        options.maxZoom,
-        Math.max(options.minZoom, prev * (e.deltaY < 0 ? 1.1 : 0.9)),
-      )
-      const factor = next / prev
-      const container = options.isFullscreen.value
-        ? options.containerFullRef.value
-        : options.containerInlineRef.value
-      if (!container) return
-      const rect = container.getBoundingClientRect()
-      const mx = e.clientX - rect.left
-      const my = e.clientY - rect.top
-      const sx = options.vb.value.w / rect.width
-      const sy = options.vb.value.h / rect.height
-      const px = options.vb.value.x + mx * sx
-      const py = options.vb.value.y + my * sy
-      options.vb.value.w = options.vb.value.w / factor
-      options.vb.value.h = options.vb.value.h / factor
-      options.vb.value.x = px - (px - options.vb.value.x) / factor
-      options.vb.value.y = py - (py - options.vb.value.y) / factor
-      applyViewBox()
-      scale.value = next
-      return
+    e.preventDefault()
+    e.stopPropagation()
+    const container = options.isFullscreen.value
+      ? options.containerFullRef.value
+      : options.containerInlineRef.value
+    if (options.renderMode === 'svg') {
+      if (!options.svgRef.value && container) {
+        const found = container.querySelector('svg') as SVGSVGElement | null
+        if (found) options.svgRef.value = found
+      }
+      if (options.svgRef.value && container) {
+        const prev = scale.value
+        const next = Math.min(
+          options.maxZoom,
+          Math.max(options.minZoom, prev * (e.deltaY < 0 ? 1.1 : 0.9)),
+        )
+        const factor = next / prev
+        const rect = container.getBoundingClientRect()
+        const mx = e.clientX - rect.left
+        const my = e.clientY - rect.top
+        const sx = options.vb.value.w / rect.width
+        const sy = options.vb.value.h / rect.height
+        const px = options.vb.value.x + mx * sx
+        const py = options.vb.value.y + my * sy
+        options.vb.value.w = options.vb.value.w / factor
+        options.vb.value.h = options.vb.value.h / factor
+        options.vb.value.x = px - (px - options.vb.value.x) / factor
+        options.vb.value.y = py - (py - options.vb.value.y) / factor
+        applyViewBox()
+        scale.value = next
+        return
+      }
     }
+    // transform 模式
     const prev = scale.value
     const next = Math.min(
       options.maxZoom,
       Math.max(options.minZoom, prev * (e.deltaY < 0 ? 1.1 : 0.9)),
     )
-    const container = options.isFullscreen.value
-      ? options.containerFullRef.value
-      : options.containerInlineRef.value
     if (!container) return
     const rect = container.getBoundingClientRect()
     const mx = e.clientX - rect.left

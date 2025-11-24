@@ -8,7 +8,7 @@
       @mousemove="onPointerMove && onPointerMove($event)"
       @mouseup="onPointerUp && onPointerUp($event)"
       @mouseleave="onPointerUp && onPointerUp($event)"
-      @dblclick="$emit('toggle-fullscreen')"
+      @dblclick.self="$emit('toggle-fullscreen')"
       @contextmenu.prevent
     >
       <button

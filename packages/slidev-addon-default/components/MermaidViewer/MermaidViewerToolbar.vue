@@ -1,14 +1,65 @@
 <template>
-  <div :class="['toolbar', left ? 'left' : '']">
-    <button v-if="zoom" @click="$emit('zoom-out')" title="缩小">−</button>
-    <button v-if="zoom" @click="$emit('zoom-in')" title="放大">＋</button>
-    <button v-if="zoom" @click="$emit('reset')" title="重置">Reset</button>
-    <button v-if="zoom" @click="$emit('fit')" title="适配">Fit</button>
-    <button @click="$emit('toggle-fullscreen')" :title="fullscreenTitle">
+  <div :class="['toolbar', left ? 'left' : '']" @dblclick.stop>
+    <button
+      v-if="zoom"
+      @mousedown.stop
+      @dblclick.stop
+      @click.stop="$emit('zoom-out')"
+      title="缩小"
+    >
+      −
+    </button>
+    <button
+      v-if="zoom"
+      @mousedown.stop
+      @dblclick.stop
+      @click.stop="$emit('zoom-in')"
+      title="放大"
+    >
+      ＋
+    </button>
+    <button
+      v-if="zoom"
+      @mousedown.stop
+      @dblclick.stop
+      @click.stop="$emit('reset')"
+      title="重置"
+    >
+      Reset
+    </button>
+    <button
+      v-if="zoom"
+      @mousedown.stop
+      @dblclick.stop
+      @click.stop="$emit('fit')"
+      title="适配"
+    >
+      Fit
+    </button>
+    <button
+      @mousedown.stop
+      @dblclick.stop
+      @click.stop="$emit('toggle-fullscreen')"
+      :title="fullscreenTitle"
+    >
       {{ fullscreenIcon }}
     </button>
-    <button @click="$emit('download-svg')" title="下载SVG">SVG</button>
-    <button @click="$emit('download-png')" title="下载PNG">PNG</button>
+    <button
+      @mousedown.stop
+      @dblclick.stop
+      @click.stop="$emit('download-svg')"
+      title="下载SVG"
+    >
+      SVG
+    </button>
+    <button
+      @mousedown.stop
+      @dblclick.stop
+      @click.stop="$emit('download-png')"
+      title="下载PNG"
+    >
+      PNG
+    </button>
   </div>
 </template>
 <script lang="ts" setup>
