@@ -15,11 +15,9 @@
   },
   "dependencies": {
     "@mudssky/slidev-style": "workspace:^",
-    "@slidev/types": "^0.46.3",
-    "clsx": "^2.1.0"
-  },
-  "devDependencies": {
-    "@slidev/cli": "^0.46.3"
+    "@slidev/types": "^52.9.1",
+    "clsx": "^2.1.0",
+    "mermaid": "^11.0.0"
   },
   "engines": {
     "node": ">=18.0.0",
