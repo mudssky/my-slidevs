@@ -77,6 +77,7 @@ watch(
   (v) => {
     if (v) dlgRef.value?.showModal()
     else dlgRef.value?.close()
+    if (v) emit('ready', { dlgRef, containerRef })
   },
 )
 

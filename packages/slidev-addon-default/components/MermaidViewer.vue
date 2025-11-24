@@ -48,7 +48,11 @@
 
     <!-- 内容通过 Teleport 进入当前激活容器 -->
     <Teleport v-if="teleportTarget" :to="teleportTarget">
-      <div class="content" :style="contentStyle">
+      <div
+        class="content"
+        :style="contentStyle"
+        :key="isFullscreen ? 'full' : 'inline'"
+      >
         <pre ref="elRef"><slot v-if="!content" /></pre>
       </div>
     </Teleport>
@@ -218,6 +222,13 @@ watch(isFullscreen, async (v) => {
     if (comp && comp.containerRef) {
       containerFullRef.value =
         comp.containerRef?.value ?? containerFullRef.value
+    }
+    if (!containerFullRef.value && comp && comp.containerRef) {
+      window.setTimeout(() => {
+        containerFullRef.value =
+          comp.containerRef?.value ?? containerFullRef.value
+        if (p.autoFit) fit()
+      }, 16)
     }
     if (p.autoFit) fit()
   }

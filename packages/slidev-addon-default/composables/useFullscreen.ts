@@ -1,4 +1,4 @@
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, nextTick } from 'vue'
 
 export function useFullscreen(options: {
   containerInlineRef: { value: HTMLElement | null }
@@ -10,10 +10,17 @@ export function useFullscreen(options: {
   const teleportTarget = computed<HTMLElement | null>(() => (isFullscreen.value ? options.containerFullRef.value : options.containerInlineRef.value))
 
   function toggleFullscreen() {
-    isFullscreen.value = !isFullscreen.value
-    if (isFullscreen.value) {
+    if (!isFullscreen.value) {
       dlgRef.value?.showModal()
+      isFullscreen.value = true
+      nextTick().then(() => {
+        if (!options.containerFullRef.value && dlgRef.value) {
+          const el = dlgRef.value.querySelector('.viewport')
+          if (el instanceof HTMLElement) options.containerFullRef.value = el
+        }
+      })
     } else {
+      isFullscreen.value = false
       dlgRef.value?.close()
     }
   }
@@ -39,4 +46,3 @@ export function useFullscreen(options: {
 
   return { isFullscreen, dlgRef, teleportTarget, toggleFullscreen, onDialogClose }
 }
-
