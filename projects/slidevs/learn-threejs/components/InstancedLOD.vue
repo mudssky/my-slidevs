@@ -34,11 +34,13 @@ onMounted(() => {
   const count = 400
   const geo = new THREE.BoxGeometry(10, 10, 10)
   const mat = new THREE.MeshStandardMaterial({ color: 0x4caf50 })
+  // InstancedMesh：一次性绘制多实例以提升性能
   const inst = new THREE.InstancedMesh(geo, mat, count)
   const m = new THREE.Matrix4()
   let idx = 0
   for (let x = -10; x < 10; x++) {
     for (let z = -10; z < 10; z++) {
+      // 为每个实例设置变换矩阵
       m.setPosition(x * 20, 0, z * 20)
       inst.setMatrixAt(idx++, m)
     }

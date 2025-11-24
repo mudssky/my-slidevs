@@ -36,6 +36,7 @@ onMounted(() => {
   camera.lookAt(0, 0, 0)
 
   const camera2 = new THREE.PerspectiveCamera(20, 16 / 9, 100, 300)
+  // 使用 CameraHelper 可视化相机2的视锥
   const cameraHelper = new THREE.CameraHelper(camera2)
   scene.add(cameraHelper)
 
@@ -45,6 +46,7 @@ onMounted(() => {
   }
   const { createGui } = useGuiAutoVisibility(domRef)
   const gui = createGui()
+  // 通过 GUI 动态调整相机2参数并更新辅助器
   gui.add(camera2, 'fov', [30, 60, 10]).onChange(onChange)
   gui
     .add(camera2, 'aspect', {

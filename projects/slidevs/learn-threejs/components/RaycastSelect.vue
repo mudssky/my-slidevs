@@ -43,10 +43,12 @@ onMounted(() => {
       objs.push(m)
     }
   }
+  // 射线拾取器：用于根据鼠标坐标检测命中对象
   const raycaster = new THREE.Raycaster()
   let hovered: THREE.Mesh | null = null
   function onMove(e: MouseEvent) {
     const rect = renderer.domElement.getBoundingClientRect()
+    // 将鼠标位置转换为标准化设备坐标(NDC)
     const x = ((e.clientX - rect.left) / rect.width) * 2 - 1
     const y = -(((e.clientY - rect.top) / rect.height) * 2 - 1)
     raycaster.setFromCamera({ x, y }, camera)
@@ -54,9 +56,11 @@ onMounted(() => {
     if (hovered)
       (hovered.material as THREE.MeshStandardMaterial).color.setHex(0x9e9e9e)
     hovered = hit.length ? (hit[0].object as THREE.Mesh) : null
+    // 命中时高亮显示
     if (hovered)
       (hovered.material as THREE.MeshStandardMaterial).color.setHex(0xff5722)
   }
+  // 监听鼠标移动以实现悬停选中
   renderer.domElement.addEventListener('mousemove', onMove)
   function animate() {
     if (stop) return

@@ -7,6 +7,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import * as THREE from 'three'
 import { useSlideContext } from '@slidev/client'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+// 将纯色生成为1x1图片的 dataURL，用于快速构造立方体贴图
 function dataUrlFromColor(color: THREE.ColorRepresentation) {
   const cnv = document.createElement('canvas')
   cnv.width = 1
@@ -45,6 +46,7 @@ onMounted(() => {
     dataUrlFromColor('#ff00ff'),
   ]
   const cubeTex = new THREE.CubeTextureLoader().load(urls)
+  // 使用 PMREM 生成预滤波环境贴图以获得更真实的金属反射
   const pmrem = new THREE.PMREMGenerator(renderer)
   const envMap = pmrem.fromCubemap(cubeTex).texture
   const sphere = new THREE.Mesh(
@@ -62,6 +64,7 @@ onMounted(() => {
   scene.add(light)
   scene.add(sphere)
   const refrCube = cubeTex.clone()
+  // 将映射改为折射，实现玻璃质感
   refrCube.mapping = THREE.CubeRefractionMapping
   const box = new THREE.Mesh(
     new THREE.BoxGeometry(60, 60, 60),

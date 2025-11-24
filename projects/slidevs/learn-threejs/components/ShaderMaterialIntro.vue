@@ -20,6 +20,7 @@ const vertex = `
     gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);
   }
 `
+// 顶点着色器：传递 uv 到片元，并计算裁剪空间位置
 const fragment = `
   varying vec2 vUv;
   void main(){
@@ -41,6 +42,7 @@ onMounted(() => {
   domRef.value.appendChild(renderer.domElement)
   const controls = new OrbitControls(camera, renderer.domElement)
   controls.enableDamping = true
+  // 使用 ShaderMaterial 自定义着色效果
   const plane = new THREE.Mesh(
     new THREE.PlaneGeometry(160, 160, 1, 1),
     new THREE.ShaderMaterial({
@@ -51,6 +53,7 @@ onMounted(() => {
   scene.add(plane)
   function animate() {
     if (stop) return
+    // 每帧旋转一点，观察着色效果
     plane.rotation.z += 0.01
     controls.update()
     renderer.render(scene, camera)

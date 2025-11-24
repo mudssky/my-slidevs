@@ -13,6 +13,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Loader = () => Promise<any>
 
+// 懒加载：通过 loader 动态引入组件，退出后延迟卸载
 const props = defineProps<{ loader: Loader; exitDelay?: number }>()
 
 const container = ref<HTMLElement | null>(null)
@@ -27,6 +28,7 @@ let observer: IntersectionObserver | null = null
 let hideTimer: any = null
 let loaded = false
 
+// 进入视口时加载并显示子组件（仅加载一次）
 const show = async () => {
   if (!loaded) {
     const mod = await props.loader()
@@ -37,6 +39,7 @@ const show = async () => {
   shouldRender.value = true
 }
 
+// 离开视口时延迟隐藏并尝试调用子组件的 dispose 释放资源
 const hide = () => {
   clearTimeout(hideTimer)
   hideTimer = setTimeout(() => {
@@ -50,6 +53,7 @@ const hide = () => {
 }
 
 onMounted(() => {
+  // 使用 IntersectionObserver 监听容器进入/离开视口
   observer = new IntersectionObserver(
     ([entry]) => {
       if (!entry) return
@@ -62,6 +66,7 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+  // 清理观察器与计时器，尝试释放子组件资源
   observer && observer.disconnect()
   clearTimeout(hideTimer)
   try {

@@ -28,11 +28,13 @@ onMounted(() => {
   domRef.value.appendChild(renderer.domElement)
   const controls = new OrbitControls(camera, renderer.domElement)
   controls.enableDamping = true
+  // 限制仰角与缩放距离范围
   controls.maxPolarAngle = Math.PI * 0.95
   controls.minDistance = 100
   controls.maxDistance = 500
   const { createGui } = useGuiAutoVisibility(domRef)
   const gui = createGui()
+  // 通过 GUI 动态调整控制器限制参数
   gui.add(controls, 'maxPolarAngle', 0.1, Math.PI)
   gui.add(controls, 'minDistance', 10, 400)
   gui.add(controls, 'maxDistance', 50, 800)

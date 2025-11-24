@@ -43,6 +43,7 @@ onMounted(() => {
   )
   ball.position.set(0, 150, 0)
   scene.add(ball)
+  // 简易物理：速度、重力加速度、弹性系数
   const vel = new THREE.Vector3(0, 0, 0)
   const g = 200
   const restitution = 0.6
@@ -50,11 +51,14 @@ onMounted(() => {
   function animate() {
     if (stop) return
     const dt = clock.getDelta()
+    // 速度积分与位置更新
     vel.y -= g * dt
     ball.position.y += vel.y * dt
     if (ball.position.y < 20) {
       ball.position.y = 20
+      // 触地反弹并引入能量损失
       vel.y = -vel.y * restitution
+      // 阈值以下停止弹跳
       if (Math.abs(vel.y) < 10) vel.y = 0
     }
     controls.update()

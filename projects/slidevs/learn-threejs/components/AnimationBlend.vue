@@ -39,11 +39,13 @@ onMounted(() => {
   scene.add(light)
   scene.add(mesh)
   const mixer = new THREE.AnimationMixer(mesh)
+  // 位置关键帧：在3秒内沿路径移动
   const posTrack = new THREE.VectorKeyframeTrack(
     '.position',
     [0, 1, 2, 3],
     [0, 0, 0, 80, 0, 0, 0, 80, 0, -80, 0, 0],
   )
+  // 旋转关键帧：绕Y轴旋转
   const rotTrack = new THREE.VectorKeyframeTrack(
     '.rotation',
     [0, 1.5, 3],
@@ -56,6 +58,7 @@ onMounted(() => {
   actionA.play()
   const { createGui } = useGuiAutoVisibility(domRef)
   const gui = createGui()
+  // 点击触发交叉淡入，从移动动作过渡到旋转动作
   gui.add({ blend: () => actionA.crossFadeTo(actionB, 0.5, false) }, 'blend')
   const clock = new THREE.Clock()
   function animate() {

@@ -44,11 +44,13 @@ onMounted(() => {
     }),
   )
   scene.add(mesh)
+  // 后处理管线：先渲染场景，再应用 FXAA 抗锯齿
   const composer = new EffectComposer(renderer)
   const renderPass = new RenderPass(scene, camera)
   composer.addPass(renderPass)
   const fxaaPass = new ShaderPass(FXAAShader)
   const dpr = window.devicePixelRatio
+  // FXAA 分辨率需要根据 DPR 设置为像素的倒数
   fxaaPass.material.uniforms['resolution'].value.set(
     1 / (w * dpr),
     1 / (h * dpr),
@@ -58,6 +60,7 @@ onMounted(() => {
     if (stop) return
     mesh.rotation.y += 0.01
     controls.update()
+    // 使用 composer 渲染以启用后处理
     composer.render()
     requestAnimationFrame(animate)
   }

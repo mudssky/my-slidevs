@@ -24,6 +24,7 @@ onMounted(() => {
   const renderer = new THREE.WebGLRenderer({ antialias: true })
   renderer.setPixelRatio(window.devicePixelRatio)
   renderer.setSize(w, h)
+  // 开启阴影并使用柔和阴影类型
   renderer.shadowMap.enabled = true
   renderer.shadowMap.type = THREE.PCFSoftShadowMap
   domRef.value.appendChild(renderer.domElement)
@@ -34,6 +35,7 @@ onMounted(() => {
     new THREE.MeshStandardMaterial({ color: 0x9e9e9e }),
   )
   ground.rotation.x = -Math.PI / 2
+  // 地面接收阴影
   ground.receiveShadow = true
   scene.add(ground)
   const sphere = new THREE.Mesh(
@@ -41,10 +43,12 @@ onMounted(() => {
     new THREE.MeshStandardMaterial({ color: 0x03a9f4 }),
   )
   sphere.position.set(0, 40, 0)
+  // 球体投射阴影
   sphere.castShadow = true
   scene.add(sphere)
   const dirLight = new THREE.DirectionalLight(0xffffff, 1.2)
   dirLight.position.set(100, 200, 100)
+  // 平行光开启阴影并调整阴影相机参数提高清晰度
   dirLight.castShadow = true
   dirLight.shadow.mapSize.set(1024, 1024)
   dirLight.shadow.camera.near = 10

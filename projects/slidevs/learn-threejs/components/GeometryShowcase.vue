@@ -31,20 +31,25 @@ onMounted(() => {
   const light = new THREE.PointLight(0xffffff, 2000)
   light.position.set(200, 200, 200)
   scene.add(light)
+  // 环境光：均匀照亮场景
   const ambient = new THREE.AmbientLight(0xffffff, 0.6)
   scene.add(ambient)
+  // 半球光：天空/地面两色混合
   const hemi = new THREE.HemisphereLight(0xffffff, 0x222222, 0.5)
   scene.add(hemi)
   const group = new THREE.Group()
+  // 基础材质：不受光照影响
   const box = new THREE.Mesh(
     new THREE.BoxGeometry(80, 80, 80),
     new THREE.MeshBasicMaterial({ color: 0x2194f3 }),
   )
   box.position.x = -120
+  // Phong材质：高光可调
   const sphere = new THREE.Mesh(
     new THREE.SphereGeometry(50, 32, 16),
     new THREE.MeshPhongMaterial({ color: 0x8bc34a, shininess: 60 }),
   )
+  // Standard材质：金属度/粗糙度
   const torus = new THREE.Mesh(
     new THREE.TorusKnotGeometry(30, 10, 100, 16),
     new THREE.MeshStandardMaterial({
