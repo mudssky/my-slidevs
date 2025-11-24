@@ -5,6 +5,8 @@
       <button @click="zoomIn">+</button>
       <button @click="reset">Reset</button>
       <button @click="fit">Fit</button>
+      <button @click="downloadSVG">SVG</button>
+      <button @click="downloadPNG">PNG</button>
     </div>
     <div
       ref="containerRef"
@@ -36,6 +38,7 @@ interface Props {
   maxZoom?: number
   initialZoom?: number
   autoFit?: boolean
+  downloadName?: string
 }
 
 const p = withDefaults(defineProps<Props>(), {
@@ -47,6 +50,7 @@ const p = withDefaults(defineProps<Props>(), {
   maxZoom: 4,
   initialZoom: 1,
   autoFit: true,
+  downloadName: 'mermaid-graph',
 })
 
 const elRef = ref<HTMLElement | null>(null)
@@ -174,6 +178,57 @@ onMounted(() => {
   })
   if (containerRef.value) ro.observe(containerRef.value)
 })
+
+function downloadSVG() {
+  const svg = elRef.value?.querySelector('svg') as SVGSVGElement | null
+  if (!svg) return
+  const serializer = new XMLSerializer()
+  let source = serializer.serializeToString(svg)
+  if (!/^<svg[^>]+xmlns=/.test(source)) {
+    source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"')
+  }
+  const blob = new Blob([source], { type: 'image/svg+xml;charset=utf-8' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = `${p.downloadName}.svg`
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
+  URL.revokeObjectURL(url)
+}
+
+function downloadPNG() {
+  const svg = elRef.value?.querySelector('svg') as SVGSVGElement | null
+  if (!svg) return
+  const serializer = new XMLSerializer()
+  let source = serializer.serializeToString(svg)
+  if (!/^<svg[^>]+xmlns=/.test(source)) {
+    source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"')
+  }
+  const blob = new Blob([source], { type: 'image/svg+xml;charset=utf-8' })
+  const url = URL.createObjectURL(blob)
+  const img = new Image()
+  img.onload = () => {
+    const vb = svg.viewBox.baseVal
+    const w = vb && vb.width ? Math.ceil(vb.width) : Math.ceil(img.width)
+    const h = vb && vb.height ? Math.ceil(vb.height) : Math.ceil(img.height)
+    const canvas = document.createElement('canvas')
+    canvas.width = w
+    canvas.height = h
+    const ctx = canvas.getContext('2d')!
+    ctx.drawImage(img, 0, 0, w, h)
+    const pngUrl = canvas.toDataURL('image/png')
+    const a = document.createElement('a')
+    a.href = pngUrl
+    a.download = `${p.downloadName}.png`
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+  }
+  img.src = url
+}
 </script>
 <style scoped>
 .mermaid-viewer {
