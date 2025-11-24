@@ -487,11 +487,9 @@ function downloadPNG() {
   gap: 6px;
   padding: 6px;
   border-radius: 8px;
-  background: color-mix(
-    in oklab,
-    var(--slidev-slide-container-background, #1f2937) 80%,
-    transparent
-  );
+  background: rgba(0, 0, 0, 0.72);
+  color: #fff;
+  backdrop-filter: saturate(120%) blur(6px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   opacity: 0;
   pointer-events: none;
@@ -511,13 +509,13 @@ function downloadPNG() {
   padding: 4px 8px;
   font-size: 12px;
   line-height: 1;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 6px;
-  background: rgba(255, 255, 255, 0.06);
-  color: inherit;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
 }
 .toolbar button:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.26);
 }
 .mv-dialog {
   border: none;
