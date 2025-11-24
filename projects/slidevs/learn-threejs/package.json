@@ -5,6 +5,7 @@
   "scripts": {
     "build": "slidev build",
     "dev": "slidev --open",
+    "dev:remote": "slidev --remote",
     "export": "slidev export",
     "slidev:export": "npx slidev export --format pdf --output slides-export/pdf",
     "slidev:exportAll": "pnpm slidev:exportAllFormat && pnpm slidev:exportAllFormatWithClicks",
