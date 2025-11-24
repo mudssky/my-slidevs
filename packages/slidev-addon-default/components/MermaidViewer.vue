@@ -18,7 +18,7 @@
       @mouseleave="onPointerUp"
     >
       <div class="content" :style="contentStyle">
-        <pre ref="elRef"></pre>
+        <pre ref="elRef"><slot v-if="!content" /></pre>
       </div>
     </div>
     <div v-if="err" class="error">{{ err }}</div>
@@ -73,6 +73,9 @@ async function renderMermaid() {
   err.value = ''
   const host = elRef.value
   if (!host) return
+  for (const child of Array.from(host.childNodes)) {
+    if (child.nodeType === Node.COMMENT_NODE) host.removeChild(child)
+  }
   const { default: mermaid } = await import('mermaid')
   mermaid.initialize({
     startOnLoad: false,
@@ -82,7 +85,12 @@ async function renderMermaid() {
     ...p.config,
   })
   host.classList.add('mermaid')
-  host.textContent = p.content
+  const text =
+    p.content && p.content.length > 0
+      ? p.content
+      : (host.textContent ?? '').trim()
+  if (!text) return
+  host.textContent = text
   await nextTick()
   await mermaid.run({ nodes: [host] })
   const svg = host.querySelector('svg') as SVGElement | null
