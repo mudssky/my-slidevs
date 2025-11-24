@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { nextTick, ref } from 'vue'
 
 export function useMermaidRender(options: {
@@ -9,8 +10,18 @@ export function useMermaidRender(options: {
   autoFit: boolean
 }) {
   const svgRef = ref<SVGSVGElement | null>(null)
-  const vb = ref<{ x: number; y: number; w: number; h: number }>({ x: 0, y: 0, w: 0, h: 0 })
-  const vbOrig = ref<{ x: number; y: number; w: number; h: number }>({ x: 0, y: 0, w: 0, h: 0 })
+  const vb = ref<{ x: number; y: number; w: number; h: number }>({
+    x: 0,
+    y: 0,
+    w: 0,
+    h: 0,
+  })
+  const vbOrig = ref<{ x: number; y: number; w: number; h: number }>({
+    x: 0,
+    y: 0,
+    w: 0,
+    h: 0,
+  })
   const err = ref('')
 
   async function renderMermaid() {
@@ -22,13 +33,18 @@ export function useMermaidRender(options: {
     }
     let mermaidMod: unknown
     try {
-      // @ts-expect-error
+      // @ts-expect-error lint error
       mermaidMod = await import('mermaid/dist/mermaid.esm.mjs')
     } catch {
       mermaidMod = await import('mermaid')
     }
     const mermaid = (mermaidMod as { default?: any }).default ?? mermaidMod
-    mermaid.initialize({ startOnLoad: false, theme: options.theme as any, securityLevel: options.securityLevel, ...options.config })
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: options.theme as any,
+      securityLevel: options.securityLevel,
+      ...options.config,
+    })
     host.classList.add('mermaid')
     const text = options.getText()
     if (!text) return
@@ -49,4 +65,3 @@ export function useMermaidRender(options: {
 
   return { svgRef, vb, vbOrig, err, renderMermaid }
 }
-
