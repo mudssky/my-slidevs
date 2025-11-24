@@ -24,12 +24,17 @@ onMounted(() => {
   const renderer = new THREE.WebGLRenderer({ antialias: true })
   renderer.setPixelRatio(window.devicePixelRatio)
   renderer.setSize(w, h)
+  renderer.setClearColor(0xf5f5f5, 1)
   domRef.value.appendChild(renderer.domElement)
   const controls = new OrbitControls(camera, renderer.domElement)
   controls.enableDamping = true
   const light = new THREE.PointLight(0xffffff, 2000)
   light.position.set(200, 200, 200)
   scene.add(light)
+  const ambient = new THREE.AmbientLight(0xffffff, 0.6)
+  scene.add(ambient)
+  const hemi = new THREE.HemisphereLight(0xffffff, 0x222222, 0.5)
+  scene.add(hemi)
   const group = new THREE.Group()
   const box = new THREE.Mesh(
     new THREE.BoxGeometry(80, 80, 80),
