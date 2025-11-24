@@ -1,28 +1,63 @@
 <template>
   <div class="mermaid-viewer">
-    <div v-if="zoom" class="toolbar">
-      <button @click="zoomOut">-</button>
-      <button @click="zoomIn">+</button>
-      <button @click="reset">Reset</button>
-      <button @click="fit">Fit</button>
-      <button @click="toggleFullscreen">Fullscreen</button>
-      <button @click="downloadSVG">SVG</button>
-      <button @click="downloadPNG">PNG</button>
-    </div>
+    <!-- 普通视图容器 -->
     <div
-      ref="containerRef"
-      :class="['viewport', { fullscreen: isFullscreen }]"
+      ref="containerInlineRef"
+      class="viewport"
       @wheel.prevent="onWheel"
       @mousedown="onPointerDown"
       @mousemove="onPointerMove"
       @mouseup="onPointerUp"
       @mouseleave="onPointerUp"
       @dblclick="toggleFullscreen"
+      @contextmenu.prevent
     >
+      <div v-if="zoom" class="toolbar">
+        <button @click="zoomOut" title="缩小">−</button>
+        <button @click="zoomIn" title="放大">＋</button>
+        <button @click="reset" title="重置">Reset</button>
+        <button @click="fit" title="适配">Fit</button>
+        <button @click="toggleFullscreen" title="全屏">⤢</button>
+        <button @click="downloadSVG" title="下载SVG">SVG</button>
+        <button @click="downloadPNG" title="下载PNG">PNG</button>
+      </div>
+    </div>
+
+    <!-- 全屏对话框（原生 dialog） -->
+    <dialog ref="dlgRef" class="mv-dialog" @close="onDialogClose">
+      <div
+        ref="containerFullRef"
+        class="viewport fullscreen"
+        @wheel.prevent="onWheel"
+        @mousedown="onPointerDown"
+        @mousemove="onPointerMove"
+        @mouseup="onPointerUp"
+        @mouseleave="onPointerUp"
+        @dblclick="toggleFullscreen"
+        @contextmenu.prevent
+      >
+        <button class="close-btn" @click="toggleFullscreen" title="关闭">
+          ×
+        </button>
+        <div v-if="zoom" class="toolbar left">
+          <button @click="zoomOut" title="缩小">−</button>
+          <button @click="zoomIn" title="放大">＋</button>
+          <button @click="reset" title="重置">Reset</button>
+          <button @click="fit" title="适配">Fit</button>
+          <button @click="toggleFullscreen" title="退出">⤡</button>
+          <button @click="downloadSVG" title="下载SVG">SVG</button>
+          <button @click="downloadPNG" title="下载PNG">PNG</button>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- 内容通过 Teleport 进入当前激活容器 -->
+    <Teleport v-if="teleportTarget" :to="teleportTarget">
       <div class="content" :style="contentStyle">
         <pre ref="elRef"><slot v-if="!content" /></pre>
       </div>
-    </div>
+    </Teleport>
+
     <div v-if="err" class="error">{{ err }}</div>
   </div>
 </template>
@@ -61,7 +96,9 @@ const p = withDefaults(defineProps<Props>(), {
 })
 
 const elRef = ref<HTMLElement | null>(null)
-const containerRef = ref<HTMLElement | null>(null)
+const containerInlineRef = ref<HTMLElement | null>(null)
+const containerFullRef = ref<HTMLElement | null>(null)
+const dlgRef = ref<HTMLDialogElement | null>(null)
 const scale = ref(p.initialZoom)
 const tx = ref(0)
 const ty = ref(0)
@@ -90,6 +127,10 @@ const contentStyle = computed(() => ({
       ? `translate(${Math.round(tx.value)}px, ${Math.round(ty.value)}px) scale(${scale.value})`
       : 'none',
 }))
+
+const teleportTarget = computed<HTMLElement | null>(() =>
+  isFullscreen.value ? containerFullRef.value : containerInlineRef.value,
+)
 
 let ro: ResizeObserver | null = null
 let mo: MutationObserver | null = null
@@ -141,7 +182,9 @@ async function renderMermaid() {
 }
 
 function fit() {
-  const container = containerRef.value
+  const container = isFullscreen.value
+    ? containerFullRef.value
+    : containerInlineRef.value
   const svg = elRef.value?.querySelector('svg') as SVGElement | null
   if (!container || !svg) return
   if (p.renderMode === 'svg' && svgRef.value) {
@@ -212,7 +255,9 @@ function onWheel(e: WheelEvent) {
       Math.max(p.minZoom, prev * (e.deltaY < 0 ? 1.1 : 0.9)),
     )
     const factor = next / prev
-    const rect = containerRef.value!.getBoundingClientRect()
+    const rect = (
+      isFullscreen.value ? containerFullRef.value : containerInlineRef.value
+    )!.getBoundingClientRect()
     const mx = e.clientX - rect.left
     const my = e.clientY - rect.top
     const sx = vb.value.w / rect.width
@@ -232,7 +277,9 @@ function onWheel(e: WheelEvent) {
     p.maxZoom,
     Math.max(p.minZoom, prev * (e.deltaY < 0 ? 1.1 : 0.9)),
   )
-  const rect = containerRef.value!.getBoundingClientRect()
+  const rect = (
+    isFullscreen.value ? containerFullRef.value : containerInlineRef.value
+  )!.getBoundingClientRect()
   const mx = e.clientX - rect.left
   const my = e.clientY - rect.top
   const factor = next / prev
@@ -242,6 +289,8 @@ function onWheel(e: WheelEvent) {
 }
 
 function onPointerDown(e: MouseEvent) {
+  if (e.button !== 0) return
+  e.preventDefault()
   dragging.value = true
   lastX.value = e.clientX
   lastY.value = e.clientY
@@ -252,7 +301,9 @@ function onPointerMove(e: MouseEvent) {
   const dx = e.clientX - lastX.value
   const dy = e.clientY - lastY.value
   if (p.renderMode === 'svg' && svgRef.value) {
-    const rect = containerRef.value!.getBoundingClientRect()
+    const rect = (
+      isFullscreen.value ? containerFullRef.value : containerInlineRef.value
+    )!.getBoundingClientRect()
     const sx = vb.value.w / rect.width
     const sy = vb.value.h / rect.height
     vb.value.x -= dx * sx
@@ -283,8 +334,15 @@ function applyViewBox() {
 function toggleFullscreen() {
   isFullscreen.value = !isFullscreen.value
   if (isFullscreen.value) {
+    dlgRef.value?.showModal()
     fit()
+  } else {
+    dlgRef.value?.close()
   }
+}
+
+function onDialogClose() {
+  if (isFullscreen.value) isFullscreen.value = false
 }
 
 watch(
@@ -299,6 +357,19 @@ watch(
   },
 )
 
+watch(teleportTarget, (t) => {
+  if (!t) return
+  if (renderTimer) window.clearTimeout(renderTimer)
+  renderTimer = window.setTimeout(() => {
+    nextTick().then(() => {
+      renderMermaid().catch((e) => {
+        err.value = String(e)
+      })
+      if (p.autoFit) fit()
+    })
+  }, 0)
+})
+
 onMounted(() => {
   renderMermaid().catch((e) => {
     err.value = String(e)
@@ -306,7 +377,8 @@ onMounted(() => {
   ro = new ResizeObserver(() => {
     if (p.autoFit) fit()
   })
-  if (containerRef.value) ro.observe(containerRef.value)
+  if (containerInlineRef.value) ro.observe(containerInlineRef.value)
+  if (containerFullRef.value) ro.observe(containerFullRef.value)
   if (!p.content && elRef.value) {
     mo = new MutationObserver(() => {
       if (renderTimer) window.clearTimeout(renderTimer)
@@ -324,7 +396,8 @@ onMounted(() => {
   }
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && isFullscreen.value) {
-      toggleFullscreen()
+      dlgRef.value?.close()
+      isFullscreen.value = false
     }
   })
 })
@@ -387,10 +460,6 @@ function downloadPNG() {
   flex-direction: column;
   gap: 8px;
 }
-.toolbar {
-  display: flex;
-  gap: 8px;
-}
 .viewport {
   position: relative;
   width: 100%;
@@ -402,15 +471,83 @@ function downloadPNG() {
 .viewport.fullscreen {
   position: fixed;
   inset: 0;
-  z-index: 9999;
-  background: var(--slidev-slide-container-background, rgba(0, 0, 0, 0.85));
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
 }
 .content {
   transform-origin: 0 0;
+  user-select: none;
+}
+.toolbar {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 6px;
+  padding: 6px;
+  border-radius: 8px;
+  background: color-mix(
+    in oklab,
+    var(--slidev-slide-container-background, #1f2937) 80%,
+    transparent
+  );
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 1;
+}
+.viewport:hover .toolbar {
+  opacity: 1;
+  pointer-events: auto;
+}
+.toolbar.left {
+  left: 8px;
+  right: auto;
+}
+.toolbar button {
+  min-width: auto;
+  padding: 4px 8px;
+  font-size: 12px;
+  line-height: 1;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  color: inherit;
+}
+.toolbar button:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+.mv-dialog {
+  border: none;
+  padding: 0;
+  width: auto;
+  background: var(--slidev-slide-container-background, rgba(0, 0, 0, 0.85));
+}
+.mv-dialog::backdrop {
+  background: color-mix(
+    in oklab,
+    var(--slidev-slide-container-background, rgba(0, 0, 0, 0.85)) 90%,
+    #000 10%
+  );
+}
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  color: inherit;
+  z-index: 2;
 }
 .mermaid svg {
   shape-rendering: geometricPrecision;
   text-rendering: optimizeLegibility;
+  user-select: none;
 }
 .error {
   color: #e11d48;
