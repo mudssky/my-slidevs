@@ -76,7 +76,15 @@ async function renderMermaid() {
   for (const child of Array.from(host.childNodes)) {
     if (child.nodeType === Node.COMMENT_NODE) host.removeChild(child)
   }
-  const { default: mermaid } = await import('mermaid')
+  let mermaidMod: unknown
+  try {
+    // @ts-expect-error 类型报错
+    mermaidMod = await import('mermaid/dist/mermaid.esm.mjs')
+  } catch {
+    mermaidMod = await import('mermaid')
+  }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const mermaid = (mermaidMod as { default?: any }).default ?? mermaidMod
   mermaid.initialize({
     startOnLoad: false,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
