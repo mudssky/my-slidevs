@@ -28,7 +28,7 @@
 import { ref, computed, watch, onMounted, nextTick } from 'vue'
 
 interface Props {
-  content: string
+  content?: string
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   config?: Record<string, any>
   theme?: string
@@ -42,6 +42,7 @@ interface Props {
 }
 
 const p = withDefaults(defineProps<Props>(), {
+  content: '',
   config: () => ({}),
   theme: 'default',
   securityLevel: 'strict',
