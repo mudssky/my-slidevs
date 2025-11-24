@@ -1,5 +1,187 @@
 ---
 title: 几何体与材质
+transition: fade
+---
+
+## BufferGeometry
+
+<MermaidViewer>
+<!-- markdownlint-disable MD046 -->
+```mermaid
+classDiagram
+    direction TB
+    %% 最顶层的基类
+    class EventDispatcher {
+        <<abstract>>
+        +addEventListener()
+        +removeEventListener()
+        +dispatchEvent()
+    }
+
+    %% 三维对象的基类
+    class Object3D {
+        <<abstract>>
+        +position: Vector3
+        +rotation: Euler
+        +scale: Vector3
+        +add(object)
+        +remove(object)
+    }
+
+    %% 所有几何体的基类
+    class BufferGeometry {
+        <<abstract>>
+        +attributes: Object
+        +index: BufferAttribute
+        +boundingBox: Box3
+        +setAttribute(name, attribute)
+        +computeVertexNormals()
+        +dispose()
+    }
+
+    %% 具体几何体实现
+    class BoxGeometry {
+        +width: Number
+        +height: Number
+        +depth: Number
+    }
+
+    class SphereGeometry {
+        +radius: Number
+        +widthSegments: Integer
+        +heightSegments: Integer
+    }
+
+    class PlaneGeometry {
+        +width: Number
+        +height: Number
+        +widthSegments: Integer
+        +heightSegments: Integer
+    }
+
+    class CylinderGeometry {
+        +radiusTop: Number
+        +radiusBottom: Number
+        +height: Number
+        +radialSegments: Integer
+    }
+
+    class ConeGeometry {
+        +radius: Number
+        +height: Number
+        +radialSegments: Integer
+    }
+
+    class TorusGeometry {
+        +radius: Number
+        +tube: Number
+        +radialSegments: Integer
+        +tubularSegments: Integer
+    }
+
+    class RingGeometry {
+        +innerRadius: Number
+        +outerRadius: Number
+        +thetaSegments: Integer
+        +phiSegments: Integer
+    }
+
+    class CircleGeometry {
+        +radius: Number
+        +segments: Integer
+    }
+
+    class TubeGeometry {
+        +path: Curve
+        +tubularSegments: Integer
+        +radius: Number
+        +radialSegments: Integer
+    }
+
+    class LatheGeometry {
+        +points: Array
+        +segments: Integer
+        +phiStart: Number
+        +phiLength: Number
+    }
+
+    class ExtrudeGeometry {
+        +shapes: Shape
+        +options: Object
+    }
+
+    class TextGeometry {
+        +text: String
+        +parameters: Object
+    }
+
+    class TorusKnotGeometry {
+        +radius: Number
+        +tube: Number
+        +tubularSegments: Integer
+        +radialSegments: Integer
+        +p: Number
+        +q: Number
+    }
+
+    class PolyhedronGeometry {
+        +vertices: Array
+        +indices: Array
+        +radius: Number
+        +detail: Integer
+    }
+
+    class DodecahedronGeometry {
+        +radius: Number
+        +detail: Integer
+    }
+
+    class IcosahedronGeometry {
+        +radius: Number
+        +detail: Integer
+    }
+
+    class OctahedronGeometry {
+        +radius: Number
+        +detail: Integer
+    }
+
+    class TetrahedronGeometry {
+        +radius: Number
+        +detail: Integer
+    }
+
+    %% 继承关系
+    EventDispatcher <|-- Object3D
+    Object3D <|-- BufferGeometry
+    BufferGeometry <|-- BoxGeometry
+    BufferGeometry <|-- SphereGeometry
+    BufferGeometry <|-- PlaneGeometry
+    BufferGeometry <|-- CylinderGeometry
+    BufferGeometry <|-- ConeGeometry
+    BufferGeometry <|-- TorusGeometry
+    BufferGeometry <|-- RingGeometry
+    BufferGeometry <|-- CircleGeometry
+    BufferGeometry <|-- TubeGeometry
+    BufferGeometry <|-- LatheGeometry
+    BufferGeometry <|-- ExtrudeGeometry
+    BufferGeometry <|-- TextGeometry
+    BufferGeometry <|-- TorusKnotGeometry
+    BufferGeometry <|-- PolyhedronGeometry
+    BufferGeometry <|-- DodecahedronGeometry
+    BufferGeometry <|-- IcosahedronGeometry
+    BufferGeometry <|-- OctahedronGeometry
+    BufferGeometry <|-- TetrahedronGeometry
+
+    %% 分组注释
+    note for BufferGeometry "所有现代 Three.js 几何体的基类"
+    note for BoxGeometry "基础几何体"
+    note for TextGeometry "复杂/特殊几何体"
+
+```
+<!-- markdownlint-enable MD046 -->
+</MermaidViewer>
+
 ---
 
 ### 目标
