@@ -1,10 +1,57 @@
 ---
 title: 几何体与材质
 transition: fade
+layout: center
+---
+
+## 几何体与材质
+
+---
+layout: scroll
 ---
 
 ## BufferGeometry
 
+```mermaid
+classDiagram
+    direction TB
+    
+    class BufferGeometry {
+        +attributes
+        +index
+        +computeVertexNormals()
+    }
+
+    class BoxGeometry {
+        +width
+        +height
+        +depth
+    }
+
+    class SphereGeometry {
+        +radius
+        +widthSegments
+        +heightSegments
+    }
+    
+    class TextGeometry {
+        +text
+        +parameters
+    }
+
+    class Others["其他15+种几何体..."] {
+        <<PlaceHolder>>
+    }
+
+    BufferGeometry <|-- BoxGeometry
+    BufferGeometry <|-- SphereGeometry
+    BufferGeometry <|-- TextGeometry
+    BufferGeometry <.. Others : 及其它子类
+```
+
+---
+hide: true
+---
 <MermaidViewer>
 <!-- markdownlint-disable MD046 -->
 ```mermaid
