@@ -8,9 +8,34 @@ layout: center
 
 ---
 layout: scroll
+level: 2
 ---
 
 ## BufferGeometry
+
+https://threejs.org/docs/index.html?q=Geometry#BoxGeometry
+
+BufferGeometry 是 Three.js 中现代几何体的共同基类。它用 TypedArray 存储顶点数据并直接面向 GPU，既省内存也更易于批量更新。
+
+- attributes：顶点属性集合，如 `position`、`normal`、`uv`，每个属性由 `BufferAttribute` 表示
+- index：可选的索引缓冲，用来复用顶点、减少面片重复；编辑几何体后记得同步更新
+- computeVertexNormals()：当未提供法线或修改了 `position`/`index` 时，用此方法按面平均生成顶点法线
+
+常见子类与用途：
+
+- `BoxGeometry`：通过 `width`/`height`/`depth` 构建盒体，适合快速搭建场景元素
+- `SphereGeometry`：用 `radius` 与经纬细分生成球体，常用于星球/球形指示器
+- `TextGeometry`：基于字体曲线挤出生成文本网格，顶点数较多，适合静态标题
+
+使用建议：
+
+- 自定义形状或批量数据：直接使用 `BufferGeometry`，通过 `setAttribute('position', ...)` 构建顶点
+- 修改几何后：设置 `geometry.attributes.position.needsUpdate = true` 并调用 `computeVertexNormals()`
+- 性能优化：优先使用 `index` 合并重复顶点；大量实例考虑 `InstancedBufferGeometry`
+
+---
+layout: scroll
+---
 
 ```mermaid
 classDiagram
