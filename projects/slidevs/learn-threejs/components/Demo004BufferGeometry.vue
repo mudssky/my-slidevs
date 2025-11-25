@@ -8,6 +8,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import * as THREE from 'three'
 import { useSlideContext } from '@slidev/client'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { disposeThreeResources } from '@mudssky/slidev-addon-default/composables/useThreeCleanup'
 
 /*
   学习提示
@@ -106,34 +107,10 @@ onMounted(() => {
   controls = new OrbitControls(camera, renderer.domElement)
 })
 
-const disposeScene = (s: THREE.Scene) => {
-  s.traverse((obj) => {
-    const mesh = obj as THREE.Mesh
-    const g = mesh.geometry as THREE.BufferGeometry | undefined
-    const m = mesh.material as THREE.Material | THREE.Material[] | undefined
-    if (Array.isArray(m)) m.forEach((mm) => mm && mm.dispose())
-    else if (m) m.dispose()
-    if (g) g.dispose()
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const t = (mesh.material && (mesh.material as any).map) as
-      | THREE.Texture
-      | undefined
-    t && t.dispose()
-  })
-}
-
 onUnmounted(() => {
   stop = true
   raf && cancelAnimationFrame(raf)
-  controls && controls.dispose()
-  if (renderer) {
-    renderer.dispose()
-    renderer.forceContextLoss && renderer.forceContextLoss()
-    const el = renderer.domElement
-    el && el.parentNode && el.parentNode.removeChild(el)
-  }
-  scene && disposeScene(scene)
+  disposeThreeResources({ renderer, scene, controls })
   renderer = null
   controls = null
   scene = null

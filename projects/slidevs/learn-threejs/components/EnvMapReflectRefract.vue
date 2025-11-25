@@ -6,6 +6,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import * as THREE from 'three'
 import { useSlideContext } from '@slidev/client'
+import { disposeThreeResources } from '@mudssky/slidev-addon-default/composables/useThreeCleanup'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 // 将纯色生成为1x1图片的 dataURL，用于快速构造立方体贴图
 function dataUrlFromColor(color: THREE.ColorRepresentation) {
@@ -31,31 +32,7 @@ let envMap: THREE.Texture | null = null
 onUnmounted(() => {
   stop = true
   raf && cancelAnimationFrame(raf)
-  controls && controls.dispose()
-  if (renderer) {
-    renderer.dispose()
-    // @ts-expect-error forceContextLoss
-    renderer.forceContextLoss && renderer.forceContextLoss()
-    const el = renderer.domElement
-    el && el.parentNode && el.parentNode.removeChild(el)
-  }
-  pmrem && pmrem.dispose()
-  cubeTex && cubeTex.dispose()
-  refrCube && refrCube.dispose()
-  envMap && envMap.dispose()
-  if (scene) {
-    scene.traverse((obj) => {
-      const mesh = obj as THREE.Mesh
-      const g = mesh.geometry as THREE.BufferGeometry | undefined
-      const m = mesh.material as THREE.Material | THREE.Material[] | undefined
-      if (Array.isArray(m)) m.forEach((mm) => mm && mm.dispose())
-      else if (m) m.dispose()
-      if (g) g.dispose()
-      // @ts-expect-error map
-      const t = (mesh.material && (mesh.material as any).map) as THREE.Texture | undefined
-      t && t.dispose()
-    })
-  }
+  disposeThreeResources({ renderer, scene, controls, extra: [pmrem!, cubeTex!, refrCube!, envMap!] })
   renderer = null
   controls = null
   scene = null

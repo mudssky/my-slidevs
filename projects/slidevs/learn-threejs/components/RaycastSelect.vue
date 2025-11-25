@@ -6,6 +6,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import * as THREE from 'three'
 import { useSlideContext } from '@slidev/client'
+import { disposeThreeResources } from '@mudssky/slidev-addon-default/composables/useThreeCleanup'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 const domRef = ref()
 const slideContext = useSlideContext()
@@ -18,28 +19,12 @@ let onMoveHandler: ((e: MouseEvent) => void) | null = null
 onUnmounted(() => {
   stop = true
   raf && cancelAnimationFrame(raf)
-  if (renderer && onMoveHandler) renderer.domElement.removeEventListener('mousemove', onMoveHandler)
-  controls && controls.dispose()
-  if (renderer) {
-    renderer.dispose()
-    // @ts-expect-error forceContextLoss
-    renderer.forceContextLoss && renderer.forceContextLoss()
-    const el = renderer.domElement
-    el && el.parentNode && el.parentNode.removeChild(el)
-  }
-  if (scene) {
-    scene.traverse((obj) => {
-      const mesh = obj as THREE.Mesh
-      const g = mesh.geometry as THREE.BufferGeometry | undefined
-      const m = mesh.material as THREE.Material | THREE.Material[] | undefined
-      if (Array.isArray(m)) m.forEach((mm) => mm && mm.dispose())
-      else if (m) m.dispose()
-      if (g) g.dispose()
-      // @ts-expect-error map
-      const t = (mesh.material && (mesh.material as any).map) as THREE.Texture | undefined
-      t && t.dispose()
-    })
-  }
+  disposeThreeResources({
+    renderer,
+    scene,
+    controls,
+    events: renderer && onMoveHandler ? [{ target: renderer.domElement, type: 'mousemove', handler: onMoveHandler }] : [],
+  })
   renderer = null
   controls = null
   scene = null
