@@ -256,6 +256,16 @@ classDiagram
 
 ---
 
+
+---
+level: 2
+layout: none
+---
+
+<Demo004BufferGeometry/>
+
+
+
 ### 目标
 
 - 认识常用几何体与 BufferGeometry
