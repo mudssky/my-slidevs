@@ -25,6 +25,7 @@ let stop = false
 let renderer: THREE.WebGLRenderer | null = null
 let controls: OrbitControls | null = null
 let scene: THREE.Scene | null = null
+let axesHelper: THREE.AxesHelper | null = null
 
 /**
  * 创建一个 BufferGeometry 几何体
@@ -74,8 +75,8 @@ onMounted(() => {
   // 将网格加入场景
   scene.add(mesh)
   // 坐标轴辅助线，可用于理解场景坐标系
-  // const axesHelper = new THREE.AxesHelper(200)
-  // scene.add(axesHelper)
+  axesHelper = new THREE.AxesHelper(200)
+  scene.add(axesHelper)
 
   // 透视相机：参数依次为 视场角(FOV)、长宽比、近裁剪面、远裁剪面
   const camera = new THREE.PerspectiveCamera(
@@ -114,5 +115,6 @@ onUnmounted(() => {
   renderer = null
   controls = null
   scene = null
+  axesHelper = null
 })
 </script>
