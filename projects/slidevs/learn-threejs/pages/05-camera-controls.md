@@ -18,4 +18,6 @@ title: 相机与交互控制
 layout: none
 ---
 
+<LazyRender>
 <ControlsOrbitLimits />
+</LazyRender>

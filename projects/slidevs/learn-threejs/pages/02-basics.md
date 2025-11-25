@@ -121,7 +121,9 @@ render()
 layout: none
 ---
 
+<LazyRender>
 <Demo001start />
+</LazyRender>
 
 ---
 title: 自适应与像素比
@@ -234,7 +236,9 @@ hideInToc: true
 layout: none
 ---
 
+<LazyRender>
 <Demo002GUI />
+</LazyRender>
 
 ---
 level: 2
@@ -279,4 +283,6 @@ hideInToc: true
 layout: none
 ---
 
-<Demo003PerspectiveCamera />
+<LazyRender>
+  <Demo003PerspectiveCamera />
+</LazyRender>

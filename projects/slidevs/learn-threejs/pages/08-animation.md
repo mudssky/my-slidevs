@@ -18,4 +18,6 @@ title: 动画系统与剪辑
 layout: none
 ---
 
+<LazyRender>
 <AnimationBlend />
+</LazyRender>

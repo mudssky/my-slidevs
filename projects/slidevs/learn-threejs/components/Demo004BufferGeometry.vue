@@ -4,7 +4,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import * as THREE from 'three'
 import { useSlideContext } from '@slidev/client'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
@@ -18,8 +18,12 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 // 获取模板中的容器引用
 const domRef = ref()
-// Slidev 上下文：用于读取演示的画布尺寸与宽高比配置
 const slideContext = useSlideContext()
+let raf = 0
+let stop = false
+let renderer: THREE.WebGLRenderer | null = null
+let controls: OrbitControls | null = null
+let scene: THREE.Scene | null = null
 
 /**
  * 创建一个 BufferGeometry 几何体
@@ -57,11 +61,13 @@ onMounted(() => {
   const slideWidth =
     slideContext.$slidev.configs.canvasWidth || window.innerWidth
   const slideHeight =
-    // 获取幻灯片容器尺寸（优先使用SlideV配置的尺寸，否则使用窗口尺寸）
-    slideContext.$slidev.configs.aspectRatio || window.innerHeight
+    (slideContext.$slidev.configs.canvasWidth &&
+      slideContext.$slidev.configs.canvasWidth /
+        slideContext.$slidev.configs.aspectRatio) ||
+    window.innerHeight
 
   // 场景：所有 3D 对象的根容器
-  const scene = new THREE.Scene()
+  scene = new THREE.Scene()
 
   const mesh = getMesh()
   // 将网格加入场景
@@ -82,15 +88,13 @@ onMounted(() => {
   camera.lookAt(0, 0, 0)
 
   // 渲染器：负责将场景与相机绘制到画布
-  const renderer = new THREE.WebGLRenderer()
-  // 设置渲染尺寸以匹配 Slidev 画布
+  renderer = new THREE.WebGLRenderer()
   renderer.setSize(slideWidth, slideHeight)
 
   function render() {
-    // 每帧使用当前相机视角渲染场景
-    renderer.render(scene, camera)
-    // 请求下一帧，形成渲染循环
-    requestAnimationFrame(render)
+    if (stop) return
+    renderer!.render(scene!, camera)
+    raf = requestAnimationFrame(render)
   }
 
   render()
@@ -99,6 +103,39 @@ onMounted(() => {
   domRef.value.appendChild(renderer.domElement)
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const controls = new OrbitControls(camera, renderer.domElement)
+  controls = new OrbitControls(camera, renderer.domElement)
+})
+
+const disposeScene = (s: THREE.Scene) => {
+  s.traverse((obj) => {
+    const mesh = obj as THREE.Mesh
+    const g = mesh.geometry as THREE.BufferGeometry | undefined
+    const m = mesh.material as THREE.Material | THREE.Material[] | undefined
+    if (Array.isArray(m)) m.forEach((mm) => mm && mm.dispose())
+    else if (m) m.dispose()
+    if (g) g.dispose()
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const t = (mesh.material && (mesh.material as any).map) as
+      | THREE.Texture
+      | undefined
+    t && t.dispose()
+  })
+}
+
+onUnmounted(() => {
+  stop = true
+  raf && cancelAnimationFrame(raf)
+  controls && controls.dispose()
+  if (renderer) {
+    renderer.dispose()
+    renderer.forceContextLoss && renderer.forceContextLoss()
+    const el = renderer.domElement
+    el && el.parentNode && el.parentNode.removeChild(el)
+  }
+  scene && disposeScene(scene)
+  renderer = null
+  controls = null
+  scene = null
 })
 </script>

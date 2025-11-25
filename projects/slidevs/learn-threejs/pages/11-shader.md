@@ -18,4 +18,6 @@ title: Shader 入门
 layout: none
 ---
 
+<LazyRender>
 <ShaderMaterialIntro />
+</LazyRender>

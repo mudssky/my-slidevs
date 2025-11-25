@@ -18,4 +18,6 @@ title: 交互拾取与射线
 layout: none
 ---
 
+<LazyRender>
 <RaycastSelect />
+</LazyRender>

@@ -11,12 +11,42 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 const domRef = ref()
 const slideContext = useSlideContext()
 let stop = false
+let raf = 0
+let renderer: THREE.WebGLRenderer | null = null
+let controls: OrbitControls | null = null
+let scene: THREE.Scene | null = null
+let mixer: THREE.AnimationMixer | null = null
 onUnmounted(() => {
   stop = true
+  raf && cancelAnimationFrame(raf)
+  controls && controls.dispose()
+  if (renderer) {
+    renderer.dispose()
+    // @ts-expect-error forceContextLoss
+    renderer.forceContextLoss && renderer.forceContextLoss()
+    const el = renderer.domElement
+    el && el.parentNode && el.parentNode.removeChild(el)
+  }
+  if (scene) {
+    scene.traverse((obj) => {
+      const mesh = obj as THREE.Mesh
+      const g = mesh.geometry as THREE.BufferGeometry | undefined
+      const m = mesh.material as THREE.Material | THREE.Material[] | undefined
+      if (Array.isArray(m)) m.forEach((mm) => mm && mm.dispose())
+      else if (m) m.dispose()
+      if (g) g.dispose()
+      // @ts-expect-error map
+      const t = (mesh.material && (mesh.material as any).map) as THREE.Texture | undefined
+      t && t.dispose()
+    })
+  }
+  mixer = null
+  renderer = null
+  controls = null
+  scene = null
 })
 onMounted(() => {
-  // 场景初始化
-  const scene = new THREE.Scene()
+  scene = new THREE.Scene()
   const w = slideContext.$slidev.configs.canvasWidth || window.innerWidth
   const h =
     slideContext.$slidev.configs.canvasWidth /
@@ -25,25 +55,25 @@ onMounted(() => {
   const camera = new THREE.PerspectiveCamera(60, w / h, 0.1, 1000)
   camera.position.set(150, 120, 180)
   // 抗锯齿渲染器，并根据设备像素比提升清晰度
-  const renderer = new THREE.WebGLRenderer({ antialias: true })
+  renderer = new THREE.WebGLRenderer({ antialias: true })
   renderer.setPixelRatio(window.devicePixelRatio)
   renderer.setSize(w, h)
   domRef.value.appendChild(renderer.domElement)
   // 轨道控制器，支持阻尼让交互更平滑
-  const controls = new OrbitControls(camera, renderer.domElement)
+  controls = new OrbitControls(camera, renderer.domElement)
   controls.enableDamping = true
   // 环境光 + 点光源照亮模型
   scene.add(new THREE.AmbientLight(0xffffff, 0.5))
   const light = new THREE.PointLight(0xffffff, 1000)
   light.position.set(100, 150, 100)
   scene.add(light)
-  let mixer: THREE.AnimationMixer | null = null
+  mixer = null
   // 加载外部 glTF 模型，成功时加入场景并播放动画
   const loader = new GLTFLoader()
   loader.load(
     'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/CesiumMan/glTF/CesiumMan.gltf',
     (gltf) => {
-      scene.add(gltf.scene)
+      scene!.add(gltf.scene)
       if (gltf.animations && gltf.animations.length > 0) {
         mixer = new THREE.AnimationMixer(gltf.scene)
         const action = mixer.clipAction(gltf.animations[0])
@@ -67,8 +97,8 @@ onMounted(() => {
     const dt = clock.getDelta()
     if (mixer) mixer.update(dt)
     controls.update()
-    renderer.render(scene, camera)
-    requestAnimationFrame(animate)
+    renderer!.render(scene!, camera)
+    raf = requestAnimationFrame(animate)
   }
   animate()
 })

@@ -18,4 +18,6 @@ title: 加载器与 glTF 模型
 layout: none
 ---
 
+<LazyRender>
 <GLTFLoadAndAnimate />
+</LazyRender>

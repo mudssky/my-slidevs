@@ -18,4 +18,6 @@ title: 光源与阴影
 layout: none
 ---
 
+<LazyRender>
 <LightsAndShadows />
+</LazyRender>

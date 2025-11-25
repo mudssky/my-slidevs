@@ -18,4 +18,6 @@ title: 纹理与环境贴图
 layout: none
 ---
 
+<LazyRender>
 <EnvMapReflectRefract />
+</LazyRender>

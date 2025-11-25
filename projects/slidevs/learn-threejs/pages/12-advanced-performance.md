@@ -18,4 +18,6 @@ title: 高级渲染与性能优化
 layout: none
 ---
 
+<LazyRender>
 <InstancedLOD />
+</LazyRender>

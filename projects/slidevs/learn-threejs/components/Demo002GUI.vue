@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import * as THREE from 'three'
 import { useSlideContext } from '@slidev/client'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
@@ -11,10 +11,14 @@ import { useGuiAutoVisibility } from '@/hooks'
 
 const domRef = ref()
 const slideContext = useSlideContext()
+let raf = 0
+let stop = false
+let renderer: THREE.WebGLRenderer | null = null
+let controls: OrbitControls | null = null
+let scene: THREE.Scene | null = null
 
 onMounted(() => {
-  // 1. 创建场景 - 所有3D对象的容器
-  const scene = new THREE.Scene()
+  scene = new THREE.Scene()
 
   // 获取幻灯片容器尺寸（优先使用SlideV配置的尺寸，否则使用窗口尺寸）
   const slideWidth =
@@ -108,24 +112,52 @@ onMounted(() => {
     camera.lookAt(0, 0, 0)
 
     // 创建WebGL渲染器
-    const renderer = new THREE.WebGLRenderer()
-    // 设置渲染器尺寸为幻灯片容器尺寸
+    renderer = new THREE.WebGLRenderer()
     renderer.setSize(slideWidth, slideHeight)
 
     // 渲染循环函数
     function render() {
-      // 渲染场景和相机
-      renderer.render(scene, camera)
-      // 请求下一帧继续渲染（实现动画效果）
-      requestAnimationFrame(render)
+      if (stop) return
+      renderer!.render(scene!, camera)
+      raf = requestAnimationFrame(render)
     }
     // 开始渲染循环
     render()
     // 将渲染器的canvas元素添加到DOM中
     domRef.value.appendChild(renderer.domElement)
     // 添加轨道控制器（允许用鼠标旋转/缩放场景）
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const controls = new OrbitControls(camera, renderer.domElement)
+    controls = new OrbitControls(camera, renderer.domElement)
   }
+})
+
+const disposeScene = (s: THREE.Scene) => {
+  s.traverse((obj) => {
+    const mesh = obj as THREE.Mesh
+    const g = mesh.geometry as THREE.BufferGeometry | undefined
+    const m = mesh.material as THREE.Material | THREE.Material[] | undefined
+    if (Array.isArray(m)) m.forEach((mm) => mm && mm.dispose())
+    else if (m) m.dispose()
+    if (g) g.dispose()
+    // @ts-expect-error map
+    const t = (mesh.material && (mesh.material as any).map) as THREE.Texture | undefined
+    t && t.dispose()
+  })
+}
+
+onUnmounted(() => {
+  stop = true
+  raf && cancelAnimationFrame(raf)
+  controls && controls.dispose()
+  if (renderer) {
+    renderer.dispose()
+    // @ts-expect-error forceContextLoss
+    renderer.forceContextLoss && renderer.forceContextLoss()
+    const el = renderer.domElement
+    el && el.parentNode && el.parentNode.removeChild(el)
+  }
+  scene && disposeScene(scene)
+  renderer = null
+  controls = null
+  scene = null
 })
 </script>

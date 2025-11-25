@@ -254,7 +254,6 @@ classDiagram
 <!-- markdownlint-enable MD046 -->
 </MermaidViewer>
 
----
 
 
 ---
@@ -262,8 +261,11 @@ level: 2
 layout: none
 ---
 
-<Demo004BufferGeometry/>
+<LazyRender>
+  <Demo004BufferGeometry/>
+</LazyRender>
 
+---
 
 
 ### 目标
@@ -282,4 +284,6 @@ layout: none
 layout: none
 ---
 
+<LazyRender>
 <GeometryShowcase />
+</LazyRender>

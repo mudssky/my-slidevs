@@ -18,4 +18,6 @@ title: 后期处理与效果链路
 layout: none
 ---
 
+<LazyRender>
 <ComposerPipeline />
+</LazyRender>

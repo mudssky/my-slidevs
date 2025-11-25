@@ -20,22 +20,63 @@ function dataUrlFromColor(color: THREE.ColorRepresentation) {
 const domRef = ref()
 const slideContext = useSlideContext()
 let stop = false
+let raf = 0
+let renderer: THREE.WebGLRenderer | null = null
+let controls: OrbitControls | null = null
+let scene: THREE.Scene | null = null
+let pmrem: THREE.PMREMGenerator | null = null
+let cubeTex: THREE.CubeTexture | null = null
+let refrCube: THREE.CubeTexture | null = null
+let envMap: THREE.Texture | null = null
 onUnmounted(() => {
   stop = true
+  raf && cancelAnimationFrame(raf)
+  controls && controls.dispose()
+  if (renderer) {
+    renderer.dispose()
+    // @ts-expect-error forceContextLoss
+    renderer.forceContextLoss && renderer.forceContextLoss()
+    const el = renderer.domElement
+    el && el.parentNode && el.parentNode.removeChild(el)
+  }
+  pmrem && pmrem.dispose()
+  cubeTex && cubeTex.dispose()
+  refrCube && refrCube.dispose()
+  envMap && envMap.dispose()
+  if (scene) {
+    scene.traverse((obj) => {
+      const mesh = obj as THREE.Mesh
+      const g = mesh.geometry as THREE.BufferGeometry | undefined
+      const m = mesh.material as THREE.Material | THREE.Material[] | undefined
+      if (Array.isArray(m)) m.forEach((mm) => mm && mm.dispose())
+      else if (m) m.dispose()
+      if (g) g.dispose()
+      // @ts-expect-error map
+      const t = (mesh.material && (mesh.material as any).map) as THREE.Texture | undefined
+      t && t.dispose()
+    })
+  }
+  renderer = null
+  controls = null
+  scene = null
+  pmrem = null
+  cubeTex = null
+  refrCube = null
+  envMap = null
 })
 onMounted(() => {
-  const scene = new THREE.Scene()
+  scene = new THREE.Scene()
   const w = slideContext.$slidev.configs.canvasWidth || window.innerWidth
   const h =
     slideContext.$slidev.configs.canvasWidth /
       slideContext.$slidev.configs.aspectRatio || window.innerHeight
   const camera = new THREE.PerspectiveCamera(60, w / h, 0.1, 1000)
   camera.position.set(150, 120, 180)
-  const renderer = new THREE.WebGLRenderer({ antialias: true })
+  renderer = new THREE.WebGLRenderer({ antialias: true })
   renderer.setPixelRatio(window.devicePixelRatio)
   renderer.setSize(w, h)
   domRef.value.appendChild(renderer.domElement)
-  const controls = new OrbitControls(camera, renderer.domElement)
+  controls = new OrbitControls(camera, renderer.domElement)
   controls.enableDamping = true
   const urls = [
     dataUrlFromColor('#ff0000'),
@@ -45,10 +86,10 @@ onMounted(() => {
     dataUrlFromColor('#00ffff'),
     dataUrlFromColor('#ff00ff'),
   ]
-  const cubeTex = new THREE.CubeTextureLoader().load(urls)
+  cubeTex = new THREE.CubeTextureLoader().load(urls)
   // 使用 PMREM 生成预滤波环境贴图以获得更真实的金属反射
-  const pmrem = new THREE.PMREMGenerator(renderer)
-  const envMap = pmrem.fromCubemap(cubeTex).texture
+  pmrem = new THREE.PMREMGenerator(renderer)
+  envMap = pmrem.fromCubemap(cubeTex).texture
   const sphere = new THREE.Mesh(
     new THREE.SphereGeometry(40, 64, 32),
     new THREE.MeshStandardMaterial({
@@ -63,7 +104,7 @@ onMounted(() => {
   light.position.set(100, 150, 100)
   scene.add(light)
   scene.add(sphere)
-  const refrCube = cubeTex.clone()
+  refrCube = cubeTex.clone()
   // 将映射改为折射，实现玻璃质感
   refrCube.mapping = THREE.CubeRefractionMapping
   const box = new THREE.Mesh(
@@ -83,8 +124,8 @@ onMounted(() => {
     sphere.rotation.y += 0.01
     box.rotation.x += 0.008
     controls.update()
-    renderer.render(scene, camera)
-    requestAnimationFrame(animate)
+    renderer!.render(scene!, camera)
+    raf = requestAnimationFrame(animate)
   }
   animate()
 })
