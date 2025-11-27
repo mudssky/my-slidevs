@@ -167,3 +167,11 @@ layout: none
 <LazyRender>
 <Demo009CylinderGeometry />
 </LazyRender>
+
+---
+layout: none
+---
+
+<LazyRender>
+<Demo010RandomMountain />
+</LazyRender>
