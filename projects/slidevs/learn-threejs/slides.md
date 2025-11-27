@@ -40,7 +40,7 @@ src: ./pages/02-basics.md
 ---
 
 ---
-src: ./pages/03-geometry-material.md
+src: ./pages/03-BufferGeometry.md
 ---
 
 ---
