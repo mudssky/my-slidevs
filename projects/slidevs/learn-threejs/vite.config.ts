@@ -7,4 +7,8 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./', import.meta.url)),
     },
   },
+  optimizeDeps: {
+    // 强制 Vite 预构建 ansis 包
+    include: ['ansis'],
+  },
 })

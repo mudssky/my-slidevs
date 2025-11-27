@@ -16,6 +16,10 @@ transition: slide-left
 mdc: true
 addons:
   - '@mudssky/slidev-addon-default'
+monacoRunAdditionalDeps:
+  - three
+monacoTypesAdditionalPackages:
+  - three
 ---
 
 
