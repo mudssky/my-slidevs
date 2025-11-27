@@ -27,22 +27,32 @@ let orbitControls: OrbitControls | null = null
 let scene: THREE.Scene | null = null
 let axesHelperInst: THREE.AxesHelper | null = null
 
-const props = defineProps<{
-  object3d?: THREE.Object3D | THREE.Object3D[]
-  axesHelper?: boolean | number
-  fov?: number
-  near?: number
-  far?: number
-  cameraPosition?: { x: number; y: number; z: number }
-  controls?: boolean
-  background?: string
-  onFrame?: (ctx: {
-    scene: THREE.Scene
-    camera: THREE.Camera
-    renderer: THREE.WebGLRenderer
-    THREE: typeof THREE
-  }) => void
-}>()
+const props = withDefaults(
+  defineProps<{
+    object3d?: THREE.Object3D | THREE.Object3D[]
+    axesHelper?: boolean | number
+    fov?: number
+    near?: number
+    far?: number
+    cameraPosition?: { x: number; y: number; z: number }
+    controls?: boolean
+    background?: string
+    onFrame?: (ctx: {
+      scene: THREE.Scene
+      camera: THREE.Camera
+      renderer: THREE.WebGLRenderer
+      THREE: typeof THREE
+    }) => void
+  }>(),
+  {
+    axesHelper: false,
+    fov: 60,
+    near: 1,
+    far: 1000,
+    cameraPosition: () => ({ x: 200, y: 200, z: 200 }),
+    controls: true,
+  },
+)
 
 onMounted(() => {
   // 获取幻灯片容器尺寸（优先使用 Slidev 配置的尺寸，否则使用窗口尺寸）
@@ -80,13 +90,13 @@ onMounted(() => {
 
   // 透视相机：参数依次为 视场角(FOV)、长宽比、近裁剪面、远裁剪面
   const camera = new THREE.PerspectiveCamera(
-    props.fov ?? 60,
+    props.fov,
     slideWidth / slideHeight,
-    props.near ?? 1,
-    props.far ?? 1000,
+    props.near,
+    props.far,
   )
   // 设置相机位置并朝向原点
-  const cp = props.cameraPosition ?? { x: 200, y: 200, z: 200 }
+  const cp = props.cameraPosition
   camera.position.set(cp.x, cp.y, cp.z)
   camera.lookAt(0, 0, 0)
 
