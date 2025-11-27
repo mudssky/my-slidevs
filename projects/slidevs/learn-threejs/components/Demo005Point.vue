@@ -75,7 +75,6 @@ onMounted(() => {
   // 将 WebGL 画布元素挂载到模板中的容器
   domRef.value.appendChild(renderer.domElement)
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   controls = new OrbitControls(camera, renderer.domElement)
 })
 
