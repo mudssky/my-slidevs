@@ -7,6 +7,7 @@
     "slidev"
   ],
   "type": "module",
+  "module": "./index.ts",
   "scripts": {
     "build": "slidev build example.md",
     "dev": "slidev example.md --open -p 8766",
