@@ -210,6 +210,9 @@ importers:
       '@my-slidev/tsconfig':
         specifier: workspace:^
         version: link:../../../packages/tsconfig
+      simplex-noise:
+        specifier: ^4.0.3
+        version: 4.0.3
       three:
         specifier: ^0.181.2
         version: 0.181.2
@@ -4419,6 +4422,9 @@ packages:
   shikiji@0.9.19:
     resolution: {integrity: sha512-Kw2NHWktdcdypCj1GkKpXH4o6Vxz8B8TykPlPuLHOGSV8VkhoCLcFOH4k19K4LXAQYRQmxg+0X/eM+m2sLhAkg==}
     deprecated: Deprecated, use shiki instead
+
+  simplex-noise@4.0.3:
+    resolution: {integrity: sha512-qSE2I4AngLQG7BXqoZj51jokT4WUXe8mOBrvfOXpci8+6Yu44+/dD5zqDpOx3Ux792eamTd2lLcI8jqFntk/lg==}
 
   sirv@2.0.4:
     resolution: {integrity: sha512-94Bdh3cC2PKrbgSOUqTiGPWVZeSiXfKOVZNJniWoqrWrRkB1CJzBU3NEbiTsPcYy1lDsANA/THzS+9WBiy5nfQ==}
@@ -10346,6 +10352,8 @@ snapshots:
   shikiji@0.9.19:
     dependencies:
       shikiji-core: 0.9.19
+
+  simplex-noise@4.0.3: {}
 
   sirv@2.0.4:
     dependencies:

@@ -175,3 +175,19 @@ layout: none
 <LazyRender>
 <Demo010RandomMountain />
 </LazyRender>
+
+---
+layout: none
+---
+
+<LazyRender>
+<Demo011NoiseMountain />
+</LazyRender>
+
+---
+layout: none
+---
+
+<LazyRender>
+<Demo012NoiseMountainAnime />
+</LazyRender>
