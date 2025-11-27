@@ -325,6 +325,44 @@ geometry.index = new THREE.BufferAttribute(indexes, 1);
 ```
 
 ---
+layout: none
+---
+
+<LazyRender>
+  <Demo004BufferGeometry3/>
+</LazyRender>
+
+---
+layout: scroll
+---
+
+把 `geometry.attributes.position` 里重复的两个顶点删掉，然后加一份索引数据，设置到 `geometry.index`  
+所有几何体都是这样存储顶点数据的  
+`geometry.attributes.position`可以查看顶点数为24  
+`geometry.index`可以看到顶点索引为36个.12个三角形，每面两个三角形，一共6个面，这个就是一个立方体
+
+```js {monaco-run} {autorun:false}
+import * as THREE from 'three';
+
+const geometry = new THREE.BoxGeometry(100, 100, 100);
+const material = new THREE.MeshLambertMaterial(({
+    color: new THREE.Color('orange')
+}));
+const mesh = new THREE.Mesh(geometry, material);
+debugger
+console.log('测试几何体顶点',mesh);
+
+```
+
+---
+layout: none
+---
+
+<LazyRender>
+  <Demo004BufferGeometry4/>
+</LazyRender>
+
+---
 
 ### 目标
 
