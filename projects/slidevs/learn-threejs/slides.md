@@ -44,6 +44,10 @@ src: ./pages/03-BufferGeometry.md
 ---
 
 ---
+src: ./pages/04-point-line-mesh.md
+---
+
+---
 src: ./pages/04-lights-shadows.md
 ---
 
