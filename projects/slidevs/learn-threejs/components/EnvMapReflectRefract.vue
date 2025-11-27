@@ -105,7 +105,7 @@ onMounted(() => {
     if (stop) return
     sphere.rotation.y += 0.01
     box.rotation.x += 0.008
-    controls.update()
+    controls!.update()
     renderer!.render(scene!, camera)
     raf = requestAnimationFrame(animate)
   }
