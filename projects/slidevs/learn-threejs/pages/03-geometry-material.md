@@ -267,9 +267,64 @@ layout: none
 
 ---
 
-上面的例子我们可以看出BufferGeometry是由多个三角形组成的  
-可以基于多个三角形来构建复杂的几何体
+上面的例子我们可以看出BufferGeometry是由多个三角形组成的 (6个顶点构成两个三角形) 
+可以基于多个三角形来构建复杂的几何体  
 
+我们可以基于BufferGeometry封装各种几何体，比如平面几何体PlaneGeometry  
+
+可以由两个三角形构成
+
+```ts
+const vertices = new Float32Array([
+    0, 0, 0,
+    100, 0, 0,
+    0, 100, 0,
+
+    0, 100, 0,
+    100, 0, 0,
+    100, 100, 0
+]);
+```
+
+---
+layout: none
+---
+
+<LazyRender>
+  <Demo004BufferGeometry2/>
+</LazyRender>
+
+---
+level: 2
+---
+
+我们发现上面的两个三角形，有两个顶点是重合的，因此TypeArray中也重复定义了两个顶点  
+
+Three.js 提供了一种优化顶点存储的方案：  
+存储一份不重复的顶点数据，然后存储一份顶点索引的顺序就可以了。
+
+```ts
+const vertices = new Float32Array([
+    0, 0, 0,
+    100, 0, 0,
+    0, 100, 0,
+
+    // 0, 100, 0,
+    // 100, 0, 0,
+    100, 100, 0
+]);
+
+const attribute = new THREE.BufferAttribute(vertices, 3);
+geometry.attributes.position = attribute;
+
+const indexes = new Uint16Array([
+    0, 1, 2, 2, 1, 3
+]);
+geometry.index = new THREE.BufferAttribute(indexes, 1);
+
+```
+
+---
 
 ### 目标
 
