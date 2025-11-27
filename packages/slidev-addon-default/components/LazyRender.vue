@@ -2,6 +2,7 @@
 <script setup lang="ts">
 import { ref, watch, computed } from 'vue'
 import { useElementVisibility } from '@vueuse/core'
+import { useSlideContext } from '@slidev/client'
 const { $renderContext } = useSlideContext()
 const props = defineProps<{ enableInOverview?: boolean }>()
 const isOverview = computed(() => $renderContext.value === 'overview')
