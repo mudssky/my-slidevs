@@ -17,30 +17,33 @@ import { disposeThreeResources } from '@mudssky/slidev-addon-default'
   - 演示在 Slidev 中运行，优先采用 Slidev 的画布尺寸设置以保证比例一致。
 */
 
-// 获取模板中的容器引用
 const domRef = ref()
 const slideContext = useSlideContext()
 console.log('当前模式:', slideContext.$renderContext.value)
 let raf = 0
 let stop = false
 let renderer: THREE.WebGLRenderer | null = null
-let controls: OrbitControls | null = null
+let orbitControls: OrbitControls | null = null
 let scene: THREE.Scene | null = null
-let axesHelper: THREE.AxesHelper | null = null
+let axesHelperInst: THREE.AxesHelper | null = null
 
-/**
- * 创建一个 BufferGeometry 几何体
- * @returns {THREE.Mesh} 一个 BufferGeometry 几何体
- */
-function getMesh() {
-  const geometry = new THREE.BoxGeometry(100, 100, 100)
-  const material = new THREE.MeshBasicMaterial({
-    color: new THREE.Color('orange'),
-    wireframe: true,
-  })
-  const mesh = new THREE.Mesh(geometry, material)
-  return mesh
-}
+const props = defineProps<{
+  object3d?: THREE.Object3D | THREE.Object3D[]
+  axesHelper?: boolean | number
+  fov?: number
+  near?: number
+  far?: number
+  cameraPosition?: { x: number; y: number; z: number }
+  controls?: boolean
+  background?: string
+  onFrame?: (ctx: {
+    scene: THREE.Scene
+    camera: THREE.Camera
+    renderer: THREE.WebGLRenderer
+    THREE: typeof THREE
+  }) => void
+}>()
+
 onMounted(() => {
   // 获取幻灯片容器尺寸（优先使用 Slidev 配置的尺寸，否则使用窗口尺寸）
   const slideWidth =
@@ -54,22 +57,37 @@ onMounted(() => {
   // 场景：所有 3D 对象的根容器
   scene = new THREE.Scene()
 
-  const mesh = getMesh()
-  // 将网格加入场景
-  scene.add(mesh)
+  if (props.background) {
+    scene.background = new THREE.Color(props.background)
+  }
+
   // 坐标轴辅助线，可用于理解场景坐标系
-  axesHelper = new THREE.AxesHelper(200)
-  scene.add(axesHelper)
+  const axesConf = props.axesHelper
+  if (axesConf !== false) {
+    const size = typeof axesConf === 'number' ? axesConf : 200
+    axesHelperInst = new THREE.AxesHelper(size)
+    scene.add(axesHelperInst)
+  }
+
+  const objs = props.object3d
+  if (objs) {
+    if (Array.isArray(objs)) {
+      objs.forEach((o) => scene!.add(o))
+    } else {
+      scene!.add(objs)
+    }
+  }
 
   // 透视相机：参数依次为 视场角(FOV)、长宽比、近裁剪面、远裁剪面
   const camera = new THREE.PerspectiveCamera(
-    60,
+    props.fov ?? 60,
     slideWidth / slideHeight,
-    1,
-    1000,
+    props.near ?? 1,
+    props.far ?? 1000,
   )
   // 设置相机位置并朝向原点
-  camera.position.set(200, 200, 200)
+  const cp = props.cameraPosition ?? { x: 200, y: 200, z: 200 }
+  camera.position.set(cp.x, cp.y, cp.z)
   camera.lookAt(0, 0, 0)
 
   // 渲染器：负责将场景与相机绘制到画布
@@ -78,6 +96,9 @@ onMounted(() => {
 
   function render() {
     if (stop) return
+    if (props.onFrame) {
+      props.onFrame({ scene: scene!, camera, renderer: renderer!, THREE })
+    }
     renderer!.render(scene!, camera)
     raf = requestAnimationFrame(render)
   }
@@ -87,17 +108,18 @@ onMounted(() => {
   // 将 WebGL 画布元素挂载到模板中的容器
   domRef.value.appendChild(renderer.domElement)
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  controls = new OrbitControls(camera, renderer.domElement)
+  if (props.controls !== false) {
+    orbitControls = new OrbitControls(camera, renderer.domElement)
+  }
 })
 
 onUnmounted(() => {
   stop = true
   raf && cancelAnimationFrame(raf)
-  disposeThreeResources({ renderer, scene, controls })
+  disposeThreeResources({ renderer, scene, controls: orbitControls })
   renderer = null
-  controls = null
+  orbitControls = null
   scene = null
-  axesHelper = null
+  axesHelperInst = null
 })
 </script>
