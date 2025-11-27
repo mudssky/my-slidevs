@@ -1,7 +1,13 @@
 <!-- components/LazyRenderer.vue -->
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { useElementVisibility } from '@vueuse/core'
+const { $renderContext } = useSlideContext()
+const props = defineProps<{ enableInOverview?: boolean }>()
+const isOverview = computed(() => $renderContext.value === 'overview')
+const canRenderByContext = computed(
+  () => !isOverview.value || !!props.enableInOverview,
+)
 
 // 定义一个容器引用
 const container = ref(null)
@@ -32,7 +38,7 @@ watch(isVisible, (visible) => {
     style="width: 100%; height: 100%; min-height: 300px"
   >
     <!-- 只有可见时，Slot 里的内容才会被创建 -->
-    <slot v-if="shouldRender" />
+    <slot v-if="shouldRender && canRenderByContext" />
 
     <!-- 可选：未渲染时显示的占位符/Loading -->
     <div v-else class="placeholder">Waiting for slide...</div>
