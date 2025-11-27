@@ -1,5 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { onUnmounted } from 'vue'
-import type { Scene, Object3D, Mesh, Material, Texture, BufferGeometry, WebGLRenderer } from 'three'
+import type {
+  Scene,
+  Object3D,
+  Mesh,
+  Material,
+  Texture,
+  BufferGeometry,
+  WebGLRenderer,
+} from 'three'
 import type { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import type { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
 
@@ -57,9 +66,13 @@ export function disposeScene(scene: Scene, opts?: { textureKeys?: string[] }) {
 export function disposeComposer(composer: EffectComposer | null | undefined) {
   if (!composer) return
   const c: any = composer as any
-  if (c.renderTarget1 && typeof c.renderTarget1.dispose === 'function') c.renderTarget1.dispose()
-  if (c.renderTarget2 && typeof c.renderTarget2.dispose === 'function') c.renderTarget2.dispose()
-  const passes: any[] = Array.isArray((composer as any).passes) ? (composer as any).passes : []
+  if (c.renderTarget1 && typeof c.renderTarget1.dispose === 'function')
+    c.renderTarget1.dispose()
+  if (c.renderTarget2 && typeof c.renderTarget2.dispose === 'function')
+    c.renderTarget2.dispose()
+  const passes: any[] = Array.isArray((composer as any).passes)
+    ? (composer as any).passes
+    : []
   for (const p of passes) {
     if (p && typeof p.dispose === 'function') p.dispose()
   }
@@ -77,8 +90,14 @@ export function disposeRenderer(renderer: WebGLRenderer | null | undefined) {
 export function cleanupEventListeners(listeners: Listener[]) {
   for (const l of listeners) {
     try {
-      l.target.removeEventListener(l.type, l.handler as EventListener, l.options as any)
-    } catch {}
+      l.target.removeEventListener(
+        l.type,
+        l.handler as EventListener,
+        l.options as any,
+      )
+    } catch {
+      console.warn('removeEventListener failed', l)
+    }
   }
 }
 
@@ -95,10 +114,13 @@ export function disposeThreeResources(args: {
     for (const id of args.rafs) {
       try {
         cancelAnimationFrame(id)
-      } catch {}
+      } catch {
+        console.warn('cancelAnimationFrame failed', id)
+      }
     }
   }
-  if (args.controls && typeof args.controls.dispose === 'function') args.controls.dispose()
+  if (args.controls && typeof args.controls.dispose === 'function')
+    args.controls.dispose()
   if (args.events && args.events.length) cleanupEventListeners(args.events)
   disposeComposer(args.composer)
   disposeRenderer(args.renderer)
@@ -132,7 +154,9 @@ export function useThreeCleanup() {
   const trackScene = (s: Scene | null) => (state.scene = s)
   const trackControls = (c: OrbitControls | null) => (state.controls = c)
   const trackComposer = (c: EffectComposer | null) => (state.composer = c)
-  const trackExtra = (...d: Array<{ dispose: () => void } | null | undefined>) => {
+  const trackExtra = (
+    ...d: Array<{ dispose: () => void } | null | undefined>
+  ) => {
     for (const x of d) if (x) state.extra.push(x)
   }
   const trackEvents = (...l: Listener[]) => state.events.push(...l)
