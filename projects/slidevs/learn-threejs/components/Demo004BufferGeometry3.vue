@@ -20,6 +20,7 @@ import { disposeThreeResources } from '@mudssky/slidev-addon-default'
 // 获取模板中的容器引用
 const domRef = ref()
 const slideContext = useSlideContext()
+console.log('当前模式:', slideContext.$renderContext.value)
 let raf = 0
 let stop = false
 let renderer: THREE.WebGLRenderer | null = null
@@ -41,7 +42,9 @@ function getMesh() {
     // 三角形 1
     0, 0, 0, 100, 0, 0, 0, 100, 0,
     // 三角形 2
-    0, 100, 0, 100, 0, 0, 100, 100, 0,
+    // 0, 100, 0,
+    //  100, 0, 0,
+    100, 100, 0,
   ])
 
   // 将顶点数组包装为缓冲区属性；第二个参数 itemSize=3 表示每个顶点由 3 个分量组成
@@ -49,6 +52,8 @@ function getMesh() {
   // 绑定到几何体的 position 属性
   geometry.attributes.position = attribute
 
+  const indexes = new Uint16Array([0, 1, 2, 2, 1, 3])
+  geometry.index = new THREE.BufferAttribute(indexes, 1)
   // 基础材质：纯色、无光照响应，适合几何结构演示
   const material = new THREE.MeshBasicMaterial({
     color: new THREE.Color('orange'),

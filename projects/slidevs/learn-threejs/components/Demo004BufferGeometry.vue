@@ -8,7 +8,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import * as THREE from 'three'
 import { useSlideContext } from '@slidev/client'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { disposeThreeResources } from '@mudssky/slidev-addon-default/composables/useThreeCleanup'
+import { disposeThreeResources } from '@mudssky/slidev-addon-default'
 
 /*
   学习提示

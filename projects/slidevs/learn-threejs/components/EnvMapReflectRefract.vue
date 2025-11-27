@@ -6,7 +6,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import * as THREE from 'three'
 import { useSlideContext } from '@slidev/client'
-import { disposeThreeResources } from '@mudssky/slidev-addon-default/composables/useThreeCleanup'
+import { disposeThreeResources } from '@mudssky/slidev-addon-default'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 // 将纯色生成为1x1图片的 dataURL，用于快速构造立方体贴图
 function dataUrlFromColor(color: THREE.ColorRepresentation) {
@@ -32,7 +32,12 @@ let envMap: THREE.Texture | null = null
 onUnmounted(() => {
   stop = true
   raf && cancelAnimationFrame(raf)
-  disposeThreeResources({ renderer, scene, controls, extra: [pmrem!, cubeTex!, refrCube!, envMap!] })
+  disposeThreeResources({
+    renderer,
+    scene,
+    controls,
+    extra: [pmrem!, cubeTex!, refrCube!, envMap!],
+  })
   renderer = null
   controls = null
   scene = null

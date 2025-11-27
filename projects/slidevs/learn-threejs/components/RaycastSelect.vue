@@ -6,7 +6,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import * as THREE from 'three'
 import { useSlideContext } from '@slidev/client'
-import { disposeThreeResources } from '@mudssky/slidev-addon-default/composables/useThreeCleanup'
+import { disposeThreeResources } from '@mudssky/slidev-addon-default'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 const domRef = ref()
 const slideContext = useSlideContext()
@@ -23,7 +23,16 @@ onUnmounted(() => {
     renderer,
     scene,
     controls,
-    events: renderer && onMoveHandler ? [{ target: renderer.domElement, type: 'mousemove', handler: onMoveHandler }] : [],
+    events:
+      renderer && onMoveHandler
+        ? [
+            {
+              target: renderer.domElement,
+              type: 'mousemove',
+              handler: onMoveHandler,
+            },
+          ]
+        : [],
   })
   renderer = null
   controls = null

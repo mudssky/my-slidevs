@@ -6,7 +6,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import * as THREE from 'three'
 import { useSlideContext } from '@slidev/client'
-import { disposeThreeResources } from '@mudssky/slidev-addon-default/composables/useThreeCleanup'
+import { disposeThreeResources } from '@mudssky/slidev-addon-default'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 const domRef = ref()
 const slideContext = useSlideContext()
