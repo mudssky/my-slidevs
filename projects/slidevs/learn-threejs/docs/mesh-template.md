@@ -9,6 +9,10 @@ MeshTemplate 用于在 Slidev 演示中承载 Three.js 场景与交互，提供�
 - `background`：场景背景色（如 `"#202225"`）
 - `cameraPosition`：相机位置 `{ x, y, z }`
 - `onFrame`：每帧回调，签名为 `({ scene, camera, renderer, THREE }) => void`
+- `lights`：自定义光源实例或数组，组件将自动挂载到场景
+- `defaultLight`：简易光源开关与配置，示例 `{ type: 'ambient', intensity: 0.8 }`
+- `enableShadows`：是否开启阴影渲染（同时需要 mesh 设置 `castShadow/receiveShadow`）
+- `title`：左上角标题文本（若提供 `#title` 插槽则以插槽为准）
 
 ## 基本用法
 ```vue
@@ -23,6 +27,30 @@ import MeshTemplate from '../components/MeshTemplate.vue'
 import mesh from '../components/mesh/noiseMountain'
 </script>
 ```
+
+## 标题用法
+```vue
+<template>
+  <MeshTemplate :object3d="mesh" title="我的标题" />
+  <!-- 或使用组件作为标题 -->
+  <!--
+  <MeshTemplate :object3d="mesh">
+    <template #title>
+      <MyTitle />
+    </template>
+  </MeshTemplate>
+  -->
+```
+```vue
+<script setup lang="ts">
+import MeshTemplate from '../components/MeshTemplate.vue'
+import mesh from '../components/mesh/noiseMountain'
+import MyTitle from '../components/MyTitle.vue'
+</script>
+```
+
+### 插槽
+- `#title`：标题插槽，若提供则优先于 `title` 文本渲染；可传入任意组件或内容。
 
 ## 每帧动画示例（噪声地形起伏）
 ```vue
@@ -53,6 +81,33 @@ function onFrame() {
 </script>
 ```
 
+## 开启光源示例
+```vue
+<template>
+  <MeshTemplate :object3d="mesh" :defaultLight="{ type: 'ambient', intensity: 0.8 }" />
+  <!-- 或使用定向光 -->
+  <!-- <MeshTemplate :object3d="mesh" :defaultLight="{ type: 'directional', color: '#ffffff', intensity: 1, position: { x: 200, y: 300, z: 150 } }" /> -->
+</template>
+
+<script setup lang="ts">
+import MeshTemplate from '../components/MeshTemplate.vue'
+import mesh from '../components/mesh/noiseMountain'
+</script>
+```
+
+```vue
+<template>
+  <MeshTemplate :object3d="mesh" :defaultLight="{ type: 'hemisphere', skyColor: '#ffffff', groundColor: '#666666', intensity: 0.7 }" :enableShadows="false" />
+</template>
+
+<script setup lang="ts">
+import MeshTemplate from '../components/MeshTemplate.vue'
+import mesh from '../components/mesh/noiseMountain'
+</script>
+```
+
 ## 提示
 - 画布尺寸自动匹配 Slidev 配置，避免比例失衡。
 - 如需更细网格或更大地形，调整 `PlaneGeometry` 的尺寸与分段。
+- 使用受光材质（如 `MeshLambertMaterial`、`MeshPhongMaterial`、`MeshStandardMaterial`）才能看到光照效果；`MeshBasicMaterial` 不受光影响。
+- 阴影需要在材质/mesh 处设置：几何体 `castShadow` 与接收者 `receiveShadow`。

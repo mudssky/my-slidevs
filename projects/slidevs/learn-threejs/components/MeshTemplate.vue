@@ -1,10 +1,16 @@
 <template>
-  <!-- 承载 WebGL 画布的 DOM 容器 -->
-  <div ref="domRef"></div>
+  <div class="mesh-container">
+    <div ref="domRef"></div>
+    <div v-if="hasTitle" class="mesh-title">
+      <slot name="title">
+        <span class="mesh-title-text">{{ props.title }}</span>
+      </slot>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed, useSlots } from 'vue'
 import * as THREE from 'three'
 import { useSlideContext } from '@slidev/client'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
@@ -48,6 +54,7 @@ const props = withDefaults(
           groundColor?: string
         }
     enableShadows?: boolean
+    title?: string
     onFrame?: (ctx: {
       scene: THREE.Scene
       camera: THREE.Camera
@@ -66,6 +73,9 @@ const props = withDefaults(
     enableShadows: false,
   },
 )
+
+const slots = useSlots()
+const hasTitle = computed(() => !!slots.title || !!props.title)
 
 onMounted(() => {
   // 获取幻灯片容器尺寸（优先使用 Slidev 配置的尺寸，否则使用窗口尺寸）
@@ -205,3 +215,27 @@ onUnmounted(() => {
   axesHelperInst = null
 })
 </script>
+
+<style scoped>
+.mesh-container {
+  position: relative;
+  display: inline-block;
+}
+.mesh-title {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 10;
+  pointer-events: none;
+}
+.mesh-title > * {
+  pointer-events: auto;
+}
+.mesh-title-text {
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+</style>
