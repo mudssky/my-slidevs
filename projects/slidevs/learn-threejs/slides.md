@@ -48,6 +48,10 @@ src: ./pages/04-point-line-mesh.md
 ---
 
 ---
+src: ./pages/05-material.md
+---
+
+---
 src: ./pages/04-lights-shadows.md
 ---
 
