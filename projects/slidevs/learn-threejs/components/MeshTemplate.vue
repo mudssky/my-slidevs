@@ -19,7 +19,6 @@ import { disposeThreeResources } from '@mudssky/slidev-addon-default'
 
 const domRef = ref()
 const slideContext = useSlideContext()
-console.log('当前模式:', slideContext.$renderContext.value)
 let raf = 0
 let stop = false
 let renderer: THREE.WebGLRenderer | null = null
@@ -37,6 +36,18 @@ const props = withDefaults(
     cameraPosition?: { x: number; y: number; z: number }
     controls?: boolean
     background?: string
+    lights?: THREE.Light | THREE.Light[]
+    defaultLight?:
+      | false
+      | {
+          type?: 'ambient' | 'hemisphere' | 'directional' | 'point' | 'spot'
+          color?: string
+          intensity?: number
+          position?: { x: number; y: number; z: number }
+          skyColor?: string
+          groundColor?: string
+        }
+    enableShadows?: boolean
     onFrame?: (ctx: {
       scene: THREE.Scene
       camera: THREE.Camera
@@ -51,6 +62,8 @@ const props = withDefaults(
     far: 1000,
     cameraPosition: () => ({ x: 200, y: 200, z: 200 }),
     controls: true,
+    defaultLight: false,
+    enableShadows: false,
   },
 )
 
@@ -104,6 +117,57 @@ onMounted(() => {
   renderer = new THREE.WebGLRenderer()
   renderer.setSize(slideWidth, slideHeight)
 
+  // 光源：根据 props 添加光照
+  const createdLights: THREE.Light[] = []
+  const addLight = (light: THREE.Light) => {
+    scene!.add(light)
+    createdLights.push(light)
+  }
+
+  if (props.lights) {
+    if (Array.isArray(props.lights)) {
+      props.lights.forEach((l) => addLight(l))
+    } else {
+      addLight(props.lights)
+    }
+  } else if (props.defaultLight !== false) {
+    const conf = props.defaultLight || {}
+    const type = conf.type || 'ambient'
+    const color = conf.color || '#ffffff'
+    const intensity = conf.intensity ?? 0.8
+    const pos = conf.position || { x: 200, y: 300, z: 150 }
+    if (type === 'ambient') {
+      addLight(new THREE.AmbientLight(color, intensity))
+    } else if (type === 'hemisphere') {
+      const sky = conf.skyColor || '#ffffff'
+      const ground = conf.groundColor || '#666666'
+      addLight(new THREE.HemisphereLight(sky, ground, intensity))
+    } else if (type === 'directional') {
+      const dl = new THREE.DirectionalLight(color, intensity)
+      dl.position.set(pos.x, pos.y, pos.z)
+      addLight(dl)
+    } else if (type === 'point') {
+      const pl = new THREE.PointLight(color, intensity)
+      pl.position.set(pos.x, pos.y, pos.z)
+      addLight(pl)
+    } else if (type === 'spot') {
+      const sl = new THREE.SpotLight(color, intensity)
+      sl.position.set(pos.x, pos.y, pos.z)
+      addLight(sl)
+    }
+  }
+
+  if (props.enableShadows) {
+    renderer.shadowMap.enabled = true
+    createdLights.forEach((l) => {
+      if ('castShadow' in l) {
+        ;(
+          l as THREE.DirectionalLight | THREE.SpotLight | THREE.PointLight
+        ).castShadow = true
+      }
+    })
+  }
+
   function render() {
     if (stop) return
     if (props.onFrame) {
@@ -127,6 +191,14 @@ onUnmounted(() => {
   stop = true
   raf && cancelAnimationFrame(raf)
   disposeThreeResources({ renderer, scene, controls: orbitControls })
+  // 移除本组件创建的光源（若有）
+  if (scene) {
+    const children = [...scene.children]
+    children.forEach((child) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if ((child as any).isLight) scene!.remove(child)
+    })
+  }
   renderer = null
   orbitControls = null
   scene = null
