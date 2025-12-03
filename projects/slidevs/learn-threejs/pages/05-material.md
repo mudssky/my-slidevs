@@ -72,3 +72,11 @@ layout: none
 <LazyRender>
 <Demo015SphereTexture />
 </LazyRender>
+
+---
+layout: none
+---
+
+<LazyRender>
+<Demo016zhuan />
+</LazyRender>
