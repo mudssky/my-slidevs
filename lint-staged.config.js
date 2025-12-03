@@ -9,5 +9,5 @@ export default {
   // eslint检查
   '*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,vue}': ['eslint --fix'],
   '**/*.ts?(x)': () => 'tsgo -p tsconfig.json --noEmit',
-  '**/*.md': 'markdownlint --fix',
+  '**/*.md': 'markdownlint --fix -c .markdownlint.cjs',
 }

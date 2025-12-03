@@ -16,6 +16,7 @@ module.exports = {
   'no-multiple-blanks': true,
   //   行宽限制,默认是80
   'line-length': false,
+  MD013: false,
   // 标题# 后面应该只有一个空格
   'no-multiple-space-atx': true,
   // MD022   标题需要被空行包围
@@ -35,8 +36,10 @@ module.exports = {
   'no-inline-html': false,
   // MD81 不能用强调符号作为标题，这是为了语义,但是太烦了，还是关掉
   'no-emphasis-as-heading': false,
+  MD036: false,
   //   第一行需要是最高级别标题
   'first-line-heading': false,
+  MD041: false,
   //   文件需要以一个新的换行符结尾
   //   Files should end with a single newline character
   'single-trailing-newline': true,
