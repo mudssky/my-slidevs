@@ -74,6 +74,27 @@ layout: none
 </LazyRender>
 
 ---
+
+```js
+// 可以重复贴图
+texture.wrapS = THREE.RepeatWrapping
+texture.wrapT = THREE.RepeatWrapping
+texture.repeat.set(3, 3)
+// 设置贴图颜色空间
+texture.colorSpace = THREE.SRGBColorSpace
+```
+
+在Three.js中，材质的aoMap属性是环境光遮挡贴图(Ambient Occlusion Map)的缩写，它是一个用于增强3D模型真实感的重要贴图属性。
+
+```js
+const material = new THREE.MeshBasicMaterial({
+  map: texture,
+  // 环境遮挡图
+  aoMap: texture,
+})
+```
+
+---
 layout: none
 ---
 
