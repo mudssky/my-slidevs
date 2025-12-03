@@ -1,5 +1,12 @@
 <template>
-  <MeshTemplate :object3d="zhuan" :controls="true" :lights="pointLight">
+  <MeshTemplate
+    :object3d="zhuan"
+    :controls="true"
+    :lights="pointLight"
+    :camera-option="{
+      far: 10000,
+    }"
+  >
     <template #title>
       <div class="text-red-300 text-center w-full!">材质贴图</div>
     </template>

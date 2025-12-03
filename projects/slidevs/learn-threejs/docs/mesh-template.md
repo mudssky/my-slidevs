@@ -8,7 +8,7 @@ MeshTemplate 用于在 Slidev 演示中承载 Three.js 场景与交互，提供�
 - `controls`：是否启用轨道控制，默认启用
 - `axesHelper`：坐标轴辅助线，`false` 关闭，或传入数值作为尺寸
 - `background`：场景背景色（如 `"#202225"`）
-- `cameraOption`：相机选项 `{ fov, near, far, position: { x, y, z } }`
+- `cameraOption`：相机选项（字段均可选）`{ fov?, near?, far?, position?: { x?, y?, z? } }`，未提供的字段将按“自动取景”默认值填充
 - `onFrame`：每帧回调，签名为 `({ scene, camera, renderer, THREE }) => void`
 - `lights`：自定义光源实例或数组，组件将自动挂载到场景
 - `defaultLight`：简易光源开关与配置，示例 `{ type: 'ambient', intensity: 0.8 }`
@@ -22,8 +22,18 @@ MeshTemplate 用于在 Slidev 演示中承载 Three.js 场景与交互，提供�
   <MeshTemplate :object3d="mesh" />
   <!-- 或传入多个对象：:object3d="[mesh1, mesh2]" -->
   <!-- 关闭交互：:controls="false" -->
-  <!-- 相机统一配置：:cameraOption -->
+  <!-- 相机统一配置：:cameraOption（支持部分覆盖） -->
+  <!-- 完整配置示例： -->
   <!-- <MeshTemplate :object3d="mesh" :cameraOption="{ fov: 75, near: 0.1, far: 2000, position: { x: 300, y: 180, z: 260 } }" /> -->
+  <!-- 仅覆盖部分字段示例： -->
+  <!-- <MeshTemplate :object3d="mesh" :cameraOption="{ fov: 70, position: { x: 250 } }" /> -->
+
+## 自动取景与默认值
+
+- 当传入 `object3d`（单个或数组）时，组件会自动计算对象的联合包围盒与中心点，生成更合理的默认相机参数：
+  - 自动设置 `fov/near/far` 与 `position`，并将相机朝向对象中心
+  - 用户可以仅传入部分 `cameraOption` 字段进行覆盖（例如只传 `position.x` 或只传 `fov`）
+- 未传入 `object3d` 时，使用静态默认值：`{ fov:60, near:1, far:1000, position:{ x:200, y:200, z:200 } }`
 </template>
 
 <script setup lang="ts">

@@ -37,10 +37,10 @@ const props = withDefaults(
     object3d?: THREE.Object3D | THREE.Object3D[]
     axesHelper?: boolean | number
     cameraOption?: {
-      fov: number
-      near: number
-      far: number
-      position: { x: number; y: number; z: number }
+      fov?: number
+      near?: number
+      far?: number
+      position?: { x?: number; y?: number; z?: number }
     }
     controls?: boolean
     background?: string
@@ -66,12 +66,6 @@ const props = withDefaults(
   }>(),
   {
     axesHelper: false,
-    cameraOption: () => ({
-      fov: 60,
-      near: 1,
-      far: 1000,
-      position: { x: 200, y: 200, z: 200 },
-    }),
     controls: true,
     defaultLight: false,
     enableShadows: false,
@@ -80,6 +74,83 @@ const props = withDefaults(
 
 const slots = useSlots()
 const hasTitle = computed(() => !!slots.title || !!props.title)
+
+function computeBounding(objects?: THREE.Object3D | THREE.Object3D[]) {
+  if (!objects) return null
+  const box = new THREE.Box3()
+  const addObj = (o: THREE.Object3D) => {
+    const b = new THREE.Box3().setFromObject(o)
+    box.union(b)
+  }
+  if (Array.isArray(objects)) objects.forEach(addObj)
+  else addObj(objects)
+  if (box.isEmpty()) return null
+  const center = box.getCenter(new THREE.Vector3())
+  const size = box.getSize(new THREE.Vector3())
+  const radius = size.length() / 2
+  return { center, radius }
+}
+
+function clampFov(fov: number) {
+  return Math.min(120, Math.max(10, fov))
+}
+
+function buildAutoCameraDefaults(
+  bounds: { center: THREE.Vector3; radius: number } | null,
+) {
+  if (!bounds) {
+    return {
+      fov: 60,
+      near: 1,
+      far: 1000,
+      position: { x: 200, y: 200, z: 200 },
+      lookAt: new THREE.Vector3(0, 0, 0),
+    }
+  }
+  const fov = 60
+  const near = Math.max(0.1, bounds.radius * 0.01)
+  const halfRad = (fov * Math.PI) / 360
+  const distance = bounds.radius / Math.tan(halfRad) + bounds.radius * 0.5
+  const far = Math.max(near + 1, distance + bounds.radius * 4)
+  return {
+    fov,
+    near,
+    far,
+    position: {
+      x: bounds.center.x + bounds.radius * 0.8,
+      y: bounds.center.y + bounds.radius * 0.6,
+      z: bounds.center.z + distance,
+    },
+    lookAt: bounds.center.clone(),
+  }
+}
+
+function deepMergeCamera(
+  defaults: {
+    fov: number
+    near: number
+    far: number
+    position: { x: number; y: number; z: number }
+    lookAt: THREE.Vector3
+  },
+  user: {
+    fov?: number
+    near?: number
+    far?: number
+    position?: { x?: number; y?: number; z?: number }
+  },
+) {
+  const fov = clampFov(user.fov ?? defaults.fov)
+  const near = Math.max(1e-3, user.near ?? defaults.near)
+  let far = user.far ?? defaults.far
+  far = Math.max(near + 1, far)
+  const position = {
+    x: user.position?.x ?? defaults.position.x,
+    y: user.position?.y ?? defaults.position.y,
+    z: user.position?.z ?? defaults.position.z,
+  }
+  return { fov, near, far, position, lookAt: defaults.lookAt }
+}
 
 onMounted(() => {
   // 获取幻灯片容器尺寸（优先使用 Slidev 配置的尺寸，否则使用窗口尺寸）
@@ -115,17 +186,18 @@ onMounted(() => {
     }
   }
 
-  // 透视相机：参数依次为 视场角(FOV)、长宽比、近裁剪面、远裁剪面
+  const bounds = computeBounding(props.object3d)
+  const autoDefaults = buildAutoCameraDefaults(bounds)
+  const camOpt = deepMergeCamera(autoDefaults, props.cameraOption || {})
   const camera = new THREE.PerspectiveCamera(
-    props.cameraOption.fov,
+    camOpt.fov,
     slideWidth / slideHeight,
-    props.cameraOption.near,
-    props.cameraOption.far,
+    camOpt.near,
+    camOpt.far,
   )
-  // 设置相机位置并朝向原点
-  const cp = props.cameraOption.position
+  const cp = camOpt.position
   camera.position.set(cp.x, cp.y, cp.z)
-  camera.lookAt(0, 0, 0)
+  camera.lookAt(autoDefaults.lookAt)
 
   // 渲染器：负责将场景与相机绘制到画布
   renderer = new THREE.WebGLRenderer()
