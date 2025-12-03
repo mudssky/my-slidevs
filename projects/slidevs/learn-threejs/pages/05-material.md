@@ -24,3 +24,51 @@ layout: none
 <LazyRender>
 <Demo013Materail />
 </LazyRender>
+
+---
+
+网格模型材质  
+可以通过`mesh.material.color`调整颜色  
+可以创建时指定透明度
+
+```js
+const material = new THREE.MeshBasicMaterial({
+  color: new THREE.Color('orange'),
+  // 可以指定透明度
+  // transparent: true,
+  // opacity: 0.5,
+})
+```
+
+可以通过map加载贴图  
+
+```js
+import * as THREE from 'three'
+import diqiu from '@/public/assets/world.topo.bathy.200401.jpg'
+
+const loader = new THREE.TextureLoader()
+const texture = loader.load(diqiu)
+const geometry = new THREE.SphereGeometry(100)
+const material = new THREE.MeshBasicMaterial({
+  map: texture,
+})
+const mesh = new THREE.Mesh(geometry, material)
+export default mesh
+
+```
+
+---
+layout: none
+---
+
+<LazyRender>
+<Demo014MeshBasicMaterial />
+</LazyRender>
+
+---
+layout: none
+---
+
+<LazyRender>
+<Demo015SphereTexture />
+</LazyRender>
