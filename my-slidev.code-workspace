@@ -1,10 +1,6 @@
 {
   "folders": [
     {
-      "path": ".",
-      "name": "root",
-    },
-    {
       "path": "packages/slidev-style",
       "name": "slidev-style",
     },
@@ -43,6 +39,10 @@
     {
       "path": "projects/slidevs/learn-threejs",
       "name": "learn-threejs",
+    },
+    {
+      "path": ".",
+      "name": "root",
     },
   ],
   "settings": {
