@@ -36,10 +36,12 @@ const props = withDefaults(
   defineProps<{
     object3d?: THREE.Object3D | THREE.Object3D[]
     axesHelper?: boolean | number
-    fov?: number
-    near?: number
-    far?: number
-    cameraPosition?: { x: number; y: number; z: number }
+    cameraOption?: {
+      fov: number
+      near: number
+      far: number
+      position: { x: number; y: number; z: number }
+    }
     controls?: boolean
     background?: string
     lights?: THREE.Light | THREE.Light[]
@@ -64,10 +66,12 @@ const props = withDefaults(
   }>(),
   {
     axesHelper: false,
-    fov: 60,
-    near: 1,
-    far: 1000,
-    cameraPosition: () => ({ x: 200, y: 200, z: 200 }),
+    cameraOption: () => ({
+      fov: 60,
+      near: 1,
+      far: 1000,
+      position: { x: 200, y: 200, z: 200 },
+    }),
     controls: true,
     defaultLight: false,
     enableShadows: false,
@@ -113,13 +117,13 @@ onMounted(() => {
 
   // 透视相机：参数依次为 视场角(FOV)、长宽比、近裁剪面、远裁剪面
   const camera = new THREE.PerspectiveCamera(
-    props.fov,
+    props.cameraOption.fov,
     slideWidth / slideHeight,
-    props.near,
-    props.far,
+    props.cameraOption.near,
+    props.cameraOption.far,
   )
   // 设置相机位置并朝向原点
-  const cp = props.cameraPosition
+  const cp = props.cameraOption.position
   camera.position.set(cp.x, cp.y, cp.z)
   camera.lookAt(0, 0, 0)
 
