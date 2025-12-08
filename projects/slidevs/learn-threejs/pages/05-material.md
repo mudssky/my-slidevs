@@ -101,3 +101,44 @@ layout: none
 <LazyRender>
 <Demo016zhuan />
 </LazyRender>
+
+---
+
+## uv 坐标
+
+uv 坐标是指在3D模型中，用于映射贴图的二维坐标系统。每个顶点都有一个对应的uv坐标，用于确定在贴图上的位置。
+
+uv坐标的范围是0到1，分别对应贴图的水平方向和垂直方向。
+
+在Three.js中，我们可以通过`geometry.uvsNeedUpdate = true`来更新顶点的uv坐标。
+
+```js
+const geometry = new THREE.BoxGeometry(100, 100, 100)
+geometry.uvsNeedUpdate = true
+```
+
+---
+layout: none
+---
+
+<LazyRender>
+<Demo017textureUv />
+</LazyRender>
+
+---
+
+## uv动画
+
+纹理对象 Texture 有个 offset 属性，可以让纹理贴图在 x、y 方向做一些偏移。  
+
+这相当于改变了 uv 坐标，所以这种改变 texture.offset 的动画叫做 uv 动画。
+
+---
+layout: none
+---
+
+<LazyRender>
+<Demo018uvAnimation />
+</LazyRender>
+
+---
