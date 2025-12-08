@@ -15,8 +15,9 @@
 
 <script setup lang="ts">
 import MeshTemplate from './MeshTemplate.vue'
-import zhuan from './mesh/zhuan'
+import { createZhuan } from './mesh/zhuan'
 import * as THREE from 'three'
+const zhuan = createZhuan()
 const pointLight = new THREE.PointLight(0xffffff, 10000)
 pointLight.position.set(80, 80, 80)
 </script>
