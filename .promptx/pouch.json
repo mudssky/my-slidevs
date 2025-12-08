@@ -1,0 +1,17 @@
+{
+  "currentState": "initial",
+  "stateHistory": [
+    {
+      "from": "initial",
+      "command": "project",
+      "timestamp": "2025-12-08T06:14:02.889Z",
+      "args": [
+        {
+          "workingDirectory": "c:\\home\\Projects\\frontend\\my-slidevs",
+          "ideType": "vscode"
+        }
+      ]
+    }
+  ],
+  "lastUpdated": "2025-12-08T06:14:03.022Z"
+}
