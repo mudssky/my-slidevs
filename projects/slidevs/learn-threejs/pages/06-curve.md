@@ -139,3 +139,19 @@ layout: none
 <LazyRender>
 <Demo029ExtrudeGeometry />
 </LazyRender>
+
+---
+layout: none
+---
+
+<LazyRender>
+<Demo030Tubetravel />
+</LazyRender>
+
+---
+layout: none
+---
+
+<LazyRender>
+<Demo031Tubetravel2 />
+</LazyRender>
