@@ -4,6 +4,7 @@
     :controls="true"
     :lights="pointLight"
     :axes-helper="true"
+    :axes-legend="true"
     @frame="onFrame"
   >
     <template #title>

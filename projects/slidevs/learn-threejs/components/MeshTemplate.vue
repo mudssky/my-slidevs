@@ -6,6 +6,7 @@
         <span class="mesh-title-text">{{ props.title }}</span>
       </slot>
     </div>
+    <div v-if="props.axesLegend" class="mesh-legend">X(红) · Y(绿) · Z(蓝)</div>
   </div>
 </template>
 
@@ -36,6 +37,7 @@ const props = withDefaults(
   defineProps<{
     object3d?: THREE.Object3D | THREE.Object3D[]
     axesHelper?: boolean | number
+    axesLegend?: boolean
     cameraOption?: {
       fov?: number
       near?: number
@@ -66,6 +68,7 @@ const props = withDefaults(
   }>(),
   {
     axesHelper: false,
+    axesLegend: false,
     controls: true,
     defaultLight: false,
     enableShadows: false,
@@ -313,5 +316,16 @@ onUnmounted(() => {
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 14px;
+}
+.mesh-legend {
+  position: absolute;
+  top: 36px;
+  left: 8px;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
 }
 </style>
