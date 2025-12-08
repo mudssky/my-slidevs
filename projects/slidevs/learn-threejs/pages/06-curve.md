@@ -155,3 +155,11 @@ layout: none
 <LazyRender>
 <Demo031Tubetravel2 />
 </LazyRender>
+
+---
+layout: none
+---
+
+<LazyRender>
+<Demo032Tubetravel3 />
+</LazyRender>
