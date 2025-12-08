@@ -99,3 +99,43 @@ layout: none
 <LazyRender>
 <Demo025yunleiwen />
 </LazyRender>
+
+---
+
+LatheGeometry相当于旋转成型  
+TubeGeometry用于生成管道  
+Shape 可以定义多边形
+ShapeGeometry 可以绘制Shape定义的多边形  
+Shape+ExtrudeGeometry 可以拉伸Shape定义的多边形
+
+---
+layout: none
+---
+
+<LazyRender>
+<Demo026LatheGeometry />
+</LazyRender>
+
+---
+layout: none
+---
+
+<LazyRender>
+<Demo027TubeGeometry />
+</LazyRender>
+
+---
+layout: none
+---
+
+<LazyRender>
+<Demo028ShapeGeometry />
+</LazyRender>
+
+---
+layout: none
+---
+
+<LazyRender>
+<Demo029ExtrudeGeometry />
+</LazyRender>
