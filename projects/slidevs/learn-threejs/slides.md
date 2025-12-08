@@ -52,6 +52,10 @@ src: ./pages/05-material.md
 ---
 
 ---
+src: ./pages/06-curve.md
+---
+
+---
 src: ./pages/04-lights-shadows.md
 ---
 
