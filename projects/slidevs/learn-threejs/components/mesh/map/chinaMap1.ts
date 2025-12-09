@@ -25,7 +25,7 @@ interface FeatureCollection {
  * - translate([0, 0]) 保持坐标原点在 (0,0)；
  * - scale(800) 控制地图整体尺寸，可按需调整密度与大小。
  */
-const mercator = geoMercator().center([105, 34]).translate([0, 0]).scale(800)
+const mercator = geoMercator().center([105, 34]).translate([0, 0]).scale(500)
 
 /**
  * 根据导入的 GeoJSON 生成中国地图的 `THREE.Group`。

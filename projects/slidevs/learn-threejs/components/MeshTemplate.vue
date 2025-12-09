@@ -43,6 +43,7 @@ const props = withDefaults(
       near?: number
       far?: number
       position?: { x?: number; y?: number; z?: number }
+      autoFit?: boolean
     }
     controls?: boolean
     background?: string
@@ -189,9 +190,21 @@ onMounted(() => {
     }
   }
 
-  const bounds = computeBounding(props.object3d)
-  const autoDefaults = buildAutoCameraDefaults(bounds)
-  const camOpt = deepMergeCamera(autoDefaults, props.cameraOption || {})
+  const useAuto = (props.cameraOption?.autoFit ?? false) === true
+  const defaults = (() => {
+    if (useAuto) {
+      const bounds = computeBounding(props.object3d)
+      return buildAutoCameraDefaults(bounds)
+    }
+    return {
+      fov: 60,
+      near: 1,
+      far: 5000,
+      position: { x: 0, y: 0, z: 600 },
+      lookAt: new THREE.Vector3(0, 0, 0),
+    }
+  })()
+  const camOpt = deepMergeCamera(defaults, props.cameraOption || {})
   const camera = new THREE.PerspectiveCamera(
     camOpt.fov,
     slideWidth / slideHeight,
@@ -200,7 +213,7 @@ onMounted(() => {
   )
   const cp = camOpt.position
   camera.position.set(cp.x, cp.y, cp.z)
-  camera.lookAt(autoDefaults.lookAt)
+  camera.lookAt(defaults.lookAt)
 
   // 渲染器：负责将场景与相机绘制到画布
   renderer = new THREE.WebGLRenderer()
