@@ -10,6 +10,9 @@ MeshTemplate 用于在 Slidev 演示中承载 Three.js 场景与交互，提供�
 - `background`：场景背景色（如 `"#202225"`）
 - `cameraOption`：相机选项（字段均可选）`{ fov?, near?, far?, position?: { x?, y?, z? } }`，未提供的字段将按“自动取景”默认值填充
 - `onFrame`：每帧回调，签名为 `({ scene, camera, renderer, THREE }) => void`
+- `onMount`：组件挂载并创建画布后触发，一次性提供上下文以便绑定事件；签名：
+  `({ scene, camera, renderer, THREE, dom, size, controls }) => void`
+- `onUnmount`：组件卸载时触发，用于清理事件与资源；签名：`() => void`
 - `lights`：自定义光源实例或数组，组件将自动挂载到场景
 - `defaultLight`：简易光源开关与配置，示例 `{ type: 'ambient', intensity: 0.8 }`
 - `enableShadows`：是否开启阴影渲染（同时需要 mesh 设置 `castShadow/receiveShadow`）
@@ -132,3 +135,66 @@ import mesh from '../components/mesh/noiseMountain'
 - 使用受光材质（如 `MeshLambertMaterial`、`MeshPhongMaterial`、`MeshStandardMaterial`）才能看到光照效果；`MeshBasicMaterial` 不受光影响。
 - 阴影需要在材质/mesh 处设置：几何体 `castShadow` 与接收者 `receiveShadow`。
 - 相机相关属性统一通过 `cameraOption` 提供。
+
+## 指针拾取与点击注记示例（使用 onMount）
+
+```vue
+<template>
+  <!-- 通过 onMount 获取上下文并绑定点击事件 -->
+  <MeshTemplate :object3d="mesh" :onMount="onMount" />
+</template>
+
+<script setup lang="ts">
+import * as THREE from 'three'
+import MeshTemplate from '../components/MeshTemplate.vue'
+import SpriteText from 'three-spritetext'
+import mesh from '../components/mesh/noiseMountain'
+
+let installed = false
+function onMount(ctx: {
+  scene: THREE.Scene
+  camera: THREE.Camera
+  renderer: THREE.WebGLRenderer
+  THREE: typeof THREE
+  dom: HTMLCanvasElement
+  size: { width: number; height: number }
+}) {
+  if (installed) return
+  installed = true
+  const { scene, camera, THREE: T, dom, size } = ctx
+  const handleClick = (e: MouseEvent) => {
+    const x = (e.offsetX / (dom.clientWidth || size.width)) * 2 - 1
+    const y = -((e.offsetY / (dom.clientHeight || size.height)) * 2 - 1)
+    const ray = new T.Raycaster()
+    ray.setFromCamera(new T.Vector2(x, y), camera)
+    const hits = ray.intersectObjects(scene.children, true)
+    if (!hits.length) return
+    const obj = hits[0].object as THREE.Object3D & { isSprite?: boolean; name?: string }
+    if ((obj as any).isSprite && obj.name?.startsWith('annotation')) {
+      scene.traverse((node) => {
+        // 清理其他标签
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        if ((node as any).isSprite) node.children?.forEach((c) => c.name === 'posName' && node.remove(c))
+      })
+      const label = new SpriteText(obj.name.replace('annotation', ''), 1)
+      label.name = 'posName'
+      label.color = 'black'
+      label.backgroundColor = 'white'
+      label.padding = 1.5
+      label.borderWidth = 0.2
+      label.borderRadius = 1
+      label.borderColor = 'orange'
+      label.position.set(0, 3, 0)
+      obj.add(label)
+    }
+  }
+  dom.addEventListener('click', handleClick)
+}
+</script>
+```
+
+### 说明
+
+- `onMount` 在画布元素插入 DOM 后被调用，适合绑定一次性事件（如鼠标/触摸）。
+- `dom` 是 `renderer.domElement`，使用其尺寸进行坐标换算更准确。
+- 若更偏好模板属性风格，`onFrame`/`onMount` 都可使用驼峰或短横形式绑定：`:onFrame` 或 `:on-frame`，Vue 会自动映射到同名 prop。

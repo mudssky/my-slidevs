@@ -1,6 +1,8 @@
 import * as THREE from 'three'
 import { geoMercator } from 'd3-geo'
 import chinaGeojson from '@/assets/geojson/china-full.json'
+
+import posImg from '@/assets/pos.png'
 import { Feature, FeatureCollection, PolygonCoords, Position } from '@/type'
 
 /**
@@ -39,6 +41,57 @@ export function creatMap(): THREE.Group {
     }
     chinaMap.add(province)
   })
+
+  // 获取center，用墨卡托转换把它变为 x、y 坐标。在那个位置创建一个 10 * 10 的矩形小方块。
+  geojson.features.forEach((feature) => {
+    if (!feature.properties.center) {
+      return
+    }
+
+    const center = feature.properties.center as [number, number]
+    const projected = mercator(center)
+    if (!projected) return
+    const [x, y] = projected
+
+    // 绘制散点方块
+    // const material = new THREE.SpriteMaterial({
+    //   color: 'orange',
+    // })
+    // const annotation = new THREE.Sprite(material)
+    // annotation.scale.setScalar(10)
+
+    // 使用SpriteText绘制文字
+    // const annotation = new SpriteText(feature.properties.name, 6)
+    // annotation.color = 'orange'
+    // annotation.strokeColor = 'blue'
+    // annotation.strokeWidth = 1
+    // annotation.position.set(x, -y, 0)
+
+    // 文字太挤，改为采用圆点标记，mouseover 时显示文字
+    const loader = new THREE.TextureLoader()
+    const texture = loader.load(posImg)
+
+    const material = new THREE.SpriteMaterial({
+      map: texture,
+      transparent: true,
+    })
+    const annotation = new THREE.Sprite(material)
+    annotation.scale.setScalar(10)
+    annotation.position.set(x, -y, 0)
+
+    // const posName = new SpriteText(feature.properties.name, 1)
+    // posName.color = 'black'
+    // posName.backgroundColor = 'white'
+    // posName.padding = 1.5
+    // posName.borderWidth = 0.2
+    // posName.borderRadius = 1
+    // posName.borderColor = 'orange'
+    // posName.position.set(0, 3, 0)
+    // annotation.add(posName)
+    chinaMap.add(annotation)
+    annotation.name = 'annotation' + feature.properties.name
+  })
+
   return chinaMap
 }
 

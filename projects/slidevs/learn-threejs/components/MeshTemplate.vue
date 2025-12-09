@@ -226,8 +226,9 @@ onMounted(() => {
   camera.lookAt(defaults.lookAt)
 
   // 渲染器：负责将场景与相机绘制到画布
-  renderer = new THREE.WebGLRenderer()
+  renderer = new THREE.WebGLRenderer({ antialias: true })
   renderer.setSize(slideWidth, slideHeight)
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
   // 光源：根据 props 添加光照
   const createdLights: THREE.Light[] = []

@@ -231,6 +231,9 @@ importers:
       three:
         specifier: ^0.181.2
         version: 0.181.2
+      three-spritetext:
+        specifier: ^1.10.0
+        version: 1.10.0(three@0.181.2)
     devDependencies:
       '@types/d3-geo':
         specifier: ^3.1.0
@@ -4787,6 +4790,12 @@ packages:
   theme-vitesse@0.7.9:
     resolution: {integrity: sha512-wgxHWOIEcIBp/5MAdO8Z5c0vdKy5J5008Kqt/uOYruel9oJ4TrvH3qXgCsatp4ImROd1UWsIgQ3C0R8db38qgA==}
     engines: {vscode: ^1.43.0}
+
+  three-spritetext@1.10.0:
+    resolution: {integrity: sha512-t08iP1FCU1lQh8T5MmCpdijKgas8GDHJE0LqMGBuVu3xqMMpFnEZhTlih7FlxLPQizHIGoumUSpfOlY1GO/Tgg==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      three: '>=0.86.0'
 
   three@0.181.2:
     resolution: {integrity: sha512-k/CjiZ80bYss6Qs7/ex1TBlPD11whT9oKfT8oTGiHa34W4JRd1NiH/Tr1DbHWQ2/vMUypxksLnF2CfmlmM5XFQ==}
@@ -10996,6 +11005,10 @@ snapshots:
   tapable@2.3.0: {}
 
   theme-vitesse@0.7.9: {}
+
+  three-spritetext@1.10.0(three@0.181.2):
+    dependencies:
+      three: 0.181.2
 
   three@0.181.2: {}
 

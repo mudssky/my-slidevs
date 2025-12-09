@@ -61,3 +61,11 @@ layout: none
 </LazyRender>
 
 ---
+layout: none
+---
+
+<LazyRender>
+<Demo034ChinaMap2/>
+</LazyRender>
+
+---

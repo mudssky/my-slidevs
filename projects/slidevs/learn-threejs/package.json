@@ -20,7 +20,8 @@
     "@my-slidev/tsconfig": "workspace:^",
     "d3-geo": "^3.1.1",
     "simplex-noise": "^4.0.3",
-    "three": "^0.181.2"
+    "three": "^0.181.2",
+    "three-spritetext": "^1.10.0"
   },
   "devDependencies": {
     "@types/d3-geo": "^3.1.0",
