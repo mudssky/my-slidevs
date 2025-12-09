@@ -66,6 +66,16 @@ const props = withDefaults(
       renderer: THREE.WebGLRenderer
       THREE: typeof THREE
     }) => void
+    onMount?: (ctx: {
+      scene: THREE.Scene
+      camera: THREE.Camera
+      renderer: THREE.WebGLRenderer
+      THREE: typeof THREE
+      dom: HTMLCanvasElement
+      size: { width: number; height: number }
+      controls: OrbitControls | null
+    }) => void
+    onUnmount?: () => void
   }>(),
   {
     axesHelper: false,
@@ -284,6 +294,17 @@ onMounted(() => {
   // 将 WebGL 画布元素挂载到模板中的容器
   domRef.value.appendChild(renderer.domElement)
 
+  // 将上下文暴露给父组件，用于绑定事件等一次性操作
+  props.onMount?.({
+    scene: scene!,
+    camera,
+    renderer: renderer!,
+    THREE,
+    dom: renderer!.domElement as HTMLCanvasElement,
+    size: { width: slideWidth, height: slideHeight },
+    controls: orbitControls,
+  })
+
   if (props.controls !== false) {
     orbitControls = new OrbitControls(camera, renderer.domElement)
   }
@@ -293,6 +314,11 @@ onUnmounted(() => {
   stop = true
   raf && cancelAnimationFrame(raf)
   disposeThreeResources({ renderer, scene, controls: orbitControls })
+  try {
+    props.onUnmount?.()
+  } catch (error) {
+    console.error('onUnmount error:', error)
+  }
   // 移除本组件创建的光源（若有）
   if (scene) {
     const children = [...scene.children]
