@@ -56,6 +56,10 @@ src: ./pages/06-curve.md
 ---
 
 ---
+src: ./pages/12-map.md
+---
+
+---
 src: ./pages/04-lights-shadows.md
 ---
 
