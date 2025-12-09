@@ -92,6 +92,24 @@ scene.add(group)
 - 对 `group` 的变换会同步作用到所有子对象，适合将复杂纹样作为一个整体管理。
 - 在“云雷纹”示例中，返回的 `group` 集合了同心圆、小圆环、以及两圈“回”字折线，便于整体添加到场景或做动画。
 
+group存在postion属性，group中的mesh也有postion。mesh添加到group之后，绝对坐标是group的position加上mesh的position  
+group内部mesh的postion就变成了局部坐标  
+mesh上有getWorldPosition这个api可以获取到世界坐标  
+
+遍历scene ：  
+threejs提供了api可以遍历scene中的mesh  
+可以在遍历scene的过程中改变属性  
+如果给mesh设置了name属性，可以通过`scene.getObjectByName` api查找对象
+
+```js
+scene.traverse((obj) => {
+    if(obj.isMesh) {
+        obj.material.color = new THREE.Color('pink');
+    }
+});
+
+```
+
 ---
 layout: none
 ---
