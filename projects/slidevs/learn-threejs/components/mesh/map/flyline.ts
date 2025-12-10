@@ -11,6 +11,8 @@ import { Line2, LineGeometry, LineMaterial } from 'three/examples/jsm/Addons'
  *   再用 three.js 将各省轮廓绘制为线段集合。
  * - 类型 `Feature`、`PolygonCoords`、`Position` 从项目共享类型中引入，
  *   分别表示 GeoJSON 的要素、坐标结构，以及单个经纬度点 `[lng, lat]`。
+ * - 该示例仅绘制北京到上海的一条三维弧线，并介绍粗线段的用法。
+ * - 与 `three.Line` 不同，`Line2/LineGeometry/LineMaterial` 支持屏幕像素级粗线。
  */
 
 /**
@@ -19,6 +21,8 @@ import { Line2, LineGeometry, LineMaterial } from 'three/examples/jsm/Addons'
  * - translate([0, 0]) 保持坐标原点在 (0,0)；
  * - scale(800) 控制地图整体尺寸，可按需调整密度与大小。
  */
+// 墨卡托投影：将经纬度转换到平面坐标系，便于在 three.js 中直接使用
+// center/translate/scale 分别控制投影中心、偏移与缩放（地图尺寸）。
 const mercator = geoMercator().center([105, 34]).translate([0, 0]).scale(500)
 
 /**
@@ -47,13 +51,16 @@ export function creatMap(): THREE.Group {
     cityCenterMap.set(feature.properties.name, feature.properties.center)
   })
   // console.log(cityCenterMap)
+  // 上述 Map 用于按城市名称获取其几何中心，经墨卡托投影后作为飞线的端点。
 
   const beijingPos = mercator(cityCenterMap.get('北京市')) as Position
   const shanghaiPos = mercator(cityCenterMap.get('上海市')) as Position
+  // 注意：墨卡托返回的是二维坐标 [x, y]，three.js 里我们将 y 取负以符合视觉直觉的“向上”。
   const start = new THREE.Vector3(beijingPos[0], -beijingPos[1], 0)
   const end = new THREE.Vector3(shanghaiPos[0], -shanghaiPos[1], 0)
 
   const middle = start.clone().add(end).divideScalar(2)
+  // 中点抬高形成弧线；z 值越大，弧度越高。
   middle.z = 100
 
   const curve = new THREE.CatmullRomCurve3([start, middle, end])
@@ -74,6 +81,9 @@ export function creatMap(): THREE.Group {
     color: new THREE.Color('orange'),
     linewidth: 3,
   })
+  // 说明：LineMaterial 的 linewidth 以屏幕像素为单位；若渲染尺寸变化，需设置
+  // material.resolution = new THREE.Vector2(canvasWidth, canvasHeight)
+  // 来确保粗线宽度正确。
 
   const line = new Line2(geometry, material)
   chinaMap.add(line)

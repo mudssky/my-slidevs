@@ -13,6 +13,8 @@ import planeImg from '@/assets/plane.jpeg'
  *   再用 three.js 将各省轮廓绘制为线段集合。
  * - 类型 `Feature`、`PolygonCoords`、`Position` 从项目共享类型中引入，
  *   分别表示 GeoJSON 的要素、坐标结构，以及单个经纬度点 `[lng, lat]`。
+ * - 在 `flyline2.ts` 的基础上，这里增加了一个沿曲线运动的“飞机”贴图，
+ *   并根据相邻两点的方向计算贴图旋转角度，实现跟随指向效果。
  */
 
 /**
@@ -21,6 +23,7 @@ import planeImg from '@/assets/plane.jpeg'
  * - translate([0, 0]) 保持坐标原点在 (0,0)；
  * - scale(800) 控制地图整体尺寸，可按需调整密度与大小。
  */
+// 墨卡托投影：经纬度 → 平面坐标（x, y），three.js 中 y 轴向上。
 const mercator = geoMercator().center([105, 34]).translate([0, 0]).scale(500)
 
 /**
@@ -49,6 +52,7 @@ export function creatMap(): THREE.Group {
     cityCenterMap.set(feature.properties.name, feature.properties.center)
   })
   // console.log(cityCenterMap)
+  // 城市名称 → 中心坐标，用于生成飞线路径端点。
 
   const beijingPos = mercator(cityCenterMap.get('北京市')) as Position
   for (const [name, center] of cityCenterMap.entries()) {
@@ -82,7 +86,7 @@ export function creatMap(): THREE.Group {
     const line = new Line2(geometry, material)
     chinaMap.add(line)
 
-    // 绘制另一条线表示方向
+    // 绘制另一条线作为“滑动窗口”，突出运动方向
     const pointsArr2 = pointsArr.slice(30, 30 + 20)
     const geometry2 = new LineGeometry()
     geometry2.setFromPoints(pointsArr2)
@@ -119,6 +123,7 @@ export function creatMap(): THREE.Group {
     planeSprite.scale.set(30, 30, 0)
     chinaMap.add(planeSprite)
 
+    // 通过改变切片 index 让“橙色窗口”和飞机沿曲线前进
     const obj = { index: 0 }
     gsap.to(obj, {
       index: 100,
@@ -144,6 +149,7 @@ export function creatMap(): THREE.Group {
           const angle = Math.atan2(direction.y, direction.x)
 
           planeSprite.material.rotation = angle - Math.PI / 2
+          // 说明：Sprite 的旋转为绕 z 轴的角度；这里减去 90° 以匹配贴图朝向。
         }
       },
     })

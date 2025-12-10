@@ -13,6 +13,8 @@ import planeImg from '@/assets/plane.jpeg'
  *   再用 three.js 将各省轮廓绘制为线段集合。
  * - 类型 `Feature`、`PolygonCoords`、`Position` 从项目共享类型中引入，
  *   分别表示 GeoJSON 的要素、坐标结构，以及单个经纬度点 `[lng, lat]`。
+ * - 相比前两个版本，这里进一步加入：起点圆锥的“呼吸”动画、末端涟漪效果，
+ *   以及沿线运动的飞机贴图与方向对齐。
  */
 
 /**
@@ -21,6 +23,7 @@ import planeImg from '@/assets/plane.jpeg'
  * - translate([0, 0]) 保持坐标原点在 (0,0)；
  * - scale(800) 控制地图整体尺寸，可按需调整密度与大小。
  */
+// 墨卡托投影：经纬度 → 平面坐标；配合 three.js 的坐标系使用
 const mercator = geoMercator().center([105, 34]).translate([0, 0]).scale(500)
 
 /**
@@ -49,6 +52,7 @@ export function creatMap(): THREE.Group {
     cityCenterMap.set(feature.properties.name, feature.properties.center)
   })
   // console.log(cityCenterMap)
+  // 城市名称映射到中心坐标，用于飞线起止点的计算。
 
   const beijingPos = mercator(cityCenterMap.get('北京市')) as Position
   for (const [name, center] of cityCenterMap.entries()) {
@@ -65,6 +69,7 @@ export function creatMap(): THREE.Group {
       cone.position.z = 20
       cone.rotateX(-Math.PI / 2)
       chinaMap.add(cone)
+      // 使用 gsap 在 z 轴上做往返运动，形成立体“呼吸”效果
       gsap.to(cone.position, {
         z: 40,
         ease: 'none',
@@ -98,7 +103,7 @@ export function creatMap(): THREE.Group {
     const line = new Line2(geometry, material)
     chinaMap.add(line)
 
-    // 绘制另一条线表示方向
+    // 绘制另一条线作为“滑动窗口”，表达方向与动感
     const pointsArr2 = pointsArr.slice(30, 30 + 20)
     const geometry2 = new LineGeometry()
     geometry2.setFromPoints(pointsArr2)
@@ -121,7 +126,7 @@ export function creatMap(): THREE.Group {
 
     // render()
 
-    // 增加飞机图
+    // 增加飞机贴图（Sprite），并让其沿曲线运动
     const textureLoader = new THREE.TextureLoader()
     const texture = textureLoader.load(planeImg)
 
@@ -135,7 +140,7 @@ export function creatMap(): THREE.Group {
     planeSprite.scale.set(30, 30, 0)
     chinaMap.add(planeSprite)
 
-    // 末端涟漪动画
+    // 末端涟漪动画：用若干同心椭圆曲线叠加并做缩放动画，形成动态波纹
     function drawRipple(pos: THREE.Vector3) {
       const ripple = new THREE.Group()
       for (let i = 0; i < 5; i++) {
@@ -164,6 +169,7 @@ export function creatMap(): THREE.Group {
     }
     drawRipple(new THREE.Vector3(endPos[0], -endPos[1], 0))
 
+    // 通过 index 控制切片起点，让窗口与飞机前进；并根据两点方向设定飞机角度
     const obj = { index: 0 }
     gsap.to(obj, {
       index: 100,
@@ -189,6 +195,7 @@ export function creatMap(): THREE.Group {
           const angle = Math.atan2(direction.y, direction.x)
 
           planeSprite.material.rotation = angle - Math.PI / 2
+          // 说明：Sprite 旋转与贴图朝向相关，这里减去 90° 以匹配飞机贴图的默认方向。
         }
       },
     })

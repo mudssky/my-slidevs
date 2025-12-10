@@ -12,6 +12,8 @@ import { gsap } from 'gsap'
  *   再用 three.js 将各省轮廓绘制为线段集合。
  * - 类型 `Feature`、`PolygonCoords`、`Position` 从项目共享类型中引入，
  *   分别表示 GeoJSON 的要素、坐标结构，以及单个经纬度点 `[lng, lat]`。
+ * - 相比 `flyline.ts`，这里绘制的是北京到全国各城市的弧线，并通过
+ *   gsap 动画在粗线上滑动一个“橙色窗口”指示飞行方向。
  */
 
 /**
@@ -20,6 +22,7 @@ import { gsap } from 'gsap'
  * - translate([0, 0]) 保持坐标原点在 (0,0)；
  * - scale(800) 控制地图整体尺寸，可按需调整密度与大小。
  */
+// 墨卡托投影：经纬度 → 平面坐标，便于 three.js 使用
 const mercator = geoMercator().center([105, 34]).translate([0, 0]).scale(500)
 
 /**
@@ -48,6 +51,7 @@ export function creatMap(): THREE.Group {
     cityCenterMap.set(feature.properties.name, feature.properties.center)
   })
   // console.log(cityCenterMap)
+  // 通过城市名称到几何中心的映射，统一计算飞线端点。
 
   const beijingPos = mercator(cityCenterMap.get('北京市')) as Position
   for (const [name, center] of cityCenterMap.entries()) {
@@ -58,6 +62,7 @@ export function creatMap(): THREE.Group {
       continue
     }
     const endPos = mercator(center) as Position
+    // y 取负让地图“向上”为正方向；z 维用于弧线抬高。
     const start = new THREE.Vector3(beijingPos[0], -beijingPos[1], 0)
     const end = new THREE.Vector3(endPos[0], -endPos[1], 0)
     const middle = start.clone().add(end).divideScalar(2)
@@ -81,7 +86,7 @@ export function creatMap(): THREE.Group {
     const line = new Line2(geometry, material)
     chinaMap.add(line)
 
-    // 绘制另一条线表示方向
+    // 绘制另一条粗线作为“滑动窗口”，用于表示方向与动感
     const pointsArr2 = pointsArr.slice(30, 30 + 20)
     const geometry2 = new LineGeometry()
     geometry2.setFromPoints(pointsArr2)
@@ -103,6 +108,7 @@ export function creatMap(): THREE.Group {
     // }
 
     // render()
+    // 通过改变切片起始 index 来让“橙色窗口”沿曲线移动
     const obj = { index: 0 }
     gsap.to(obj, {
       index: 100,
