@@ -69,3 +69,9 @@ layout: none
 </LazyRender>
 
 ---
+layout: none
+---
+
+<LazyRender>
+<Demo035ChinaPopulationBar/>
+</LazyRender>

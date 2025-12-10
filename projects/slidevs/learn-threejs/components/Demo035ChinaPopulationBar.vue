@@ -14,14 +14,14 @@
     :on-mount="onMount"
   >
     <template #title>
-      <div class="text-red-300 text-center w-full!">中国地图(绘制标注)</div>
+      <div class="text-red-300 text-center w-full!">中国人口柱状图</div>
     </template>
   </MeshTemplate>
 </template>
 
 <script setup lang="ts">
 import MeshTemplate from './MeshTemplate.vue'
-import { creatMap } from './mesh/map/chinaMapMark'
+import { creatMap } from './mesh/map/chinaPopulationBar'
 import * as THREE from 'three'
 import SpriteText from 'three-spritetext'
 /**
@@ -56,6 +56,7 @@ function onMount(ctx: {
   dom: HTMLCanvasElement
   size: { width: number; height: number }
 }) {
+  return
   if (mounted) return
   mounted = true
   const { scene, camera, THREE: T, dom, size } = ctx
