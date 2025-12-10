@@ -1,6 +1,6 @@
 @charset "UTF-8";
 .btn-primary {
-  @apply inline-block cursor-pointer rounded bg-blue-500 px-4 py-1  font-bold  text-white;
+  @apply inline-block cursor-pointer rounded bg-blue-500 px-4 py-1 font-bold text-white;
 }
 
 .btn-primary:hover {
