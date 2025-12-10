@@ -16,6 +16,12 @@ import * as THREE from 'three'
 import { useSlideContext } from '@slidev/client'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { disposeThreeResources } from '@mudssky/slidev-addon-default'
+import type {
+  MeshTemplateProps,
+  CameraOption,
+  AutoCameraDefaults,
+  Bounds,
+} from '../type'
 
 /*
   学习提示
@@ -34,65 +40,21 @@ let scene: THREE.Scene | null = null
 let axesHelperInst: THREE.AxesHelper | null = null
 let resizeObs: ResizeObserver | null = null
 
-const props = withDefaults(
-  defineProps<{
-    object3d?: THREE.Object3D | THREE.Object3D[]
-    axesHelper?: boolean | number
-    axesLegend?: boolean
-    cameraOption?: {
-      fov?: number
-      near?: number
-      far?: number
-      position?: { x?: number; y?: number; z?: number }
-      autoFit?: boolean
-    }
-    controls?: boolean
-    background?: string
-    lights?: THREE.Light | THREE.Light[]
-    defaultLight?:
-      | false
-      | {
-          type?: 'ambient' | 'hemisphere' | 'directional' | 'point' | 'spot'
-          color?: string
-          intensity?: number
-          position?: { x: number; y: number; z: number }
-          skyColor?: string
-          groundColor?: string
-        }
-    enableShadows?: boolean
-    title?: string
-    fitToContainer?: boolean
-    onFrame?: (ctx: {
-      scene: THREE.Scene
-      camera: THREE.Camera
-      renderer: THREE.WebGLRenderer
-      THREE: typeof THREE
-    }) => void
-    onMount?: (ctx: {
-      scene: THREE.Scene
-      camera: THREE.Camera
-      renderer: THREE.WebGLRenderer
-      THREE: typeof THREE
-      dom: HTMLCanvasElement
-      size: { width: number; height: number }
-      controls: OrbitControls | null
-    }) => void
-    onUnmount?: () => void
-  }>(),
-  {
-    axesHelper: false,
-    axesLegend: false,
-    controls: true,
-    defaultLight: false,
-    enableShadows: false,
-    fitToContainer: true,
-  },
-)
+const props = withDefaults(defineProps<MeshTemplateProps>(), {
+  axesHelper: false,
+  axesLegend: false,
+  controls: true,
+  defaultLight: false,
+  enableShadows: false,
+  fitToContainer: true,
+})
 
 const slots = useSlots()
 const hasTitle = computed(() => !!slots.title || !!props.title)
 
-function computeBounding(objects?: THREE.Object3D | THREE.Object3D[]) {
+function computeBounding(
+  objects?: THREE.Object3D | THREE.Object3D[],
+): Bounds | null {
   if (!objects) return null
   const box = new THREE.Box3()
   const addObj = (o: THREE.Object3D) => {
@@ -112,9 +74,7 @@ function clampFov(fov: number) {
   return Math.min(120, Math.max(10, fov))
 }
 
-function buildAutoCameraDefaults(
-  bounds: { center: THREE.Vector3; radius: number } | null,
-) {
+function buildAutoCameraDefaults(bounds: Bounds | null): AutoCameraDefaults {
   if (!bounds) {
     return {
       fov: 60,
@@ -142,21 +102,7 @@ function buildAutoCameraDefaults(
   }
 }
 
-function deepMergeCamera(
-  defaults: {
-    fov: number
-    near: number
-    far: number
-    position: { x: number; y: number; z: number }
-    lookAt: THREE.Vector3
-  },
-  user: {
-    fov?: number
-    near?: number
-    far?: number
-    position?: { x?: number; y?: number; z?: number }
-  },
-) {
+function deepMergeCamera(defaults: AutoCameraDefaults, user: CameraOption) {
   const fov = clampFov(user.fov ?? defaults.fov)
   const near = Math.max(1e-3, user.near ?? defaults.near)
   let far = user.far ?? defaults.far
