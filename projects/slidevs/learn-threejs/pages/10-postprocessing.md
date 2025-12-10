@@ -15,9 +15,7 @@ title: 后期处理与效果链路
 ### 示例
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <ComposerPipeline />
-</LazyRender>

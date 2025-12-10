@@ -15,9 +15,7 @@ title: Shader 入门
 ### 示例
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <ShaderMaterialIntro />
-</LazyRender>

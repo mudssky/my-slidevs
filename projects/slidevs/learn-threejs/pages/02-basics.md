@@ -118,12 +118,10 @@ render()
 
 下面是一个基础demo案例
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo001start />
-</LazyRender>
 
 ---
 title: 自适应与像素比
@@ -233,12 +231,10 @@ gl_FragColor = vec4(vUv, 0.0, 1.0);
 
 ---
 hideInToc: true
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo002GUI />
-</LazyRender>
 
 ---
 level: 2
@@ -280,9 +276,7 @@ hideInToc: true
 - 深度闪烁（Z-Fighting）：`near` 与 `far` 跨度过大，尽量缩小范围以提升深度精度。
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
   <Demo003PerspectiveCamera />
-</LazyRender>

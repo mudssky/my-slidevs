@@ -18,12 +18,10 @@ layout: center
 渲染线模型我们把BoxGeometry转为EdgesGeometry，因为线模型只需要顶点，不需要很多三角形。。。  
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo013Materail />
-</LazyRender>
 
 ---
 
@@ -58,20 +56,16 @@ export default mesh
 ```
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo014MeshBasicMaterial />
-</LazyRender>
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo015SphereTexture />
-</LazyRender>
 
 ---
 
@@ -95,12 +89,10 @@ const material = new THREE.MeshBasicMaterial({
 ```
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo016zhuan />
-</LazyRender>
 
 ---
 
@@ -118,12 +110,10 @@ geometry.uvsNeedUpdate = true
 ```
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo017textureUv />
-</LazyRender>
 
 ---
 
@@ -134,11 +124,9 @@ layout: none
 这相当于改变了 uv 坐标，所以这种改变 texture.offset 的动画叫做 uv 动画。
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo018uvAnimation />
-</LazyRender>
 
 ---

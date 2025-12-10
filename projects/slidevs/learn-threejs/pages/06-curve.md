@@ -11,52 +11,40 @@ layout: center
 曲线api是用来计算点，然后可以拿这些点使用点模型或者线模型画出来
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo019EllipseCurve />
-</LazyRender>
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo020EllipseCurve2 />
-</LazyRender>
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo021SplineCurve />
-</LazyRender>
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo022QuadraticBezierCurve />
-</LazyRender>
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo023CubicBezierCurve3 />
-</LazyRender>
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo024CurvePath />
-</LazyRender>
 
 ---
 
@@ -111,12 +99,10 @@ scene.traverse((obj) => {
 ```
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo025yunleiwen />
-</LazyRender>
 
 ---
 
@@ -127,57 +113,43 @@ ShapeGeometry 可以绘制Shape定义的多边形
 Shape+ExtrudeGeometry 可以拉伸Shape定义的多边形
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo026LatheGeometry />
-</LazyRender>
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo027TubeGeometry />
-</LazyRender>
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo028ShapeGeometry />
-</LazyRender>
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo029ExtrudeGeometry />
-</LazyRender>
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo030Tubetravel />
-</LazyRender>
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo031Tubetravel2 />
-</LazyRender>
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo032Tubetravel3 />
-</LazyRender>

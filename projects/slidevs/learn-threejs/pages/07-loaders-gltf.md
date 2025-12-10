@@ -15,9 +15,7 @@ title: 加载器与 glTF 模型
 ### 示例
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <GLTFLoadAndAnimate />
-</LazyRender>

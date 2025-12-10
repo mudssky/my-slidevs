@@ -53,23 +53,19 @@ layout: center
 这里可以从antv这个网站获取到geojson数据  https://datav.aliyun.com/portal/school/atlas/area_selector  
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo033ChinaMap1 />
-</LazyRender>
 
 ---
 layout: webgl
 ---
 
-<LazyRender>
 <Demo034ChinaMap2/>
-</LazyRender>
 
 ---
 layout: webgl
 ---
 
-<Demo001start/>
+<Demo035ChinaPopulationBar/>

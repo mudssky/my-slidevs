@@ -256,12 +256,12 @@ classDiagram
 
 ---
 level: 2
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
+
   <Demo004BufferGeometry/>
-</LazyRender>
+
 
 ---
 
@@ -285,12 +285,10 @@ const vertices = new Float32Array([
 ```
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
   <Demo004BufferGeometry2/>
-</LazyRender>
 
 ---
 level: 2
@@ -323,12 +321,10 @@ geometry.index = new THREE.BufferAttribute(indexes, 1);
 ```
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
   <Demo004BufferGeometry3/>
-</LazyRender>
 
 ---
 layout: scroll
@@ -353,9 +349,7 @@ console.log('测试几何体顶点',mesh);
 ```
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
   <Demo004BufferGeometry4/>
-</LazyRender>

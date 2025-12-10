@@ -39,12 +39,10 @@ export default points;
 ```
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo005Point />
-</LazyRender>
 
 ---
 level: 2
@@ -76,12 +74,10 @@ export default line;
 ```
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo006Line />
-</LazyRender>
 
 ---
 level: 2
@@ -115,12 +111,10 @@ export default mesh;
 ```
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo007Mesh />
-</LazyRender>
 
 ---
 
@@ -153,41 +147,31 @@ const geometry = new THREE.PlaneGeometry(100, 100, 2, 3);
 https://threejs.org/docs/index.html?q=Geometry#CylinderGeometry
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo008Segment />
-</LazyRender>
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo009CylinderGeometry />
-</LazyRender>
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo010RandomMountain />
-</LazyRender>
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo011NoiseMountain />
-</LazyRender>
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
 <Demo012NoiseMountainAnime />
-</LazyRender>
