@@ -69,3 +69,9 @@ layout: webgl
 ---
 
 <Demo035ChinaPopulationBar/>
+
+---
+layout: webgl
+---
+
+<Demo036FlyLine/>
