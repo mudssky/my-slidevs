@@ -93,3 +93,9 @@ layout: webgl
 ---
 
 <Demo039FlyLine4/>
+
+---
+layout: webgl
+---
+
+<Demo040worldMap/>
