@@ -32,6 +32,7 @@ let renderer: THREE.WebGLRenderer | null = null
 let orbitControls: OrbitControls | null = null
 let scene: THREE.Scene | null = null
 let axesHelperInst: THREE.AxesHelper | null = null
+let resizeObs: ResizeObserver | null = null
 
 const props = withDefaults(
   defineProps<{
@@ -60,6 +61,7 @@ const props = withDefaults(
         }
     enableShadows?: boolean
     title?: string
+    fitToContainer?: boolean
     onFrame?: (ctx: {
       scene: THREE.Scene
       camera: THREE.Camera
@@ -83,6 +85,7 @@ const props = withDefaults(
     controls: true,
     defaultLight: false,
     enableShadows: false,
+    fitToContainer: true,
   },
 )
 
@@ -228,7 +231,6 @@ onMounted(() => {
   // 渲染器：负责将场景与相机绘制到画布
   renderer = new THREE.WebGLRenderer({ antialias: true })
   renderer.setSize(slideWidth, slideHeight)
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
   // 光源：根据 props 添加光照
   const createdLights: THREE.Light[] = []
@@ -295,6 +297,30 @@ onMounted(() => {
   // 将 WebGL 画布元素挂载到模板中的容器
   domRef.value.appendChild(renderer.domElement)
 
+  const syncSize = () => {
+    const el = domRef.value as HTMLElement
+    if (!el || !renderer) return
+    const rect = el.getBoundingClientRect()
+    const w = Math.max(1, Math.floor(rect.width))
+    const h = Math.max(1, Math.floor(rect.height))
+    const scaleComp = slideWidth ? w / slideWidth : 1
+    const prBase = isFinite(scaleComp) ? scaleComp : 1
+    const pr = Math.min(Math.max(1, window.devicePixelRatio * prBase), 3)
+    renderer.setPixelRatio(pr)
+    renderer.setSize(w, h, false)
+    camera.aspect = w / h
+    camera.updateProjectionMatrix()
+    orbitControls?.update()
+  }
+
+  if (props.fitToContainer !== false) {
+    syncSize()
+    resizeObs = new ResizeObserver(() => syncSize())
+    resizeObs.observe(domRef.value as HTMLElement)
+  } else {
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+  }
+
   // 将上下文暴露给父组件，用于绑定事件等一次性操作
   props.onMount?.({
     scene: scene!,
@@ -302,7 +328,16 @@ onMounted(() => {
     renderer: renderer!,
     THREE,
     dom: renderer!.domElement as HTMLCanvasElement,
-    size: { width: slideWidth, height: slideHeight },
+    size:
+      props.fitToContainer !== false
+        ? (() => {
+            const rect = (domRef.value as HTMLElement).getBoundingClientRect()
+            return {
+              width: Math.floor(rect.width),
+              height: Math.floor(rect.height),
+            }
+          })()
+        : { width: slideWidth, height: slideHeight },
     controls: orbitControls,
   })
 
@@ -332,6 +367,8 @@ onUnmounted(() => {
   orbitControls = null
   scene = null
   axesHelperInst = null
+  resizeObs?.disconnect()
+  resizeObs = null
 })
 </script>
 

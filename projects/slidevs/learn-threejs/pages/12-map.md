@@ -61,7 +61,7 @@ layout: none
 </LazyRender>
 
 ---
-layout: none
+layout: webgl
 ---
 
 <LazyRender>
@@ -69,9 +69,7 @@ layout: none
 </LazyRender>
 
 ---
-layout: none
+layout: webgl
 ---
 
-<LazyRender>
-<Demo035ChinaPopulationBar/>
-</LazyRender>
+<Demo001start/>
