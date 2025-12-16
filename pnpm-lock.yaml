@@ -141,8 +141,8 @@ importers:
   packages/slidev-theme-default:
     dependencies:
       '@mudssky/slidev-addon-default':
-        specifier: latest
-        version: 0.0.2
+        specifier: workspace:*
+        version: link:../slidev-addon-default
       '@mudssky/slidev-style':
         specifier: workspace:^
         version: link:../slidev-style
@@ -261,6 +261,12 @@ importers:
         version: link:../../../packages/slidev-style
 
   projects/slidevs/slidev3: {}
+
+  projects/works/2025work-report:
+    dependencies:
+      '@mudssky/slidev-style':
+        specifier: workspace:*
+        version: link:../../../packages/slidev-style
 
   site: {}
 
@@ -1102,13 +1108,6 @@ packages:
     resolution: {integrity: sha512-dTCSUos3H5PwmYFk6AGCHa1loj3XY7JhZMRkGNZ0RUTHRu5MLPOXX1zGVXRzIR3dwjStaR26rCxSMbzl7cSmng==}
     peerDependencies:
       prettier: '>=3.0.0'
-
-  '@mudssky/slidev-addon-default@0.0.2':
-    resolution: {integrity: sha512-WSfGpsD+nJ7E4hlVyBbt/ebMiEn3nmycLT6ZI6k7SOm+NnYM4nWeHiIQdeLyBfV8/QjWys9APSU2ySlKiYaxGQ==}
-    engines: {node: '>=18.0.0', slidev: '>=0.4'}
-
-  '@mudssky/slidev-style@0.0.6':
-    resolution: {integrity: sha512-eG/AVKqdjwAVyznJPCeq1o3GOiCQf7foDkf9+mPV2zrGHhUMdZ7sf9k01SO/oYOF40XBIEvo9qNPSmQoalYkWg==}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -6733,14 +6732,6 @@ snapshots:
   '@mudssky/prettier-config-custom@1.1.0(prettier@3.7.4)':
     dependencies:
       prettier: 3.7.4
-
-  '@mudssky/slidev-addon-default@0.0.2':
-    dependencies:
-      '@mudssky/slidev-style': 0.0.6
-      '@slidev/types': 0.46.3
-      clsx: 2.1.1
-
-  '@mudssky/slidev-style@0.0.6': {}
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
