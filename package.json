@@ -20,7 +20,9 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prepare": "husky",
-    "publish-packages": "turbo run lint test && changeset version && changeset publish"
+    "change": "changeset",
+    "version-packages": "changeset version",
+    "publish-packages": "changeset publish"
   },
   "dependencies": {
     "element-plus": "^2.12.0",

@@ -1,6 +1,6 @@
 {
   "name": "@mudssky/slidev-theme-default",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "my slidev theme",
   "keywords": [
     "slidev-theme",
@@ -14,7 +14,7 @@
     "screenshot": "slidev export example.md --format png"
   },
   "dependencies": {
-    "@mudssky/slidev-addon-default": "latest",
+    "@mudssky/slidev-addon-default": "workspace:*",
     "@mudssky/slidev-style": "workspace:^",
     "@slidev/types": "^0.46.3",
     "codemirror-theme-vars": "^0.1.2",
