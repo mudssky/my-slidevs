@@ -1,5 +1,11 @@
 # @mudssky/slidev-addon-default
 
+## 0.1.1
+
+### Patch Changes
+
+- config package.json files avoid upload unclean
+
 ## 0.1.0
 
 ### Minor Changes
