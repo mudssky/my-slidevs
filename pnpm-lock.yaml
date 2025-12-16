@@ -262,12 +262,6 @@ importers:
 
   projects/slidevs/slidev3: {}
 
-  projects/works/2025work-report:
-    dependencies:
-      '@mudssky/slidev-style':
-        specifier: workspace:*
-        version: link:../../../packages/slidev-style
-
   site: {}
 
 packages:
