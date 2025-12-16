@@ -19,7 +19,8 @@
     "upgrade:turbo": "npx @turbo/codemod migrate",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prepare": "husky"
+    "prepare": "husky",
+    "publish-packages": "turbo run lint test && changeset version && changeset publish"
   },
   "dependencies": {
     "element-plus": "^2.12.0",
@@ -27,6 +28,7 @@
     "vue": "^3.5.25"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.28.1",
     "@eslint/js": "^9.39.2",
     "@mudssky/prettier-config-custom": "^1.1.0",
     "@mudssky/slidev-addon-default": "workspace:^",
