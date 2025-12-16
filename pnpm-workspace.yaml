@@ -1,4 +1,5 @@
 packages:
  - 'projects/slidevs/*'
+ - 'projects/works/*'
  - 'packages/*'
  - 'site'
