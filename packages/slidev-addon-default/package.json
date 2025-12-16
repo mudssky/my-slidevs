@@ -8,6 +8,13 @@
   ],
   "type": "module",
   "module": "./index.ts",
+  "files": [
+    "components",
+    "composables",
+    "layouts",
+    "styles",
+    "index.ts"
+  ],
   "scripts": {
     "build": "slidev build example.md",
     "dev": "slidev example.md --open -p 8766",

@@ -7,6 +7,12 @@
     "slidev"
   ],
   "type": "module",
+  "files": [
+    "components",
+    "setup",
+    "styles",
+    "index.ts"
+  ],
   "scripts": {
     "build": "slidev build example.md",
     "dev": "slidev example.md --open",
